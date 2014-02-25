@@ -1,5 +1,30 @@
 $(document).ready(function(){
 
+/*
+  $.fn.increment = function (from, to, duration, easing, complete) {
+    var params = $.speed(duration, easing, complete);
+    return this.each(function(){
+        var self = this;
+        params.step = function(now) {
+            self.innerText = now << 0;
+        };
+
+        $({number: from}).animate({number: to}, params);
+    });
+ };
+
+ $('#saldo').increment(0, 1337);
+
+jQuery({someValue: 300}).animate({someValue: 600}, {
+  duration: 10000,
+  easing:'swing', // can be anything
+  step: function() { // called on every step
+    // Update the element's text with rounded-up value:
+    $('#saldo').text(Math.ceil(this.someValue) + "€");
+  }
+});
+*/
+
   // scroll chat down / no va fino :/
   var mydiv = $('#conversation-list');
   mydiv.scrollTop(mydiv.prop('scrollHeight'));

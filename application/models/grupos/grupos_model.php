@@ -620,5 +620,22 @@ class Grupos_model extends CI_Model {
         else
             return false;
     }
+
+
+    /**
+     * Devuelve la informacion del grupo
+     *
+     * @return void
+     * @author 
+     **/
+    function obtener_info_grupo($id_grupo)
+    {
+        $q = $this->db->select('usuarios_grupos.*,usuarios.nick')->from('usuarios_grupos')
+                                    ->join('usuarios','usuarios.id = usuarios_grupos.id_usuario_creador')
+
+                                    ->where('usuarios_grupos.id',$id_grupo)->get()->row();
+
+        return $q;
+    }
 }
 

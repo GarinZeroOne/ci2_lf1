@@ -109,6 +109,8 @@ class Grupos extends CI_Controller {
 
         $datos['nombreGrupo'	] = $this->grupos_model->obtenerNombreGrupo($id_grupo)->nombre;
 
+        $datos['grupo_info'     ] = $this->grupos_model->obtener_info_grupo($id_grupo);
+
         $datos['rankingGP'		] = $this->grupos_model->gruposRankingGP($id_grupo)->result();
 
         $datos['rankingGeneral' ] = $this->grupos_model->gruposRankingGeneral($id_grupo)->result();
@@ -121,14 +123,16 @@ class Grupos extends CI_Controller {
         //dump($datos);
 
        
-
+        $data_to_js['banco_desde'] = '120000';
+        $data_to_js['banco_hasta'] = '2000000';
 
 		// Header
 		$header['estilos'] 	  = array('dashboard.css');
 		$header['titulo' ]	  = 'Grupos - LigaFormula1.com';
 
 		// Javascript
-		$bottom['javascript'] = array('dashboard/comentarios.js');
+		$bottom['javascript'    ] = array('dashboard/comentarios.js');
+		$bottom['javascript_php'] = array('ruletadinero' => $this->load->view('dashboard/_head/js/ruletadinero',$data_to_js,TRUE));
 
 		// Vistas base | Header | Menu Principal
 		$this->load->view('dashboard/base/header.php',$header);
@@ -317,6 +321,34 @@ class Grupos extends CI_Controller {
 		$this->load->view('dashboard/base/sidebarright.php',$sidebarright);		
 		$this->load->view('dashboard/base/bottom.php',$bottom);
 		
+	}
+
+
+	/**
+	 * Configuracion de grupo
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function configurar_grupo($id_grupo = false)
+	{
+		// Header
+		$header['estilos'] 	  = array('dashboard.css');
+		$header['titulo' ]	  = 'Crear nuevo grupo - LigaFormula1.com';
+
+		// Javascript
+		$bottom['javascript'] = array();
+
+		// Vistas base | Header | Menu Principal
+		$this->load->view('dashboard/base/header.php',$header);
+		$this->load->view('dashboard/base/sidebarleft.php',$sidebarleft);
+
+		// Vista contenido
+		$this->load->view('dashboard/grupos/configurar_grupo'  ,$datos);
+
+		// Vistas base | Menu derecha | Bottom end
+		$this->load->view('dashboard/base/sidebarright.php',$sidebarright);		
+		$this->load->view('dashboard/base/bottom.php',$bottom);
 	}
 
 

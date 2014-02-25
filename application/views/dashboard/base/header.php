@@ -230,11 +230,12 @@
     </ul>
     <!--  notification end -->
 </div>
+
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
         <li>
-            <span class="saldo"><?php echo banco_model::getSaldo('formateado'); ?> €</span>
+            <span id="saldo" class="saldo"><?php echo banco_model::getSaldo('formateado'); ?> </span> <span id="euroicon" class="saldo euro">€</span>
         </li>
         <!-- user login dropdown start-->
         <li class="dropdown">

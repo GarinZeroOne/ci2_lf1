@@ -44,6 +44,7 @@
 <script src="<?= base_url();?>assets/flot-chart/jquery.flot.growraf.js"></script>
 */?>
 <script src="<?= base_url();?>js/dashboard/custom-select/jquery.customSelect.min.js" ></script>
+<script src="<?= base_url();?>js/dashboard/prettynumber/jquery.prettynumber.js" ></script>
 
 
 <!--common script init for all pages-->
@@ -56,6 +57,15 @@
       }  
     }
     
+?>
+
+<?php 
+	if($javascript_php){
+		foreach($javascript_php as $jsp)
+		{
+			echo $jsp;
+		}
+	}
 ?>
 
 </body>

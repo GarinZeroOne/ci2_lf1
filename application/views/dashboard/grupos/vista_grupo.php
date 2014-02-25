@@ -24,22 +24,29 @@
                     <div class="panel-body profile-information">
                        <div class="col-md-6 col-xs-6">
                            <div class="profile-pic text-center">
-                               <img alt="" src="http://placehold.it/250x150">
+                               <img alt="" src="<?php echo base_url(); ?>img/grupos/1393251054.jpg">
                            </div>
                        </div>
                        <div class="col-md-6 col-xs-6">
                            <div class="profile-desk">
-                               <h1><?php echo $nombreGrupo; ?></h1>
-                               <span class="text-muted">Admin Gogari</span>
+                               <h1><?php echo $grupo_info->nombre; ?></h1>
+                               <span class="text-muted" style="display:block;">Admin <?php echo $grupo_info->nick; ?></span>
                                <p>
-                                   Descripcion del grupo, aqui se puede meter  lo que se quiera, esta bien para las porras para que cada grupo pueda poner sus reglas o si ponen pasta, el reparto de premios
-                                   <ul>
-                                       <li>1º - 130$</li>
-                                       <li>2º - 80$</li>
-                                       <li>3º - 50$</li>
-                                   </ul>
+                                <?php if($grupo_info->descripcion): ?>
+                                   <?php echo $grupo_info->descripcion; ?>
+                                <?php else: ?>
+                                    <i>No se ha introducido ninguna descripción.</i>
+                                <?php endif; ?>
                                </p>
-                               <a class="btn btn-primary" href="#">Configurar grupo</a>
+                                
+                                <?php if($_SESSION['id_usuario'] == $grupo_info->id_usuario_creador): ?>
+                                    <a class="btn btn-primary" href="<?php echo site_url(); ?>grupos/configurar_grupo/<?php echo $idGrupo; ?>">Configurar grupo</a>
+                                <?php elseif(!$grupo_info->privado): ?>
+                                    <a class="btn btn-primary" href="#">Entrar al grupo</a>
+                                <?php else: ?>
+                                    <a class="btn btn-primary" href="#">Grupo privado</a>
+                                <?php endif; ?>
+
                            </div>
                        </div>
                        <div class="col-md-6 col-xs-12">
