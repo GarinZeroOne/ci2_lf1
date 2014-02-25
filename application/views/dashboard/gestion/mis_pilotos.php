@@ -17,26 +17,38 @@
         </div>
 
         <!-- ROW -->
-        <div class="row">
-            <?php if (isset($msgVenta['codigoOperacion'])): ?>
-                <?php if ($msgVenta['codigoOperacion']): ?>
-                    <div class="alert alert-block alert-success fade in">                                            
-                        <button type="button" class="close close-sm" data-dismiss="alert">
-                            <i class="fa fa-times"></i>
-                        </button>
-                        <?php echo $msgVenta['mensaje']; ?>
-                    </div>
-                <?php else: ?>
-                    <div class="alert alert-block alert-danger fade in">                                            
-                        <button type="button" class="close close-sm" data-dismiss="alert">
-                            <i class="fa fa-times"></i>
-                        </button>
-                        <strong>Opps!</strong> <?php echo $msgVenta['mensaje']; ?>
-                    </div>
-                <?php endif; ?>
+        <?php if (isset($msgVenta['codigoOperacion'])): ?>
+            <?php if ($msgVenta['codigoOperacion']): ?>
+                <div class="alert alert-block alert-success fade in">                                            
+                    <button type="button" class="close close-sm" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <?php echo $msgVenta['mensaje']; ?>
+                </div>
+            <?php else: ?>
+                <div class="alert alert-block alert-danger fade in">                                            
+                    <button type="button" class="close close-sm" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <strong>Opps!</strong> <?php echo $msgVenta['mensaje']; ?>
+                </div>
             <?php endif; ?>
-            <?php foreach ($pilotos as $piloto): ?>
+        <?php endif; ?>
 
+        <div class="row">            
+            <?php
+            $contador = 0;
+            $segundoDiv = false;
+            foreach ($pilotos as $piloto):
+                if ($contador > 3 && !$segundoDiv):
+                    $segundoDiv = true;
+                    ?>
+                </div>
+                <div class="row">            
+                    <?php
+                endif;
+                $contador++;
+                ?>
                 <div class="col-lg-3">
                     <!--widget start-->
                     <aside class="profile-nav alt">
@@ -120,28 +132,37 @@
                                             endforeach;
                                             if (count($pilotos) < 7):
                                                 for ($i = count($pilotos); $i < 7; $i++):
-                                                    ?>                                                                       
-                                                    <div class="col-lg-3">
-                                                        <!--widget start-->
-                                                        <aside class="profile-nav alt">
-                                                            <section class="panel">
-                                                                <div class="corner-ribon black-ribon">
-                                                                    <a title="Fichar/alquilar piloto" href="<?php echo site_url() . 'mercado/pilotos/'; ?>"><i class="fa fa-shopping-cart"></i></a>
-                                                                </div>
-                                                                <div class="user-heading alt" style="background-color: darkgrey">
-                                                                    <div class="col-sm-4">
-                                                                        <i class="fa fa-question-circle" style="font-size: 75px"></i>
-                                                                    </div>
 
-                                                                    <h1 class="col-sm-8">Plaza libre</h1>
-                                                                </div>
-                                                            </section>
-                                                        </aside>
-                                                    </div>
-                                                    <?php
-                                                endfor;
-                                            endif;
-                                            ?>
+                                                    if ($contador > 3 && !$segundoDiv):
+                                                        $segundoDiv = true;
+                                                        ?>
+                                                        </div>
+                                                        <div class="row">            
+                                                            <?php
+                                                        endif;
+                                                        $contador++;
+                                                        ?>
+                                                        <div class="col-lg-3">
+                                                            <!--widget start-->
+                                                            <aside class="profile-nav alt">
+                                                                <section class="panel">
+                                                                    <div class="corner-ribon black-ribon">
+                                                                        <a title="Fichar/alquilar piloto" href="<?php echo site_url() . 'mercado/pilotos/'; ?>"><i class="fa fa-shopping-cart"></i></a>
+                                                                    </div>
+                                                                    <div class="user-heading alt" style="background-color: darkgrey">
+                                                                        <div class="col-sm-4">
+                                                                            <i class="fa fa-question-circle" style="font-size: 75px"></i>
+                                                                        </div>
+
+                                                                        <h1 class="col-sm-8">Plaza libre</h1>
+                                                                    </div>
+                                                                </section>
+                                                            </aside>
+                                                        </div>
+                                                        <?php
+                                                    endfor;
+                                                endif;
+                                                ?>
                                             </div><!-- FIN ROW -->
 
 

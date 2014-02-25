@@ -4,21 +4,22 @@ require_once APPPATH . 'classes/pilotos/pilotoUsuario.php';
 require_once APPPATH . 'classes/pilotos/piloto.php';
 require_once APPPATH . 'classes/pilotos/valorMercado.php';
 require_once APPPATH . 'classes/equipos/equipo.php';
+require_once APPPATH . 'classes/equipos/equipoUsuario.php';
 require_once APPPATH . 'classes/usuarios/usuario.php';
         
 
-class Gestion extends CI_Controller {
+class Gestion extends Controller {
     
     const msgVenta = "msgVenta";
 
     /**
      * Idiomas soportados /*DEPRECATED! */
     /*
-      private $languages    = array ('spanish','english');
+      private $languages	= array ('spanish','english');
      */
 
     function Gestion() {
-        parent::__construct();
+        parent::Controller();
 
         // Configurar idioma
         //$this->_set_language();
@@ -142,6 +143,41 @@ class Gestion extends CI_Controller {
         $this->session->set_flashdata(Gestion::msgVenta, $retorno);
 
         redirect_lf1('gestion/mis_pilotos', 'refresh');
+    }
+    
+    function mis_equipos() {
+
+        $datos[Gestion::msgVenta] = $this->session->flashdata(Gestion::msgVenta);
+        
+        // Menu Izquierda
+        $sidebarleft = array();
+        $sidebarleft['m_act'] = 2;
+
+        // Header
+        $header['estilos'] = array('dashboard.css');
+        $header['titulo'] = 'Gestión Manager - LigaFormula1.com';
+        $header['avatar'] = $this->usuarios_model->userAvatar($_SESSION['id_usuario']);
+
+        // Javascript
+        $bottom['javascript'] = array();
+
+        $this->load->model('equipos/equipos_model');
+
+        $datos['equipos'] = $this->equipos_model->
+                getEquiposUsuarioObject($_SESSION['id_usuario']);
+
+        // Vistas base | Header | Menu Principal
+        $this->load->view('dashboard/base/header.php', $header);
+        $this->load->view('dashboard/base/sidebarleft.php', $sidebarleft);
+
+        // Vista contenido
+        $this->load->view('dashboard/gestion/mis_equipos', $datos);
+
+        $sidebarright = "";
+        
+        // Vistas base | Menu derecha | Bottom end
+        $this->load->view('dashboard/base/sidebarright.php', $sidebarright);
+        $this->load->view('dashboard/base/bottom.php', $bottom);
     }
 
     /**

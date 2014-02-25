@@ -1,6 +1,6 @@
 <?php
 
-class Pilotos_model extends CI_Model {
+class Pilotos_model extends Model {
 
     private $iduser;
 
@@ -12,47 +12,47 @@ class Pilotos_model extends CI_Model {
     const codigoKo = 0;
 
     function Pilotos_model() {
-        parent::__construct();
+        parent::Model();
         $this->load->model('boxes/mejoras_model');
         $this->iduser = $_SESSION['id_usuario'];
     }
 
     function getInfoPilotos() {
         $sql = "SELECT pilotos.*,equipos.escuderia
-                                FROM 
-                                    equipos_rel_pilotos, pilotos , equipos
-                                WHERE 
-                                    pilotos.id = equipos_rel_pilotos.id_piloto
-                                AND 
-                                    equipos.id = equipos_rel_pilotos.id_equipo";
+								FROM 
+									equipos_rel_pilotos, pilotos , equipos
+								WHERE 
+									pilotos.id = equipos_rel_pilotos.id_piloto
+								AND 
+									equipos.id = equipos_rel_pilotos.id_equipo";
         return $this->db->query($sql)->result();
     }
 
     function getInfoPilotosEquipos() {
         $sql = "SELECT pilotos.*,equipos.escuderia, equipos.id as id_equipo
-                                FROM 
-                                    equipos_rel_pilotos, pilotos , equipos
-                                WHERE 
-                                    pilotos.id = equipos_rel_pilotos.id_piloto
-                                AND 
-                                    equipos.id = equipos_rel_pilotos.id_equipo";
+								FROM 
+									equipos_rel_pilotos, pilotos , equipos
+								WHERE 
+									pilotos.id = equipos_rel_pilotos.id_piloto
+								AND 
+									equipos.id = equipos_rel_pilotos.id_equipo";
         return $this->db->query($sql)->result();
     }
 
     function getMisPilotos() {
         $sql = "SELECT pilotos.*,equipos.escuderia,usuarios_pilotos.puntos
-                         FROM 
-                           usuarios_pilotos,pilotos,equipos,equipos_rel_pilotos
-                         WHERE
-                           usuarios_pilotos.id_piloto = pilotos.id
-                         AND
-                           pilotos.id = equipos_rel_pilotos.id_piloto
-                         AND
-                           equipos.id = equipos_rel_pilotos.id_equipo
-                         AND
-                           usuarios_pilotos.id_usuario = ? 
-                         AND 
-                           usuarios_pilotos.activo = 1";
+						 FROM 
+						   usuarios_pilotos,pilotos,equipos,equipos_rel_pilotos
+						 WHERE
+						   usuarios_pilotos.id_piloto = pilotos.id
+					     AND
+						   pilotos.id = equipos_rel_pilotos.id_piloto
+						 AND
+						   equipos.id = equipos_rel_pilotos.id_equipo
+						 AND
+						   usuarios_pilotos.id_usuario = ? 
+						 AND 
+						   usuarios_pilotos.activo = 1";
         return $this->db->query($sql, array($this->iduser))->result();
     }
 
@@ -62,18 +62,18 @@ class Pilotos_model extends CI_Model {
 
     function getMisPilotosUsuario($idUser) {
         $sql = "SELECT pilotos.*,equipos.escuderia,usuarios_pilotos.puntos
-                         FROM 
-                           usuarios_pilotos,pilotos,equipos,equipos_rel_pilotos
-                         WHERE
-                           usuarios_pilotos.id_piloto = pilotos.id
-                         AND
-                           pilotos.id = equipos_rel_pilotos.id_piloto
-                         AND
-                           equipos.id = equipos_rel_pilotos.id_equipo
-                         AND
-                           usuarios_pilotos.id_usuario = ? 
-                         AND 
-                           usuarios_pilotos.activo = 1";
+						 FROM 
+						   usuarios_pilotos,pilotos,equipos,equipos_rel_pilotos
+						 WHERE
+						   usuarios_pilotos.id_piloto = pilotos.id
+					     AND
+						   pilotos.id = equipos_rel_pilotos.id_piloto
+						 AND
+						   equipos.id = equipos_rel_pilotos.id_equipo
+						 AND
+						   usuarios_pilotos.id_usuario = ? 
+						 AND 
+						   usuarios_pilotos.activo = 1";
         return $this->db->query($sql, array($idUser))->result();
     }
 
@@ -279,7 +279,7 @@ class Pilotos_model extends CI_Model {
             if ($piloto_activo == 0) {
                 // ---------------------------------------------------------------------
                 // Algun  listo intenta hacer la trampa del año pasao, guardamos en bd un log con sus datos
-                // ---------------------------------------------------------------------        
+                // ---------------------------------------------------------------------		
                 $data = array(
                     'id' => '',
                     'id_usuario' => $this->iduser,
@@ -296,18 +296,18 @@ class Pilotos_model extends CI_Model {
 
             // Poner inactivo el piloto
             $sql_inactivo = "UPDATE usuarios_pilotos SET 
-                                                        activo = 0,
-                                                        fecha_venta = ?
-                                                     WHERE 
-                                                        id_usuario = ?
-                                                     AND 
-                                                        id_piloto = ?";
+														activo = 0,
+														fecha_venta = ?
+													 WHERE 
+													 	id_usuario = ?
+													 AND 
+													 	id_piloto = ?";
             $this->db->query($sql_inactivo, array(date('Y-m-d'), $this->iduser, $id_piloto));
 
             // Sumarle la pasta de la venta al banco
             $pasta_venta_piloto = $this->db->query("SELECT dinero_venta 
-                                                           FROM pilotos 
-                                                           WHERE id = ?", array($id_piloto))->row()->dinero_venta;
+														   FROM pilotos 
+														   WHERE id = ?", array($id_piloto))->row()->dinero_venta;
             $sql_ingreso = "UPDATE usuarios_banco SET fondos = fondos + ? WHERE id_usuario = ?";
             $this->db->query($sql_ingreso, array($pasta_venta_piloto, $this->iduser));
         }
@@ -322,7 +322,7 @@ class Pilotos_model extends CI_Model {
         $sql_inactivo = "UPDATE usuarios_pilotos SET activo = 0,fecha_venta = ?
                         WHERE id_usuario = ?
                         AND id_piloto = ?";
-        $this->db->query($sql_inactivo, array(date('Y-m-d'), $usuario->getIdUsuario(), $piloto->getIdPiloto()));
+        $this->db->query($sql_inactivo, array(date('Y-m-d'), $usuario->getIdUsuario(), $piloto->getIdPiloto()));        
 
         $CI = &get_instance();
         $CI->load->Model('banco/banco_model');
@@ -347,8 +347,8 @@ class Pilotos_model extends CI_Model {
         //Registrar movimiento banco
         $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $ingreso
                 , $usuario->getIdUsuario(), $concepto
-                , 0, Banco_model::ingreso);
-
+                , 0, Banco_model::ingreso);        
+        
         return "Piloto vendido correctamente!";
     }
 

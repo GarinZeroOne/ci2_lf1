@@ -3,10 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class EquipoFicha extends Equipo {
+class EquipoUsuario extends Equipo {
 
     private $puntosConseguidos;
     private $dineroConseguido;
+    private $precioCompra;
 
     public function Equipo() {
         
@@ -30,15 +31,26 @@ class EquipoFicha extends Equipo {
     public function setDineroConseguido($dineroConseguido) {
         $this->dineroConseguido = $dineroConseguido;
     }
+    public function getPrecioCompra($formateado = false) {
+        if ($formateado) {
+            return number_format($this->precioCompra, 0, ',', '.') . " €";
+        }
+        return $this->precioCompra;
+    }
 
-    public static function getById($idEquipo) {
+    public function setPrecioCompra($precioCompra) {
+        $this->precioCompra = $precioCompra;
+    }
+
+    
+    public static function getById($idEquipo, $idUsuario) {
         $CI;
         $CI = & get_instance();
         $CI->load->model('equipos/equipos_model');
 
         $parent = Equipo::getById($idEquipo);
-        $instance = new self();        
-        
+        $instance = new self();
+
         $instance->setConstructorId($parent->getConstructorId());
         $instance->setIdEquipo($parent->getIdEquipo());
         $instance->setEscuderia($parent->getEscuderia());
@@ -53,10 +65,22 @@ class EquipoFicha extends Equipo {
         $instance->setPosicionMundial($parent->getPosicionMundial());
         $instance->setPuntosMundial($parent->getPuntosMundial());
 
-        $instance->setPuntosConseguidos($CI->equipos_model->getPuntosEquipo($idEquipo));
-        $instance->setDineroConseguido($CI->equipos_model->getDineroGanadoEquipo($idEquipo));
+        $datosEquipoUsuario = $CI->equipos_model->
+                        getDatosEquipoUsuario($idEquipo, $idUsuario)->row();
+
+        $instance->setPuntosConseguidos($datosEquipoUsuario->puntos);
+        $instance->setDineroConseguido($datosEquipoUsuario->dinero);
+        $instance->setPrecioCompra($datosEquipoUsuario->precio_compra);
 
         return $instance;
+    }
+    
+    public function getGananciaPerdida($formateado = false) {
+        $valor = $this->getValorActual() - $this->getPrecioCompra();
+        if ($formateado) {
+            return number_format($valor, 0, ',', '.') . " €";
+        }
+        return $valor;
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Equipos_model extends CI_Model {
+class Equipos_model extends Model {
 
     private $iduser;
 
@@ -10,7 +10,7 @@ class Equipos_model extends CI_Model {
     const codigoKo = 0;
 
     function Equipos_model() {
-        parent::__construct();
+        parent::Model();
         $this->load->model('boxes/mejoras_model');
         $this->iduser = $_SESSION['id_usuario'];
     }
@@ -394,7 +394,7 @@ class Equipos_model extends CI_Model {
         $sql = "SELECT * FROM resultados_equipos "
                 . "WHERE id_equipo = ? ";
 
-        $result = $this->db->query($sql, array($idPiloto))->result();
+        $result = $this->db->query($sql, array($idEquipo))->result();
 
         $sqlPuntos = "SELECT * FROM premios_manager_equipos WHERE posicion = ?";
 
@@ -413,7 +413,7 @@ class Equipos_model extends CI_Model {
         $sql = "SELECT * FROM resultados_equipos "
                 . "WHERE id_equipo = ? ";
 
-        $result = $this->db->query($sql, array($idPiloto))->result();
+        $result = $this->db->query($sql, array($idEquipo))->result();
 
         $sqlDinero = "SELECT * FROM premios_manager_equipos WHERE posicion = ?";
 
@@ -489,7 +489,7 @@ class Equipos_model extends CI_Model {
         return $equipo;
     }
 
-    function getEquiposUsuarioObject($idUsuario) {
+    /*function getEquiposUsuarioObject($idUsuario) {
         $sql = "SELECT equipos.*
                 FROM equipos,usuarios_equipos
                 WHERE usuarios_equipos.id_usuario = ?
@@ -506,6 +506,34 @@ class Equipos_model extends CI_Model {
         }
 
         return $equipos;
+    }*/
+    
+    function getEquiposUsuarioObject($idUsuario) {
+        $sql = "SELECT *
+                FROM usuarios_equipos
+                WHERE usuarios_equipos.id_usuario = ?                
+                AND usuarios_equipos.activo = 1";
+        $result = $this->db->query($sql, array($idUsuario))->result();
+
+        $equipos = array();
+        foreach ($result as $row) {
+            $equipo = EquipoUsuario::getById($row->id_equipo,$idUsuario);
+            $pilotos = $this->getPilotosEquipoObject($row->id_equipo);
+            $equipo->setPilotos($pilotos);
+            $equipos[] = $equipo;
+        }
+
+        return $equipos;
+    }
+    
+    function getDatosEquipoUsuario($idEquipo, $idUsuario) {
+        $sql = "SELECT * FROM usuarios_equipos " . "WHERE id_equipo = ? "
+                . "AND id_usuario = ? ";
+
+        $result = $this->db->query($sql, array(
+            $idEquipo, $idUsuario));
+
+        return $result;
     }
 
 }

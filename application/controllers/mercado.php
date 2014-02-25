@@ -5,10 +5,11 @@ require_once APPPATH . 'classes/pilotos/pilotoFicha.php';
 require_once APPPATH . 'classes/pilotos/pilotoUsuario.php';
 require_once APPPATH . 'classes/equipos/equipo.php';
 require_once APPPATH . 'classes/equipos/equipoFicha.php';
+require_once APPPATH . 'classes/equipos/equipoUsuario.php';
 require_once APPPATH . 'classes/pilotos/valorMercado.php';
 require_once APPPATH . 'classes/usuarios/usuario.php';
 
-class Mercado extends CI_Controller {
+class Mercado extends Controller {
 
     const msgFichaje = "msgFichaje";
 
@@ -19,7 +20,7 @@ class Mercado extends CI_Controller {
      */
 
     function Mercado() {
-        parent::__construct();
+        parent::Controller();
 
         // Configurar idioma
         //$this->_set_language();
@@ -124,7 +125,7 @@ class Mercado extends CI_Controller {
         $idEquipo = $this->uri->segment(3);
 
         $usuario = Usuario::getById($_SESSION['id_usuario']);
-        $equiposUsuario = $this->equipos_model->getEquiposUsuarioObject();
+        $equiposUsuario = $this->equipos_model->getEquiposUsuarioObject($_SESSION['id_usuario']);
         $usuario->setEquipos($equiposUsuario);
 
         $equipo = Equipo::getById($idEquipo);
