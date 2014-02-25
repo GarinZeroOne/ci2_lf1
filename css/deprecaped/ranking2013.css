@@ -1,0 +1,62 @@
+h1.rankingh{
+     background-color: #e6ebf2;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    color: #0B3756;
+    font-family: 'helvetica';
+    font-size: 3em;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    text-shadow: 1px 2px 0 #FCFCFC;
+}
+
+#topgeneral{
+
+}
+
+
+#topgeneral table tr td.posicion{
+
+	background-color: #EFEFEF;
+    color: #091B3D;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 1px 1px 0 #FFFFFF;
+    vertical-align: middle;
+    width: 50px;
+
+}
+
+#topgeneral table tr td.puntos{
+background-color: #e6ebf2;
+    color: #FF5D00;
+    font-size: 1.5em;
+    text-align: center;
+
+    vertical-align: middle;
+    width: 86px;}
+
+#topgeneral table tr td.cavat{
+    width: 65px;
+}
+
+#topgeneral table tr td.nick{
+    font-size: 2em;
+    vertical-align: middle;
+}
+
+#topgeneral table th{
+ background-color: #EBEBEB;
+    color: #404040;
+    font-size: 1.5em;
+    text-shadow: 1px 1px 0 #FFFFFF;
+
+}
+
+img.avatar{
+    border: 1px solid #CCCCCC;
+    min-height: 65px;
+    width: 65px;
+}

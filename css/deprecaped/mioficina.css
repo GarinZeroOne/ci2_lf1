@@ -1,0 +1,125 @@
+#tmejoras
+{
+  /*width: 600px;*/
+  margin: 20px auto;
+
+
+}
+
+#tmejoras table td {
+	border:			none;
+	background-color:	#fff;
+	padding: 0 0 0 0;
+  text-align: right;
+}
+
+
+#tmejoras table td img{
+	border-right:	2px solid #444444;
+	border-top:		2px solid #444444;
+  width: 100%;
+}
+
+#infoPanel{
+	 background-color: #FF7F00;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;
+    font-style: italic;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    padding: 5px;
+    text-align: center;
+}
+
+
+
+.button {
+    /*background: -moz-linear-gradient(center top , #DDF4FF, #E3E3E3) repeat scroll 0 0 transparent;
+    border-radius: 2px 2px 2px 2px;*/
+    /*box-shadow: 0 0 1px #C2C2C2;*/
+    background-color: #eee;
+    padding:10px;
+    color: #0B88C2;
+    display: block;
+    font-family: 'Lucida Grande',Helvetica,Arial,Sans-Serif;
+    font-size: 16px;
+    height: 24px;
+    margin-right: 5px;
+    margin-top: -3px;
+    /*padding: 8px 26px;*/
+    text-decoration: none;
+    vertical-align: middle;
+}
+.button:hover {
+    background: -moz-linear-gradient(center top , #F7E5E5, #FFF4F4) repeat scroll 0 0 transparent;
+
+    color: #C45555;
+
+   }
+.button:active {
+   border-top-color: #ff0000;
+   color:#fff;
+   background: #ff0000;
+   }
+
+
+
+.plus {
+    background-color: #EEEEEE;
+    display: block;
+    height: 20px;
+    margin-left: 6px;
+    margin-top: 0;
+    padding: 11px;
+    width: 45px;
+}
+.plus:hover {
+   border-top-color: #ff0000;
+   background: #ff0000;
+   color: #ffffff;
+   }
+.plus:active {
+   border-top-color: #ff0000;
+   background: #ff0000;
+   }
+
+
+
+#resumengp table
+{
+	width:			100%;
+	/*background-color:	#4b636b;*/
+}
+
+#resumengp table th {
+    background-color: #F0F3F5;
+    color: #1D334A;
+    text-align: center;
+}
+
+
+#resumengp table td.pm
+{
+	width:		80px;
+}
+
+#resumengp table tr td.concepto
+{
+	background-color:		#EBEBEB;
+	font-weight:			bold;
+	text-align:				left;
+	color:					#000000;
+}
+
+#resumengp table tr td
+{
+	color:				#000000;
+   border: 1px solid #DDE0F1;
+}
+#resumengp table tr#totales td
+{
+	background-color:	#b1f4a6;
+	text-align:			center;
+	color:				#000000;
+	font-weight:		bold;
+}

@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteCond $1 !^(index.php|css|js|img|imgs|images|assets|bs3|bucket-ico-fonts|f5943150736|robots.txt|comunidad|taburete2000|0e2b6fb3b574a9691319933f89da8433.html|charts_library)
+RewriteRule ^(.*)$ /ci2_lf1/index.php/$1 [L]

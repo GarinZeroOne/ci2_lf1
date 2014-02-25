@@ -1,0 +1,202 @@
+/* Dashboard LF1 2014  */
+/* www.ligaformula1.com*/
+
+/*Saldo*/
+span.saldo{
+	font-size: 25px;
+	color:#148B00;
+	font-family: "Trebuchet MS","tahoma";
+}
+
+/*hall of fame*/
+ul.notification-meta li span{
+	color:#B1C697;
+}
+ul.notification-meta li span a{
+	color:#5A9910;
+	font-weight: 600;
+}
+
+.notification-info p {
+    color: #5C5C5C;
+    font-size: 12px;
+    margin: 0;
+}
+.notification-info {
+    margin-left: 56px;
+    margin-top: -45px;
+}
+
+.alert {
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    margin-bottom: 3px;
+    padding: 8px;
+}
+.alert-hall-msg{
+	background-color: #F2F2F2;
+
+}
+
+span.hall-avatar{
+	display: block;
+}
+span.hall-avatar img{
+	border-radius: 50%;
+	width: 48px;
+	height: 48px;
+	margin-bottom: 2px;
+}
+
+
+div.temporizador{
+	text-align: center;
+	min-height: 164px;
+}
+
+div.temporizador div.nextGP{
+	font-size:30px;
+	color:#1FB5AD;
+}
+
+div#countDownt span.digitot{
+	color: #F96C01;
+    font-size: 24px;
+}
+div#countDownt span.letrat{
+	color: #702900;
+    font-size: 25px;
+}
+
+/*Notificaciones*/
+.dropdown-menu.tasks-bar .task-info .desc {
+    
+	width: 100%;
+}
+.dropdown-menu > li > a{
+	white-space: inherit;
+}
+
+/*Ultimos fichajes*/
+div.driver-box{
+	display: inline-block;
+}
+div.driver-box img{
+	 border: 10px solid #F1F2F7;
+    border-radius: 4%;
+    height: 100px;
+    margin-bottom: 10px;
+    margin-left: 16px;
+    margin-top: 0;
+    width: 100px;
+}
+
+/*Sidebar RIGHT*/
+
+div.post-foro{
+	padding:6px;
+	margin-left: 6px;
+	
+}
+div.post-foro a{
+	color: #D6D6D6;
+	font-size: 14px;
+}
+
+/*GRUPOS*/
+a.group-join-btn{
+	color: #fff;
+	text-decoration: none;
+}
+a.group-join-btn:hover{
+	color: #BEFF8B;
+	text-decoration: none;
+}
+
+    
+.conversation-list .chat-avatar {
+    display: inline-block;
+    float: left;
+    text-align: center;
+    width: 60px;
+}
+.conversation-list .chat-avatar i {
+    display: block;
+    font-size: 9px;
+    width: 60px;
+}
+.conversation-list .odd2 .ctext-wrap {
+    background: none repeat scroll 0 0 #FFFABB !important;
+}
+
+.conversation-list .odd2 .ctext-wrap:after {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: rgba(213, 242, 239, 0) #FFF7B3 rgba(213, 242, 239, 0) rgba(213, 242, 239, 0);
+    border-image: none;
+    border-style: solid;
+    border-width: 5px;
+    content: " ";
+    height: 0;
+    margin-top: -5px;
+    pointer-events: none;
+    position: absolute;
+    right: 100%;
+    top: 20%;
+    width: 0;
+}
+
+.conversation-list .odd2 .ctext-wrap i {
+    color: #AB981E;
+    display: block;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: bold;
+    position: relative;
+}
+
+/*grupos mensajes identificador*/
+a.num-msg-grp{
+    color: #D7CD74;
+    font-family: Arial;
+    font-size: 11px;
+    cursor: pointer;
+}
+a.num-msg-grp-g{
+    color: #D2D1CF;
+    font-family: Arial;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+a.num-msg-grp-b{
+    color: #81CDEB;
+    font-family: Arial;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+
+/*Mis Pilotos*/
+.corner-ribon i {
+    color: #FFFFFF;
+    padding: 11px 0 0 25px;
+}
+.corner-ribon {
+    font-size: 21px;
+    height: 71px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 86px;
+}
+
+.black-ribon {
+    background: url("../../images/vender_piloto_green.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.label-success2 {
+    background-color: #22D96F;
+}

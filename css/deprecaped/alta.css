@@ -1,0 +1,17 @@
+#formulario
+{
+    background-color: #EEEEEE;
+    padding: 10px;
+    border-radius:0 0 10px 10px;
+    padding-bottom:30px;
+}
+#formulario span p {
+    background-color: #F5D6D6;
+    border: 1px solid #893838;
+    border-radius: 10px 10px 10px 10px;
+    color: #5F3131;
+    margin-bottom: 3px;
+    padding: 10px;
+    width: 300px;
+}
+

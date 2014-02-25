@@ -1,0 +1,24 @@
+#circuitos table{
+	width:					90%;
+}
+#circuitos table th {
+	background-color: #4F5ACC;
+    color: #FFFFFF;
+    text-align: left;
+}
+#circuitos table td{
+	background-color: #F9F9F9;
+    border-bottom: 1px solid #F1F1F1;
+    color: #000000;
+    padding: 3px;
+}
+
+#circuitos table td a
+{
+    color:#1461A9;
+}
+
+#circuitos table td a:hover
+{
+    text-decoration:underline;
+}

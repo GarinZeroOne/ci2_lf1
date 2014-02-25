@@ -1,0 +1,109 @@
+h1
+{
+	margin-bottom:10px;
+}
+
+h2
+{
+	margin-bottom:10px;
+	margin-top:10px;
+}
+
+table
+{
+	width:100%;
+}
+table tr td
+{
+	text-align: center;
+}
+
+tr:nth-child(2n+1) {
+background-color: #4F0808;
+color:#A26767
+}
+
+.banco
+{
+	 background-color: #EEEEEE;
+    /*border-radius: 10px 10px 10px 10px;*/
+    list-style: square outside none;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    max-width: 360px;
+    /*box-shadow: 1px 1px 10px #BEBEBE;*/
+}
+
+.banco  li
+{
+	color: #4E4A46;
+    font-size: 13px;
+    margin-left: 10px;
+    margin-top: 7px;
+    padding-left: 4px;
+    text-align: left;
+}
+#indice
+{
+	background-color: #eee;
+	/*background-image:url('../img/reglamento.png');*/
+	background-position: right;
+	background-repeat:no-repeat;
+	border-radius:10px;
+	padding:20px;
+	height:304px;
+
+}
+
+#indice ul
+{
+	list-style:square;
+}
+
+#puntos
+{
+    /*
+	 background-color: #513A3A;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 1px 1px 10px #BEBEBE;
+    margin: 20px auto 0;
+    width: 300px;
+    color:#fff;
+    */
+    margin: 20px auto 0;
+}
+
+
+span.srr{
+    color: #FFBA00;
+    display: inline-block;
+    font-size: 9px;
+    left: 8px;
+    position: absolute;
+    top: -1px;
+}
+
+span.srro{
+    display: inline-block;
+    background-image: url('../img/srr.png');
+    background-position: 17px 0;
+    height: 18px;
+    width: 18px;
+}
+
+span.srrm{
+    display: inline-block;
+    background-image: url('../img/srr.png');
+    background-position: -20px 0;
+    height: 18px;
+    width: 18px;
+}
+
+span.srrf{
+    display: inline-block;
+    background-image: url('../img/srr.png');
+    background-position: 0px 0;
+    height: 18px;
+    width: 18px;
+}
