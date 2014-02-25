@@ -9,7 +9,7 @@ require_once APPPATH . 'classes/equipos/equipoUsuario.php';
 require_once APPPATH . 'classes/pilotos/valorMercado.php';
 require_once APPPATH . 'classes/usuarios/usuario.php';
 
-class Mercado extends Controller {
+class Mercado extends CI_Controller {
 
     const msgFichaje = "msgFichaje";
 
@@ -20,7 +20,7 @@ class Mercado extends Controller {
      */
 
     function Mercado() {
-        parent::Controller();
+        parent::__construct();
 
         // Configurar idioma
         //$this->_set_language();

@@ -8,7 +8,7 @@ require_once APPPATH . 'classes/equipos/equipoUsuario.php';
 require_once APPPATH . 'classes/usuarios/usuario.php';
         
 
-class Gestion extends Controller {
+class Gestion extends CI_Controller {
     
     const msgVenta = "msgVenta";
 
@@ -19,7 +19,7 @@ class Gestion extends Controller {
      */
 
     function Gestion() {
-        parent::Controller();
+        parent::__construct();
 
         // Configurar idioma
         //$this->_set_language();

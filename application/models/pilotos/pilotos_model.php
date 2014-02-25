@@ -1,6 +1,6 @@
 <?php
 
-class Pilotos_model extends Model {
+class Pilotos_model extends CI_Model {
 
     private $iduser;
 
@@ -12,7 +12,7 @@ class Pilotos_model extends Model {
     const codigoKo = 0;
 
     function Pilotos_model() {
-        parent::Model();
+        parent::__construct();
         $this->load->model('boxes/mejoras_model');
         $this->iduser = $_SESSION['id_usuario'];
     }

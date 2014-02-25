@@ -1,9 +1,9 @@
 <?php
 
-class Admin_model extends Model {
+class Admin_model extends CI_Model {
 
     function Admin_model() {
-        parent::Model();
+        parent::__construct();
     }
 
     function insertarCirtuito($cicuito, $pais, $fecha) {
