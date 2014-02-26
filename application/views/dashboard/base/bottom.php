@@ -45,6 +45,7 @@
 */?>
 <script src="<?= base_url();?>js/dashboard/custom-select/jquery.customSelect.min.js" ></script>
 <script src="<?= base_url();?>js/dashboard/prettynumber/jquery.prettynumber.js" ></script>
+<script src="<?= base_url();?>js/dashboard/jquery-confirm/jquery.confirm.min.js" ></script>
 
 
 <!--common script init for all pages-->

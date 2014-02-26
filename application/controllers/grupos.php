@@ -52,8 +52,9 @@ class Grupos extends CI_Controller {
 		$datos['gruposUsuario'] = $this->grupos_model->obtenerGruposUsuario($_SESSION['id_usuario'])->result();
 		//dump($datos['gruposUsuario']);
 
-        
-
+        //  Ejemplo GASTOS /INGRESOS
+		// Se ha  echo un gasto/ingreso ,se guarda lo ke tenia antes del gasto/ingreso
+		$this->session->set_flashdata('banco_desde', '1300000');
 
 		// Header
 		$header['estilos'] 	  = array('dashboard.css');
@@ -61,7 +62,7 @@ class Grupos extends CI_Controller {
 		
 
 		// Javascript
-		$bottom['javascript'] = array();
+		$bottom['javascript'] = array('dashboard/grupos.js');
 
 		// Vistas base | Header | Menu Principal
 		$this->load->view('dashboard/base/header.php',$header);
@@ -111,6 +112,10 @@ class Grupos extends CI_Controller {
 
         $datos['grupo_info'     ] = $this->grupos_model->obtener_info_grupo($id_grupo);
 
+        $datos['num_usuarios'   ]  = $this->grupos_model->get_num_usuarios_grupo($id_grupo);
+
+        $datos['soy_miembro'    ] = $this->grupos_model->get_soy_miembro($id_grupo);
+
         $datos['rankingGP'		] = $this->grupos_model->gruposRankingGP($id_grupo)->result();
 
         $datos['rankingGeneral' ] = $this->grupos_model->gruposRankingGeneral($id_grupo)->result();
@@ -122,17 +127,21 @@ class Grupos extends CI_Controller {
 
         //dump($datos);
 
-       
-        $data_to_js['banco_desde'] = '120000';
-        $data_to_js['banco_hasta'] = '2000000';
+        // Animacion Dinero
+        if( $this->session->flashdata('banco_desde') )
+        {
+        	$data_to_js['banco_desde'] = $this->session->flashdata('banco_desde');
+        	$data_to_js['banco_hasta'] = $this->banco_model->getSaldo();
 
+        	$bottom['javascript_php'] = array('ruletadinero' => $this->load->view('dashboard/_head/js/ruletadinero',$data_to_js,TRUE));
+    	}
 		// Header
 		$header['estilos'] 	  = array('dashboard.css');
 		$header['titulo' ]	  = 'Grupos - LigaFormula1.com';
 
 		// Javascript
-		$bottom['javascript'    ] = array('dashboard/comentarios.js');
-		$bottom['javascript_php'] = array('ruletadinero' => $this->load->view('dashboard/_head/js/ruletadinero',$data_to_js,TRUE));
+		$bottom['javascript'    ] = array('dashboard/comentarios.js','dashboard/confirmar.js');
+		
 
 		// Vistas base | Header | Menu Principal
 		$this->load->view('dashboard/base/header.php',$header);
@@ -351,6 +360,35 @@ class Grupos extends CI_Controller {
 		$this->load->view('dashboard/base/bottom.php',$bottom);
 	}
 
+
+	/**
+	 * Ingresar a un grupo publico
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function ingresar(  $id_grupo = false )
+	{
+		// Si no llega un id de grupo -> GTFO!!
+		if(!is_numeric($id_grupo)){redirect_lf1('grupos');}
+
+		$this->grupos_model->ingresar_grupo_publico($id_grupo);
+	}
+
+
+	/**
+	 * Abandonar  un grupo
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function abandonar( $id_grupo = false )
+	{
+		// Si no llega un id de grupo -> GTFO!!
+		if(!is_numeric($id_grupo)){redirect_lf1('grupos');}
+
+		$this->grupos_model->abandonar_grupo($id_grupo);
+	}
 
 	/**
 	 * Plantilla seccion

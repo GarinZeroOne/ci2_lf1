@@ -637,5 +637,98 @@ class Grupos_model extends CI_Model {
 
         return $q;
     }
+
+    /**
+     * Devuelve el numero de usuarios
+     *
+     * @return void
+     * @author 
+     **/
+    function get_num_usuarios_grupo($id_grupo)
+    {
+        $q = $this->db->select("id")->from('grupos_miembros')->where('id_grupo',$id_grupo)->get()->num_rows();
+
+        return $q;
+    }
+
+    /**
+     * Devuelve  true / false si esta o no en el grupo
+     *
+     * @return void
+     * @author 
+     **/
+    function get_soy_miembro($id_grupo)
+    {
+        $q = $this->db->select('id')->from('grupos_miembros')->where('id_usuario',$_SESSION['id_usuario'])->where('id_grupo',$id_grupo)->get();
+
+        if($q->num_rows())
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+
+    /**
+     * Ingresar a un grupo publico
+     *
+     * @return void
+     * @author 
+     **/
+    function ingresar_grupo_publico($id_grupo)
+    {
+        // Comprobar que no exista ya en  el grupo
+        $miembro = $this->get_soy_miembro($id_grupo);
+
+        if(!$miembro)
+        {
+            $data_insert = array(
+                                'id'            =>      '',
+                                'id_usuario'    =>      $_SESSION['id_usuario'],
+                                'id_grupo'      =>      $id_grupo,
+                                'fecha_ingreso' =>      date('Y-m-d H:s:i')
+
+                                    );
+
+            $this->db->insert('grupos_miembros',$data_insert);
+
+
+            $this->session->set_flashdata('msg_bienvenida','Bienvenido al grupo,suerte!');
+            redirect_lf1('grupos/ver/'.$id_grupo);
+
+        }
+        else
+        {
+            redirect_lf1('grupos');
+        }
+
+
+    }
+
+    /**
+     * Abandonar un grupo
+     *
+     * @return void
+     * @author 
+     **/
+    function abandonar_grupo($id_grupo)
+    {
+
+        // Comprobar que exista en el grupo
+        $miembro = $this->get_soy_miembro($id_grupo);
+
+        if($miembro)
+        {
+            $this->db->where('id_grupo',$id_grupo);
+            $this->db->where('id_usuario',$_SESSION['id_usuario']);
+            $this->db->delete('grupos_miembros');
+            //dump($this->db->queries());die;
+        }
+        
+        redirect_lf1('grupos');
+    }
 }
 

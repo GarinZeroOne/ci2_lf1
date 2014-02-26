@@ -13,8 +13,80 @@
                         <li class="active"><a href="#"> Baratxoko</a></li>
                     </ul>
                     <!--breadcrumbs end -->
+
+                    <?php if($this->session->flashdata('msg_bienvenida')): ?>
+                    <div class="alert alert-success fade in">
+                        <button type="button" class="close close-sm" data-dismiss="alert">
+                            <i class="fa fa-times"></i>
+                        </button>
+                        <strong>Ya estás dentro!</strong> <?php echo $this->session->flashdata('msg_bienvenida'); ?>
+                    </div>
+                    <?php endif; ?>
             </div>
         </div>
+        
+        <?php /******************************* SOLO PARA NO MIEMBROS DEL GRUPO **************************/ ?>
+        <?php if(!$soy_miembro): ?>
+
+        <div class="row">
+            
+            <!-- Cabecera grupo -->
+            <div class="col-md-12">
+                <section class="panel">
+                    <div class="panel-body profile-information">
+                       <div class="col-md-6 col-xs-6">
+                           <div class="profile-pic text-center">
+                               <?php if($grupo_info->imagen): ?>
+                               <img alt="" src="<?php echo base_url(); ?>img/grupos/<?php echo $grupo_info->imagen; ?>">
+                                <?php else: ?>
+                                    <img alt="" src="<?php echo base_url(); ?>img/grupos/noimage.png">
+                                <?php endif; ?>
+                           </div>
+                       </div>
+                       <div class="col-md-6 col-xs-6">
+                           <div class="profile-desk">
+                               <h1><?php echo $grupo_info->nombre; ?></h1>
+                               <span class="text-muted" style="display:block;">Admin <?php echo $grupo_info->nick; ?></span>
+                               <p>
+                                <?php if($grupo_info->descripcion): ?>
+                                   <?php echo $grupo_info->descripcion; ?>
+                                <?php else: ?>
+                                    <i>No se ha introducido ninguna descripción.</i>
+                                <?php endif; ?>
+                               </p>
+                                
+                                
+                                <div>
+                                <?php if(!$grupo_info->privado): ?>
+                                    <a class="btn btn-primary" href="<?php echo site_url(); ?>grupos/ingresar/<?php echo $idGrupo; ?>">Entrar al grupo</a>
+                                <?php else: ?>
+                                    <a class="btn btn-primary" href="#">Grupo privado</a>
+                                <?php endif; ?>
+                                </div>
+
+                           </div>
+                       </div>
+                       <div class="col-md-6 col-xs-12">
+                           <div class="profile-statistics">
+                               <h1><?php echo $num_usuarios; ?> miembros</h1>
+                               
+                               <p></p>
+                               
+                           </div>
+                       </div>
+                    </div>
+                </section>
+
+                
+
+
+            </div>
+            
+        </div>    
+        
+        <?php /******************************* SOLO PARA MIEMBROS DEL GRUPO **************************/ ?>
+        <?php else: ?>
+
 
         <div class="row">
             
@@ -24,7 +96,11 @@
                     <div class="panel-body profile-information">
                        <div class="col-md-6 col-xs-6">
                            <div class="profile-pic text-center">
-                               <img alt="" src="<?php echo base_url(); ?>img/grupos/1393251054.jpg">
+                            <?php if($grupo_info->imagen): ?>
+                               <img alt="" src="<?php echo base_url(); ?>img/grupos/<?php echo $grupo_info->imagen; ?>">
+                            <?php else: ?>
+                                <img alt="" src="<?php echo base_url(); ?>img/grupos/noimage.png">
+                            <?php endif; ?>
                            </div>
                        </div>
                        <div class="col-md-6 col-xs-6">
@@ -41,17 +117,17 @@
                                 
                                 <?php if($_SESSION['id_usuario'] == $grupo_info->id_usuario_creador): ?>
                                     <a class="btn btn-primary" href="<?php echo site_url(); ?>grupos/configurar_grupo/<?php echo $idGrupo; ?>">Configurar grupo</a>
-                                <?php elseif(!$grupo_info->privado): ?>
-                                    <a class="btn btn-primary" href="#">Entrar al grupo</a>
+                                
+                                
                                 <?php else: ?>
-                                    <a class="btn btn-primary" href="#">Grupo privado</a>
+                                    <a class="btn btn-primary btn-danger confirm" href="<?php echo site_url(); ?>grupos/abandonar/<?php echo $idGrupo; ?>">Abandonar grupo</a>
                                 <?php endif; ?>
 
                            </div>
                        </div>
                        <div class="col-md-6 col-xs-12">
                            <div class="profile-statistics">
-                               <h1>13 mienbros</h1>
+                               <h1><?php echo $num_usuarios; ?> miembros</h1>
                                
                                <p></p>
                                
@@ -248,6 +324,9 @@
             </div>
         </div>
         <!-- page end-->
+
+        <?php endif; ?>
+
         </section>
     </section>
     <!--main content end-->
