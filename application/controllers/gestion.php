@@ -179,6 +179,35 @@ class Gestion extends CI_Controller {
         $this->load->view('dashboard/base/sidebarright.php', $sidebarright);
         $this->load->view('dashboard/base/bottom.php', $bottom);
     }
+    
+    function venderEquipo() {
+        
+        $this->load->model('equipos/equipos_model');
+        
+        if (!is_numeric($this->uri->segment(3))) {
+            $msg = "Piloto NO vendido";
+            $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo
+                , Pilotos_model::mensaje => $msg);
+
+            $this->session->set_flashdata(Gestion::msgVenta, $retorno);
+
+            redirect_lf1('gestion/mis_equipos', 'refresh');
+        }
+        $idEquipo = $this->uri->segment(3);
+
+        $equipo = EquipoUsuario::getById($idEquipo, $_SESSION['id_usuario']);
+
+        $usuario = Usuario::getById($_SESSION['id_usuario']);
+
+        $msg = $this->equipos_model->venderEquipo($usuario, $equipo);
+
+        $retorno = array(Equipos_model::codigoRetorno => Equipos_model::codigoOk
+            , Equipos_model::mensaje => $msg);
+
+        $this->session->set_flashdata(Gestion::msgVenta, $retorno);
+
+        redirect_lf1('gestion/mis_equipos', 'refresh');
+    }
 
     /**
      * Plantilla seccion

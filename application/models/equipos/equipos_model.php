@@ -213,6 +213,8 @@ class Equipos_model extends CI_Model {
                     , $equipo->getValorActual()));
             }
 
+            $this->insertCompraEquipo($equipo, $usuario);
+            
             $usuario->setFondos($saldo_despues_de_compra);
 
             $CI = &get_instance();
@@ -283,25 +285,31 @@ class Equipos_model extends CI_Model {
      * Función utilizada para vender equipos (Servicio)
      */
 
-    function venderEquipo($idUser, $idEquipo) {
+    function venderEquipo(Usuario $usuario, Equipo $equipo) {
 
         // Poner inactivo el equipo
         $sql_inactivo = "UPDATE usuarios_equipos 
                             SET activo = 0,fecha_venta = ?
                             WHERE id_usuario = ?
                             AND id_equipo = ?";
-        $this->db->query($sql_inactivo, array(date('Y-m-d'), $idUser, $idEquipo));
+        $this->db->query($sql_inactivo, array(date('Y-m-d')
+            , $usuario->getIdUsuario(), $equipo->getIdEquipo()));
 
-        // Sumarle la pasta de la venta al banco
-        $pasta_venta_piloto = $this->db->query("SELECT precio_venta 
-                                                    FROM equipos 
-                                                    WHERE id = ?"
-                        , array($idEquipo))->row()->precio_venta;
+        $CI = &get_instance();
+        $CI->load->Model('banco/banco_model');
 
-        $sql_ingreso = "UPDATE usuarios_banco 
-                            SET fondos = fondos + ? 
-                            WHERE id_usuario = ?";
-        $this->db->query($sql_ingreso, array($pasta_venta_piloto, $idUser));
+        $fondos = $usuario->getFondos() + $equipo->getValorActual();
+        $usuario->setFondos($fondos);
+
+        $CI->banco_model->guardarSaldoUsuario($usuario);
+
+        //Registrar movimiento banco
+        $CI->banco_model->registrarMovimiento(0, $equipo->getValorActual()
+                , $usuario->getIdUsuario(), Banco_model::ventaEquipo
+                , $equipo->getIdEquipo(), Banco_model::ingreso);
+        
+        $this->insertVentaEquipo($equipo, $usuario);
+
         // TODO OK
         return 'Operación realizada correctamente!';
     }
@@ -489,25 +497,25 @@ class Equipos_model extends CI_Model {
         return $equipo;
     }
 
-    /*function getEquiposUsuarioObject($idUsuario) {
-        $sql = "SELECT equipos.*
-                FROM equipos,usuarios_equipos
-                WHERE usuarios_equipos.id_usuario = ?
-                AND usuarios_equipos.id_equipo = equipos.id
-                AND usuarios_equipos.activo = 1";
-        $result = $this->db->query($sql, array($idUsuario))->result();
+    /* function getEquiposUsuarioObject($idUsuario) {
+      $sql = "SELECT equipos.*
+      FROM equipos,usuarios_equipos
+      WHERE usuarios_equipos.id_usuario = ?
+      AND usuarios_equipos.id_equipo = equipos.id
+      AND usuarios_equipos.activo = 1";
+      $result = $this->db->query($sql, array($idUsuario))->result();
 
-        $equipos = array();
-        foreach ($result as $row) {
-            $equipo = EquipoFicha::getById($row->id);
-            $pilotos = $this->getPilotosEquipoObject($row->id);
-            $equipo->setPilotos($pilotos);
-            $equipos[] = $equipo;
-        }
+      $equipos = array();
+      foreach ($result as $row) {
+      $equipo = EquipoFicha::getById($row->id);
+      $pilotos = $this->getPilotosEquipoObject($row->id);
+      $equipo->setPilotos($pilotos);
+      $equipos[] = $equipo;
+      }
 
-        return $equipos;
-    }*/
-    
+      return $equipos;
+      } */
+
     function getEquiposUsuarioObject($idUsuario) {
         $sql = "SELECT *
                 FROM usuarios_equipos
@@ -517,7 +525,7 @@ class Equipos_model extends CI_Model {
 
         $equipos = array();
         foreach ($result as $row) {
-            $equipo = EquipoUsuario::getById($row->id_equipo,$idUsuario);
+            $equipo = EquipoUsuario::getById($row->id_equipo, $idUsuario);
             $pilotos = $this->getPilotosEquipoObject($row->id_equipo);
             $equipo->setPilotos($pilotos);
             $equipos[] = $equipo;
@@ -525,7 +533,7 @@ class Equipos_model extends CI_Model {
 
         return $equipos;
     }
-    
+
     function getDatosEquipoUsuario($idEquipo, $idUsuario) {
         $sql = "SELECT * FROM usuarios_equipos " . "WHERE id_equipo = ? "
                 . "AND id_usuario = ? ";
@@ -534,6 +542,20 @@ class Equipos_model extends CI_Model {
             $idEquipo, $idUsuario));
 
         return $result;
+    }
+    
+    function insertCompraEquipo(Equipo $equipo, Usuario $usuario) {
+        $sqlFichaje = "INSERT INTO compras_equipos "
+                . "( id_equipo, id_usuario, fecha) values (?,?,?)";
+
+        $this->db->query($sqlFichaje, array($equipo->getIdEquipo(), $usuario->getIdUsuario(), date('Y-m-d')));
+    }
+
+    function insertVentaEquipo(Equipo $equipo, Usuario $usuario) {
+        $sqlFichaje = "INSERT INTO ventas_equipos "
+                . "( id_equipo, id_usuario, fecha) values (?,?,?)";
+
+        $this->db->query($sqlFichaje, array($equipo->getIdEquipo(), $usuario->getIdUsuario(), date('Y-m-d')));
     }
 
 }
