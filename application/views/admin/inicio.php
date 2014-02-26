@@ -102,4 +102,15 @@
 
     </form>
     
+    <form method="post" action="<?= site_url() ?>admin/cambioValorMovimientos">
+
+        <table>
+
+            <tr>
+                <td colspan="2" align="center"> <input type="submit" value="Cambio valor por movimientos de mercado"></td>
+            </tr>
+        </table>        
+
+    </form>
+    
 </div>

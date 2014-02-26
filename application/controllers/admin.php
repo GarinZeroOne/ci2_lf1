@@ -1,5 +1,11 @@
 <?php
 
+require_once APPPATH . 'classes/pilotos/piloto.php';
+require_once APPPATH . 'classes/pilotos/valorMercado.php';
+require_once APPPATH . 'classes/equipos/equipo.php';
+require_once APPPATH . 'classes/movimientos/movimientosPilotos.php';
+require_once APPPATH . 'classes/movimientos/movimientoPiloto.php';
+
 class Admin extends CI_Controller {
 
     function Admin() {
@@ -19,9 +25,9 @@ class Admin extends CI_Controller {
         $msgClasificacion = $this->session->flashdata('msgClasificacionMundial');
 
         /* Es el admin???
-        $msgResultados = $this->session->flashdata('msgResultados');msgClasificacionMundial
+          $msgResultados = $this->session->flashdata('msgResultados');msgClasificacionMundial
 
-        /* Es el admin???
+          /* Es el admin???
           if ($_SESSION['id_usuario'] == 177) { */
 
         //Se pasan los circuitos no procesados
@@ -200,7 +206,7 @@ class Admin extends CI_Controller {
         $json = json_decode(file_get_contents($url));
 
         $MRData = $json->MRData;
-        
+
         $this->admin_model->borrarClasificacionMundialPilotos();
 
         foreach ($MRData->StandingsTable->StandingsLists as $standing) {
@@ -215,13 +221,13 @@ class Admin extends CI_Controller {
                         , $driverStanding->position);
             }
         }
-        
+
         $url = 'http://ergast.com/api/f1/current/constructorStandings.json';
 
         $json = json_decode(file_get_contents($url));
 
         $MRData = $json->MRData;
-        
+
         $this->admin_model->borrarClasificacionMundialEquipos();
 
         foreach ($MRData->StandingsTable->StandingsLists as $standing) {
@@ -236,8 +242,87 @@ class Admin extends CI_Controller {
                         , $constructorStanding->position);
             }
         }
-        
+
         return "Datos guardados correctamente";
+    }
+
+    function cambioValorMovimientos() {
+        //$this->load->Model('admin/movimientosMercado_model');
+        $this->load->model('admin/movimientos_mercado_model');
+        $this->load->model('pilotos/pilotos_model');
+
+        $pilotos = $this->pilotos_model->getPilotosObject();
+
+        $fecha = date('Y-m-d');
+        $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
+        echo $fechaAyer;
+        echo "<br>";
+
+        foreach ($pilotos as $piloto) {
+            $movimientoPiloto = new MovimientoPiloto($fechaAyer, $piloto->getIdPiloto());
+
+            echo $piloto->getNombre();
+            echo "<br>";
+            echo "Ventas :" . $movimientoPiloto->getVentasPiloto();
+            echo "<br>";
+            echo "Porcentaje Ventas :" . $movimientoPiloto->getPorcentajeVenta();
+            echo "<br>";
+            echo "Compras :" . $movimientoPiloto->getComprasPiloto();
+            echo "<br>";
+            echo "Porcentaje Compras :" . $movimientoPiloto->getPorcentajeCompra();
+            echo "<br>";
+            echo "Movimientos piloto :" . $movimientoPiloto->getMovimientosPiloto();
+            echo "<br>";
+            echo "Porcentaje Movimientos piloto :" . $movimientoPiloto->getPorcentajeMovimientosPiloto();
+            echo "<br>";
+            echo "Movimientos totales :" . $movimientoPiloto->getMovimientosTotales();
+            echo "<br>";
+
+
+            if ($movimientoPiloto->getModificarPrecio() == 0) {
+                echo "no cambiar precio";
+            } elseif ($movimientoPiloto->getModificarPrecio() == 1) {
+                $porcentajeSubir = $this->movimientos_mercado_model->
+                                getPorcentajeCambioValorMovimientosPilotos
+                                        ($movimientoPiloto->getPorcentajeMovimientosPiloto()
+                                        , $movimientoPiloto->getPorcentajeCompra())->row()->porcentaje_cambio;
+                echo "Subir " . $porcentajeSubir;
+                echo "<br>";
+                echo "valor antes : " . $piloto->getValorActual();
+                echo "<br>";
+                $piloto->aumentarValor($porcentajeSubir);
+                echo "valor despues : " . $piloto->getValorActual();
+            } elseif ($movimientoPiloto->getModificarPrecio() == 2) {
+                $porcentajeBajar = $this->movimientos_mercado_model->
+                                getPorcentajeCambioValorMovimientosPilotos
+                                        ($movimientoPiloto->getPorcentajeMovimientosPiloto()
+                                        , $movimientoPiloto->getPorcentajeVenta())->row()->porcentaje_cambio;
+                echo "Bajar " . $porcentajeBajar;
+                echo "<br>";
+                echo "valor antes : " . $piloto->getValorActual();
+                echo "<br>";
+                $piloto->disminuirValor($porcentajeBajar);
+                echo "valor despues : " . $piloto->getValorActual();
+            } elseif ($movimientoPiloto->getModificarPrecio() == 3) {
+                echo "Bajar por no movimientos";
+                $porcentajeBajar = $this->movimientos_mercado_model->
+                                getPorcentajeCambioValorMovimientosPilotos
+                                        (0
+                                        , 0)->row()->porcentaje_cambio;
+                echo "<br>";
+                echo "Bajar " . $porcentajeBajar;
+                echo "<br>";
+                echo "valor antes : " . $piloto->getValorActual();
+                echo "<br>";
+                $piloto->disminuirValor($porcentajeBajar);
+                echo "valor despues : " . $piloto->getValorActual();
+            }
+
+            echo "<br>";
+            echo "<br>";
+
+            $this->pilotos_model->guardarValorPiloto($piloto);
+        }
     }
 
 }
