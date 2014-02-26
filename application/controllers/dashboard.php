@@ -64,6 +64,11 @@ class Dashboard extends CI_Controller {
 		// Variaciones mercado pilotos
 		$datos['info_mercado_pilotos'     ] = $this->pilotos_model->getInfoPilotos();
 
+		$chart_data = $this->estadisticas_model->get_info_fichajes_ventas();
+		$data_to_js['series_data'] = json_encode($chart_data);
+
+		//dump($data_to_js['series_data']);die;
+
 		// Header
 		$header['estilos'] 	  = array('dashboard.css');
 		$header['titulo' ]	  = 'Dashboard - LigaFormula1.com';
@@ -71,7 +76,8 @@ class Dashboard extends CI_Controller {
 		//$header['saldo'  ]    = $this->banco_model->getSaldo('formateado');
 
 		// Javascript
-		$bottom['javascript'] = array('highcharts.js','dashboard/ejemplo_dash.js');
+		$bottom['javascript'	] = array('highcharts.js');
+		$bottom['javascript_php'] = array('grafica1_dash' => $this->load->view('dashboard/_head/js/grafica1_dash',$data_to_js,TRUE));
 
 		// Menu Izquierda
 		$sidebarleft 		  = array();

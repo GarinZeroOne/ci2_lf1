@@ -256,4 +256,45 @@ class Estadisticas_model extends CI_Model
 		return $gastos;
 
 	}
+
+
+	/**
+	 * Devuelve los fichajes y las ventas del dia anterior
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_info_fichajes_ventas()
+	{
+
+		$fecha_estadisticas = '2014-02-19';//date('Y-m-d');
+		$fichajes = $this->db->select('*')->from('usuarios_pilotos')
+										  
+										  ->where('fecha_fichaje',$fecha_estadisticas)
+										  ->get()
+										  ->result();
+
+
+		$ventas = $this->db->select('*')->from('usuarios_pilotos')->where('fecha_venta',$fecha_estadisticas)->get()->result();
+
+		// Recorremos pilotos fichados en esa fecha
+		foreach($fichajes as $fi)
+		{
+			 $suma_fichados = $suma_fichados + intval($fi->precio_fichaje);
+		}
+		$fichados[] = intval($suma_fichados);
+		// Recorremos pilotos fichados en esa fecha
+		foreach($ventas as $ve)
+		{
+			$suma_vendidos = $suma_vendidos + intval($ve->precio_venta);
+		}
+
+		$vendidos[] = intval($suma_vendidos);
+
+		$series_data[] = array('name' => 'Fichajes $','data'=>$fichados);
+		$series_data[] = array('name' => 'Ventas $','data'=>$vendidos);
+
+		return $series_data;
+		
+	}
 }

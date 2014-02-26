@@ -49,7 +49,7 @@
             <div class="col-md-3">
                 <section class="panel">
                     <div class="panel-body">
-                        <div id="grafica" style="max-width: 310px; height: 400px; margin: 0 auto">
+                        <div id="grafica" >
                             
                         </div>
                     </div>
@@ -72,7 +72,8 @@
                     </div>
                 </section>
             </div>
-
+            
+            
             <div class="col-md-3">
                 <section class="panel">
                     <div class="panel-body">
@@ -109,6 +110,7 @@
                     </div>
                 </section>
             </div>
+            
         </div>
         <!--mini statistics end-->
 
