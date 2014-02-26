@@ -168,7 +168,7 @@ class Grupos extends CI_Controller {
 		if(!$_POST){die;}
 
 		$id_grupo = $_POST['gi'];
-		$contenido = $_POST['comment'];
+		$contenido = strip_tags($_POST['comment']);
 
 		$mensaje = $this->grupos_model->insertMensajes($id_grupo,$contenido,true);
 		$texto = '<li class="clearfix odd">
@@ -221,7 +221,7 @@ class Grupos extends CI_Controller {
 		{
 
 			// Comprobar que no exista
-			$existeGrupo = $this->grupos_model->existeGrupo($_POST['nombre_grupo']);
+			$existeGrupo = $this->grupos_model->existeGrupo(strip_tags($_POST['nombre_grupo']));
 
 	        if ($existeGrupo) 
 	        {

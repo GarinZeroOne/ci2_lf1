@@ -20,7 +20,7 @@ class Grupos_model extends CI_Model {
 
 
         $sql = "INSERT INTO usuarios_grupos VALUES (?,?,?,?,?,?,?)";
-        $query = $this->db->query($sql, array('', $_SESSION['id_usuario'], $datos['nombre_grupo'],$datos['descripcion_grupo'],'',date('Y-m-d h:i:s'),$privacidad));
+        $query = $this->db->query($sql, array('', $_SESSION['id_usuario'], strip_tags($datos['nombre_grupo']),$datos['descripcion_grupo'],'',date('Y-m-d h:i:s'),$privacidad));
 
         return $this->db->insert_id();
     }
@@ -683,7 +683,10 @@ class Grupos_model extends CI_Model {
         // Comprobar que no exista ya en  el grupo
         $miembro = $this->get_soy_miembro($id_grupo);
 
-        if(!$miembro)
+        // Comprobar privacidad del grupo
+        $privado = $this->db->select('privado')->from('usuarios_grupos')->where('id',$id_grupo)->get()->row()->privado;
+
+        if(!$miembro && !$privado)
         {
             $data_insert = array(
                                 'id'            =>      '',

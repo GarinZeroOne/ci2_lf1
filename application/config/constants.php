@@ -39,7 +39,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 // Para el servidor Internet
 //define('ROOT',$_SERVER['DOCUMENT_ROOT']);
 // Localhost
- define('ROOT',$_SERVER['DOCUMENT_ROOT'].'lf12014');
+ define('ROOT',$_SERVER['DOCUMENT_ROOT'].'ci2_lf1');
 
 /* End of file constants.php */
 /* Location: ./system/application/config/constants.php */

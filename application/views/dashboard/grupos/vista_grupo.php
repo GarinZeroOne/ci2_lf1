@@ -115,6 +115,7 @@
                                 <?php endif; ?>
                                </p>
                                 
+                                <div>
                                 <?php if($_SESSION['id_usuario'] == $grupo_info->id_usuario_creador): ?>
                                     <a class="btn btn-primary" href="<?php echo site_url(); ?>grupos/configurar_grupo/<?php echo $idGrupo; ?>">Configurar grupo</a>
                                 
@@ -122,6 +123,7 @@
                                 <?php else: ?>
                                     <a class="btn btn-primary btn-danger confirm" href="<?php echo site_url(); ?>grupos/abandonar/<?php echo $idGrupo; ?>">Abandonar grupo</a>
                                 <?php endif; ?>
+                                </div>
 
                            </div>
                        </div>
