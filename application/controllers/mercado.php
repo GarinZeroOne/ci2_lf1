@@ -68,7 +68,7 @@ class Mercado extends CI_Controller {
         $datos['pilotos'] = $this->pilotos_model->getPilotosFichaObject();
 
         // Javascript
-        $bottom['javascript'] = array();
+        $bottom['javascript'] = array('dashboard/confirmar.js');
 
         // Vistas base | Header | Menu Principal
         $this->load->view('dashboard/base/header.php', $header);
@@ -177,7 +177,7 @@ class Mercado extends CI_Controller {
         $datos['equipos'] = $this->equipos_model->getEquiposFichaObject();
 
         // Javascript
-        $bottom['javascript'] = array();
+        $bottom['javascript'] = array('dashboard/confirmar.js');
 
         // Vistas base | Header | Menu Principal
         $this->load->view('dashboard/base/header.php', $header);

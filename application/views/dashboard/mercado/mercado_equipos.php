@@ -99,7 +99,7 @@
                                                         ?>
                                                     </span>
                                             </td>
-                                            <td class="numeric"><a href="<?php echo site_url() . 'mercado/comprarEquipo/' . $equipo->getIdEquipo(); ?>" class="btn btn-success"><?php echo $equipo->getValorActual(true); ?></a></td>
+                                            <td class="numeric"><a href="<?php echo site_url() . 'mercado/comprarEquipo/' . $equipo->getIdEquipo(); ?>" class="btn btn-success confirm"><?php echo $equipo->getValorActual(true); ?></a></td>
                                             <td class="numeric"><?php echo $equipo->getValorMax(true); ?></td>
                                             <td class="numeric"><?php echo $equipo->getValorMin(true); ?></td>                                                                                                                        
                                         </tr>

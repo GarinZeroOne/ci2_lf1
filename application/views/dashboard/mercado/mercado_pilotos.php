@@ -117,10 +117,10 @@
                                                                                         ?>
                                                                                     </span>
                                                                                     </td>
-                                                                                    <td class="numeric"><a href="<?php echo site_url() . 'mercado/ficharPiloto/' . $piloto->getIdPiloto(); ?>" class="btn btn-success btn-xs"> <i class="fa fa-shopping-cart"></i> <?php echo $piloto->getValorActual(true); ?></a></td>
+                                                                                    <td class="numeric"><a href="<?php echo site_url() . 'mercado/ficharPiloto/' . $piloto->getIdPiloto(); ?>" class="btn btn-success btn-xs confirm"> <i class="fa fa-shopping-cart"></i> <?php echo $piloto->getValorActual(true); ?></a></td>
                                                                                     <td class="numeric" style="background-color: rgb(253, 242, 255); color: rgb(162, 122, 170);"><?php echo $piloto->getValorMax(true); ?></td>
                                                                                     <td class="numeric" style="background-color: rgb(255, 237, 237); color: rgb(191, 120, 120);"><?php echo $piloto->getValorMin(true); ?></td>
-                                                                                    <td class="numeric"><a href="<?php echo site_url() . 'mercado/alquilarPiloto/' . $piloto->getIdPiloto(); ?> " class="btn btn-info btn-xs"><i class="fa fa-flag-checkered"></i> <?php echo $piloto->getPrecioAlquiler(true); ?></a></td>                                                            
+                                                                                    <td class="numeric"><a href="<?php echo site_url() . 'mercado/alquilarPiloto/' . $piloto->getIdPiloto(); ?> " class="btn btn-info btn-xs confirm"><i class="fa fa-flag-checkered"></i> <?php echo $piloto->getPrecioAlquiler(true); ?></a></td>                                                            
                                                                                     </tr>
                                                                                 <?php endforeach; ?>
 

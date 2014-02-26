@@ -95,7 +95,7 @@ class Gestion extends CI_Controller {
         $header['avatar'] = $this->usuarios_model->userAvatar($_SESSION['id_usuario']);
 
         // Javascript
-        $bottom['javascript'] = array();
+        $bottom['javascript'] = array('dashboard/confirmar.js');
 
         $this->load->model('pilotos/pilotos_model');
 
@@ -159,7 +159,7 @@ class Gestion extends CI_Controller {
         $header['avatar'] = $this->usuarios_model->userAvatar($_SESSION['id_usuario']);
 
         // Javascript
-        $bottom['javascript'] = array();
+        $bottom['javascript'] = array('dashboard/confirmar.js');
 
         $this->load->model('equipos/equipos_model');
 
