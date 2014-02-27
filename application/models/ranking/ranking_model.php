@@ -1,4 +1,4 @@
-<?
+<?php
 
 class Ranking_model extends CI_Model {
 

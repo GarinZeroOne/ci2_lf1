@@ -86,7 +86,7 @@ class Mercado extends CI_Controller {
 
     function ficharPiloto() {
 
-        if ($this->uri->segment(3) === FALSE) {
+        if (!is_numeric($this->uri->segment(3))) {
             $msg = "Piloto NO fichado";
             $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo
                 , Pilotos_model::mensaje => $msg);
@@ -112,7 +112,7 @@ class Mercado extends CI_Controller {
     }
 
     function comprarEquipo() {
-        if ($this->uri->segment(3) === FALSE) {
+        if (!is_numeric($this->uri->segment(3))) {
             $msg = "Equipo NO comprado";
 
             $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo
@@ -138,7 +138,7 @@ class Mercado extends CI_Controller {
     }
 
     function alquilarPiloto() {
-        if ($this->uri->segment(3) === FALSE) {
+        if (!is_numeric($this->uri->segment(3))) {
             $msg = "Piloto NO alquilado";
             $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo
                 , Pilotos_model::mensaje => $msg);
@@ -195,6 +195,10 @@ class Mercado extends CI_Controller {
 
     function fichaPiloto() {
 
+        if (!is_numeric($this->uri->segment(3))) {
+            redirect_lf1('pilotos', 'refresh');
+        }
+
         // Menu Izquierda
         $sidebarleft = array();
         $sidebarleft['m_act'] = 3;
@@ -240,6 +244,10 @@ class Mercado extends CI_Controller {
 
     function fichaEquipo() {
 
+        if (!is_numeric($this->uri->segment(3))) {
+            redirect_lf1('equipos', 'refresh');
+        }
+        
         // Menu Izquierda
         $sidebarleft = array();
         $sidebarleft['m_act'] = 3;
