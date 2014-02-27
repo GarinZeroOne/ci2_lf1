@@ -5,6 +5,8 @@ require_once APPPATH . 'classes/pilotos/valorMercado.php';
 require_once APPPATH . 'classes/equipos/equipo.php';
 require_once APPPATH . 'classes/movimientos/movimientosPilotos.php';
 require_once APPPATH . 'classes/movimientos/movimientoPiloto.php';
+require_once APPPATH . 'classes/movimientos/movimientosEquipos.php';
+require_once APPPATH . 'classes/movimientos/movimientoEquipo.php';
 
 class Admin extends CI_Controller {
 
@@ -247,9 +249,14 @@ class Admin extends CI_Controller {
     }
 
     function cambioValorMovimientos() {
-        //$this->load->Model('admin/movimientosMercado_model');
+        $this->_cambiarValoresMovimientosPilotos();
+        $this->_cambiarValoresMovimientosEquipos();
+    }
+
+    private function _cambiarValoresMovimientosPilotos() {
         $this->load->model('admin/movimientos_mercado_model');
         $this->load->model('pilotos/pilotos_model');
+        $this->load->model('boxes/boxes_model');
 
         $pilotos = $this->pilotos_model->getPilotosObject();
 
@@ -259,69 +266,159 @@ class Admin extends CI_Controller {
         echo "<br>";
 
         foreach ($pilotos as $piloto) {
-            $movimientoPiloto = new MovimientoPiloto($fechaAyer, $piloto->getIdPiloto());
 
-            echo $piloto->getNombre();
-            echo "<br>";
-            echo "Ventas :" . $movimientoPiloto->getVentasPiloto();
-            echo "<br>";
-            echo "Porcentaje Ventas :" . $movimientoPiloto->getPorcentajeVenta();
-            echo "<br>";
-            echo "Compras :" . $movimientoPiloto->getComprasPiloto();
-            echo "<br>";
-            echo "Porcentaje Compras :" . $movimientoPiloto->getPorcentajeCompra();
-            echo "<br>";
-            echo "Movimientos piloto :" . $movimientoPiloto->getMovimientosPiloto();
-            echo "<br>";
-            echo "Porcentaje Movimientos piloto :" . $movimientoPiloto->getPorcentajeMovimientosPiloto();
-            echo "<br>";
-            echo "Movimientos totales :" . $movimientoPiloto->getMovimientosTotales();
-            echo "<br>";
+            $boxesAbiertos = $this->boxes_model->estadoFecha($fechaAyer);
+
+            if ($boxesAbiertos) {
+
+                $movimientoPiloto = new MovimientoPiloto($fechaAyer, $piloto->getIdPiloto());
+
+                echo $piloto->getNombre();
+                echo "<br>";
+                echo "Ventas :" . $movimientoPiloto->getVentasPiloto();
+                echo "<br>";
+                echo "Porcentaje Ventas :" . $movimientoPiloto->getPorcentajeVenta();
+                echo "<br>";
+                echo "Compras :" . $movimientoPiloto->getComprasPiloto();
+                echo "<br>";
+                echo "Porcentaje Compras :" . $movimientoPiloto->getPorcentajeCompra();
+                echo "<br>";
+                echo "Movimientos piloto :" . $movimientoPiloto->getMovimientosPiloto();
+                echo "<br>";
+                echo "Porcentaje Movimientos piloto :" . $movimientoPiloto->getPorcentajeMovimientosPiloto();
+                echo "<br>";
+                echo "Movimientos totales :" . $movimientoPiloto->getMovimientosTotales();
+                echo "<br>";
 
 
-            if ($movimientoPiloto->getModificarPrecio() == 0) {
-                echo "no cambiar precio";
-            } elseif ($movimientoPiloto->getModificarPrecio() == 1) {
-                $porcentajeSubir = $this->movimientos_mercado_model->
-                                getPorcentajeCambioValorMovimientosPilotos
-                                        ($movimientoPiloto->getPorcentajeMovimientosPiloto()
-                                        , $movimientoPiloto->getPorcentajeCompra())->row()->porcentaje_cambio;
-                echo "Subir " . $porcentajeSubir;
+                if ($movimientoPiloto->getModificarPrecio() == 0) {
+                    echo "no cambiar precio";
+                } elseif ($movimientoPiloto->getModificarPrecio() == 1) {
+                    $porcentajeSubir = $this->movimientos_mercado_model->
+                                    getPorcentajeCambioValorMovimientos
+                                            ($movimientoPiloto->getPorcentajeMovimientosPiloto()
+                                            , $movimientoPiloto->getPorcentajeCompra())->row()->porcentaje_cambio;
+                    echo "Subir " . $porcentajeSubir;
+                    echo "<br>";
+                    echo "valor antes : " . $piloto->getValorActual();
+                    echo "<br>";
+                    $piloto->aumentarValor($porcentajeSubir);
+                    echo "valor despues : " . $piloto->getValorActual();
+                } elseif ($movimientoPiloto->getModificarPrecio() == 2) {
+                    $porcentajeBajar = $this->movimientos_mercado_model->
+                                    getPorcentajeCambioValorMovimientos
+                                            ($movimientoPiloto->getPorcentajeMovimientosPiloto()
+                                            , $movimientoPiloto->getPorcentajeVenta())->row()->porcentaje_cambio;
+                    echo "Bajar " . $porcentajeBajar;
+                    echo "<br>";
+                    echo "valor antes : " . $piloto->getValorActual();
+                    echo "<br>";
+                    $piloto->disminuirValor($porcentajeBajar);
+                    echo "valor despues : " . $piloto->getValorActual();
+                } elseif ($movimientoPiloto->getModificarPrecio() == 3) {
+                    echo "Bajar por no movimientos";
+                    $porcentajeBajar = $this->movimientos_mercado_model->
+                                    getPorcentajeCambioValorMovimientos
+                                            (0
+                                            , 0)->row()->porcentaje_cambio;
+                    echo "<br>";
+                    echo "Bajar " . $porcentajeBajar;
+                    echo "<br>";
+                    echo "valor antes : " . $piloto->getValorActual();
+                    echo "<br>";
+                    $piloto->disminuirValor($porcentajeBajar);
+                    echo "valor despues : " . $piloto->getValorActual();
+                }
+
                 echo "<br>";
-                echo "valor antes : " . $piloto->getValorActual();
                 echo "<br>";
-                $piloto->aumentarValor($porcentajeSubir);
-                echo "valor despues : " . $piloto->getValorActual();
-            } elseif ($movimientoPiloto->getModificarPrecio() == 2) {
-                $porcentajeBajar = $this->movimientos_mercado_model->
-                                getPorcentajeCambioValorMovimientosPilotos
-                                        ($movimientoPiloto->getPorcentajeMovimientosPiloto()
-                                        , $movimientoPiloto->getPorcentajeVenta())->row()->porcentaje_cambio;
-                echo "Bajar " . $porcentajeBajar;
-                echo "<br>";
-                echo "valor antes : " . $piloto->getValorActual();
-                echo "<br>";
-                $piloto->disminuirValor($porcentajeBajar);
-                echo "valor despues : " . $piloto->getValorActual();
-            } elseif ($movimientoPiloto->getModificarPrecio() == 3) {
-                echo "Bajar por no movimientos";
-                $porcentajeBajar = $this->movimientos_mercado_model->
-                                getPorcentajeCambioValorMovimientosPilotos
-                                        (0
-                                        , 0)->row()->porcentaje_cambio;
-                echo "<br>";
-                echo "Bajar " . $porcentajeBajar;
-                echo "<br>";
-                echo "valor antes : " . $piloto->getValorActual();
-                echo "<br>";
-                $piloto->disminuirValor($porcentajeBajar);
-                echo "valor despues : " . $piloto->getValorActual();
             }
-
-            echo "<br>";
-            echo "<br>";
-
             $this->pilotos_model->guardarValorPiloto($piloto);
+        }
+    }
+
+    
+    private function _cambiarValoresMovimientosEquipos() {
+        $this->load->model('admin/movimientos_mercado_model');
+        $this->load->model('equipos/equipos_model');
+        $this->load->model('boxes/boxes_model');
+
+        $equipos = $this->equipos_model->getEquiposObject();
+
+        $fecha = date('Y-m-d');
+        $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
+        echo $fechaAyer;
+        echo "<br>";
+
+        foreach ($equipos as $equipo) {
+
+            $boxesAbiertos = $this->boxes_model->estadoFecha($fechaAyer);
+
+            if ($boxesAbiertos) {
+
+                $movimientoEquipo = new MovimientoEquipo($fechaAyer, $equipo->getIdEquipo());
+
+                echo $equipo->getEscuderia();
+                echo "<br>";
+                echo "Ventas :" . $movimientoEquipo->getVentasEquipo();
+                echo "<br>";
+                echo "Porcentaje Ventas :" . $movimientoEquipo->getPorcentajeVenta();
+                echo "<br>";
+                echo "Compras :" . $movimientoEquipo->getComprasEquipo();
+                echo "<br>";
+                echo "Porcentaje Compras :" . $movimientoEquipo->getPorcentajeCompra();
+                echo "<br>";
+                echo "Movimientos piloto :" . $movimientoEquipo->getMovimientosEquipo();
+                echo "<br>";
+                echo "Porcentaje Movimientos piloto :" . $movimientoEquipo->getPorcentajeMovimientosEquipo();
+                echo "<br>";
+                echo "Movimientos totales :" . $movimientoEquipo->getMovimientosTotales();
+                echo "<br>";
+
+
+                if ($movimientoEquipo->getModificarPrecio() == 0) {
+                    echo "no cambiar precio";
+                } elseif ($movimientoEquipo->getModificarPrecio() == 1) {
+                    $porcentajeSubir = $this->movimientos_mercado_model->
+                                    getPorcentajeCambioValorMovimientos
+                                            ($movimientoEquipo->getPorcentajeMovimientosEquipo()
+                                            , $movimientoEquipo->getPorcentajeCompra())->row()->porcentaje_cambio;
+                    echo "Subir " . $porcentajeSubir;
+                    echo "<br>";
+                    echo "valor antes : " . $equipo->getValorActual();
+                    echo "<br>";
+                    $equipo->aumentarValor($porcentajeSubir);
+                    echo "valor despues : " . $equipo->getValorActual();
+                } elseif ($movimientoEquipo->getModificarPrecio() == 2) {
+                    $porcentajeBajar = $this->movimientos_mercado_model->
+                                    getPorcentajeCambioValorMovimientos
+                                            ($movimientoEquipo->getPorcentajeMovimientosEquipo()
+                                            , $movimientoEquipo->getPorcentajeVenta())->row()->porcentaje_cambio;
+                    echo "Bajar " . $porcentajeBajar;
+                    echo "<br>";
+                    echo "valor antes : " . $equipo->getValorActual();
+                    echo "<br>";
+                    $equipo->disminuirValor($porcentajeBajar);
+                    echo "valor despues : " . $equipo->getValorActual();
+                } elseif ($movimientoEquipo->getModificarPrecio() == 3) {
+                    echo "Bajar por no movimientos";
+                    $porcentajeBajar = $this->movimientos_mercado_model->
+                                    getPorcentajeCambioValorMovimientos
+                                            (0
+                                            , 0)->row()->porcentaje_cambio;
+                    echo "<br>";
+                    echo "Bajar " . $porcentajeBajar;
+                    echo "<br>";
+                    echo "valor antes : " . $equipo->getValorActual();
+                    echo "<br>";
+                    $equipo->disminuirValor($porcentajeBajar);
+                    echo "valor despues : " . $equipo->getValorActual();
+                }
+
+                echo "<br>";
+                echo "<br>";
+            }
+            $this->equipos_model->guardarValorEquipo($equipo);
         }
     }
 

@@ -214,7 +214,7 @@ class Equipos_model extends CI_Model {
             }
 
             $this->insertCompraEquipo($equipo, $usuario);
-            
+
             $usuario->setFondos($saldo_despues_de_compra);
 
             $CI = &get_instance();
@@ -307,7 +307,7 @@ class Equipos_model extends CI_Model {
         $CI->banco_model->registrarMovimiento(0, $equipo->getValorActual()
                 , $usuario->getIdUsuario(), Banco_model::ventaEquipo
                 , $equipo->getIdEquipo(), Banco_model::ingreso);
-        
+
         $this->insertVentaEquipo($equipo, $usuario);
 
         // TODO OK
@@ -389,13 +389,36 @@ class Equipos_model extends CI_Model {
     }
 
     function guardarValorEquipo(Equipo $equipo) {
-        $sql = "INSERT INTO valor_equipo "
-                . "( valor_actual, valor_anterior, fecha, id_equipo) "
-                . "VALUES (?,?,?,?)";
+        /*
+         * Se comprueba si existe valor para el equipo en el dia,
+         * si existe se modifica, si no se inserta nuevo.
+         */
+        $sql = "SELECT * FROM valor_equipo "
+                . "WHERE id_equipo = ? "
+                . "AND fecha = ?";
 
-        $this->db->query($sql, array($equipo->getValorActual()
-            , $equipo->getValorAnterior()
-            , date('Y-m-d H:i:s'), $equipo->getIdEquipo()));
+        $existeValor = $this->db->query($sql, array($equipo->getIdEquipo(),
+                    date('Y-m-d')))->num_rows();
+
+
+        if ($existeValor) {
+            $sql = "UPDATE valor_equipo SET valor_actual = ? , "
+                    . "valor_anterior = ? "
+                    . "WHERE id_equipo = ? "
+                    . "AND fecha = ? ";
+
+            $this->db->query($sql, array($equipo->getValorActual()
+                , $equipo->getValorAnterior()
+                , $equipo->getIdEquipo(), date('Y-m-d')));
+        } else {
+            $sql = "INSERT INTO valor_equipo "
+                    . "( valor_actual, valor_anterior, fecha, id_equipo) "
+                    . "VALUES (?,?,?,?)";
+
+            $this->db->query($sql, array($equipo->getValorActual()
+                , $equipo->getValorAnterior()
+                , date('Y-m-d'), $equipo->getIdEquipo()));
+        }
     }
 
     function getPuntosEquipo($idEquipo) {
@@ -543,7 +566,7 @@ class Equipos_model extends CI_Model {
 
         return $result;
     }
-    
+
     function insertCompraEquipo(Equipo $equipo, Usuario $usuario) {
         $sqlFichaje = "INSERT INTO compras_equipos "
                 . "( id_equipo, id_usuario, fecha) values (?,?,?)";

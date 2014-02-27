@@ -167,7 +167,7 @@ class Pilotos_model extends CI_Model {
             $CI = &get_instance();
             $CI->load->Model('banco/banco_model');
             $CI->banco_model->guardarSaldoUsuario($usuario);
-            
+
             //Registrar movimiento banco
             $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $piloto->getValorActual()
                     , $usuario->getIdUsuario(), Banco_model::compraPiloto
@@ -263,58 +263,58 @@ class Pilotos_model extends CI_Model {
         }
     }
 
-    /*function vender($datos) {
+    /* function vender($datos) {
 
-        /**  BUG SERIO.SI VENDES UN PILOTO Y SEGUIDO ACTUALIZAS LA PAGINA, SE VUELVE A ENVIAR EL POST Y SE VUELVE A INGRESAR LA PASTA
-         *  Hay que comprobar primero que se este vendiendo un piloto ACTIVO!! 
-         *
-        foreach ($datos['piloto'] as $id_piloto) {
+      /**  BUG SERIO.SI VENDES UN PILOTO Y SEGUIDO ACTUALIZAS LA PAGINA, SE VUELVE A ENVIAR EL POST Y SE VUELVE A INGRESAR LA PASTA
+     *  Hay que comprobar primero que se este vendiendo un piloto ACTIVO!! 
+     *
+      foreach ($datos['piloto'] as $id_piloto) {
 
-            // Comprobar que el piloto este activo
-            $piloto_activo = $this->db->query("SELECT activo FROM usuarios_pilotos WHERE id_usuario = ? AND id_piloto = ? ", array($this->iduser, $id_piloto))
-                            ->row()
-                    ->activo;
+      // Comprobar que el piloto este activo
+      $piloto_activo = $this->db->query("SELECT activo FROM usuarios_pilotos WHERE id_usuario = ? AND id_piloto = ? ", array($this->iduser, $id_piloto))
+      ->row()
+      ->activo;
 
-            // Si no tiene el piloto activo, devolvemos mensaje de error
-            if ($piloto_activo == 0) {
-                // ---------------------------------------------------------------------
-                // Algun  listo intenta hacer la trampa del año pasao, guardamos en bd un log con sus datos
-                // ---------------------------------------------------------------------		
-                $data = array(
-                    'id' => '',
-                    'id_usuario' => $this->iduser,
-                    'fecha' => date('Y-m-d h:i:s'), //datetime
-                    'comentario' => 'Alguien ha vendido un piloto y le ha dado al F5 para hacer el trapi! CAZADO!',
-                );
-
-
-                $this->db->insert('sospechosos', $data);
-
-                return '<div class="msgErr">Ya has vendido este piloto.</div>';
-            }
+      // Si no tiene el piloto activo, devolvemos mensaje de error
+      if ($piloto_activo == 0) {
+      // ---------------------------------------------------------------------
+      // Algun  listo intenta hacer la trampa del año pasao, guardamos en bd un log con sus datos
+      // ---------------------------------------------------------------------
+      $data = array(
+      'id' => '',
+      'id_usuario' => $this->iduser,
+      'fecha' => date('Y-m-d h:i:s'), //datetime
+      'comentario' => 'Alguien ha vendido un piloto y le ha dado al F5 para hacer el trapi! CAZADO!',
+      );
 
 
-            // Poner inactivo el piloto
-            $sql_inactivo = "UPDATE usuarios_pilotos SET 
-														activo = 0,
-														fecha_venta = ?
-													 WHERE 
-													 	id_usuario = ?
-													 AND 
-													 	id_piloto = ?";
-            $this->db->query($sql_inactivo, array(date('Y-m-d'), $this->iduser, $id_piloto));
+      $this->db->insert('sospechosos', $data);
 
-            // Sumarle la pasta de la venta al banco
-            $pasta_venta_piloto = $this->db->query("SELECT dinero_venta 
-														   FROM pilotos 
-														   WHERE id = ?", array($id_piloto))->row()->dinero_venta;
-            $sql_ingreso = "UPDATE usuarios_banco SET fondos = fondos + ? WHERE id_usuario = ?";
-            $this->db->query($sql_ingreso, array($pasta_venta_piloto, $this->iduser));
-        }
+      return '<div class="msgErr">Ya has vendido este piloto.</div>';
+      }
 
-        // TODO OK
-        return '<div class="msgOk">' . $this->lang->line('piloto_txt_vendido_ok') . '</div>';
-    }*/
+
+      // Poner inactivo el piloto
+      $sql_inactivo = "UPDATE usuarios_pilotos SET
+      activo = 0,
+      fecha_venta = ?
+      WHERE
+      id_usuario = ?
+      AND
+      id_piloto = ?";
+      $this->db->query($sql_inactivo, array(date('Y-m-d'), $this->iduser, $id_piloto));
+
+      // Sumarle la pasta de la venta al banco
+      $pasta_venta_piloto = $this->db->query("SELECT dinero_venta
+      FROM pilotos
+      WHERE id = ?", array($id_piloto))->row()->dinero_venta;
+      $sql_ingreso = "UPDATE usuarios_banco SET fondos = fondos + ? WHERE id_usuario = ?";
+      $this->db->query($sql_ingreso, array($pasta_venta_piloto, $this->iduser));
+      }
+
+      // TODO OK
+      return '<div class="msgOk">' . $this->lang->line('piloto_txt_vendido_ok') . '</div>';
+      } */
 
     function venderPiloto(Usuario $usuario, PilotoUsuario $piloto) {
 
@@ -322,11 +322,11 @@ class Pilotos_model extends CI_Model {
         $sql_inactivo = "UPDATE usuarios_pilotos SET activo = 0,fecha_venta = ?
                         WHERE id_usuario = ?
                         AND id_piloto = ?";
-        $this->db->query($sql_inactivo, array(date('Y-m-d'), $usuario->getIdUsuario(), $piloto->getIdPiloto()));        
+        $this->db->query($sql_inactivo, array(date('Y-m-d'), $usuario->getIdUsuario(), $piloto->getIdPiloto()));
 
         $CI = &get_instance();
         $CI->load->Model('banco/banco_model');
-        
+
         if ($piloto->getTipoCompra() == 'fichado') {
             $ingreso = $piloto->getValorActual();
             $concepto = Banco_model::ventaPiloto;
@@ -341,14 +341,14 @@ class Pilotos_model extends CI_Model {
 
         $usuario->setFondos($fondos);
 
-        
+
         $CI->banco_model->guardarSaldoUsuario($usuario);
 
         //Registrar movimiento banco
         $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $ingreso
                 , $usuario->getIdUsuario(), $concepto
-                , 0, Banco_model::ingreso);        
-        
+                , 0, Banco_model::ingreso);
+
         return "Piloto vendido correctamente!";
     }
 
@@ -466,13 +466,37 @@ class Pilotos_model extends CI_Model {
     }
 
     function guardarValorPiloto(Piloto $piloto) {
-        $sql = "INSERT INTO valor_piloto " . "( valor_actual, valor_anterior, fecha, id_piloto) "
-                . "VALUES (?,?,?,?)";
+        /*
+         * Se comprueba si existe valor para el piloto en el dia,
+         * si existe se modifica, si no se inserta nuevo.
+         */
+        $sql = "SELECT * FROM valor_piloto "
+                . "WHERE id_piloto = ? "
+                . "AND fecha = ?";
 
-        $this->db->query($sql, array(
-            $piloto->getValorActual()
-            , $piloto->getValorAnterior()
-            , date('Y-m-d H:i:s'), $piloto->getIdPiloto()));
+        $existeValor = $this->db->query($sql, array($piloto->getIdPiloto(),
+                    date('Y-m-d')))->num_rows();
+
+
+        if ($existeValor) {
+            $sql = "UPDATE valor_piloto SET valor_actual = ? , "
+                    . "valor_anterior = ? "
+                    . "WHERE id_piloto = ? "
+                    . "AND fecha = ? ";
+
+            $this->db->query($sql, array($piloto->getValorActual()
+                , $piloto->getValorAnterior()
+                , $piloto->getIdPiloto(), date('Y-m-d')));
+        } else {
+
+            $sql = "INSERT INTO valor_piloto " . "( valor_actual, valor_anterior, fecha, id_piloto) "
+                    . "VALUES (?,?,?,?)";
+
+            $this->db->query($sql, array(
+                $piloto->getValorActual()
+                , $piloto->getValorAnterior()
+                , date('Y-m-d H:i:s'), $piloto->getIdPiloto()));
+        }
     }
 
     function getPuntosPiloto($idPiloto) {
