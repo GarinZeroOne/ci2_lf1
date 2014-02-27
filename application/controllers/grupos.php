@@ -342,17 +342,30 @@ class Grupos extends CI_Controller {
 	function configurar_grupo($id_grupo = false)
 	{
 
+
 		// Si no llega un id de grupo -> GTFO!!
 		if(!is_numeric($id_grupo)){redirect_lf1('grupos');}
 
 		// Si no es el administrador -> GTFO!!
 		if(!$this->grupos_model->get_soy_admin($id_grupo)){redirect_lf1('grupos');}
 
+		/*
+		$this->load->helper('generar_codigo');
+		echo generar_codigo(8);die;
+		*/
+
 		if($_POST)
 		{
 			//dump($_POST);die;
-
-			$this->grupos_model->actualizar_datos_grupo($_POST,$_FILES);
+			if($_POST['codigo_manager'])
+			{
+				$this->grupos_model->agregar_usuario_grupo($id_grupo,$_POST['codigo_manager']);
+			}
+			else
+			{
+				$this->grupos_model->actualizar_datos_grupo($_POST,$_FILES);	
+			}
+			
 
 			
 		}

@@ -3,20 +3,35 @@
     <section id="main-content">
         <section class="wrapper">
         <!-- page start-->
-
+    
         <div class="row">
+        
+            <?php if($this->session->flashdata('msg_ok')): ?>
 
-            
+                <div class="col-md-12">
+                <div class="alert alert-success fade in">
+                    <button type="button" class="close close-sm" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <strong>Hecho!</strong> <?php echo $this->session->flashdata('msg_ok'); ?>
+                </div>
+                </div>
+            <?php endif; ?>
 
-            <div class="col-sm-6">
-                <?php if($this->session->flashdata('msg_error')): ?>
+            <?php if($this->session->flashdata('msg_error')): ?>
+                <div class="col-md-12">
                     <div class="alert alert-block alert-danger fade in">
                         <button type="button" class="close close-sm" data-dismiss="alert">
                             <i class="fa fa-times"></i>
                         </button>
                         <strong>Opps!</strong> <?php echo $this->session->flashdata('msg_error'); ?>
                     </div>
-                <?php endif; ?>
+                </div>
+            <?php endif; ?>
+            
+
+            <div class="col-md-6">
+                
 
                 <section class="panel">
                     <header class="panel-heading">
@@ -55,24 +70,30 @@
                 </section>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-md-6">
 
-                <?php if($this->session->flashdata('msg_ok')): ?>
-                <div class="alert alert-success fade in">
-                    <button type="button" class="close close-sm" data-dismiss="alert">
-                        <i class="fa fa-times"></i>
-                    </button>
-                    <strong>Hecho!</strong> <?php echo $this->session->flashdata('msg_ok'); ?>
-                </div>
-                <?php endif; ?>
+                
+
+                
 
 
                 <section class="panel">
                     <header class="panel-heading">
-                        Usuarios Grupo
+                       Usuarios del Grupo
                         
                     </header>
                     <div class="panel-body">
+                        <p>Puedes agregar usuarios a tu grupo introduciendo su <i>código de manager</i>. Todos los usuarios tienen un <i>código de manager</i> al que  pueden acceder desde su perfil.</p>
+                        
+                        <form action="<?php echo site_url();?>grupos/configurar_grupo/<?php echo $info_grupo->id; ?>" method="post">
+                            <div class="input-group m-bot15">
+                                <span class="input-group-addon btn-white"><i class="fa fa-barcode"></i></span>
+                                <input type="text" placeholder="Introduce el codigo de manager" class="form-control" name="codigo_manager">
+                                <span class="input-group-btn">
+                                    <input type="submit" class="btn btn-success" value="Añadir usuario" />
+                                  </span>
+                            </div>
+                        </form>
                         
                         <?php foreach($usuarios_grupo  as $ug): ?>
                         <div class="box-usuario">

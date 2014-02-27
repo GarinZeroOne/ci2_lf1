@@ -902,5 +902,40 @@ class Grupos_model extends CI_Model {
 
         redirect_lf1('grupos/configurar_grupo/'.$id_grupo);
     }
+
+
+    /**
+     * Agrega  a un usuario a un grupo
+     *
+     * @return void
+     * @author 
+     **/
+    function agregar_usuario_grupo($id_grupo,$codigo_manager)
+    {
+        $q = $this->db->select('id_usuario')->from('usuarios_codigo_manager')->where('codigo_manager',$codigo_manager)->get();
+
+        if($q->num_rows())
+        {
+            $id_usuario = $q->row()->id_usuario;
+
+            $data_insert = array(
+                                    'id'            =>              '',
+                                    'id_usuario'    =>              $id_usuario,
+                                    'id_grupo'      =>              $id_grupo,
+                                    'fecha_ingreso' =>              date('Y-m-d  H:i:s')
+                                    );
+
+            $this->session->set_flashdata('msg_ok','El usuario ha sido añadido.');
+
+            redirect_lf1('grupos/configurar_grupo/'.$id_grupo);
+
+        }
+        else
+        {
+            // No existe el codigo manager!
+            $this->session->set_flashdata('msg_error','El código introducido no es válido.Asegurate de haber introducido el código de manager y <b>no</b> el nick de usuario .');
+            redirect_lf1('grupos/configurar_grupo/'.$id_grupo);
+        }
+    }
 }
 
