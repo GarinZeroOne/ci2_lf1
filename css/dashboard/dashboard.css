@@ -200,3 +200,48 @@ a.num-msg-grp-b{
 .label-success2 {
     background-color: #22D96F;
 }
+
+
+/*Grupos*/
+
+div.box-usuario
+{
+    display: inline-block;
+    width: 90px;
+    position: relative;
+    padding:5px;
+    margin-bottom: 5px;
+    background-color: #F7F7F7;
+    border-radius: 4px;
+
+}
+div.box-image
+{
+    margin-bottom: 10px;
+}
+div.box-image img
+{
+    width: 80px;
+    max-height: 80px;
+    min-height: 80px;
+
+}
+
+div.box-nick 
+{
+    font-size: 12px;
+    text-align: center;
+}
+
+a.box-delete
+{
+    background-color: #FF0000;
+    border-radius: 0 0 10px 10px;
+    color: #FFFFFF;
+    height: 20px;
+    position: absolute;
+    right: 11px;
+    text-align: center;
+    top: 0;
+    width: 20px;
+}

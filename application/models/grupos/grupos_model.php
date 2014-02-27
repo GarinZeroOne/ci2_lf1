@@ -671,6 +671,26 @@ class Grupos_model extends CI_Model {
         }
     }
 
+    /**
+     * Devuelve  true / false si es el admin
+     *
+     * @return void
+     * @author 
+     **/
+    function get_soy_admin($id_grupo)
+    {
+        $q = $this->db->select('id')->from('usuarios_grupos')->where('id_usuario_creador',$_SESSION['id_usuario'])->where('id',$id_grupo)->get();
+
+        if($q->num_rows())
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
 
     /**
      * Ingresar a un grupo publico
@@ -732,6 +752,155 @@ class Grupos_model extends CI_Model {
         }
         
         redirect_lf1('grupos');
+    }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     * @author 
+     **/
+    function actualizar_datos_grupo($datos,$file)
+    {
+        if($datos['privacidad'])
+        {
+            $privacidad = 1;
+        }
+        else
+        {
+            $privacidad = 0;
+        }
+
+        $data_update = array(
+                                'descripcion'       =>      $datos['descripcion_grupo'],
+                                'privado'           =>      $privacidad
+                                );
+        $this->db->where('id',$datos['gid']);
+        $this->db->update('usuarios_grupos',$data_update);
+
+        /*IMAGEN DEL GRUPO*/
+        if($file['userfile']['name'])
+        {
+            $config['upload_path'] = ROOT.'/img/grupos/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '200';
+            $config['max_width']  = '1280';
+            $config['max_height']  = '1024';
+            $config['file_name'] = strtotime(date('Y-m-d H:i:s'));
+            
+            
+            $this->load->library('upload', $config);
+
+            // GUARDAR IMAGEN
+            if ( ! $this->upload->do_upload())
+            {
+                $errores = $this->upload->display_errors();
+                
+                if(is_array($errores)){
+                    foreach($errores as $error){
+                        $cad_errores .=  $error.' | ';
+                    }   
+                }
+                else
+                {
+                    $cad_errores = $errores;
+                }
+                
+                
+                $this->session->set_flashdata('msg_error', 'No se ha  podido guardar la imagen del grupo.'.$cad_errores.' <br> El grupo aparecerá sin imagen hasta que subas una valida.');
+                redirect_lf1('grupos/configurar_grupo/'.$datos['gid']);
+                // $this->load->view('upload_form', $error);
+            }
+            else
+            {
+                $data = array('upload_data' => $this->upload->data());
+                $cargar_vista = 'UPLOAD_OK';
+                
+                foreach($this->upload->data() as $item => $value){
+
+                    // Guardar nombre archivo subido
+                    if($item == 'file_name'){
+                        $nombre_archivo = $value;
+                    }
+
+                }
+
+                // CREAR THUMBMAIL
+                $config['image_library' ] = 'gd2';
+                $config['source_image'  ] = ROOT.'/img/grupos/'.$nombre_archivo;
+                $config['new_image'     ] = ROOT.'/img/grupos/thumbs/'.$nombre_archivo;
+                $config['create_thumb'  ] = TRUE;
+                $config['maintain_ratio'] = FALSE;
+                $config['width'         ] = 80;
+                $config['height'        ] = 80;
+                $config['thumb_marker'  ] = '';
+
+                $this->load->library('image_lib', $config);
+
+                if ( ! $this->image_lib->resize())
+                {
+                    echo $this->image_lib->display_errors();
+                }
+
+                // Guardar imagen del grupo
+                $this->grupos_model->guardar_imagen_grupo($datos['gid'],$nombre_archivo);
+
+                redirect_lf1('grupos/configurar_grupo/'.$datos['gid']);
+            }
+        }
+    }
+
+
+    /**
+     * Devuelve  todos los usuarios de un grupo + su info
+     *
+     * @return void
+     * @author 
+     **/
+    function obtener_usuarios_grupo($id_grupo)
+    {
+        $q = $this->db->select('grupos_miembros.id,usuarios.nick,usuarios_avatar.avatar')
+                                   ->from('grupos_miembros')
+                                   ->join('usuarios','usuarios.id = grupos_miembros.id_usuario')
+                                   ->join('usuarios_avatar','usuarios_avatar.id_usuario = usuarios.id')
+                                   ->where('id_grupo',$id_grupo)
+                                   ->where('grupos_miembros.id_usuario !=',$_SESSION['id_usuario'])
+                                   ->get()
+                                   ->result();
+
+        return $q;
+        
+    }
+
+
+    /**
+     * Eliminar a un usuario del grupo
+     *
+     * @return void
+     * @author 
+     **/
+    function eliminar_usuario_grupo($id_registro_miembro)
+    {
+
+        $id_grupo = $this->db->select('id_grupo')->from('grupos_miembros')->where('id',$id_registro_miembro)->get()->row()->id_grupo;
+
+        // Asegurarnos de que sea el admin del grupo
+        $id_admin = $this->db->select('id_usuario_creador')->from('usuarios_grupos')->where('id',$id_grupo)->get()->row()->id_usuario_creador;
+
+        // No es el admin?? GTFO!
+        if($id_admin!=$_SESSION['id_usuario'])
+        {
+            redirect_lf1('grupos');
+        }
+
+
+        // Eliminar usuario del grupo
+        $this->db->where('id',$id_registro_miembro);
+        $this->db->delete('grupos_miembros');
+
+        $this->session->set_flashdata('msg_ok','Usuario eliminado del grupo.');
+
+        redirect_lf1('grupos/configurar_grupo/'.$id_grupo);
     }
 }
 

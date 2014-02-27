@@ -341,12 +341,33 @@ class Grupos extends CI_Controller {
 	 **/
 	function configurar_grupo($id_grupo = false)
 	{
+
+		// Si no llega un id de grupo -> GTFO!!
+		if(!is_numeric($id_grupo)){redirect_lf1('grupos');}
+
+		// Si no es el administrador -> GTFO!!
+		if(!$this->grupos_model->get_soy_admin($id_grupo)){redirect_lf1('grupos');}
+
+		if($_POST)
+		{
+			//dump($_POST);die;
+
+			$this->grupos_model->actualizar_datos_grupo($_POST,$_FILES);
+
+			
+		}
+
+
+		$datos['info_grupo'		] = $this->grupos_model->obtener_info_grupo($id_grupo);
+		$datos['usuarios_grupo'	] = $this->grupos_model->obtener_usuarios_grupo($id_grupo);
+
+		//dump($datos['info_grupo']);die;
 		// Header
 		$header['estilos'] 	  = array('dashboard.css');
 		$header['titulo' ]	  = 'Crear nuevo grupo - LigaFormula1.com';
 
 		// Javascript
-		$bottom['javascript'] = array();
+		$bottom['javascript'    ] = array('dashboard/confirmar.js');
 
 		// Vistas base | Header | Menu Principal
 		$this->load->view('dashboard/base/header.php',$header);
@@ -360,6 +381,21 @@ class Grupos extends CI_Controller {
 		$this->load->view('dashboard/base/bottom.php',$bottom);
 	}
 
+
+
+	/**
+	 * Eliminar usuario de un grupo. Se recibe el id del registro de grupos_miembros
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function eliminar_usuario_grupo($id_registro_miembro)
+	{
+		// Si no llega un id de grupo -> GTFO!!
+		if(!is_numeric($id_registro_miembro)){redirect_lf1('grupos');}
+
+		$this->grupos_model->eliminar_usuario_grupo($id_registro_miembro);
+	}
 
 	/**
 	 * Ingresar a un grupo publico

@@ -7,6 +7,9 @@ $(function () {
         title: {
             text: 'Movimiento dinero Fichajes / Ventas'
         },
+        subtitle:{
+            text: "<?php echo date('d.m.Y',strtotime('-1 days')) ?>"
+        },
         xAxis: {
         },
         yAxis: {
