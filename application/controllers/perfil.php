@@ -40,10 +40,18 @@ class Perfil extends CI_Controller {
 	function index()
 	{
 
+		//
+		$this->load->helper('generar_codigo');
+
 		// Menu Izquierda
 		$sidebarleft 		  = array();
-		$sidebarleft['m_act'] = 1;
+		$sidebarleft['m_act'] = 0;
 		
+		$datos['codigo_manager'] = $this->usuarios_model->get_codigo_manager($_SESSION['id_usuario']);
+		$datos['info_usuario'  ] = $this->usuarios_model->get_info_usuario($_SESSION['id_usuario']);
+
+		//dump($datos['info_usuario'  ]);
+
 		// Header
 		$header['estilos'] 	  = array('dashboard.css');
 		$header['titulo' ]	  = 'Perfil de usuario - LigaFormula1.com';
@@ -57,7 +65,7 @@ class Perfil extends CI_Controller {
 		$this->load->view('dashboard/base/sidebarleft.php',$sidebarleft);
 
 		// Vista contenido
-		$this->load->view('dashboard/pagina-vacia'  ,$datos);
+		$this->load->view('dashboard/perfil/perfil.php'  ,$datos);
 
 		// Vistas base | Menu derecha | Bottom end
 		$this->load->view('dashboard/base/sidebarright.php',$sidebarright);		

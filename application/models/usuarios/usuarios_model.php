@@ -534,4 +534,89 @@ class Usuarios_model extends CI_Model {
         redirect_lf1('dashboard');
     }
 
+
+    /**
+     * Generar codigo Manager
+     *
+     * @return void
+     * @author 
+     **/
+    function get_codigo_manager( $id_usuario )
+    {
+        $q = $this->db->select('codigo_manager')
+                      ->from('usuarios_codigo_manager')
+                      ->where('id_usuario',$id_usuario)
+                      ->get();
+
+        if( $q->num_rows() )
+        {
+            return $q->row()->codigo_manager;
+        }
+        else
+        {
+            // No tiene codigo manager, hay que generarle uno unico
+
+            // Generaremos codigos, hasta que sea unico
+            // normalmente a la primera sera unico, pero hay
+            // una remota posibilidad de  que se genere un codigo
+            // que ya existe en base de datos.En tal caso generaremos uno nuevo
+            // hasta  asegurarnos de que sea unico.
+            $no_unico = true;
+
+            do{
+                $codigo_manager = generar_codigo();
+                $q = $this->db->select('id')
+                      ->from('usuarios_codigo_manager')
+                      ->where('codigo_manager',$codigo_manager)
+                      ->get();
+                
+                if(!$q->num_rows())
+                {
+                    $data_insert = array(
+                                            'id'                =>              '',
+                                            'id_usuario'        =>              $id_usuario,
+                                            'codigo_manager'    =>              $codigo_manager
+                                            );
+
+                    $this->db->insert('usuarios_codigo_manager',$data_insert);
+                    $no_unico = false;
+                }
+
+                    
+            }while($no_unico);
+
+            
+            return $codigo_manager;
+        }
+    }
+
+    /**
+     * Devuelve toda la info de un usuario
+     *
+     * @return void
+     * @author 
+     **/
+    function get_info_usuario( $id_usuario )
+    {
+        $this->load->model('estadisticas/estadisticas_model');
+
+        // Info basica
+        $datos['info_usuario'     ] = $this->db->select('*')->from('usuarios')->where('id',$id_usuario)->get()->row();
+        // Comunidad
+        $datos['comunidad_usuario'] = $this->db->select('nombre')->from('comunidades')->where('id',$datos['info_usuario']->id_comunidad)->get()->row()->nombre;
+        // Ultimas visitas
+        $datos['ultimas_visitas'  ] = $this->get_ultimas_visitas_perfil($id_usuario);
+        // Muro usuario
+        $datos['muro'             ] = $this->get_mensajes_muro($id_usuario);
+        // Posicion ranking general del usuario
+        $datos['posicionRanking'  ] = $this->get_posicion_ranking($id_usuario);
+        // Estadisticas del usuario y el visitante del perfil (si logeado)
+        $datos['full_stats'       ] = $this->estadisticas_model->get_full_stats($id_usuario);
+        // Obtener avatar usuario
+        $datos['avatar'           ] = $this->userAvatar($id_usuario);
+
+
+        return $datos;
+    }
+
 }

@@ -83,7 +83,9 @@
                         
                     </header>
                     <div class="panel-body">
+                        <p><strong>Añadir usuario al grupo</strong></p>
                         <p>Puedes agregar usuarios a tu grupo introduciendo su <i>código de manager</i>. Todos los usuarios tienen un <i>código de manager</i> al que  pueden acceder desde su perfil.</p>
+
                         
                         <form action="<?php echo site_url();?>grupos/configurar_grupo/<?php echo $info_grupo->id; ?>" method="post">
                             <div class="input-group m-bot15">
@@ -94,6 +96,8 @@
                                   </span>
                             </div>
                         </form>
+
+                        <p><strong>Eliminar usuarios del grupo</strong></p>
                         
                         <?php foreach($usuarios_grupo  as $ug): ?>
                         <div class="box-usuario">

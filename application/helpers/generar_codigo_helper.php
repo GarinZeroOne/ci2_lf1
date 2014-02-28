@@ -1,5 +1,5 @@
 <?php
-function generar_codigo($len){
+function generar_codigo($len = 8){
 	$clave="";
 	$longitud = $len;
 	for ($i=1; $i<=$longitud; $i++)
