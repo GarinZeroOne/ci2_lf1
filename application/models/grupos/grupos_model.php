@@ -863,11 +863,11 @@ class Grupos_model extends CI_Model {
                                    ->from('grupos_miembros')
                                    ->join('usuarios','usuarios.id = grupos_miembros.id_usuario')
                                    ->join('usuarios_avatar','usuarios_avatar.id_usuario = usuarios.id')
-                                   ->where('id_grupo',$id_grupo)
+                                   ->where('grupos_miembros.id_grupo',$id_grupo)
                                    ->where('grupos_miembros.id_usuario !=',$_SESSION['id_usuario'])
                                    ->get()
                                    ->result();
-
+                                   //dump($this->db->queries);die;
         return $q;
         
     }
@@ -918,16 +918,30 @@ class Grupos_model extends CI_Model {
         {
             $id_usuario = $q->row()->id_usuario;
 
-            $data_insert = array(
+            // Comprobar que no exista ya dentro del grupo
+            $existe = $this->db->select('id')->from('grupos_miembros')->where('id_grupo',$id_grupo)->where('id_usuario',$id_usuario)->get()->num_rows();
+            if($existe)
+            {
+                // No existe el codigo manager!
+                $this->session->set_flashdata('msg_error','El usuario que has intentado introducir ya se encuentra dentro del grupo.');
+                redirect_lf1('grupos/configurar_grupo/'.$id_grupo);
+            }
+            else
+            {
+                $data_insert = array(
                                     'id'            =>              '',
                                     'id_usuario'    =>              $id_usuario,
                                     'id_grupo'      =>              $id_grupo,
                                     'fecha_ingreso' =>              date('Y-m-d  H:i:s')
                                     );
 
-            $this->session->set_flashdata('msg_ok','El usuario ha sido añadido.');
+                $this->db->insert('grupos_miembros',$data_insert);
+                $this->session->set_flashdata('msg_ok','El usuario ha sido añadido.');
 
-            redirect_lf1('grupos/configurar_grupo/'.$id_grupo);
+                redirect_lf1('grupos/configurar_grupo/'.$id_grupo);    
+            }
+
+            
 
         }
         else

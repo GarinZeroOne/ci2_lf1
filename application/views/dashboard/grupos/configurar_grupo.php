@@ -5,30 +5,40 @@
         <!-- page start-->
     
         <div class="row">
-        
-            <?php if($this->session->flashdata('msg_ok')): ?>
+            
+            <div class="col-md-12">
 
-                <div class="col-md-12">
-                <div class="alert alert-success fade in">
-                    <button type="button" class="close close-sm" data-dismiss="alert">
-                        <i class="fa fa-times"></i>
-                    </button>
-                    <strong>Hecho!</strong> <?php echo $this->session->flashdata('msg_ok'); ?>
-                </div>
-                </div>
-            <?php endif; ?>
+                    <!--breadcrumbs start -->
+                    <ul class="breadcrumb">
+                        <li><a href="<?php echo site_url(); ?>grupos"><i class="fa fa-home"></i> Grupos</a></li>
+                        <li><a href="<?php echo site_url(); ?>grupos/ver/<?php echo $info_grupo->id; ?>"> Baratxoko</a></li>
+                        <li class="active"><a href="#"> Configuración</a></li>
+                    </ul>
+                    <!--breadcrumbs end -->
 
-            <?php if($this->session->flashdata('msg_error')): ?>
-                <div class="col-md-12">
-                    <div class="alert alert-block alert-danger fade in">
+                <?php if($this->session->flashdata('msg_ok')): ?>
+                    
+                    <div class="alert alert-success fade in">
                         <button type="button" class="close close-sm" data-dismiss="alert">
                             <i class="fa fa-times"></i>
                         </button>
-                        <strong>Opps!</strong> <?php echo $this->session->flashdata('msg_error'); ?>
+                        <strong>Hecho!</strong> <?php echo $this->session->flashdata('msg_ok'); ?>
                     </div>
-                </div>
-            <?php endif; ?>
-            
+                    
+                <?php endif; ?>
+
+                <?php if($this->session->flashdata('msg_error')): ?>
+                    
+                        <div class="alert alert-block alert-danger fade in">
+                            <button type="button" class="close close-sm" data-dismiss="alert">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <strong>Opps!</strong> <?php echo $this->session->flashdata('msg_error'); ?>
+                        </div>
+                    
+                <?php endif; ?>
+
+            </div>
 
             <div class="col-md-6">
                 
