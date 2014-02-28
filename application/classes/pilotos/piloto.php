@@ -255,5 +255,9 @@ class Piloto {
         }
         return $valor;
     }
+    
+    static function comparaPosicionMundial($a,$b) {
+        return $a->getPosicionMundial() -$b->getPosicionMundial();
+    }
 
 }

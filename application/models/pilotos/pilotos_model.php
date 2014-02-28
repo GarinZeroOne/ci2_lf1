@@ -610,4 +610,40 @@ class Pilotos_model extends CI_Model {
         return $pilotos;
     }
 
+    function getPilotosClasificacionMundial() {
+        $pilotos = $this->getPilotosObject();
+
+        usort($pilotos, array("Piloto", "comparaPosicionMundial"));
+
+        return $pilotos;
+    }
+
+    function getDatosPilotoGp($idPiloto,$idGp) {
+        $sql = "SELECT * FROM puntos_posicion pp, resultados_pilotos rp 
+                WHERE rp.posicion = pp.posicion
+                AND id_piloto = ?
+                AND id_gp = ?";
+        
+        $result = $this->db->query($sql,array($idPiloto,$idGp));
+        
+        return $result;
+        
+    }
+    
+    function getPilotosClasificacionGpObject($idGp) {
+        $sql = "SELECT * FROM pilotos";
+
+        $result = $this->db->query($sql)->result();
+        
+        $pilotos = array();
+        
+        foreach($result as $row){
+            $pilotos[]= new PilotoClasificacionGp($row->id,$idGp);
+        }
+        
+        usort($pilotos, array("PilotoClasificacionGp", "comparaPosicionGp"));
+
+        return $pilotos;
+    }
+
 }

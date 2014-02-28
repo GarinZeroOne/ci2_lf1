@@ -3,12 +3,12 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-abstract class ClasificacionUsuario {
+class ClasificacionUsuario {
 
-    private $usuario;    
+    private $usuario;
     private $posicion;
     private $puntos;
-    
+
     public function getUsuario() {
         return $this->usuario;
     }
@@ -33,5 +33,8 @@ abstract class ClasificacionUsuario {
         $this->puntos = $puntos;
     }
 
-  
+    public function __construct() {
+        
+    }
+
 }

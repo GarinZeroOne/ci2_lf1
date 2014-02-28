@@ -3,7 +3,13 @@
 require_once APPPATH . 'classes/usuarios/usuario.php';
 require_once APPPATH . 'classes/clasificaciones/clasificacionUsuario.php';
 require_once APPPATH . 'classes/clasificaciones/clasificacionGeneralUsuario.php';
-
+require_once APPPATH . 'classes/varios/circuito.php';
+require_once APPPATH . 'classes/clasificaciones/clasificacionGp.php';
+require_once APPPATH . 'classes/clasificaciones/clasificacionGpPilotos.php';
+require_once APPPATH . 'classes/pilotos/piloto.php';
+require_once APPPATH . 'classes/pilotos/pilotoClasificacionGp.php';
+require_once APPPATH . 'classes/pilotos/valorMercado.php';
+require_once APPPATH . 'classes/equipos/equipo.php';
 
 class Clasificaciones extends CI_Controller {
 
@@ -54,6 +60,21 @@ class Clasificaciones extends CI_Controller {
 
         $datos['clasificacionGeneral'] = $this->clasificacion_model->
                 getClasificacionGeneralObject();
+
+        $usuario = Usuario::getById($_SESSION['id_usuario']);
+
+        $datos['miClasificacionGeneral'] = ClasificacionGeneralUsuario::getById($usuario);
+
+        $datos['clasificacionGp'] = new clasificacionGp(0);
+
+        $datos['miClasificacionGp'] = $this->clasificacion_model->getClasificacionGpUsuarioObject(0
+                , $_SESSION['id_usuario']);
+
+        $this->load->model('pilotos/pilotos_model');
+
+        $datos['clasificacionMundial'] = $this->pilotos_model->getPilotosClasificacionMundial();
+
+        $datos['clasificaionGpPiloto'] = new clasificacionGpPilotos(0);
 
         // Javascript
         $bottom['javascript'] = array();

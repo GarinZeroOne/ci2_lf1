@@ -24,7 +24,7 @@ class ClasificacionGeneralUsuario extends ClasificacionUsuario {
         $CI = &get_instance();
         $CI->load->model('ranking/clasificacion_model');
         $datosClasificacion = $CI->clasificacion_model->getDatosClasificacionUsuario
-                ($usuario->getIdUsuario(), 0);
+                ($usuario->getIdUsuario(), 0)->row();
         $instance = new ClasificacionGeneralUsuario();
         
         $instance->setUsuario($usuario);
