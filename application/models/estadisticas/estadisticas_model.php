@@ -297,4 +297,168 @@ class Estadisticas_model extends CI_Model
 		return $series_data;
 		
 	}
+
+
+	/**
+	 * Devuelve el dinero invertido los ultimos X dias
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_inversion_compras($dias = 7,$id_usuario)
+	{
+
+		// Dinero en fichaje de pilotos
+		//
+		$query_fichaje_pilotos = "select * from fichajes_pilotos where id_usuario=? and fecha >= ( CURDATE() - INTERVAL ".$dias." DAY )";
+
+		$qfp = $this->db->query($query_fichaje_pilotos,array($id_usuario));
+
+		if($qfp->num_rows())
+		{
+			//dump($qfp->result());die;
+			$fichajes = $qfp->result();
+
+			foreach($fichajes as $fichaje)
+			{
+
+				$valor_piloto = $this->db->select('valor_actual')
+										 ->from('valor_piloto')
+										 ->where('id_piloto',$fichaje->id_piloto)
+										 ->where('DATE_FORMAT(fecha,"%Y-%m-%d")',$fichaje->fecha)
+										 ->get()
+										 ->row()
+										 ->valor_actual;
+
+				$dinero_fichajes = $dinero_fichajes + $valor_piloto;
+			}
+
+			$total_dinero_fichajes_pilotos =  $dinero_fichajes;
+			
+		}
+		else
+		{
+			$total_dinero_fichajes_pilotos = 0;
+		}
+
+		// Dinero en fichaje de equipos
+		//
+		$query_fichaje_equipos = "select * from compras_equipos where id_usuario=? and fecha >= ( CURDATE() - INTERVAL ".$dias." DAY )";
+
+		$qfe = $this->db->query($query_fichaje_equipos,array($id_usuario));
+
+		if($qfe->num_rows())
+		{
+			//dump($qfp->result());die;
+			$compras = $qfe->result();
+
+			foreach($compras as $compra)
+			{
+
+				$valor_equipo = $this->db->select('valor_actual')
+										 ->from('valor_equipo')
+										 ->where('id_equipo',$compra->id_equipo)
+										 ->where('DATE_FORMAT(fecha,"%Y-%m-%d")',$compra->fecha)
+										 ->get()
+										 ->row()
+										 ->valor_actual;
+
+				$dinero_compras = $dinero_compras + $valor_equipo;
+			}
+
+			$total_dinero_fichajes_equipos =  $dinero_compras;
+
+			
+		}
+		else
+		{
+			$total_dinero_fichajes_equipos = 0;
+		}
+
+		$total_absoluto_inversiones = $total_dinero_fichajes_pilotos + $total_dinero_fichajes_equipos;
+
+		return $total_absoluto_inversiones;
+	}
+
+
+	/**
+	 * Devuelve el dinero ganado los ultimos X dias por ventas
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_ganancias_ventas($dias = 7,$id_usuario)
+	{
+
+		// Dinero en venta de pilotos
+		//
+		$query_venta_pilotos = "select * from ventas_pilotos where id_usuario=? and fecha >= ( CURDATE() - INTERVAL ".$dias." DAY )";
+
+		$qvp = $this->db->query($query_venta_pilotos,array($id_usuario));
+
+		if($qvp->num_rows())
+		{
+			//dump($qfp->result());die;
+			$ventas = $qvp->result();
+
+			foreach($ventas as $venta)
+			{
+
+				$valor_piloto = $this->db->select('valor_actual')
+										 ->from('valor_piloto')
+										 ->where('id_piloto',$venta->id_piloto)
+										 ->where('DATE_FORMAT(fecha,"%Y-%m-%d")',$venta->fecha)
+										 ->get()
+										 ->row()
+										 ->valor_actual;
+
+				$dinero_ventas = $dinero_ventas + $valor_piloto;
+			}
+
+			$total_dinero_ventas_pilotos =  $dinero_ventas;
+			
+		}
+		else
+		{
+			$total_dinero_ventas_pilotos = 0;
+		}
+
+		// Dinero en venta de equipos
+		//
+		$query_venta_equipos = "select * from ventas_equipos where id_usuario=? and fecha >= ( CURDATE() - INTERVAL ".$dias." DAY )";
+
+		$qve = $this->db->query($query_venta_equipos,array($id_usuario));
+
+		if($qve->num_rows())
+		{
+			//dump($qfp->result());die;
+			$ventas = $qve->result();
+
+			foreach($ventas as $venta)
+			{
+
+				$valor_equipo = $this->db->select('valor_actual')
+										 ->from('valor_equipo')
+										 ->where('id_equipo',$venta->id_equipo)
+										 ->where('DATE_FORMAT(fecha,"%Y-%m-%d")',$venta->fecha)
+										 ->get()
+										 ->row()
+										 ->valor_actual;
+
+				$dinero_ventas = $dinero_ventas + $valor_equipo;
+			}
+
+			$total_dinero_ventas_equipos =  $dinero_ventas;
+
+			
+		}
+		else
+		{
+			$total_dinero_ventas_equipos = 0;
+		}
+
+		$total_absoluto_ventas = $total_dinero_ventas_pilotos + $total_dinero_ventas_equipos;
+		
+		return $total_absoluto_ventas;
+	}
 }

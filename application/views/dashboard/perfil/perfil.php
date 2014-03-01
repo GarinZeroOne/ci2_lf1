@@ -39,9 +39,9 @@
                            <div class="profile-statistics">
                                <h1><?php echo $info_usuario['posicionRanking'] ?> º</h1>
                                <p>Posición ranking General</p>
-                               <h1>5.612.406 €</h1>
+                               <h1><?php echo es_dinero($info_usuario['inversion']) ?> €</h1>
                                <p>Inversión compras de los últimos días</p>
-                               <h1>7.120.580 €</h1>
+                               <h1><?php echo es_dinero($info_usuario['ganancias']) ?> €</h1>
                                <p>Ganacias ventas de los últimos días</p>
                                <ul>
                                    <li>
