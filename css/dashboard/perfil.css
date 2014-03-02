@@ -1,0 +1,13 @@
+span.titCodMan{
+	color: #FFFFFF;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0 0 2px #005AFF;
+}
+
+span.codigo-manager{
+	color: #046EFF;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 10px;
+}

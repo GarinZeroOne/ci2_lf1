@@ -3,20 +3,15 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        <!-- Migas -->
-        <div class="row">
-            <div class="col-md-12">
-                <!--breadcrumbs start -->
-                <ul class="breadcrumb">                    
-                    <li class="active"><a href="#"><i class="fa fa-home"></i> Mercado pilotos</a></li>
-                </ul>
-                <!--breadcrumbs end -->
-            </div>
-        </div>
+        
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <section class="panel">
+                    <header class="panel-heading">
+                        Ficha o alquila pilotos
+                        
+                    </header>
                     <div class="panel-body">   
                         <p>Desde aquí podras fichar o alquilar a tus pilotos. El  precio de los pilotos puede variar todos los dias en función de la actividad que reciba un piloto, se tienen en  cuenta las ventas, compras y e inactividad (no compras/no ventas) de cada piloto.</p> 
                         <p>Los resultados de cada  gran premio también  harán variar el precio de los  pilotos.</p>
@@ -24,7 +19,49 @@
                 </section>    
             </div>
 
+            <div class="col-md-4 hidden-sm">
+                               
+                <!--Ultimos fichajes start-->
+                <section class="panel">
+                    <header class="panel-heading">
+                        Publicidad
+                        
+                    </header>
+                    <div class="panel-body">
+                        Contenido publicidad
+                    </div>
+                </section>
+                <!--Ultimos fichajes end-->
+                
+            </div>
+
         </div>
+
+        <?php if (isset($msgFichaje['codigoOperacion'])): ?>
+
+            <div class="row">
+                <div class="col-sm-12">
+                <section class="panel">
+            <?php if ($msgFichaje['codigoOperacion']): ?>
+                <div class="alert alert-block alert-success fade in">                                            
+                    <button type="button" class="close close-sm" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <?php echo $msgFichaje['mensaje']; ?>
+                </div>
+            <?php else: ?>
+                <div class="alert alert-block alert-danger fade in">                                            
+                    <button type="button" class="close close-sm" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <strong>Opps!</strong> <?php echo $msgFichaje['mensaje']; ?>
+                </div>
+            <?php endif; ?>
+                </section>
+                </div>
+            </div>
+        <?php endif; ?>
+
 
         <div class="row">
             <div class="col-sm-12">
@@ -40,23 +77,7 @@
                             <div class="col-sm-12">
                                 <section class="panel">
                                     <div class="panel-body">
-                                        <?php if (isset($msgFichaje['codigoOperacion'])): ?>
-                                            <?php if ($msgFichaje['codigoOperacion']): ?>
-                                                <div class="alert alert-block alert-success fade in">                                            
-                                                    <button type="button" class="close close-sm" data-dismiss="alert">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                    <?php echo $msgFichaje['mensaje']; ?>
-                                                </div>
-                                            <?php else: ?>
-                                                <div class="alert alert-block alert-danger fade in">                                            
-                                                    <button type="button" class="close close-sm" data-dismiss="alert">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                    <strong>Opps!</strong> <?php echo $msgFichaje['mensaje']; ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        <?php endif; ?>
+                                        
                                         <section id="unseen">
                                             <table class="table table-bordered table-striped table-condensed">
                                                 <thead>
@@ -76,7 +97,7 @@
 
                                                     <?php foreach ($pilotos as $piloto): ?>   
                                                         <tr>
-                                                            <td style="text-align: center;"><img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/pilotos/<?php echo $piloto->getFoto() ?>.jpg"></td>
+                                                            <td style="text-align: center;"><img class="round-pilots" alt="" src="<?= base_url() ?>img/pilotos/<?php echo $piloto->getFoto() ?>.jpg"></td>
                                                             <td><a href="<?php echo site_url() . 'mercado/fichaPiloto/' . $piloto->getIdPiloto(); ?>"><?php echo $piloto->getNombre() . " " . $piloto->getApellido(); ?></a></td>
                                                             <td class="numeric" style="background-color: rgb(255, 249, 239); color: rgb(188, 164, 108);"><?php echo $piloto->getValorAnterior(true); ?></td>
                                                             <td class="numeric"><?php

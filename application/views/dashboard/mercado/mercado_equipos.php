@@ -4,16 +4,61 @@
     <section class="wrapper">
         <!-- page start-->
 
-        <!-- Migas -->
         <div class="row">
-            <div class="col-md-12">
-                <!--breadcrumbs start -->
-                <ul class="breadcrumb">                    
-                    <li class="active"><a href="#"><i class="fa fa-home"></i> Mercado equipos</a></li>
-                </ul>
-                <!--breadcrumbs end -->
+            <div class="col-md-8">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Compra  equipos
+                        
+                    </header>
+                    <div class="panel-body">   
+                        <p>Texto compra equipos</p>
+                    </div>
+                </section>    
             </div>
+
+            <div class="col-md-4 hidden-sm">
+                               
+                <!--Ultimos fichajes start-->
+                <section class="panel">
+                    <header class="panel-heading">
+                        Publicidad
+                        
+                    </header>
+                    <div class="panel-body">
+                        Contenido publicidad
+                    </div>
+                </section>
+                <!--Ultimos fichajes end-->
+                
+            </div>
+
         </div>
+
+        <?php if (isset($msgFichaje['codigoOperacion'])): ?>
+
+            <div class="row">
+                <div class="col-sm-12">
+                <section class="panel">
+            <?php if ($msgFichaje['codigoOperacion']): ?>
+                <div class="alert alert-block alert-success fade in">                                            
+                    <button type="button" class="close close-sm" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <?php echo $msgFichaje['mensaje']; ?>
+                </div>
+            <?php else: ?>
+                <div class="alert alert-block alert-danger fade in">                                            
+                    <button type="button" class="close close-sm" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <strong>Opps!</strong> <?php echo $msgFichaje['mensaje']; ?>
+                </div>
+            <?php endif; ?>
+                </section>
+                </div>
+            </div>
+        <?php endif; ?>
 
         <div class="row">
             <div class="col-sm-12">
@@ -27,23 +72,7 @@
                         </span>
                     </header>
                     <div class="panel-body">
-                        <?php if (isset($msgFichaje['codigoOperacion'])): ?>
-                            <?php if ($msgFichaje['codigoOperacion']): ?>
-                                <div class="alert alert-block alert-success fade in">                                            
-                                    <button type="button" class="close close-sm" data-dismiss="alert">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                    <?php echo $msgFichaje['mensaje']; ?>
-                                </div>
-                            <?php else: ?>
-                                <div class="alert alert-block alert-danger fade in">                                            
-                                    <button type="button" class="close close-sm" data-dismiss="alert">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                    <strong>Opps!</strong> <?php echo $msgFichaje['mensaje']; ?>
-                                </div>
-                            <?php endif; ?>
-                        <?php endif; ?>
+                        
                         <section id="unseen">
                             <table class="table table-bordered table-striped table-condensed">
                                 <thead>
@@ -99,7 +128,9 @@
                                                         ?>
                                                     </span>
                                             </td>
-                                            <td class="numeric"><a href="<?php echo site_url() . 'mercado/comprarEquipo/' . $equipo->getIdEquipo(); ?>" class="btn btn-success confirm"><?php echo $equipo->getValorActual(true); ?></a></td>
+                                            <td class="numeric"><a href="<?php echo site_url() . 'mercado/comprarEquipo/' . $equipo->getIdEquipo(); ?>" class="btn btn-success btn-xs confirm">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                <?php echo $equipo->getValorActual(true); ?></a></td>
                                             <td class="numeric"><?php echo $equipo->getValorMax(true); ?></td>
                                             <td class="numeric"><?php echo $equipo->getValorMin(true); ?></td>                                                                                                                        
                                         </tr>

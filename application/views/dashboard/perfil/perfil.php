@@ -12,6 +12,10 @@
                            <div class="profile-pic text-center">
                                <img src="<?php echo base_url(); ?>img/avatares/<?php echo $info_usuario['avatar']; ?>" alt="<?php echo $info_usuario['info_usuario']->nick; ?>"/>
                            </div>
+                           <?php if($info_usuario['info_usuario']->id == $_SESSION['id_usuario']): ?>
+                           <div class="profile-pic text-center"><span class="titCodMan">Tu Código Manager</span></div>
+                           <div class="profile-pic text-center"><span class="codigo-manager"><?php echo  $codigo_manager; ?></span></div>
+                         <?php endif; ?>
                        </div>
                        <div class="col-md-6">
                            <div class="profile-desk">

@@ -164,7 +164,9 @@ class Usuarios_model extends CI_Model {
 
 
         $sql = "SELECT * FROM usuarios WHERE nick = ?";
+
         $q = $this->db->query($sql, array($nick));
+
 
         // SI existe le sumamos la visita
         if ($q->num_rows()) {
@@ -615,9 +617,10 @@ class Usuarios_model extends CI_Model {
         // Obtener avatar usuario
         $datos['avatar'           ] = $this->userAvatar($id_usuario);
         // Obtener inversion ultimos dias
-        $datos['inversion'        ] = $this->estadisticas_model->get_inversion_compras(17,$_SESSION['id_usuario']);
+        $datos['inversion'        ] = $this->estadisticas_model->get_inversion_compras(17,$id_usuario);
         // Obtener inversion ultimos dias
-        $datos['ganancias'        ] = $this->estadisticas_model->get_ganancias_ventas(17,$_SESSION['id_usuario']);
+        $datos['ganancias'        ] = $this->estadisticas_model->get_ganancias_ventas(17,$id_usuario);
+
 
 
         return $datos;

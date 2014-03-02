@@ -243,21 +243,7 @@
                             </div>
                         </div>
 
-                        <div class="alert alert-hall-msg ">
-                            <span class="hall-avatar">
-                                <img src="http://localhost/lf12014//img/avatares/thumbs/i212981_th1.jpg" alt="">
-                                
-                            </span>
-                            <div class="notification-info">
-                                <ul class="clearfix notification-meta">
-                                    <li class="pull-left notification-sender"><span><a href="#">John Doe</a></span></li>
-                                    <li class="pull-right notification-time">Ayer</li>
-                                </ul>
-                                <p>
-                                    Han penalizado al equipo Lotus, 2 horas despues de arruinarme comprandolo.
-                                </p>
-                            </div>
-                        </div>
+                        
 
                         
                     </div>

@@ -245,3 +245,10 @@ a.box-delete
     top: 0;
     width: 20px;
 }
+
+
+img.round-pilots{
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
