@@ -17,6 +17,7 @@ class Circuito {
     private $circuito;
     private $fechaGp;
     private $bandera;
+    private $trazado;
     
     public function getIdCircuito() {
         return $this->idCircuito;
@@ -37,7 +38,15 @@ class Circuito {
     public function getBandera() {
         return $this->bandera;
     }
+    
+    public function getTrazado() {
+        return $this->trazado;
+    }
 
+    public function setTrazado($trazado) {
+        $this->trazado = $trazado;
+    }
+    
     public function setIdCircuito($idCircuito) {
         $this->idCircuito = $idCircuito;
     }
@@ -66,6 +75,8 @@ class Circuito {
         $this->circuito = $datosCircuito->circuito;
         $this->fechaGp = $datosCircuito->fecha;
         $this->pais = $datosCircuito->pais;
+        $this->bandera = $datosCircuito->bandera;
+        $this->trazado = $datosCircuito->trazado;
     }
 
 

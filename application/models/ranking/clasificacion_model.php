@@ -6,8 +6,10 @@ class Clasificacion_model extends CI_Model {
         parent::__construct();
     }
 
-    function getClasificacionGeneralObject() {
-        $idGp = $this->getUltimoGpConClasificacion();
+    function getClasificacionGeneralObject($idGp = 0) {
+        if ($idGp == 0) {
+            $idGp = $this->getUltimoGpConClasificacion();
+        }
 
         $sql = "SELECT * FROM resultados_usuarios_2011 
                 WHERE id_gp = ?

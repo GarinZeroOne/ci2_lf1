@@ -1,4 +1,4 @@
-<?
+<?php
 
 class Calendario_model extends CI_Model {
 
@@ -16,6 +16,21 @@ class Calendario_model extends CI_Model {
         $resultado = $this->db->query($sql)->result();
 
         return $resultado;
+    }
+    
+    function obtenerCircuitosObject() {
+
+        // Obtener los datos de los circuitos
+        $sql = "SELECT * FROM circuitos";
+        $resultado = $this->db->query($sql)->result();
+
+        $circuitos = array();
+        
+        foreach($resultado as $row){
+            $circuitos[] = new Circuito($row->id);
+        }
+        
+        return $circuitos;
     }
 
     function obtenerPaisDelSiguienteGp() {

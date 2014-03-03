@@ -76,6 +76,12 @@ class Clasificaciones extends CI_Controller {
 
         $datos['clasificaionGpPiloto'] = new clasificacionGpPilotos(0);
 
+        //Se carga el model de calendario
+        $this->load->model('calendario/calendario_model');
+
+        //Se obtienen todos los circuitos
+        $datos['circuitos'] = $this->calendario_model->obtenerCircuitosObject();
+
         // Javascript
         $bottom['javascript'] = array();
 
@@ -85,6 +91,64 @@ class Clasificaciones extends CI_Controller {
 
         // Vista contenido
         $this->load->view('dashboard/clasificaciones/clasificaciones', $datos);
+
+        $sidebarright = "";
+
+        // Vistas base | Menu derecha | Bottom end
+        $this->load->view('dashboard/base/sidebarright.php', $sidebarright);
+        $this->load->view('dashboard/base/bottom.php', $bottom);
+    }
+
+    function clasificacionGp() {
+
+        if (!is_numeric($this->uri->segment(3))) {
+            redirect_lf1('clasificaciones', 'refresh');
+        }
+
+        $idGp = $this->uri->segment(3);
+        
+        // Menu Izquierda
+        $sidebarleft = array();
+        $sidebarleft['m_act'] = 4;
+
+        // Header
+        $header['estilos'] = array('dashboard.css');
+        $header['titulo'] = 'Clasificacion Gp - LigaFormula1.com';
+        $header['avatar'] = $this->usuarios_model->userAvatar($_SESSION['id_usuario']);
+
+        $datos['clasificacionGeneral'] = $this->clasificacion_model->
+                getClasificacionGeneralObject();
+
+        $usuario = Usuario::getById($_SESSION['id_usuario']);
+
+        $datos['miClasificacionGeneral'] = ClasificacionGeneralUsuario::getById($usuario,$idGp);
+
+        $datos['clasificacionGp'] = new clasificacionGp($idGp);
+
+        $datos['miClasificacionGp'] = $this->clasificacion_model->getClasificacionGpUsuarioObject($idGp
+                , $_SESSION['id_usuario']);
+
+        $this->load->model('pilotos/pilotos_model');        
+
+        $datos['clasificaionGpPiloto'] = new clasificacionGpPilotos($idGp);
+
+        //Se carga el model de calendario
+        $this->load->model('calendario/calendario_model');
+
+        //Se obtienen todos los circuitos
+        $datos['circuitos'] = $this->calendario_model->obtenerCircuitosObject();
+        
+        $datos['circuitoClasificacion'] = new Circuito($idGp);
+
+        // Javascript
+        $bottom['javascript'] = array();
+
+        // Vistas base | Header | Menu Principal
+        $this->load->view('dashboard/base/header.php', $header);
+        $this->load->view('dashboard/base/sidebarleft.php', $sidebarleft);
+
+        // Vista contenido
+        $this->load->view('dashboard/clasificaciones/clasificacionGp', $datos);
 
         $sidebarright = "";
 

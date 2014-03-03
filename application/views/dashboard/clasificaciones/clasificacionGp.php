@@ -7,7 +7,7 @@
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grandes premios
+                        Circuito
                         <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
                             <a href="javascript:;" class="fa fa-cog"></a>
@@ -15,17 +15,20 @@
                         </span>
                     </header>
                     <div class="panel-body"> 
-                        <table class="table table-bordered table-striped table-condensed"><tbody>
-                                <tr>
-                                    <?php foreach ($circuitos as $circuito): ?>
-                                        <td style="text-align: center">
-                                            <a  title="Ver clasificacion Gp" href="<?php echo site_url() . 'clasificaciones/clasificacionGp/' . $circuito->getIdCircuito(); ?>">
-                                                <img style="border-radius: 50%; width: 50%; height: 50%; a" alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>">
+                        <div class="col-lg-12">
+                            <aside class="profile-nav alt">
+                                <section class="panel">                        
+                                    <section class="panel">
+                                        <div class="user-heading alt gray-bg">
+                                            <a href="#">
+                                                <img alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuitoClasificacion->getBandera() ?>">
                                             </a>
-                                        </td>
-                                    <?php endforeach; ?>
-                                </tr>
-                        </table>
+                                            <h1><?php echo $circuitoClasificacion->getCircuito(); ?></h1>
+                                            <p><?php echo $circuitoClasificacion->getPais(); ?></p>
+                                        </div>
+                                    </section>
+                            </aside>
+                        </div>
                     </div>
                 </section>
             </div>
@@ -186,49 +189,7 @@
                                                                     </section>
                                                                 </div>
                                                                 </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-6">
-                                                                        <section class="panel">
-                                                                            <header class="panel-heading">
-                                                                                Clasificacion Mundial
-                                                                                <span class="tools pull-right">
-                                                                                    <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                                                                    <a href="javascript:;" class="fa fa-cog"></a>
-                                                                                    <a href="javascript:;" class="fa fa-times"></a>
-                                                                                </span>
-                                                                            </header>
-                                                                            <div class="panel-body">
-                                                                                <table class="table table-bordered table-striped table-condensed">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th class="numeric">Posicion</th>
-                                                                                            <th>Foto</th>
-                                                                                            <th>Piloto</th>
-                                                                                            <th class="numeric">Puntos</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($clasificacionMundial as $piloto): ?>
-                                                                                            <tr>
-                                                                                                <td>
-                                                                                                    <?php echo $piloto->getPosicionMundial(); ?>
-                                                                                                </td>
-                                                                                                <td style="text-align: center;">
-                                                                                                    <img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/pilotos/<?php echo $piloto->getFoto() . ".jpg" ?>">
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <?php echo $piloto->getNombre() . " " . $piloto->getApellido(); ?>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <?php echo $piloto->getPuntosMundial(); ?>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        <?php endforeach; ?>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </section>
-                                                                    </div>
+                                                                <div class="row">                                                                    
                                                                     <div class="col-sm-6">
                                                                         <section class="panel">
                                                                             <header class="panel-heading">                                                                
@@ -273,6 +234,33 @@
                                                                                         endforeach;
                                                                                         ?>
                                                                                     </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <section class="panel">
+                                                                            <header class="panel-heading">
+                                                                                Grandes premios
+                                                                                <span class="tools pull-right">
+                                                                                    <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                                                                    <a href="javascript:;" class="fa fa-cog"></a>
+                                                                                    <a href="javascript:;" class="fa fa-times"></a>
+                                                                                </span>
+                                                                            </header>
+                                                                            <div class="panel-body"> 
+                                                                                <table class="table table-bordered table-striped table-condensed"><tbody>
+                                                                                        <tr>
+                                                                                            <?php foreach ($circuitos as $circuito): ?>
+                                                                                                <td style="text-align: center">
+                                                                                                    <a  title="Ver clasificacion Gp" href="<?php echo site_url() . 'clasificaciones/clasificacionGp/' . $circuito->getIdCircuito(); ?>">
+                                                                                                        <img style="border-radius: 50%; width: 50%; height: 50%; a" alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>">
+                                                                                                    </a>
+                                                                                                </td>
+                                                                                            <?php endforeach; ?>
+                                                                                        </tr>
                                                                                 </table>
                                                                             </div>
                                                                         </section>
