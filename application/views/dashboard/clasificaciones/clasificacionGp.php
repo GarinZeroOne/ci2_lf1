@@ -33,8 +33,8 @@
                 </section>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6">
+        <div class="col-sm-6">
+            <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
                         Clasificacion general
@@ -64,7 +64,7 @@
                                         <img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGeneral->getUsuario()->getAvatar()->getAvatar() ?>">
                                     </td>
                                     <td>
-                                        <?php echo $miClasificacionGeneral->getUsuario()->getNick(); ?>
+                                        <a href="<?php echo site_url();?>perfil/ver/<?php echo $miClasificacionGeneral->getUsuario()->getNick();?>"><?php echo $miClasificacionGeneral->getUsuario()->getNick(); ?></a>
                                     </td>
                                     <td>
                                         <?php echo $miClasificacionGeneral->getPuntos(); ?>
@@ -100,7 +100,7 @@
                                                             <img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
                                                         </td>
                                                         <td>
-                                                            <?php echo $clasificacionUsuario->getUsuario()->getNick(); ?>
+                                                            <a href="<?php echo site_url();?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick();?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
                                                         </td>
                                                         <td>
                                                             <?php echo $clasificacionUsuario->getPuntos(); ?>
@@ -132,7 +132,7 @@
                                                                 </div>
                                                                 </section>
                                                                 </div>
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-12">
                                                                     <section class="panel">
                                                                         <header class="panel-heading">
                                                                             Clasificacion Gp <?php echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )"; ?>
@@ -161,7 +161,7 @@
                                                                                             <img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGp->getUsuario()->getAvatar()->getAvatar(); ?>">
                                                                                         </td>
                                                                                         <td>
-                                                                                            <?php echo $miClasificacionGp->getUsuario()->getNick(); ?>
+                                                                                            <a href="<?php echo site_url();?>perfil/ver/<?php echo $miClasificacionGp->getUsuario()->getNick();?>"><?php echo $miClasificacionGp->getUsuario()->getNick(); ?></a>
                                                                                         </td>
                                                                                         <td>
                                                                                             <?php echo $miClasificacionGp->getPuntos(); ?>
@@ -176,7 +176,7 @@
                                                                                                 <img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
                                                                                             </td>
                                                                                             <td>
-                                                                                                <?php echo $clasificacionUsuario->getUsuario()->getNick(); ?>
+                                                                                                <a href="<?php echo site_url();?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick();?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
                                                                                             </td>
                                                                                             <td>
                                                                                                 <?php echo $clasificacionUsuario->getPuntos(); ?>
@@ -189,8 +189,8 @@
                                                                     </section>
                                                                 </div>
                                                                 </div>
-                                                                <div class="row">                                                                    
-                                                                    <div class="col-sm-6">
+                                                                <div class="col-sm-6">
+                                                                    <div class="col-sm-12">
                                                                         <section class="panel">
                                                                             <header class="panel-heading">                                                                
                                                                                 Clasificacion Gp Pilotos <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " ( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
