@@ -266,33 +266,55 @@ class Estadisticas_model extends CI_Model
 	 **/
 	function get_info_fichajes_ventas()
 	{
+		//$fecha = date('Y-m-d');
+		//$ayer = date('Y-m-d',strtotime('-1 day',strtotime($fecha)));
+		$ayer = date('Y-m-d');
 
-		$fecha_estadisticas = '2014-02-19';//date('Y-m-d');
+		//$fecha_estadisticas = date('Y-m-d');//'2014-02-19';//date('Y-m-d');
+
 		$fichajes = $this->db->select('*')->from('usuarios_pilotos')
 										  
-										  ->where('fecha_fichaje',$fecha_estadisticas)
+										  ->where('fecha_fichaje',$ayer)
 										  ->get()
 										  ->result();
 
 
-		$ventas = $this->db->select('*')->from('usuarios_pilotos')->where('fecha_venta',$fecha_estadisticas)->get()->result();
+		$ventas = $this->db->select('*')->from('usuarios_pilotos')->where('fecha_venta',$ayer)->get()->result();
 
 		// Recorremos pilotos fichados en esa fecha
 		foreach($fichajes as $fi)
 		{
 			 $suma_fichados = $suma_fichados + intval($fi->precio_fichaje);
 		}
-		$fichados[] = intval($suma_fichados);
+
+		// Si no ha habido fichajes le pasamos 0
+		if(!$fichajes)
+		{
+			$fichados[] = intval(0);
+		}
+		else
+		{
+			$fichados[] = intval($suma_fichados);	
+		}
+		
 		// Recorremos pilotos fichados en esa fecha
 		foreach($ventas as $ve)
 		{
 			$suma_vendidos = $suma_vendidos + intval($ve->precio_venta);
 		}
+		// Si no ha habido ventas le pasamos 0
+		if(!$ventas)
+		{
+			$vendidos[] = intval(0);
+		}
+		else
+		{
+			$vendidos[] = intval($suma_vendidos);	
+		}
+		
 
-		$vendidos[] = intval($suma_vendidos);
-
-		$series_data[] = array('name' => 'Fichajes $','data'=>$fichados);
-		$series_data[] = array('name' => 'Ventas $','data'=>$vendidos);
+		$series_data[] = array('name' => 'Fichajes €','data'=>$fichados);
+		$series_data[] = array('name' => 'Ventas €','data'=>$vendidos);
 
 		return $series_data;
 		
@@ -460,5 +482,16 @@ class Estadisticas_model extends CI_Model
 		$total_absoluto_ventas = $total_dinero_ventas_pilotos + $total_dinero_ventas_equipos;
 		
 		return $total_absoluto_ventas;
+	}
+
+	/**
+	 * Devuelve el valor de mercado de todos los pilotos por dia
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_info_valor_mercado_pilotos()
+	{
+
 	}
 }

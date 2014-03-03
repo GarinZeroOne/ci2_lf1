@@ -1,6 +1,6 @@
 <script>
 
- /*   
+   
     var meses = new Array();
         meses['ene'] = 'enero';
         meses['feb'] = 'febrero';
@@ -26,7 +26,7 @@
     });
     
     $(function() { 
-        $('#grafica').highcharts({
+        $('#grafica2').highcharts({
             chart: {
                 type: 'area',
                 spacingTop: 0,
@@ -103,7 +103,7 @@
                             }
                         }
                     },
-                    color: '#FF6000'
+                    color: '#1FB5AD'
                 },
                 area: {
                     shadow: false
@@ -111,9 +111,10 @@
             }
         });
     });
-*/
+
+/*
 $(function () { 
-    $('#grafica').highcharts({
+    $('#grafica2').highcharts({
         chart: {
             type: 'bar',
             spacingTop: 0,
@@ -126,10 +127,10 @@ $(function () {
             text: 'Movimiento dinero Fichajes / Ventas'
         },
         subtitle:{
-            text: "<?php echo date('d.m.Y') ?>"
+            text: "<?php echo date('d.m.Y',strtotime('-1 days')) ?>"
         },
         xAxis: {
-                title: false,
+
                 showFirstLabel: true,
                 tickInterval: 14,
                 reversed: true,
@@ -142,7 +143,6 @@ $(function () {
         credits: {
                 enabled: false
         },
-        
         legend: {
                 enabled: false
             },
@@ -154,5 +154,5 @@ $(function () {
         series: <?php echo $series_data; ?>
     });
 });
-
+*/
 </script>

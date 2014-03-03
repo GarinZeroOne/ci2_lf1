@@ -64,8 +64,13 @@ class Dashboard extends CI_Controller {
 		// Variaciones mercado pilotos
 		$datos['info_mercado_pilotos'     ] = $this->pilotos_model->getInfoPilotos();
 
+		// Grafica Movimiento dinero Fichajes/Ventas
 		$chart_data = $this->estadisticas_model->get_info_fichajes_ventas();
 		$data_to_js['series_data'] = json_encode($chart_data);
+
+		// Grafica Movimiento dinero Fichajes/Ventas
+		$chart_data2 = $this->estadisticas_model->get_info_valor_mercado_pilotos();
+		$data_to_js2['series_data'] = json_encode($chart_data);
 
 		//dump($data_to_js['series_data']);die;
 
@@ -77,7 +82,9 @@ class Dashboard extends CI_Controller {
 
 		// Javascript
 		$bottom['javascript'	] = array('highcharts.js');
-		$bottom['javascript_php'] = array('grafica1_dash' => $this->load->view('dashboard/_head/js/grafica1_dash',$data_to_js,TRUE));
+		$bottom['javascript_php'] = array('grafica1_dash' => $this->load->view('dashboard/_head/js/grafica1_dash',$data_to_js,TRUE),
+ 										  'grafica2_dash' => $this->load->view('dashboard/_head/js/grafica2_dash',$data_to_js2,TRUE)
+										 );
 
 		// Menu Izquierda
 		$sidebarleft 		  = array();

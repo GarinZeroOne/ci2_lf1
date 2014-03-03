@@ -77,10 +77,8 @@
             <div class="col-md-3">
                 <section class="panel">
                     <div class="panel-body">
-                        <div class="top-stats-panel">
-                            <h4 class="widget-h">TOP FICHAJES AYER</h4>
-                            <div class="sm-pie">
-                            </div>
+                        <div id="grafica2" >
+                            
                         </div>
                     </div>
                 </section>
