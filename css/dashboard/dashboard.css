@@ -8,6 +8,14 @@ span.saldo{
 	font-family: "Trebuchet MS","tahoma";
 }
 
+/*alertas*/
+.noti-info {
+    color: #414147;
+    padding-left: 0px;
+    padding-top: 0px;
+}
+
+
 /*hall of fame*/
 ul.notification-meta li span{
 	color:#B1C697;

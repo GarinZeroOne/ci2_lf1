@@ -333,7 +333,7 @@ class Grupos_model extends CI_Model {
         // Si no llega el idGrupo ->GTFO!!
         if(!is_numeric($idGrupo)){return 'No se ha podido enviar el mensaje';}
 
-        // Creamos el identificador del mensaje en el grupo
+        // Creamos el identificador del mensaje en el grupo #1 #2 #3...
         $q = $this->db->select('id_mensaje')
                                      ->from('grupos_mensajes')
                                      ->where('id_grupo',$idGrupo)
@@ -346,6 +346,9 @@ class Grupos_model extends CI_Model {
 
         // Guardo el id para devolver los datos en caso de return=true
         $id_mensaje_nuevo = $this->db->insert_id();
+
+        //Nombre del grupo
+        $nombre_grupo = $this->db->select('nombre')->from('usuarios_grupos')->where('id',$idGrupo)->get()->row()->nombre;
 
         // ALERTA: Notificamos a los usuarios cuando ha habido mensajes nuevos
         $miembros = $this->db->select('id_usuario')
@@ -371,6 +374,7 @@ class Grupos_model extends CI_Model {
                                         'id'            =>          '',
                                         'id_usuario'    =>          $miembro->id_usuario,
                                         'id_grupo'      =>          $idGrupo,
+                                        'tipo_alerta'   =>          'grupo',
                                         'texto'         =>          'Hay mensajes nuevos en el grupo '.$nombre_grupo,
                                         'leida'         =>          0,
                                         'fecha_creada'  =>          date('Y-m-d H:i:s'),

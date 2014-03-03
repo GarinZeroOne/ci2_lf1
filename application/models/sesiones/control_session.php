@@ -57,7 +57,7 @@ class Control_session extends CI_Model {
 			}
 			// Si intenta entrar a la pagina de login cuando ya esta logeado le mandamos
 			// al dashboard
-			if($this->uri->uri_string() == '/inicio/acceso')
+			if($this->uri->uri_string() == 'inicio/acceso')
 			{
 				redirect_lf1('dashboard');
 			}

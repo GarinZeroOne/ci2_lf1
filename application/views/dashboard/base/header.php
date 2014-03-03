@@ -52,7 +52,7 @@
 <!--logo start-->
 <div class="brand">
 
-    <a href="index-2.html" class="logo">
+    <a href="<?php echo site_url(); ?>" class="logo">
         <img src="<?= base_url();?>/images/logo.png" alt="">
     </a>
     <div class="sidebar-toggle-box">
@@ -68,7 +68,7 @@
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-tasks"></i>
-                <span class="badge bg-success">8</span>
+                <span class="badge bg-important">8</span>
             </a>
             <ul class="dropdown-menu extended tasks-bar">
                 <li>
@@ -135,7 +135,7 @@
         <li id="header_inbox_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-important">4</span>
+                <span class="badge bg-success">4</span>
             </a>
             <ul class="dropdown-menu extended inbox">
                 <li>
@@ -200,12 +200,14 @@
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
                 <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">2</span>
+                <span class="badge bg-warning"><?php echo mensajes_model::contador_alertas_no_leidas($_SESSION['id_usuario']); ?></span>
             </a>
             <ul class="dropdown-menu extended notification">
                 <li>
-                    <p>Notificaciones</p>
+                    <p>Alertas</p>
                 </li>
+                <?php echo mensajes_model::mostrar_mis_alertas($_SESSION['id_usuario']); ?>
+                <!--
                 <li>
                     <div class="alert alert-info clearfix">
                         <span class="alert-icon"><i class="fa fa-bolt"></i></span>
@@ -222,7 +224,7 @@
                         </div>
                     </div>
                 </li>
-                
+                -->
 
             </ul>
         </li>
