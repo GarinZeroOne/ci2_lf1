@@ -87,6 +87,7 @@ class Grupos extends CI_Controller {
 	function ver( $id_grupo = false )
 	{
 
+		
 		// Si lo que llega no es un ID -> GTFO!!
 		if(!is_numeric($id_grupo)){ redirect_lf1('grupos');}
 

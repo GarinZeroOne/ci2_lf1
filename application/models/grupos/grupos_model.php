@@ -328,6 +328,7 @@ class Grupos_model extends CI_Model {
     }
 
     //Funcion que inserta mensajes en los grupos.
+    // 2014 - Notificaciones - Menciones
     function insertMensajes($idGrupo, $contenido, $return = false) {
 
         // Si no llega el idGrupo ->GTFO!!
@@ -384,6 +385,41 @@ class Grupos_model extends CI_Model {
                 $this->db->insert('usuarios_alertas',$data_insert);
             }
 
+        }
+
+        // Menciones
+        // Buscamos #xxx en la cadena
+        if (preg_match_all('/#\d+/', $contenido,$coincidencias)) 
+        {    
+            foreach($coincidencias[0] as $c)
+            {
+                $id_mensaje_mencion = substr($c, 1);
+
+                // Buscar que usuario escribio ese mensaje
+                $id_usuario_mencion = $this->db->select('id_usuario')
+                                               ->from('grupos_mensajes')
+                                               ->where('id_mensaje_grupo',$id_mensaje_mencion)
+                                               ->where('id_grupo',$idGrupo)
+                                               ->get()
+                                               ->row()
+                                               ->id_usuario;
+
+                // Crear alerta al usuario mencionado
+                $mencion_insert = array(
+                                        'id'            =>          '',
+                                        'id_usuario'    =>          $id_usuario_mencion,
+                                        'id_grupo'      =>          $idGrupo,
+                                        'tipo_alerta'   =>          'mencion',
+                                        'texto'         =>          'El usuario '.$_SESSION['usuario'].' te ha mencionado en el grupo '.$nombre_grupo.'. Mensaje #'.$id_mensaje_mencion.' => #'.$id_mensaje_grupo,
+                                        'leida'         =>          0,
+                                        'fecha_creada'  =>          date('Y-m-d H:i:s'),
+                                        'fecha_modificada'  =>          date('Y-m-d H:i:s')
+                                        );
+
+                $this->db->insert('usuarios_alertas',$mencion_insert);                                      
+            }
+
+            
         }
 
         if($return)

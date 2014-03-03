@@ -207,6 +207,7 @@
                     <p>Alertas</p>
                 </li>
                 <?php echo mensajes_model::mostrar_mis_alertas($_SESSION['id_usuario']); ?>
+                <li><a class="btn btn-warning noti-menu" href="<?php echo site_url();?>mensajes/alertas">Ver todas</a></li>
                 <!--
                 <li>
                     <div class="alert alert-info clearfix">

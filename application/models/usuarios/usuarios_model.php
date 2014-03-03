@@ -227,9 +227,15 @@ class Usuarios_model extends CI_Model {
                     $this->db->insert('perfil_visitas', $data_insert);
                 }
             }
+
+            return $q->row();
+        }
+        else
+        {
+            return false;
         }
 
-        return $q->row();
+        
     }
 
     function alterUserData($datos) {

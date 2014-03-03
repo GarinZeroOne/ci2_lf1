@@ -74,6 +74,10 @@ class Mensajes_model extends CI_Model {
 	 **/
 	function get_alertas_usuario($id_usuario)
 	{
+		//Poner todas como leidas
+		$this->db->where('id_usuario',$id_usuario);
+		$this->db->update('usuarios_alertas',array('leida'=>1));
+		
 		$q = $this->db->select('*')->from('usuarios_alertas')->where('id_usuario',$id_usuario)->order_by('fecha_modificada','desc')->get();
 
 		return $q->result();

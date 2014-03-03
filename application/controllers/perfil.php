@@ -102,6 +102,9 @@ class Perfil extends CI_Controller {
 
 		// Id del usuario
 		$data_user = $this->usuarios_model->userDataNick($nickname);
+
+		// Si no hay info dle user por lo que sea! GTFO!!
+		if(!$data_user){redirect_lf1('dashboard');}
 		//dump($data_user);die;
 		
 		$datos['codigo_manager'] = $this->usuarios_model->get_codigo_manager($data_user->id);
