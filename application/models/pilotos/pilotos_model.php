@@ -317,13 +317,7 @@ class Pilotos_model extends CI_Model {
       } */
 
     function venderPiloto(Usuario $usuario, PilotoUsuario $piloto) {
-
-        // Poner inactivo el piloto
-        $sql_inactivo = "UPDATE usuarios_pilotos SET activo = 0,fecha_venta = ?
-                        WHERE id_usuario = ?
-                        AND id_piloto = ?";
-        $this->db->query($sql_inactivo, array(date('Y-m-d'), $usuario->getIdUsuario(), $piloto->getIdPiloto()));
-
+        
         $CI = &get_instance();
         $CI->load->Model('banco/banco_model');
 
@@ -336,6 +330,14 @@ class Pilotos_model extends CI_Model {
             $concepto = Banco_model::ventaAlquilerPiloto;
             $fondos = $usuario->getFondos() + $piloto->getPrecioAlquiler();
         }
+
+        // Poner inactivo el piloto
+        $sql_inactivo = "UPDATE usuarios_pilotos SET activo = 0,fecha_venta = ?
+                        ,precio_venta = ?
+                        WHERE id_usuario = ?
+                        AND id_piloto = ?";
+        $this->db->query($sql_inactivo, array(date('Y-m-d'), $ingreso,
+            $usuario->getIdUsuario(), $piloto->getIdPiloto()));        
 
         $this->insertVentaPiloto($piloto, $usuario);
 
@@ -618,29 +620,28 @@ class Pilotos_model extends CI_Model {
         return $pilotos;
     }
 
-    function getDatosPilotoGp($idPiloto,$idGp) {
+    function getDatosPilotoGp($idPiloto, $idGp) {
         $sql = "SELECT * FROM puntos_posicion pp, resultados_pilotos rp 
                 WHERE rp.posicion = pp.posicion
                 AND id_piloto = ?
                 AND id_gp = ?";
-        
-        $result = $this->db->query($sql,array($idPiloto,$idGp));
-        
+
+        $result = $this->db->query($sql, array($idPiloto, $idGp));
+
         return $result;
-        
     }
-    
+
     function getPilotosClasificacionGpObject($idGp) {
         $sql = "SELECT * FROM pilotos";
 
         $result = $this->db->query($sql)->result();
-        
+
         $pilotos = array();
-        
-        foreach($result as $row){
-            $pilotos[]= new PilotoClasificacionGp($row->id,$idGp);
+
+        foreach ($result as $row) {
+            $pilotos[] = new PilotoClasificacionGp($row->id, $idGp);
         }
-        
+
         usort($pilotos, array("PilotoClasificacionGp", "comparaPosicionGp"));
 
         return $pilotos;

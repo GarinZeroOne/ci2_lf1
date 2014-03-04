@@ -40,6 +40,20 @@ class Calendario_model extends CI_Model {
         $sql = "SELECT pais,fecha FROM circuitos WHERE fecha > '{$hoy}' ORDER BY fecha ASC LIMIT 0,1";
         return $this->db->query($sql)->row();
     }
+    
+    function getNextGpObject(){
+        $hoy = date('Y-m-d');
+
+        $sql = "SELECT * FROM circuitos "
+                . "WHERE fecha >= ? "
+                . "ORDER BY fecha ASC LIMIT 0,1";
+        
+        $row = $this->db->query($sql,array($hoy))->row();
+        
+        $circuito = new Circuito($row->id);
+        
+        return $circuito;
+    }
 
     function obtenerCircuitoAProcesar() {
         $noProcesado = 0;

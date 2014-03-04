@@ -18,7 +18,8 @@ class Banco_model extends CI_Model {
     const compraEquipo = 'compra_equipo';
     const alquilerPiloto = 'alquiler_piloto';
     const ventaAlquilerPiloto = 'venta_alquiler_piloto';
-    const stikiDinero = 'stiki_dinero';
+    const ventaStikiDinero = 'venta_stiki_dinero';
+    const ventaStikiPuntos = 'venta_stiki_puntos';
     const nomina = 'nomina';    
     
     function Banco_model() {
