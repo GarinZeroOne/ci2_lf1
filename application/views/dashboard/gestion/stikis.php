@@ -3,6 +3,26 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    Compra Stikis
+
+                </header>
+                <div class="panel-body">   
+                    <p>Aumenta tus posibilidades duplicando los puntos y el dinero de tu piloto estrella!
+                        El piloto que lleve un stiki en su monoplaza duplicara los puntos o el dinero ganado, dependiendo del tipo de stiki que lleve.</p>
+                    <p>El precio del STIKI depende del valor de mejora de los mecánicos. Cuanto mas alto sea el nivel de mecanicos mas baratos podras comprar los stikis.</p>                    
+                    <ul>
+                        <li> Solo los pilotos fichados pueden llevar stiki</li>
+                        <li> Solo se pueden llevar dos STIKIS por carrera.</li>
+                        <li> Un corredor solo puede llevar un STIKI.</li>
+                    </ul>
+                </div>
+            </section>    
+        </div>
+
         <?php if (isset($msg['codigoOperacion'])): ?>
             <div class="row">
                 <div class="col-sm-12">
@@ -131,6 +151,7 @@
                                     <?php endif; ?>
 
                                     <?php foreach ($misPilotos as $piloto): ?>
+                                        <?php if ($piloto->getTipoCompra() == 'fichado'):?>
                                         <div class="radio">
                                             <label>
                                                 <input type="radio" name="piloto" value="<?php echo $piloto->getIdPiloto(); ?>">
@@ -147,6 +168,7 @@
 
                                             </label>
                                         </div>
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
 
                                 </div>
