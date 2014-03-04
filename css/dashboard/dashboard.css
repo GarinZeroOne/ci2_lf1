@@ -273,3 +273,14 @@ img.round-pilots{
     height: 35px;
     width: 35px;
 }
+
+/*img en blanco y negro*/
+img.desaturada { filter: grayscale(100%); }
+img.desaturada { filter: grayscale(100%);
+-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+-ms-filter: grayscale(100%);
+-o-filter: grayscale(100%);
+filter: url(filter.svg#gris);
+filter: gray;
+}

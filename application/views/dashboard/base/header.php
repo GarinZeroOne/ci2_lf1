@@ -53,7 +53,7 @@
 <div class="brand">
 
     <a href="<?php echo site_url(); ?>" class="logo">
-        <img src="<?= base_url();?>/images/logo.png" alt="">
+        <img  src="<?= base_url();?>/images/logo.png" alt="">
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
