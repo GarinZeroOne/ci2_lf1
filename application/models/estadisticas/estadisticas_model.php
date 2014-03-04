@@ -313,11 +313,81 @@ class Estadisticas_model extends CI_Model
 		}
 		
 
-		$series_data[] = array('name' => 'Fichajes €','data'=>$fichados);
-		$series_data[] = array('name' => 'Ventas €','data'=>$vendidos);
+		$series_data[] = array('name' => 'Fichajes: ','data'=>$fichados);
+		$series_data[] = array('name' => 'Ventas: ','data'=>$vendidos);
 
 		return $series_data;
 		
+	}
+
+	/**
+	 * Devuelve el valor de mercado de todos los pilotos por dia
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_info_valor_mercado_pilotos()
+	{
+		// Array con los meses para generar fecha legible
+		$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+		$query = 'select sum(valor_actual) tot,DATE_FORMAT(fecha,"%Y-%m-%d") fec from valor_piloto group by DATE_FORMAT(fecha,"%Y-%m-%d")  order by fecha desc';
+
+		$q = $this->db->query($query)->result();
+
+		foreach($q as $total_dia)
+		{
+			$total[] = intval($total_dia->tot);
+
+			// Generamos la fecha legible
+			$fecha = explode('-', $total_dia->fec);
+			$dia = $fecha[2];
+			$mes = $fecha[1];
+			$anio = $fecha[0];
+			$dias[] = intval($dia).' de '.$meses[intval($mes)];
+			//$dias[] =  date("l F jS, Y", strtotime($total_dia->fec));
+		}
+
+		$series_data['totales_dinero'] = array('name'=>'Valor','data'=>$total);
+		$series_data['totales_dia'] = $dias;
+
+		//dump($series_data);die;
+		return $series_data;
+	}
+
+	/**
+	 * Devuelve el valor de mercado de todos los pilotos por dia
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_info_valor_mercado_equipos()
+	{
+		// Array con los meses para generar fecha legible
+		$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+		$query = 'select sum(valor_actual) tot,DATE_FORMAT(fecha,"%Y-%m-%d") fec from valor_equipo group by DATE_FORMAT(fecha,"%Y-%m-%d")  order by fecha desc';
+
+		$q = $this->db->query($query)->result();
+
+		foreach($q as $total_dia)
+		{
+			$total[] = intval($total_dia->tot);
+
+			// Generamos la fecha legible
+			$fecha = explode('-', $total_dia->fec);
+			$dia = $fecha[2];
+			$mes = $fecha[1];
+			$anio = $fecha[0];
+			$dias[] = intval($dia).' de '.$meses[intval($mes)];
+			//$dias[] =  date("l F jS, Y", strtotime($total_dia->fec));
+		}
+
+		$series_data['totales_dinero'] = array('name'=>'Valor','data'=>$total);
+		$series_data['totales_dia'] = $dias;
+
+		//dump($series_data);die;
+		return $series_data;
 	}
 
 
@@ -484,14 +554,5 @@ class Estadisticas_model extends CI_Model
 		return $total_absoluto_ventas;
 	}
 
-	/**
-	 * Devuelve el valor de mercado de todos los pilotos por dia
-	 *
-	 * @return void
-	 * @author 
-	 **/
-	function get_info_valor_mercado_pilotos()
-	{
-
-	}
+	
 }

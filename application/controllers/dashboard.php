@@ -68,11 +68,15 @@ class Dashboard extends CI_Controller {
 		$chart_data = $this->estadisticas_model->get_info_fichajes_ventas();
 		$data_to_js['series_data'] = json_encode($chart_data);
 
-		// Grafica Movimiento dinero Fichajes/Ventas
+		// Grafica Valor total mercado Pilotos
 		$chart_data2 = $this->estadisticas_model->get_info_valor_mercado_pilotos();
-		$data_to_js2['series_data'] = json_encode($chart_data);
+		$data_to_js2['valores_dinero'] = json_encode($chart_data2['totales_dinero']);
+		$data_to_js2['fechas_valores'] = $chart_data2['totales_dia'];
 
-		//dump($data_to_js['series_data']);die;
+		// Grafica Valor total mercado Equipos
+		$chart_data3 = $this->estadisticas_model->get_info_valor_mercado_equipos();
+		$data_to_js3['valores_dinero'] = json_encode($chart_data3['totales_dinero']);
+		$data_to_js3['fechas_valores'] = $chart_data3['totales_dia'];
 
 		// Header
 		$header['estilos'] 	  = array('dashboard.css');
@@ -83,7 +87,8 @@ class Dashboard extends CI_Controller {
 		// Javascript
 		$bottom['javascript'	] = array('highcharts.js');
 		$bottom['javascript_php'] = array('grafica1_dash' => $this->load->view('dashboard/_head/js/grafica1_dash',$data_to_js,TRUE),
- 										  'grafica2_dash' => $this->load->view('dashboard/_head/js/grafica2_dash',$data_to_js2,TRUE)
+ 										  'grafica2_dash' => $this->load->view('dashboard/_head/js/grafica2_dash',$data_to_js2,TRUE),
+ 										  'grafica3_dash' => $this->load->view('dashboard/_head/js/grafica3_dash',$data_to_js3,TRUE),
 										 );
 
 		// Menu Izquierda

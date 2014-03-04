@@ -56,22 +56,7 @@
                 </section>
             </div>
 
-            <div class="col-md-3">
-                <section class="panel">
-                    <div class="panel-body">
-                        
-                        
-                            <div class="temporizador">
-                                <h4 class="widget-h">PRÓXIMO GRAN PREMIO</h4>
-
-                                <span id="horat"><script>calcula("<?=$anioGP?>","<?=$mesGP?>","<?=$diaGP?>")</script></span>
-
-                                <div class="nextGP"><?php  echo $paisGP; ?></div>
-                            </div>
-                        
-                    </div>
-                </section>
-            </div>
+            
             
             
             <div class="col-md-3">
@@ -87,24 +72,26 @@
             <div class="col-md-3">
                 <section class="panel">
                     <div class="panel-body">
-                        <div class="top-stats-panel">
-                            <h4 class="widget-h">TOP PROVINCIAS</h4>
-                            <div class="bar-stats">
-                                <ul class="progress-stat-bar clearfix">
-                                    <li data-percent="80%"><span class="progress-stat-percent pink"></span></li>
-                                    <li data-percent="90%"><span class="progress-stat-percent"></span></li>
-                                    <li data-percent="70%"><span class="progress-stat-percent yellow-b"></span></li>
-                                </ul>
-                                <ul class="bar-legend">
-                                    <li><span class="bar-legend-pointer pink"></span> Bizkaia</li>
-                                    <li><span class="bar-legend-pointer green"></span> Madrid</li>
-                                    <li><span class="bar-legend-pointer yellow-b"></span> Barcelona</li>
-                                </ul>
-                                <div class="daily-sales-info">
-                                    <span class="sales-count">1200 </span> <span class="sales-label">Managers de Madrid</span>
-                                </div>
-                            </div>
+                        <div id="grafica3" >
+                            
                         </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-3">
+                <section class="panel">
+                    <div class="panel-body">
+                        
+                        
+                            <div class="temporizador">
+                                <h4 class="widget-h">PRÓXIMO GRAN PREMIO</h4>
+
+                                <span id="horat"><script>calcula("<?=$anioGP?>","<?=$mesGP?>","<?=$diaGP?>")</script></span>
+
+                                <div class="nextGP"><?php  echo $paisGP; ?></div>
+                            </div>
+                        
                     </div>
                 </section>
             </div>

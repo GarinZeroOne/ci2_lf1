@@ -129,6 +129,10 @@ $(function () {
             text: "<?php echo date('d.m.Y') ?>"
         },
         xAxis: {
+            labels: {
+                    enabled: false,
+                                            
+                },
                 title: false,
                 showFirstLabel: true,
                 tickInterval: 14,
@@ -141,6 +145,12 @@ $(function () {
         },
         credits: {
                 enabled: false
+        },
+        tooltip: {
+                hideDelay: 0,
+                formatter: function() {
+                    return this.series.name+' <strong>'+Highcharts.numberFormat(this.y, 0, ',', '.') + ' €</strong>';
+                }
         },
         
         legend: {

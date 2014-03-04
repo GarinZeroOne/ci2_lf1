@@ -21,7 +21,7 @@
     });
     
     $(function() { 
-        $('#grafica2').highcharts({
+        $('#grafica3').highcharts({
             chart: {
                 type: 'area',
                 spacingTop: 0,
@@ -31,7 +31,7 @@
                 height: 165
             },
             title: {
-                text: 'Valor mercado Pilotos',
+                text: 'Valor mercado Equipos',
             },
             xAxis: {
                 labels: {
@@ -92,7 +92,7 @@
                             }
                         }
                     },
-                    color: '#E38C4A'
+                    color: '#1FB5AD'
                 },
                 area: {
                     shadow: false
