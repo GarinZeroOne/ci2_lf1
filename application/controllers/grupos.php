@@ -469,4 +469,35 @@ class Grupos extends CI_Controller {
 		
 	}
 
+	/**
+	 * Panel mejoras (mover al controlador mejoras)
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function panel_mejoras()
+	{
+		// Menu Izquierda
+        $sidebarleft = array();
+        $sidebarleft['m_act'] = 2;
+        
+		// Header
+		$header['estilos'] 	  = array('dashboard.css');
+		$header['titulo' ]	  = 'Crear nuevo grupo - LigaFormula1.com';
+
+		// Javascript
+		$bottom['javascript'] = array();
+
+		// Vistas base | Header | Menu Principal
+		$this->load->view('dashboard/base/header.php',$header);
+		$this->load->view('dashboard/base/sidebarleft.php',$sidebarleft);
+
+		// Vista contenido
+		$this->load->view('dashboard/gestion/panel_mejoras'  ,$datos);
+
+		// Vistas base | Menu derecha | Bottom end
+		$this->load->view('dashboard/base/sidebarright.php',$sidebarright);		
+		$this->load->view('dashboard/base/bottom.php',$bottom);
+	}
+
 }

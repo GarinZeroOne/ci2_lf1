@@ -274,6 +274,12 @@ img.round-pilots{
     width: 35px;
 }
 
+img.round-pilots-big{
+    border-radius: 50%;
+    height: 65px;
+    width: 65px;
+}
+
 /*img en blanco y negro*/
 img.desaturada { filter: grayscale(100%); }
 img.desaturada { filter: grayscale(100%);
@@ -283,4 +289,24 @@ img.desaturada { filter: grayscale(100%);
 -o-filter: grayscale(100%);
 filter: url(filter.svg#gris);
 filter: gray;
+}
+
+
+/*Mejoras*/
+.clock-row{
+    text-transform: none;
+}
+/*panel-body-stiki*/
+header.panel-heading-stiki
+{
+    background-color: #E19C14;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 15px;
+}
+div.panel-body-stiki
+{
+    background-color: #FFEBC9;
+    color: #AA6308;
+    padding: 15px;
 }

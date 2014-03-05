@@ -2,26 +2,6 @@
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
-        <!-- page start-->
-
-        <div class="col-md-12">
-            <section class="panel">
-                <header class="panel-heading">
-                    Compra Stikis
-
-                </header>
-                <div class="panel-body">   
-                    <p>Aumenta tus posibilidades duplicando los puntos y el dinero de tu piloto estrella!
-                        El piloto que lleve un stiki en su monoplaza duplicara los puntos o el dinero ganado, dependiendo del tipo de stiki que lleve.</p>
-                    <p>El precio del STIKI depende del valor de mejora de los mecánicos. Cuanto mas alto sea el nivel de mecanicos mas baratos podras comprar los stikis.</p>                    
-                    <ul>
-                        <li> Solo los pilotos fichados pueden llevar stiki</li>
-                        <li> Solo se pueden llevar dos STIKIS por carrera.</li>
-                        <li> Un corredor solo puede llevar un STIKI.</li>
-                    </ul>
-                </div>
-            </section>    
-        </div>
 
         <?php if (isset($msg['codigoOperacion'])): ?>
             <div class="row">
@@ -46,19 +26,43 @@
                 </div>
             </div>
         <?php endif; ?>
-        <div class="col-sm-5">
-            <div class="col-sm-12">
+
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-5">
+                <section class="panel">
+                    <header class="panel-heading-stiki">
+                        ¿Que son los STIKIS?
+
+                    </header>
+                    <div class="panel-body-stiki">   
+                        <p>Los STIKIS aumentan tus posibilidades duplicando los puntos y el dinero de tus pilotos estrella!</p>
+                            <p>El piloto que lleve un stiki en su monoplaza duplicará los puntos o el dinero ganado, dependiendo del tipo de stiki que lleve.Hay dos tipos de STIKIS:</p>
+                            <ul>
+                                <li style="list-style:inside;"><strong style="color:#358C00">STIKI DE DINERO:</strong> Duplica las ganancias del piloto que lo lleve.</li>
+                                <li style="list-style:inside;"><strong style="color:#DE0000">STIKI DE PUNTOS:</strong> Duplica los puntos conseguidos por el piloto que lo lleve.</li>
+                                
+                            </ul>
+                        <p>Los STIKIS estan sujetos  a las siguientes normas:</p>
+                        <ul>
+                            <li style="list-style:inside;"> Solo los pilotos fichados pueden llevar stiki</li>
+                            <li style="list-style:inside;"> Solo se pueden llevar dos STIKIS por carrera.</li>
+                            <li style="list-style:inside;"> Un corredor solo puede llevar un STIKI.</li>
+                        </ul>
+                    </div>
+                </section>    
+            </div>
+
+            <div class="col-md-7">
                 <section class="panel">
                     <header class="panel-heading">
-                        Comprar stiki
-                        <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-cog"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
-                        </span>
+                        Precios STIKIS
+                        
                     </header>
                     <div class="panel-body">
-                        <table class="table table-bordered table-striped table-condensed">
+                        <span class="badge bg-inverse" >Precio base</span>
+                        <span class="badge bg-success" style="color:#298A08">Precio mejora ingenieros</span>
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Tipo Stiki</th>
@@ -82,7 +86,7 @@
                                         } else {
                                             $coste_con_mejora = $coste;
                                         }
-                                        echo number_format($coste, 0, ',', '.') . " €<br><small style=\"color:#298A08\">" . number_format($coste_con_mejora, 0, ',', '.') . " € </small>";
+                                        echo "<div style='margin-bottom:5px;' class='badge bg-inverse'>".number_format($coste, 0, ',', '.') . " €</div><br><div class='badge bg-success' style=\"color:#298A08\">" . number_format($coste_con_mejora, 0, ',', '.') . " € </div>";
                                         ?>
                                     </td>                                        
                                 </tr>
@@ -101,29 +105,43 @@
                                         } else {
                                             $coste_con_mejora = $coste;
                                         }
-                                        echo number_format($coste, 0, ',', '.') . " €<br><small style=\"color:#298A08\">" . number_format($coste_con_mejora, 0, ',', '.') . " € </small>";
+                                        echo "<div style='margin-bottom:5px;' class='badge bg-inverse'>".number_format($coste, 0, ',', '.') . " € </div><br><div class='badge bg-success' style=\"color:#298A08\">" . number_format($coste_con_mejora, 0, ',', '.') . " € </div>";
                                         ?>
                                     </td>                                        
                                 </tr>
                             </tbody>
-                        </table>          
-                        <div class="col-sm-12">
+                        </table>
+                    </div>
+                </section>
+            </div>          
+                
+        </div>
+        
+        <!-- FILA -->
+        <div class="row">
+
+            <div class="col-md-5">
+                <section class="panel">
+                    <div class="panel-body">
+                        
+                
+                        
                             <aside class="profile-nav alt">
-                                <section class="panel">                        
+                                
                                     <section class="panel">
                                         <div class="user-heading alt gray-bg">
                                             <a href="#">
                                                 <img alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>">
                                             </a>
                                             <a style="border: none; color: #8B8B8B;" href="<?php echo site_url(); ?>calendario/circuito/<?php echo $circuito->getIdCircuito(); ?>">
-                                                <h1><?php echo $circuito->getCircuito(); ?></h1>
+                                                <h1><?php echo $circuito->getCircuito(); ?> <p><?php echo $circuito->getPais(); ?></p></h1>
                                             </a>                                            
-                                            <p><?php echo $circuito->getPais(); ?></p>
+                                            
                                         </div>
                                     </section>
                             </aside>
-                        </div>
-                        <div class="col-sm-12 img-thumbnail">
+                        
+                        
                             <form   method="post" action="<?= site_url() ?>gestion/comprarStiki" class="form-horizontal">
                                 <input type="hidden" name="idGp" value="<?php echo $circuito->getIdCircuito() ?>">
                                 <div class="col-sm-12" >
@@ -157,7 +175,7 @@
                                                 <input type="radio" name="piloto" value="<?php echo $piloto->getIdPiloto(); ?>">
                                                 <div class="row">
                                                     <div class="col-sm-3" style="text-align: center">
-                                                        <img style="border-radius: 50%; width: 60%;" src="<?php echo base_url(); ?>img/pilotos/<?php echo $piloto->getFoto(); ?>.jpg"> 
+                                                        <img class="round-pilots-big" src="<?php echo base_url(); ?>img/pilotos/<?php echo $piloto->getFoto(); ?>.jpg"> 
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <?php echo $piloto->getNombre() . " " . $piloto->getApellido() . "<br><small> " . $piloto->getEquipo()->getEscuderia() . " </small>"; ?>
@@ -178,21 +196,19 @@
 
 
                             </form>
-                        </div>
-                    </div>
+                        
+                    
+                    
+                    </div> <!-- div panel body-->
                 </section>
-            </div>    
-        </div>
-        <div class="col-sm-7">
-            <div class="col-sm-12">
+            </div><!-- FIN COL 5 -->
+
+            <div class="col-md-7"><!-- COL 7-->
+
                 <section class="panel">
                     <header class="panel-heading">
                         Stikis <?php echo $circuito->getCircuito() . " ( " . $circuito->getPais() . " )"; ?>
-                        <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-cog"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
-                        </span>
+                        
                     </header>
                     <div class="panel-body">
                         <table class="table table-bordered table-striped table-condensed">
@@ -216,10 +232,10 @@
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col-sm-3" style="text-align: center">
-                                                    <img style="border-radius: 50%; width: 100%; height: 20%;" src="<?php echo base_url(); ?>img/pilotos/<?php echo $stiki->getPiloto()->getFoto(); ?>.jpg"> 
+                                                <div class="col-md-4" style="text-align: center">
+                                                    <img class="round-pilots-big" src="<?php echo base_url(); ?>img/pilotos/<?php echo $stiki->getPiloto()->getFoto(); ?>.jpg"> 
                                                 </div>
-                                                <div class="col-sm-9">
+                                                <div class="col-md-8">
                                                     <?php echo $stiki->getPiloto()->getNombre() . " " . $stiki->getPiloto()->getApellido() . "<br><small>" . $stiki->getPiloto()->getEquipo()->getEscuderia() . "</small>"; ?>
 
                                                 </div>
@@ -237,16 +253,11 @@
                         </table>                        
                     </div>
                 </section>
-            </div>
-            <div class="col-sm-12">
+
                 <section class="panel">
                     <header class="panel-heading">
                         Historial stikis
-                        <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-cog"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
-                        </span>
+                        
                     </header>
                     <div class="panel-body">
                         <table class="table table-bordered table-striped table-condensed">
@@ -272,10 +283,10 @@
                                             </td>
                                             <td>     
                                                 <div class="row">
-                                                    <div class="col-sm-5">
-                                                        <img style="border-radius: 50%; width: 95%; height: 40%;" src="<?php echo base_url(); ?>img/pilotos/<?php echo $stiki->getPiloto()->getFoto(); ?>.jpg"> 
+                                                    <div class="col-md-5">
+                                                        <img class="round-pilots-big" src="<?php echo base_url(); ?>img/pilotos/<?php echo $stiki->getPiloto()->getFoto(); ?>.jpg"> 
                                                     </div>
-                                                    <div class="col-sm-7">
+                                                    <div class="col-md-7">
                                                         <?php echo $stiki->getPiloto()->getNombre() . " " . $stiki->getPiloto()->getApellido() . "<br><small>" . $stiki->getPiloto()->getEquipo()->getEscuderia() . "</small>"; ?>
 
                                                     </div>
@@ -288,7 +299,7 @@
                                                 <?php echo $stiki->getFechaCompra(); ?>
                                             </td>
                                             <td style="vertical-align: middle; text-align: center">
-                                                <img style="border-radius: 50%; width: 30%; height: 20%;" 
+                                                <img class="round-pilots-big" 
                                                      src="<?php echo base_url() ?>img/circuitos/banderas/<?php echo $stiki->getCircuito()->getBandera(); ?>"
                                                      title="<?php echo $stiki->getCircuito()->getCircuito() . " ( " . $stiki->getCircuito()->getPais() . " )"; ?>">
                                             </td>
@@ -299,8 +310,14 @@
                         </table>                        
                     </div>
                 </section>
-            </div>
-        </div>
+
+
+            </div><!-- FIN COL 7-->
+
+
+        </div><!-- FIN ROW -->
+
+        
         <!-- page end-->
     </section>
 </section>

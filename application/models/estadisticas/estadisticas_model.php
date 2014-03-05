@@ -379,7 +379,7 @@ class Estadisticas_model extends CI_Model
 			$dia = $fecha[2];
 			$mes = $fecha[1];
 			$anio = $fecha[0];
-			$dias[] = intval($dia).' de '.$meses[intval($mes)];
+			$dias[] = intval($dia).' de '.$meses[intval($mes-1)];
 			//$dias[] =  date("l F jS, Y", strtotime($total_dia->fec));
 		}
 
