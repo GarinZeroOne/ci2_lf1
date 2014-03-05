@@ -56,12 +56,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <?php echo $miClasificacionGeneral->getPosicion(); ?>
+                                <tr class="mi-posicion">
+                                    <td class="rank-posicion">
+                                        <?php echo $miClasificacionGeneral->getPosicion(); ?>º
                                     </td>
                                     <td style="text-align: center;">
-                                        <img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGeneral->getUsuario()->getAvatar()->getAvatar() ?>">
+                                        <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGeneral->getUsuario()->getAvatar()->getAvatar() ?>">
                                     </td>
                                     <td>
                                         <a href="<?php echo site_url();?>perfil/ver/<?php echo $miClasificacionGeneral->getUsuario()->getNick();?>"><?php echo $miClasificacionGeneral->getUsuario()->getNick(); ?></a>
@@ -93,11 +93,11 @@
 
                                                 <?php foreach ($clasificacionGeneral as $clasificacionUsuario): ?>
                                                     <tr>
-                                                        <td>
-                                                            <?php echo $clasificacionUsuario->getPosicion(); ?>
+                                                        <td class="rank-posicion">
+                                                            <?php echo $clasificacionUsuario->getPosicion(); ?>º
                                                         </td>
                                                         <td style="text-align: center;">
-                                                            <img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
+                                                            <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
                                                         </td>
                                                         <td>
                                                             <a href="<?php echo site_url();?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick();?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
@@ -136,11 +136,7 @@
                                                                     <section class="panel">
                                                                         <header class="panel-heading">
                                                                             Clasificacion Gp <?php echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )"; ?>
-                                                                            <span class="tools pull-right">
-                                                                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                                                                <a href="javascript:;" class="fa fa-cog"></a>
-                                                                                <a href="javascript:;" class="fa fa-times"></a>
-                                                                            </span>
+                                                                            
                                                                         </header>
                                                                         <div class="panel-body">
                                                                             <table class="table table-bordered table-striped table-condensed">
@@ -153,12 +149,12 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <?php echo $miClasificacionGp->getPosicion(); ?>
+                                                                                    <tr class="mi-posicion">
+                                                                                        <td class="rank-posicion">
+                                                                                            <?php echo $miClasificacionGp->getPosicion(); ?>º
                                                                                         </td>
                                                                                         <td style="text-align: center;">
-                                                                                            <img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGp->getUsuario()->getAvatar()->getAvatar(); ?>">
+                                                                                            <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGp->getUsuario()->getAvatar()->getAvatar(); ?>">
                                                                                         </td>
                                                                                         <td>
                                                                                             <a href="<?php echo site_url();?>perfil/ver/<?php echo $miClasificacionGp->getUsuario()->getNick();?>"><?php echo $miClasificacionGp->getUsuario()->getNick(); ?></a>
@@ -169,7 +165,7 @@
                                                                                     </tr>
                                                                                     <?php foreach ($clasificacionGp->getClasificacionUsuarios() as $clasificacionUsuario): ?>
                                                                                         <tr>
-                                                                                            <td>
+                                                                                            <td class="rank-posicion">
                                                                                                 <?php echo $clasificacionUsuario->getPosicion(); ?>
                                                                                             </td>
                                                                                             <td style="text-align: center;">

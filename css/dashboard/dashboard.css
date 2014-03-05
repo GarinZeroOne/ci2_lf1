@@ -351,3 +351,18 @@ div.panel-body-circuito
 {
     
 }
+
+/*clasificaciones*/
+.mi-posicion td
+{
+    background-color: #FFE8A9 !important;
+    color: #D06F01 !important;
+    font-weight: bold;
+}
+
+.rank-posicion{
+    color: #313C48;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+}
