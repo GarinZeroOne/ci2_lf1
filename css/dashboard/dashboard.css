@@ -373,13 +373,20 @@ ul.nivel-mejoras li.active10 {
     text-shadow: 1px 1px 0 #660202;
 }
 
-.user-heading.alt {
+div.cont-boton{
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+}
+.user-heading.alt-mejoras {
     display: inline-block;
-    height: 190px;
+    height: 215px;
+    position: relative;
     text-align: left;
+    background-color: #2A3E84;
     width: 100%;
 }
-.terques-bg {
+.terques-bg-mejoras {
     background: none repeat scroll 0 0 #365C8B;
 }
 

@@ -321,6 +321,70 @@ class Gestion extends CI_Controller {
     }
 
     /**
+     * Panel mejoras (mover al controlador mejoras)
+     *
+     * @return void
+     * @author 
+     **/
+    function panel_mejoras()
+    {
+
+        // 
+        $this->load->model('boxes/mejoras_model');
+
+        $datos['mejora_mecanicos'  ] = $this->mejoras_model->get_mejora_usuario(2);
+        $datos['mejora_ingenieros' ] = $this->mejoras_model->get_mejora_usuario(3);
+        $datos['mejora_publicistas'] = $this->mejoras_model->get_mejora_usuario(4);
+
+        // Menu Izquierda
+        $sidebarleft = array();
+        $sidebarleft['m_act'] = 2;
+        
+        // Header
+        $header['estilos']    = array('dashboard.css');
+        $header['titulo' ]    = 'Crear nuevo grupo - LigaFormula1.com';
+
+        // Javascript
+        $bottom['javascript'] = array();
+
+        // Vistas base | Header | Menu Principal
+        $this->load->view('dashboard/base/header.php',$header);
+        $this->load->view('dashboard/base/sidebarleft.php',$sidebarleft);
+
+        // Vista contenido
+        $this->load->view('dashboard/gestion/panel_mejoras'  ,$datos);
+
+        // Vistas base | Menu derecha | Bottom end
+        $this->load->view('dashboard/base/sidebarright.php',$sidebarright);     
+        $this->load->view('dashboard/base/bottom.php',$bottom);
+    }
+
+    /**
+     * Ampliar mejora
+     *
+     * @return void
+     * @author 
+     **/
+    function ampliar_mejora($id_mejora)
+    {
+        // Si no llega el id mejora -> GTFO!
+        if(!is_numeric($id_mejora))
+        {
+            redirect_lf1('gestion/panel_mejoras');
+        }
+        // Si llega la mejora 1 (deshabilitado 2014) -> GTFO!
+        if($id_mejora == 1){redirect_lf1('gestion/panel_mejoras');}
+
+        // 
+        $this->load->model('boxes/mejoras_model');
+
+        $this->mejoras_model->aumentar_mejora($id_mejora);
+
+
+        redirect_lf1('gestion/panel_mejoras');
+    }
+
+    /**
      * Plantilla seccion
      *
      * @return void

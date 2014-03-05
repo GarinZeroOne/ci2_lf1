@@ -17,7 +17,7 @@
                     <li><a href="<?php echo site_url(); ?>gestion/mi_oficina">Mi oficina</a></li>
                     <li><a href="<?php echo site_url(); ?>gestion/mis_pilotos">Mis Pilotos</a></li>
                     <li><a href="<?php echo site_url(); ?>gestion/mis_equipos">Mis Equipos</a></li>
-                    <li><a href="<?php echo site_url(); ?>gestion/mis_mejoras">Panel Mejoras</a></li>
+                    <li><a href="<?php echo site_url(); ?>gestion/panel_mejoras">Panel Mejoras</a></li>
                     <li><a href="<?php echo site_url(); ?>gestion/stikis">STIKIS</a></li>
                     
                 </ul>

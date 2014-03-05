@@ -44,6 +44,9 @@ class Mejoras_model extends CI_Model {
     }
 
     function get_mejora_usuario($id_mejora) {
+
+        if(!$this->iduser){redirect_lf1('dashboard');}
+
         $sql = "SELECT *
 				FROM
 					usuarios_mejoras um, mejoras m
@@ -125,9 +128,10 @@ class Mejoras_model extends CI_Model {
     function aumentar_mejora($id_mejora) {
         // Obtener datos de la mejora del usuario
         $usuario_mejora = $this->get_mejora_usuario($id_mejora);
+        $concepto_mejora = 'mejora_'.strtolower($usuario_mejora->nombre);
 
-
-        if ($usuario_mejora) {
+        if ($usuario_mejora) 
+        {
             $nivel_actual = $usuario_mejora->nivel;
             $siguiente_nivel = ($nivel_actual + 1);
 
@@ -142,11 +146,13 @@ class Mejoras_model extends CI_Model {
                 $saldo_final = $saldo - $precio_nivel;
 
                 // Le llega el dinero?
-                if ($saldo_final >= -200000) {
+                if ($saldo_final >= -200000) 
+                {
                     $Q = $this->db->query("SELECT id FROM usuarios_mejoras WHERE id_usuario = ? AND id_mejora = ?", array($this->iduser, $id_mejora));
 
                     // Buscamos el ID para el update
-                    if ($Q->num_rows()) {
+                    if ($Q->num_rows()) 
+                    {
                         $id_usuario_mejora = $Q->row()->id;
 
                         $sql = "UPDATE usuarios_mejoras set nivel = ?
@@ -158,10 +164,21 @@ class Mejoras_model extends CI_Model {
                         // RESTARLE EL DINERO
                         $this->banco_model->restarDinero($precio_nivel);
 
-                        $this->session->set_flashdata('infomsg', $this->lang->line('oficina_txt_ampliacion_ok'));
+                        // Guardar el movimiento de dinero
+                        $idPiloto  = 0;
+                        $dinero    = $precio_nivel;
+                        $idUsuario = $this->iduser;
+                        $conepto   = $concepto_mejora;// falta buscar el nombre  de la mejora
+                        $idEquipo = 0;
+                        $tipoMovimiento = 'gasto';
+                        $this->banco_model->registrarMovimiento($idPiloto, $dinero, $idUsuario, $conepto, $idEquipo, $tipoMovimiento);
+
+                        $this->session->set_flashdata('msg_ok', 'Se ha aumentado el nivel de '.$usuario_mejora->nombre);
                     }
-                } else {
-                    $this->session->set_flashdata('infomsg', $this->lang->line('oficina_txt_ampliacion_no_dinero'));
+                } 
+                else 
+                {
+                    $this->session->set_flashdata('msg_error', 'No tienes dinero suficiente');
                 }
 
                 /*  TRAZA
@@ -186,8 +203,7 @@ class Mejoras_model extends CI_Model {
                         break;
                 }
                 // Ya esta al maximo, mostramos mensaje
-                $this->session->set_flashdata('infomsg', $this->lang->line('oficina_txt_ampliacion_max_nivel1')
-                        . $mejora . $this->lang->line('oficina_txt_ampliacion_max_nivel2'));
+                $this->session->set_flashdata('msg_error', 'La mejora ya esta al máximo nivel');
             }
         }
         // No tiene ningun nivel de esta mejora todavia. Le creamos la primera
@@ -212,9 +228,18 @@ class Mejoras_model extends CI_Model {
                 // RESTARLE EL DINERO
                 $this->banco_model->restarDinero($mejora->nivel_1);
 
-                $this->session->set_flashdata('infomsg', $this->lang->line('oficina_txt_ampliacion_ok'));
+                // Guardar el movimiento de dinero
+                $idPiloto  = 0;
+                $dinero    = $mejora->nivel_1;
+                $idUsuario = $this->iduser;
+                $conepto   = 'mejora_'.strtolower($mejora->nombre);
+                $idEquipo = 0;
+                $tipoMovimiento = 'gasto';
+                $this->banco_model->registrarMovimiento($idPiloto, $dinero, $idUsuario, $conepto, $idEquipo, $tipoMovimiento);
+
+                $this->session->set_flashdata('msg_ok', 'Se ha aumentado el nivel de '.$mejora->nombre);
             } else {
-                $this->session->set_flashdata('infomsg', $this->lang->line('oficina_txt_ampliacion_no_dinero'));
+                $this->session->set_flashdata('msg_error', 'No tienes dinero suficiente');
             }
         }
     }
