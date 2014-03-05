@@ -296,6 +296,94 @@ filter: gray;
 .clock-row{
     text-transform: none;
 }
+ul.nivel-mejoras{
+    margin: 0;
+    background-color:#ccc;
+    border-bottom: 1px solid #000;
+}
+
+ul.nivel-mejoras li {
+    background-color: #EFEFEF;
+    border: 0 none;
+    color: #B0B0B0;
+    display: block;
+    float: left;
+    font-size: 20px;
+    height: 67px;
+    margin: 0;
+    padding: 16px 0 0;
+    text-align: center;
+    text-shadow: 1px 1px 0 #FFFFFF;
+    width: 10%;
+    border-bottom: 1px solid #000;
+}
+ul.nivel-mejoras li:last-child
+{
+    border-bottom: 1px solid #000;
+}
+
+ul.nivel-mejoras li.active1 {
+    background-color: #E1EFFF;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+ul.nivel-mejoras li.active2 {
+    background-color: #BAE2FF;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+ul.nivel-mejoras li.active3 {
+    background-color: #A5CEF9;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+ul.nivel-mejoras li.active4 {
+    background-color: #66B5FF;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+ul.nivel-mejoras li.active5 {
+    background-color: #917AFC;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+ul.nivel-mejoras li.active6 {
+    background-color: #8E40FF;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+ul.nivel-mejoras li.active7 {
+    background-color: #C74DEB;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+ul.nivel-mejoras li.active8 {
+    background-color: #CB7429;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+ul.nivel-mejoras li.active9 {
+    background-color: #BE3900;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+ul.nivel-mejoras li.active10 {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #660202;
+}
+
+.user-heading.alt {
+    display: inline-block;
+    height: 190px;
+    text-align: left;
+    width: 100%;
+}
+.terques-bg {
+    background: none repeat scroll 0 0 #365C8B;
+}
+
+
 /*panel-body-stiki*/
 header.panel-heading-stiki
 {
