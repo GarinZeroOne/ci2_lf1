@@ -310,3 +310,44 @@ div.panel-body-stiki
     color: #AA6308;
     padding: 15px;
 }
+
+/*Calendario*/
+.panel-calendario {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 100%;
+    color: #FFFFFF;
+    display: inline-block;
+    float: left;
+    font-size: 30px;
+    height: 95px;
+    line-height: 60px;
+    margin-right: 10px;
+    text-align: center;
+    width: 60px;
+}
+span.cal-pais-txt
+{
+    font-size: 12px;
+    display: inline-block;
+}
+span.cal-fecha
+{
+    font-size: 10px;
+    display: inline-block;
+    margin-left: 10px;
+    color: #256AE7;
+}
+
+.img-trazado{
+    max-width: 625px;
+    width:100%;
+}
+/*panel-body-calendario*/
+header.panel-heading-circuito
+{
+    
+}
+div.panel-body-circuito
+{
+    
+}

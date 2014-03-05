@@ -3,7 +3,36 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                    <ul class="breadcrumb">
+                        <li class="active"><a href="#"><i class="fa fa-home"></i> Calendario</a></li>
+                        
+                    </ul>
+                    <!--breadcrumbs end -->
+            </div>
+        </div>
 
+        <div class="row">
+        <?php foreach ($circuitos as $circuito): ?>
+            <div class="col-md-3">
+                <div class="mini-stat clearfix">
+                    <span class="panel-calendario"><img style="width: 68px; margin-left: -4px; margin-top: -8px;"  alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera(); ?>"></span>
+                    <div class="mini-stat-info">
+                        <span><a href="<?php echo site_url(); ?>calendario/circuito/<?php echo $circuito->getIdCircuito();?>"><?php echo $circuito->getCircuito();?></a></span>
+                        <span class="cal-pais-txt"><?php echo $circuito->getPais(); ?></span><span class="cal-fecha"> <?php echo $circuito->getFechaGp(); ?></span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+        <?php endforeach; ?>
+        </div>
+    
+    <!--
         <div class="row">
             <div class="col-sm-12">
                 <section class="panel">
@@ -48,6 +77,7 @@
                 </section>
             </div>
         </div>
+    -->
         <!-- page end-->
     </section>
 </section>
