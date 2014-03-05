@@ -70,7 +70,7 @@
     
     Modifica los precios con los resultados del Gp
     
-    <form method="post" action="<?= site_url() ?>mercado/procesarPreciosPostGp">
+    <form method="post" action="<?= site_url() ?>admin/procesarPreciosPostGp">
 
         <table>
 
@@ -82,6 +82,31 @@
         <?php
         echo $msgClasificacion;
         ?>
+
+    </form>
+    
+    Genera los resultados de los usuarios
+    
+    <form method="post" action="<?= site_url() ?>admin/procesarResultadosUsuarios">
+
+        <table>
+
+            <tr>
+                <td colspan="2" align="center"> <input type="submit" value="Procesar resultados usuario"></td>
+            </tr>
+        </table>
+
+    </form>
+    
+    Generar clasificaciones de usuarios
+    
+    <form method="post" action="<?= site_url() ?>admin/procesarClasificacion">
+
+        <table>
+            <tr>
+                <td colspan="2" align="center"> <input type="submit" value="Generar clasificaciones"></td>
+            </tr>
+        </table>
 
     </form>
     
@@ -101,6 +126,8 @@
         ?>
 
     </form>
+    
+    Guarda el valor de los pilotos/equipos en base a su movimientos (ventas/compras)
     
     <form method="post" action="<?= site_url() ?>admin/cambioValorMovimientos">
 

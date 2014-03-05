@@ -3,6 +3,8 @@
 require_once APPPATH . 'classes/pilotos/piloto.php';
 require_once APPPATH . 'classes/pilotos/valorMercado.php';
 require_once APPPATH . 'classes/equipos/equipo.php';
+require_once APPPATH . 'classes/usuarios/usuario.php';
+require_once APPPATH . 'classes/pilotos/pilotoUsuario.php';
 require_once APPPATH . 'classes/movimientos/movimientosPilotos.php';
 require_once APPPATH . 'classes/movimientos/movimientoPiloto.php';
 require_once APPPATH . 'classes/movimientos/movimientosEquipos.php';
@@ -179,9 +181,7 @@ class Admin extends CI_Controller {
                         ($equipo->id_equipo, $idGp, $contador);
 
                 $contador++;
-            }
-
-            $this->calendario_model->setCircuitoProcesado($idGp);
+            }            
 
             return "Resultados generados correctamente";
         } else {
@@ -337,7 +337,6 @@ class Admin extends CI_Controller {
         }
     }
 
-    
     private function _cambiarValoresMovimientosEquipos() {
         $this->load->model('admin/movimientos_mercado_model');
         $this->load->model('equipos/equipos_model');
@@ -420,6 +419,185 @@ class Admin extends CI_Controller {
             }
             $this->equipos_model->guardarValorEquipo($equipo);
         }
+    }
+
+    function procesarPreciosPostGp() {
+
+        /*
+         * Se obtiene el primer circuito sin procesar
+         */
+        $idGp = $this->calendario_model->obtenerCircuitoAProcesar()->row()->id;
+
+        //Pilotos
+        $this->_procesarPrecioPilotos($idGp);
+
+        //Equipos
+        $this->_procesarPrecioEquipos($idGp);
+    }
+
+    private function _procesarPrecioEquipos($idGp) {
+
+        $this->load->model('equipos/equipos_model');
+
+        //Equipos
+        $equipos = $this->equipos_model->getEquiposObject();
+
+        foreach ($equipos as $equipo) {
+            echo $equipo->getEscuderia();
+            echo "<br>";
+            echo "valor actual " . $equipo->getValorActual();
+            echo "<br>";
+            echo "valor anterior " . $equipo->getValorAnterior();
+            echo "<br>";
+            $posicionMundial = $this->equipos_model->
+                            getPosicionEquipoMundial($equipo->getIdEquipo())->row()->posicion;
+
+            echo "posicion mundial " . $posicionMundial;
+            echo "<br>";
+
+            $posicionGp = $this->equipos_model->
+                            getPosicionEquipoGp($equipo->getIdEquipo(), $idGp)->row()->posicion;
+
+            echo "posicion Gp " . $posicionGp;
+            echo "<br>";
+
+            $diferencia = $posicionMundial - $posicionGp;
+
+            echo "diferencia " . $diferencia;
+            echo "<br>";
+
+            if ($diferencia != 0) {
+                $porcentaje = $this->equipos_model->
+                                getPorcentajeMejora(abs($diferencia))
+                                ->row()->porcentaje;
+
+                //Se comprueba si hay que aumentar o decrementar el valor del piloto
+                if ($diferencia < 0) {
+                    //Decrementar
+                    echo "disminuir " . $porcentaje;
+                    echo "<br>";
+                    $equipo->disminuirValor($porcentaje);
+                } elseif ($diferencia > 0) {
+                    //Aumentar
+                    echo "aumentar " . $porcentaje;
+                    echo "<br>";
+                    $equipo->aumentarValor($porcentaje);
+                }
+            } else {
+                $equipo->mismoValor();
+            }
+
+
+            echo "valor actual " . $equipo->getValorActual();
+            echo "<br>";
+            echo "valor anterior " . $equipo->getValorAnterior();
+            echo "<br>";
+            echo "<br>";
+
+            $this->equipos_model->guardarValorEquipo($equipo);
+        }
+    }
+
+    private function _procesarPrecioPilotos($idGp) {
+
+        $this->load->model('pilotos/pilotos_model');
+
+        //Pilotos
+        $pilotos = $this->pilotos_model->getPilotosObject();
+
+        foreach ($pilotos as $piloto) {
+            $posicionMundial = $this->pilotos_model->
+                            getPosicionPilotoMundial($piloto->getIdPiloto())->row()->posicion;
+
+            $datosGp = $this->pilotos_model->
+                    getPosicionPilotoGp($piloto->getIdPiloto(), $idGp);
+
+            $posicionGp;
+            if ($datosGp->num_rows()) {
+                $posicionGp = $datosGp->row()->posicion;
+            }
+
+            echo $posicionGp;
+            echo $piloto->getNombre();
+            echo "<br>";
+            echo "Valor actual " . $piloto->getValorActual();
+            echo "<br>";
+            echo "Valor anterior " . $piloto->getValorAnterior();
+            echo "<br>";
+            echo "posicion mundial " . $posicionMundial;
+            echo "<br>";
+            echo "posicion gp " . $posicionGp;
+            echo "<br>";
+            if (isset($posicionGp)) {
+                echo " ha corrido";
+
+                echo "<br>";
+
+                $diferencia = $posicionMundial - $posicionGp;
+                echo "diferencia " . $diferencia . "<br>";
+                //Se obtiene el porcentaje a decrementar
+                if ($diferencia != 0) {
+                    $porcentaje = $this->pilotos_model->
+                                    getPorcentajeMejora(abs($diferencia))
+                                    ->row()->porcentaje;
+
+                    //Se comprueba si hay que aumentar o decrementar el valor del piloto
+                    if ($diferencia < 0) {
+                        //Decrementar
+                        echo "disminuir " . $porcentaje;
+                        echo "<br>";
+                        $piloto->disminuirValor($porcentaje);
+                    } elseif ($diferencia > 0) {
+                        //Aumentar
+                        echo "aumentar " . $porcentaje;
+                        echo "<br>";
+                        $piloto->aumentarValor($porcentaje);
+                    }
+                } else {
+                    //Se ejecuta la funcion que deja el valor anterior con el de ahora
+                    $piloto->mismoValor();
+                }
+
+                echo "Valor actual " . $piloto->getValorActual();
+                echo "<br>";
+                echo "Valor anterior " . $piloto->getValorAnterior();
+                echo "<br>";
+                echo "<br>";
+            } else {
+                //Se ejecuta la funcion que deja el valor anterior con el de ahora
+                $piloto->mismoValor();
+            }
+
+            $this->pilotos_model->guardarValorPiloto($piloto);
+        }
+    }
+
+    function procesarResultadosUsuarios() {
+        //Se obtiene el gp a procesar
+        $idGp = $this->calendario_model->obtenerCircuitoAProcesar()->row()->id;
+
+        //Se obtienen los usuarios
+        $usuarios = $this->admin_model->getUsuariosObject(0, 5000);
+
+        //Se procesan los datos de cada usuario
+        foreach ($usuarios as $usuario) {
+            echo "procesando usuario ". $usuario->getIdUsuario()."<br>"; 
+            $this->admin_model->procesarGp($usuario, $idGp);
+        }
+    }
+
+    function procesarClasificacion() {
+        //Se obtiene el gp a procesar
+        $idGp = $this->calendario_model->obtenerCircuitoAProcesar()->row()->id;
+
+        //Generar clasificacion
+        $this->admin_model->generarClasificacionUsuarios($idGp);
+
+        //Generar puntos manager totales
+        $this->admin_model->guardarPuntosManagerTotales($idGp);
+
+        //Marcar gp procesado
+        $this->calendario_model->setCircuitoProcesado($idGp);        
     }
 
 }

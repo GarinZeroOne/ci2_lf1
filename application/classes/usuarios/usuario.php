@@ -144,13 +144,14 @@ class Usuario {
         $CI;
         $CI = & get_instance();
         $CI->load->model('usuarios/usuarios_model');
+        $CI->load->model('banco/banco_model');
         $datosUsuario = $CI->usuarios_model->userData($idUsuario);
 
         $comunidad = Comunidad::getById($datosUsuario->id_comunidad);
 
         $avatar = Avatar::getById($idUsuario);
 
-        $fondos = $CI->banco_model->getSaldo();
+        $fondos = $CI->banco_model->getSaldoUsuario($idUsuario);
 
         $instance = new self();
 

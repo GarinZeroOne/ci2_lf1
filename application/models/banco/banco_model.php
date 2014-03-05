@@ -3,11 +3,10 @@
 class Banco_model extends CI_Model {
 
     private $iduser;
-    public $db;
+    public $db_fix;
 
     const ingreso = 'ingreso';
     const gasto = 'gasto';
-    
     const compraStikiDinero = 'compra_stiki_dinero';
     const compraStikiPuntos = 'compra_stiki_puntos';
     const mejoraIngenieros = 'ingenieros';
@@ -20,8 +19,12 @@ class Banco_model extends CI_Model {
     const ventaAlquilerPiloto = 'venta_alquiler_piloto';
     const ventaStikiDinero = 'venta_stiki_dinero';
     const ventaStikiPuntos = 'venta_stiki_puntos';
-    const nomina = 'nomina';    
-    
+    const stikiDinero = 'stiki_dinero';
+    const puestoPiloto = 'puesto_piloto';
+    const puestoEquipo = 'puesto_equipo';
+    const nomina = 'nomina';
+    const polePiloto = 'pole_piloto';
+
     function Banco_model() {
         parent::__construct();
         $this->iduser = $_SESSION['id_usuario'];
@@ -30,7 +33,7 @@ class Banco_model extends CI_Model {
     function getSaldo($modo = '') {
 
 
-        $this->db = $this->load->database('local', TRUE);
+        $this->db_fix = $this->load->database('local', TRUE);
 
         $sql = "SELECT fondos FROM usuarios_banco WHERE id_usuario = ?";
         $query = $this->db->query($sql, array($_SESSION['id_usuario']));
@@ -60,10 +63,10 @@ class Banco_model extends CI_Model {
     }
 
     function getSaldoUsuario($idUsuario) {
-
+                        
         $sql = "SELECT fondos FROM usuarios_banco WHERE id_usuario = ?";
         $query = $this->db->query($sql, array($idUsuario));
-
+                
         $saldo = $query->row()->fondos;
 
         return $saldo;
@@ -82,7 +85,7 @@ class Banco_model extends CI_Model {
                 . "VALUES (?,?,?,?,?,?,?)";
 
         $this->db->query($sql, array($idPiloto, $dinero, $idUsuario, $conepto
-            , $idEquipo, $tipoMovimiento,date('Y-m-d')));
+            , $idEquipo, $tipoMovimiento, date('Y-m-d H:i:s')));
     }
 
 }
