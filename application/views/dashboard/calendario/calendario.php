@@ -16,11 +16,12 @@
 
         <div class="row">
         <?php foreach ($circuitos as $circuito): ?>
-            <div class="col-md-3">
+            <div class="col-lg-4 col-md-4">
                 <div class="mini-stat clearfix">
-                    <span class="panel-calendario"><img style="width: 68px; margin-left: -4px; margin-top: -8px;"  alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera(); ?>"></span>
-                    <div class="mini-stat-info">
-                        <span><a href="<?php echo site_url(); ?>calendario/circuito/<?php echo $circuito->getIdCircuito();?>"><?php echo $circuito->getCircuito();?></a></span>
+                    <span class="col-lg-3 col-md-4">
+                        <img class="round-pilots-big"  alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera(); ?>"></span>
+                    <div class="col-lg-9 col-md-12">
+                        <div><a href="<?php echo site_url(); ?>calendario/circuito/<?php echo $circuito->getIdCircuito();?>"><?php echo $circuito->getCircuito();?></a></div>
                         <span class="cal-pais-txt"><?php echo $circuito->getPais(); ?></span><span class="cal-fecha"> <?php echo $circuito->getFechaGp(); ?></span>
                     </div>
                 </div>
