@@ -30,29 +30,28 @@ class Admin extends CI_Controller {
         $msgProcesadoUsuario = $this->session->flashdata('msgProcesadoUsuario');
 
         /* Es el admin???
-          $msgResultados = $this->session->flashdata('msgResultados');msgClasificacionMundial
+          $msgResultados = $this->session->flashdata('msgResultados');msgClasificacionMundial */
 
-          /* Es el admin???
-          if ($_SESSION['id_usuario'] == 177) { */                
+        //Es el admin???
+        if ($_SESSION['id_usuario'] == 177) {
 
-        $datos['estilos'] = array('dashboard.css');
-        
-        //Se pasan los circuitos no procesados
-        $datos['circuitos'] = $this->calendario_model->obtenerCircuitosSinProcesar();
+            $datos['estilos'] = array('dashboard.css');
 
-        $datos['numeroUsuarios'] = $this->admin_model->getNumeroUsuarios();
+            //Se pasan los circuitos no procesados
+            $datos['circuitos'] = $this->calendario_model->obtenerCircuitosSinProcesar();
 
-        $datos['msgResultados'] = $msgResultados;
-        $datos['msgClasificacion'] = $msgClasificacion;
-        $datos['msgProcesadoUsuario'] = $msgProcesadoUsuario;
+            $datos['numeroUsuarios'] = $this->admin_model->getNumeroUsuarios();
 
-        //Se prepara la vista				        
-        $this->load->view('admin/inicio', $datos);
+            $datos['msgResultados'] = $msgResultados;
+            $datos['msgClasificacion'] = $msgClasificacion;
+            $datos['msgProcesadoUsuario'] = $msgProcesadoUsuario;
 
-        /* } else {
-          // Si no es el admin le mandamos a inicio
-          redirect_lf1('inicio');
-          } */
+            //Se prepara la vista				        
+            $this->load->view('admin/inicio', $datos);
+        } else {
+            // Si no es el admin le mandamos a inicio
+            redirect_lf1('inicio');
+        }
     }
 
     function guardar_datos_gp() {

@@ -46,12 +46,6 @@
     <body>
 
         <section id="container" >
-            <!--header start-->
-            <header class="header fixed-top clearfix">
-                <div id="mainAdmin">
-                    <h3>ADMINISTRADOR</h3>
-                </div>
-            </header>
             <div class="row">
                 <div class="col-sm-12">
                     <section class="panel">
