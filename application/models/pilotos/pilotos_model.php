@@ -157,7 +157,7 @@ class Pilotos_model extends CI_Model {
             }
 
             //Se registra el fichaje
-            $this->insertFichajePiloto($piloto, $usuario);
+            $this->insertFichajePiloto($piloto, $usuario, Pilotos_model::fichado);
 
             // Restarle la pasta del banco
             $resto = $usuario->getFondos() - $piloto->getValorActual();
@@ -240,7 +240,7 @@ class Pilotos_model extends CI_Model {
             }
 
             //Se registra el fichaje            
-            $this->insertFichajePiloto($piloto, $usuario);
+            $this->insertFichajePiloto($piloto, $usuario, Pilotos_model::alquilado);
 
             // Restarle la pasta del banco
             $resto = $usuario->getFondos() - $piloto->getPrecioAlquiler();
@@ -317,7 +317,7 @@ class Pilotos_model extends CI_Model {
       } */
 
     function venderPiloto(Usuario $usuario, PilotoUsuario $piloto) {
-        
+
         $CI = &get_instance();
         $CI->load->Model('banco/banco_model');
 
@@ -337,7 +337,7 @@ class Pilotos_model extends CI_Model {
                         WHERE id_usuario = ?
                         AND id_piloto = ?";
         $this->db->query($sql_inactivo, array(date('Y-m-d'), $ingreso,
-            $usuario->getIdUsuario(), $piloto->getIdPiloto()));        
+            $usuario->getIdUsuario(), $piloto->getIdPiloto()));
 
         $this->insertVentaPiloto($piloto, $usuario);
 
@@ -354,11 +354,11 @@ class Pilotos_model extends CI_Model {
         return "Piloto vendido correctamente!";
     }
 
-    function insertFichajePiloto(Piloto $piloto, Usuario $usuario) {
+    function insertFichajePiloto(Piloto $piloto, Usuario $usuario, $tipoCompra) {
         $sqlFichaje = "INSERT INTO fichajes_pilotos "
-                . "( id_piloto, id_usuario, fecha) values (?,?,?)";
+                . "( id_piloto, id_usuario, fecha,tipo_compra) values (?,?,?,?)";
 
-        $this->db->query($sqlFichaje, array($piloto->getIdPiloto(), $usuario->getIdUsuario(), date('Y-m-d')));
+        $this->db->query($sqlFichaje, array($piloto->getIdPiloto(), $usuario->getIdUsuario(), date('Y-m-d'), $tipoCompra));
     }
 
     function insertVentaPiloto(Piloto $piloto, Usuario $usuario) {
