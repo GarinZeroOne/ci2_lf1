@@ -8,16 +8,22 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Grandes premios
-                        
+
                     </header>
                     <div class="panel-body"> 
                         <table class="table table-bordered table-striped table-condensed"><tbody>
                                 <tr>
                                     <?php foreach ($circuitos as $circuito): ?>
                                         <td style="text-align: center">
-                                            <a  title="Ver clasificacion Gp" href="<?php echo site_url() . 'clasificaciones/clasificacionGp/' . $circuito->getIdCircuito(); ?>">
-                                                <img style="border-radius: 50%; width: 50%; height: 50%; a" alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>">
-                                            </a>
+                                            <?php if ($circuito->getFechaGp() < date('Y-m-d')): ?>
+                                                <a  title="Ver clasificacion <?php echo $circuito->getCircuito() . " ( ". $circuito->getPais() . " )"; ?>" href="<?php echo site_url() . 'clasificaciones/clasificacionGp/' . $circuito->getIdCircuito(); ?>">
+                                                    <img style="border-radius: 50%; width: 50%; height: 50%; a" alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>">
+                                                </a>
+                                            <?php else: ?>
+                                                <img class="desaturada" style="border-radius: 50%; width: 50%; height: 50%; a" 
+                                                     alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>"
+                                                     title="Gp <?php echo $circuito->getCircuito() . " ( ". $circuito->getPais() . " )"; ?> no disputado">
+                                            <?php endif; ?>
                                         </td>
                                     <?php endforeach; ?>
                                 </tr>
@@ -31,7 +37,7 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Clasificacion general
-                        
+
                     </header>
                     <div class="panel-body">                        
                         <table class="table table-bordered table-striped table-condensed">
@@ -53,7 +59,7 @@
                                         <img class="round-pilots"  alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGeneral->getUsuario()->getAvatar()->getAvatar() ?>">
                                     </td>
                                     <td>                                        
-                                        <a href="<?php echo site_url();?>perfil/ver/<?php echo $miClasificacionGeneral->getUsuario()->getNick();?>"><?php echo $miClasificacionGeneral->getUsuario()->getNick(); ?></a>
+                                        <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $miClasificacionGeneral->getUsuario()->getNick(); ?>"><?php echo $miClasificacionGeneral->getUsuario()->getNick(); ?></a>
                                     </td>
                                     <td>
                                         <?php echo $miClasificacionGeneral->getPuntos(); ?>
@@ -89,7 +95,7 @@
                                                             <img class="round-pilots"  alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
                                                         </td>
                                                         <td>
-                                                            <a href="<?php echo site_url();?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick();?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
+                                                            <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick(); ?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
                                                         </td>
                                                         <td>
                                                             <?php echo $clasificacionUsuario->getPuntos(); ?>
@@ -125,7 +131,7 @@
                                                                     <section class="panel">
                                                                         <header class="panel-heading">
                                                                             Clasificacion Gp <?php echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )"; ?>
-                                                                            
+
                                                                         </header>
                                                                         <div class="panel-body">
                                                                             <table class="table table-bordered table-striped table-condensed">
@@ -146,7 +152,7 @@
                                                                                             <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGp->getUsuario()->getAvatar()->getAvatar(); ?>">
                                                                                         </td>
                                                                                         <td>                                                                                            
-                                                                                            <a href="<?php echo site_url();?>perfil/ver/<?php echo $miClasificacionGp->getUsuario()->getNick();?>"><?php echo $miClasificacionGp->getUsuario()->getNick(); ?></a>
+                                                                                            <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $miClasificacionGp->getUsuario()->getNick(); ?>"><?php echo $miClasificacionGp->getUsuario()->getNick(); ?></a>
                                                                                         </td>
                                                                                         <td>
                                                                                             <?php echo $miClasificacionGp->getPuntos(); ?>
@@ -161,7 +167,7 @@
                                                                                                 <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
                                                                                             </td>
                                                                                             <td>
-                                                                                                <a href="<?php echo site_url();?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick();?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
+                                                                                                <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick(); ?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
                                                                                             </td>
                                                                                             <td>
                                                                                                 <?php echo $clasificacionUsuario->getPuntos(); ?>
@@ -179,7 +185,7 @@
                                                                         <section class="panel">
                                                                             <header class="panel-heading">
                                                                                 Clasificacion Mundial
-                                                                                
+
                                                                             </header>
                                                                             <div class="panel-body">
                                                                                 <table class="table table-bordered table-striped table-condensed">
@@ -217,7 +223,7 @@
                                                                         <section class="panel">
                                                                             <header class="panel-heading">                                                                
                                                                                 Clasificacion Gp Pilotos <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " ( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
-                                                                                
+
                                                                             </header>
                                                                             <div class="panel-body">
                                                                                 <table class="table table-bordered table-striped table-condensed">
