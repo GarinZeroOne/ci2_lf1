@@ -191,7 +191,7 @@ class Equipo {
 
     public function aumentarValor($porcentaje) {
         $this->valorAnterior = $this->valorActual;
-        $this->valorActual = $this->valorActual + ($this->valorActual * $porcentaje / 100);
+        $this->valorActual = $this->valorAnterior + ($this->valorAnterior * $porcentaje / 100);
         if ($this->valorActual > $this->precioMax) {
             $this->valorActual = $this->precioMax;
         }
@@ -199,7 +199,7 @@ class Equipo {
 
     public function disminuirValor($porcentaje) {
         $this->valorAnterior = $this->valorActual;
-        $this->valorActual = $this->valorActual - ($this->valorActual * $porcentaje / 100);
+        $this->valorActual = $this->valorAnterior - ($this->valorAnterior * $porcentaje / 100);
         if ($this->valorActual < $this->precioMin) {
             $this->valorActual = $this->precioMin;
         }

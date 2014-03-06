@@ -451,7 +451,7 @@ class Admin_model extends CI_Model {
             //Registrar resultado en resultados_usuario_desglose
             $this->insertarUsuariosDesglose(0, $idGp, $row->dinero
                     , $row->puntos_manager, $usuario->getIdUsuario()
-                    , Admin_model::pilotos, $equipo->getIdEquipo());
+                    , Admin_model::equipos, $equipo->getIdEquipo());
 
             //Actualizar los puntos y dinero ganado por el piloto para el usuario
             $this->actualizarDatosUsuarioEquipo
@@ -474,6 +474,7 @@ class Admin_model extends CI_Model {
                 , 0, $usuario->getIdUsuario()
                 , Admin_model::publicistas, 0);
 
+        //Se suma la nomina
         $fondos = $usuario->getFondos() + Admin_model::dineroNomina;
         $usuario->setFondos($fondos);
 

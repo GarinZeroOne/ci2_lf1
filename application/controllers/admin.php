@@ -249,19 +249,20 @@ class Admin extends CI_Controller {
     }
 
     function cambioValorMovimientos() {
-        $this->_cambiarValoresMovimientosPilotos();
-        $this->_cambiarValoresMovimientosEquipos();
+        $fecha = date('Y-m-d');
+        $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
+        
+        $this->_cambiarValoresMovimientosPilotos($fechaAyer);
+        $this->_cambiarValoresMovimientosEquipos($fechaAyer);
     }
 
-    private function _cambiarValoresMovimientosPilotos() {
+    private function _cambiarValoresMovimientosPilotos($fechaAyer) {
         $this->load->model('admin/movimientos_mercado_model');
         $this->load->model('pilotos/pilotos_model');
         $this->load->model('boxes/boxes_model');
 
         $pilotos = $this->pilotos_model->getPilotosObject();
 
-        $fecha = date('Y-m-d');
-        $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
         echo $fechaAyer;
         echo "<br>";
 
@@ -293,6 +294,7 @@ class Admin extends CI_Controller {
 
                 if ($movimientoPiloto->getModificarPrecio() == 0) {
                     echo "no cambiar precio";
+                    $piloto->aumentarValor(0);
                 } elseif ($movimientoPiloto->getModificarPrecio() == 1) {
                     $porcentajeSubir = $this->movimientos_mercado_model->
                                     getPorcentajeCambioValorMovimientos
@@ -337,15 +339,13 @@ class Admin extends CI_Controller {
         }
     }
 
-    private function _cambiarValoresMovimientosEquipos() {
+    private function _cambiarValoresMovimientosEquipos($fechaAyer) {
         $this->load->model('admin/movimientos_mercado_model');
         $this->load->model('equipos/equipos_model');
         $this->load->model('boxes/boxes_model');
 
         $equipos = $this->equipos_model->getEquiposObject();
-
-        $fecha = date('Y-m-d');
-        $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
+        
         echo $fechaAyer;
         echo "<br>";
 
@@ -377,6 +377,7 @@ class Admin extends CI_Controller {
 
                 if ($movimientoEquipo->getModificarPrecio() == 0) {
                     echo "no cambiar precio";
+                    $equipo->aumentarValor(0);
                 } elseif ($movimientoEquipo->getModificarPrecio() == 1) {
                     $porcentajeSubir = $this->movimientos_mercado_model->
                                     getPorcentajeCambioValorMovimientos

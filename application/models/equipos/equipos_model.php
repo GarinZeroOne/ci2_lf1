@@ -318,7 +318,7 @@ class Equipos_model extends CI_Model {
         $sql = "SELECT *
                 FROM valor_equipo
                 WHERE id_equipo = ?
-                ORDER BY fecha
+                ORDER BY fecha DESC
                 LIMIT 0,1";
 
         return $this->db->query($sql, array($idEquipo))->row();

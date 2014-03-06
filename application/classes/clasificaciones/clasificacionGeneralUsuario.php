@@ -50,7 +50,7 @@ class ClasificacionGeneralUsuario extends ClasificacionUsuario {
         if (is_numeric($this->posicionAnterior)) {
             return $this->posicionAnterior - $this->getPosicion();
         }
-        return "-";
+        return 0;
     }
 
 }
