@@ -27,20 +27,26 @@ class Admin extends CI_Controller {
 
         $msgResultados = $this->session->flashdata('msgResultados');
         $msgClasificacion = $this->session->flashdata('msgClasificacionMundial');
+        $msgProcesadoUsuario = $this->session->flashdata('msgProcesadoUsuario');
 
         /* Es el admin???
           $msgResultados = $this->session->flashdata('msgResultados');msgClasificacionMundial
 
           /* Es el admin???
-          if ($_SESSION['id_usuario'] == 177) { */
+          if ($_SESSION['id_usuario'] == 177) { */                
 
+        $datos['estilos'] = array('dashboard.css');
+        
         //Se pasan los circuitos no procesados
         $datos['circuitos'] = $this->calendario_model->obtenerCircuitosSinProcesar();
 
+        $datos['numeroUsuarios'] = $this->admin_model->getNumeroUsuarios();
+
         $datos['msgResultados'] = $msgResultados;
         $datos['msgClasificacion'] = $msgClasificacion;
+        $datos['msgProcesadoUsuario'] = $msgProcesadoUsuario;
 
-        //Se prepara la vista				
+        //Se prepara la vista				        
         $this->load->view('admin/inicio', $datos);
 
         /* } else {
@@ -578,19 +584,28 @@ class Admin extends CI_Controller {
     }
 
     function procesarResultadosUsuarios() {
+        $usuarioInicial = $this->uri->segment(3);
+        $usuariosXejec = $this->uri->segment(4);
+
         //Se obtiene el gp a procesar
         $idGp = $this->calendario_model->obtenerCircuitoAProcesar()->row()->id;
 
         //Se obtienen los usuarios
-        $usuarios = $this->admin_model->getUsuariosObject(0, 5000);
+        $usuarios = $this->admin_model->getUsuariosObject(intval($usuarioInicial), intval($usuariosXejec));
 
-        echo date('Y-m-d H:i:s');
+        $fechaInicio = date('Y-m-d H:i:s') . "<br>";
         //Se procesan los datos de cada usuario
         foreach ($usuarios as $usuario) {
-            //echo "procesando usuario ". $usuario->getIdUsuario()."<br>"; 
+            //echo "procesando usuario " . $usuario->getIdUsuario() . "<br>";
             $this->admin_model->procesarGp($usuario, $idGp);
         }
-        echo date('Y-m-d H:i:s');
+        $fechaFin = date('Y-m-d H:i:s') . "<br>";
+        $msg = $fechaInicio . "procesado usuario " . $usuario->getIdUsuario()
+                . "<br>" . $fechaFin;
+
+        $this->session->set_flashdata('msgProcesadoUsuario', $msg);
+
+        redirect_lf1('admin', 'refresh');
     }
 
     function procesarClasificacion() {

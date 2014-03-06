@@ -178,6 +178,14 @@ class Admin_model extends CI_Model {
 
         return $usuarios;
     }
+    
+    function getNumeroUsuarios(){
+        $sql = "SELECT * FROM usuarios";
+        
+        $result = $this->db->query($sql);
+        
+        return $result->num_rows();
+    }
 
     function getEquiposUsuarioObject($idUsuario) {
         $sql = "SELECT * FROM usuarios_equipos WHERE id_usuario = ? AND activo = ?";
