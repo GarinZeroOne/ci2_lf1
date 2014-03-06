@@ -181,7 +181,7 @@ class Admin extends CI_Controller {
                         ($equipo->id_equipo, $idGp, $contador);
 
                 $contador++;
-            }            
+            }
 
             return "Resultados generados correctamente";
         } else {
@@ -251,7 +251,7 @@ class Admin extends CI_Controller {
     function cambioValorMovimientos() {
         $fecha = date('Y-m-d');
         $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
-        
+
         $this->_cambiarValoresMovimientosPilotos($fechaAyer);
         $this->_cambiarValoresMovimientosEquipos($fechaAyer);
     }
@@ -334,6 +334,8 @@ class Admin extends CI_Controller {
 
                 echo "<br>";
                 echo "<br>";
+            } else {
+                $piloto->aumentarValor(0);
             }
             $this->pilotos_model->guardarValorPiloto($piloto);
         }
@@ -345,7 +347,7 @@ class Admin extends CI_Controller {
         $this->load->model('boxes/boxes_model');
 
         $equipos = $this->equipos_model->getEquiposObject();
-        
+
         echo $fechaAyer;
         echo "<br>";
 
@@ -417,6 +419,8 @@ class Admin extends CI_Controller {
 
                 echo "<br>";
                 echo "<br>";
+            } else {
+                $equipo->aumentarValor(0);
             }
             $this->equipos_model->guardarValorEquipo($equipo);
         }
@@ -580,11 +584,13 @@ class Admin extends CI_Controller {
         //Se obtienen los usuarios
         $usuarios = $this->admin_model->getUsuariosObject(0, 5000);
 
+        echo date('Y-m-d H:i:s');
         //Se procesan los datos de cada usuario
         foreach ($usuarios as $usuario) {
-            echo "procesando usuario ". $usuario->getIdUsuario()."<br>"; 
+            //echo "procesando usuario ". $usuario->getIdUsuario()."<br>"; 
             $this->admin_model->procesarGp($usuario, $idGp);
         }
+        echo date('Y-m-d H:i:s');
     }
 
     function procesarClasificacion() {
@@ -598,7 +604,7 @@ class Admin extends CI_Controller {
         $this->admin_model->guardarPuntosManagerTotales($idGp);
 
         //Marcar gp procesado
-        $this->calendario_model->setCircuitoProcesado($idGp);        
+        $this->calendario_model->setCircuitoProcesado($idGp);
     }
 
 }
