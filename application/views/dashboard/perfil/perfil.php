@@ -34,7 +34,7 @@
                                    </div>
                                 <?php else: ?>
                                     <div>
-                                   <a href="#" class="btn btn-primary">Editar perfil</a>
+                                   <a href="<?php echo site_url();?>perfil/editar_perfil" class="btn btn-primary">Editar perfil</a>
                                    </div>
                                 <?php endif; ?>
                            </div>
@@ -120,37 +120,37 @@
                                         <div class="prf-box">
                                             <h3 class="prf-border-head">Progresión de <?php echo $info_usuario['info_usuario']->nick; ?></h3>
                                             <div class=" wk-progress">
-                                                <div class="col-md-5">Estadistica 1</div>
+                                                <div class="col-md-5">Pilotos Fichados </div>
                                                 <div class="col-md-5">
                                                     <div class="progress  ">
-                                                        <div style="width: 70%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-danger">
-                                                            <span class="sr-only">70% Complete (success)</span>
+                                                        <div style="width: <?php echo round((($full_stats['num_pilotos_fichados']*100)/7)); ?>%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-danger">
+                                                            <span class="sr-only"><?php echo round((($full_stats['num_pilotos_fichados']*100)/7)); ?>%</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">70%</div>
+                                                <div class="col-md-2"><?php echo round((($full_stats['num_pilotos_fichados']*100)/7)); ?>%</div>
                                             </div>
                                             <div class=" wk-progress">
-                                                <div class="col-md-5">Estadistica 2</div>
+                                                <div class="col-md-5">Equipos comprados</div>
                                                 <div class="col-md-5">
                                                     <div class="progress ">
-                                                        <div style="width: 57%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success">
-                                                            <span class="sr-only">57% Complete (success)</span>
+                                                        <div style="width: <?php echo round((($full_stats['num_equipos_fichados']*100)/5)); ?>%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success">
+                                                            <span class="sr-only"><?php echo round((($full_stats['num_equipos_fichados']*100)/5)); ?>% </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">57%</div>
+                                                <div class="col-md-2"><?php echo round((($full_stats['num_equipos_fichados']*100)/5)); ?>%</div>
                                             </div>
                                             <div class=" wk-progress">
-                                                <div class="col-md-5">Estadistica 3</div>
+                                                <div class="col-md-5">Inversión Mejoras</div>
                                                 <div class="col-md-5">
                                                     <div class="progress ">
-                                                        <div style="width: 20%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-info">
-                                                            <span class="sr-only">20% Complete (success)</span>
+                                                        <div style="width: <?php echo round((($full_stats['dinero_invertido_mejoras']*100)/$full_stats['maximo_posible_mejoras'])); ?>%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-info">
+                                                            <span class="sr-only"><?php echo round((($full_stats['dinero_invertido_mejoras']*100)/$full_stats['maximo_posible_mejoras'])); ?>%</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">20%</div>
+                                                <div class="col-md-2"><?php echo round((($full_stats['dinero_invertido_mejoras']*100)/$full_stats['maximo_posible_mejoras'])); ?>%</div>
                                             </div>
                                             <div class=" wk-progress">
                                                 <div class="col-md-5">Estadistica 4</div>
@@ -174,13 +174,13 @@
                                             <div class=" wk-progress pf-status">
                                                 <div class="col-md-8 col-xs-8">Mensajes en Hall of fame</div>
                                                 <div class="col-md-4 col-xs-4">
-                                                    <strong>32</strong>
+                                                    <strong>0</strong>
                                                 </div>
                                             </div>
                                             <div class=" wk-progress pf-status">
                                                 <div class="col-md-8 col-xs-8">Mensajes comunidad</div>
                                                 <div class="col-md-4 col-xs-4">
-                                                    <strong>120</strong>
+                                                    <strong>0</strong>
                                                 </div>
                                             </div>
                                             <div class=" wk-progress pf-status">

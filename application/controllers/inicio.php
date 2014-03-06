@@ -23,6 +23,7 @@ class Inicio extends CI_Controller {
 		$this->load->model('menudata/menudata_model');
 		$this->load->model('banco/banco_model');
 		$this->load->model('foro/forophpbb_model');
+		$this->load->library('form_validation');
 
 
 
@@ -354,40 +355,53 @@ class Inicio extends CI_Controller {
 
 	function alta_nuevo_usuario()
 	{
-		$this->load->library('validation');
+		
 		//dump($_POST);
 		// Campos a validar, se le quitan espacios, el passwd se codifica en md5
+		/*DEPRECATED CI.1.7!*/
+		/*
         $rules['usuario'] = "trim|required|min_length[4]|max_length[20]|xss_clean|callback_username_check";
         $rules['passwd'] = "trim|required|matches[passconf]|md5";
         $rules['passconf'] = "trim|required";
         $rules['email'] = "trim|required|valid_email|callback_email_check";
+        */
         /*$rules['ano_nacimiento'] = "trim|numeric";
         $rules['ubicacion'] = "trim|max_length[299]";
         $rules['nombre'] = "trim|max_length[299]";
         $rules['apellido'] = "trim|max_length[299]";
-		*/
+		
 		$rules['comunidad'] = "required";
 
-        $this->validation->set_rules($rules);
-
-        $fields['usuario'] = 'Nick';
+		$fields['usuario'] = 'Nick';
         $fields['passwd'] = 'Contraseña';
         $fields['passconf'] = 'Confirmar contraseña';
         $fields['email'] = 'Email';
-        /*
+        $fields['comunidad'] = 'Comunidad';
+		*
         $fields['ano_nacimiento'] = $this->lang->line('alta_ano_nacimiento');
         $fields['ubicacion'] = $this->lang->line('alta_ubicacion');
         $fields['nombre'] = $this->lang->line('alta_nombre');
         $fields['apellido'] = $this->lang->line('alta_apellidos');
+        
+		$this->validation->set_fields($fields);
         */
-        $fields['comunidad'] = 'Comunidad';
+        
 
-        $this->validation->set_fields($fields);
+        
+
+        $this->form_validation->set_rules("usuario","Nick","trim|required|min_length[4]|max_length[20]|xss_clean|callback_username_check");
+        $this->form_validation->set_rules("passwd","Contraseña","trim|required|matches[passconf]|md5");
+        $this->form_validation->set_rules("passconf","Confirmar contraseña","trim|required");
+        $this->form_validation->set_rules("email","Email","trim|required|valid_email|callback_email_check");
+        $this->form_validation->set_rules("comunidad","Comunidad","required");
+
+        
+        
 
         // Datos del menu estadisticas,posts y countdown
         $datos = $this->menudata_model->get_menu_data();
 
-        if ($this->validation->run() == FALSE) {
+        if ($this->form_validation->run() == FALSE) {
             
             // Llevar esto a un modelo!
 			$res = $this->db->query("select * from usuarios order by rand() limit 6")->result_array();

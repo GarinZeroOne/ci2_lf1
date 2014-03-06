@@ -33,7 +33,7 @@
                 <section class="panel">
                     <header class="panel-heading-stiki">
                         ¿Que son los STIKIS?
-
+                        
                     </header>
                     <div class="panel-body-stiki">   
                         <p>Los STIKIS aumentan tus posibilidades duplicando los puntos y el dinero de tus pilotos estrella!</p>

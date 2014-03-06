@@ -240,10 +240,10 @@ class Usuarios_model extends CI_Model {
 
     function alterUserData($datos) {
         $sql = "UPDATE usuarios SET nombre = ?, apellido = ?,
-                ubicacion = ? , ano_nacimiento = ? WHERE id = ?";
+                ubicacion = ? , ano_nacimiento = ? , info_perfil = ? WHERE id = ?";
 
         return $this->db->query($sql, array($datos['nombre'], $datos['apellido'],
-                    $datos['ubicacion'], $datos['ano_nacimiento'], $_SESSION['id_usuario']));
+                    $datos['ubicacion'], $datos['ano_nacimiento'],$datos['texto_perfil'], $_SESSION['id_usuario']));
     }
 
     function localizacion_usuario() {
@@ -286,13 +286,18 @@ class Usuarios_model extends CI_Model {
                 $this->db->where('id', $_SESSION['id_usuario']);
                 $this->db->update('usuarios', $data_update);
 
-                $this->session->set_flashdata('mensajeForm', 'Se ha cambiado la contraseña satisfactoriamente.');
+                $this->session->set_flashdata('msg_ok', 'Se ha cambiado la contraseña satisfactoriamente.');
 
-                redirect_lf1('boxes/mi_perfil');
+                redirect_lf1('perfil/editar_perfil');
             } else {
-                $this->session->set_flashdata('mensajeFormErr', 'La contraseña actual no es correcta');
-                redirect_lf1('boxes/mi_perfil');
+                $this->session->set_flashdata('msg_error', 'La contraseña actual no es correcta');
+                redirect_lf1('perfil/editar_perfil');
             }
+        }
+        else
+        {
+            $this->session->set_flashdata('msg_error', 'La contraseña no puede estar vacia');
+            redirect_lf1('perfil/editar_perfil');
         }
     }
 

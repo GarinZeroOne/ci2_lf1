@@ -160,6 +160,7 @@ class Estadisticas_model extends CI_Model
 
 		// Pilotos activos
 		$stats['num_pilotos_fichados'] = $this->db->select('id')->from('usuarios_pilotos')->where('id_usuario',$id_perfil)->where('activo','1')->get()->num_rows();
+		
 
 		// Equipos activos
 		$stats['num_equipos_fichados'] = $this->db->select('id')->from('usuarios_equipos')->where('id_usuario',$id_perfil)->where('activo','1')->get()->num_rows();
@@ -414,6 +415,8 @@ class Estadisticas_model extends CI_Model
 			foreach($fichajes as $fichaje)
 			{
 
+				/*Fichado o alquilado?*/
+				/*TODO*/
 				$valor_piloto = $this->db->select('valor_actual')
 										 ->from('valor_piloto')
 										 ->where('id_piloto',$fichaje->id_piloto)
@@ -421,6 +424,8 @@ class Estadisticas_model extends CI_Model
 										 ->get()
 										 ->row()
 										 ->valor_actual;
+				
+
 
 				$dinero_fichajes = $dinero_fichajes + $valor_piloto;
 			}

@@ -64,10 +64,10 @@
 
               <h2><span class="fontawesome-lock"></span>Crea tu cuenta Manager</h2>
               <?php 
-              if($this->validation->error_string):
+              if(validation_errors()):
               ?>
               <span class="error-acceso">
-                <?php echo $this->validation->error_string; ?>
+                <?php echo validation_errors(); ?>
               </span>
               <?php 
               endif;

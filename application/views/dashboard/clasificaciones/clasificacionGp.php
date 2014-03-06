@@ -8,11 +8,7 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Circuito
-                        <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-cog"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
-                        </span>
+                        
                     </header>
                     <div class="panel-body"> 
                         <div class="col-lg-12">
@@ -38,11 +34,7 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Clasificacion general
-                        <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-cog"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
-                        </span>
+                        
                     </header>
                     <div class="panel-body">                        
                         <table class="table table-bordered table-striped table-condensed">
