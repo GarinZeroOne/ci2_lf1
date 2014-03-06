@@ -14,6 +14,8 @@
 <script src="<?= base_url();?>js/dashboard/nicescroll/jquery.nicescroll.js" type="text/javascript"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="<?= base_url();?>assets/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+<script src="<?= base_url();?>assets/advanced-datatable/media/js/jquery.dataTables.js" language="javascript" type="text/javascript"></script>
+<script type="text/javascript" src="<?= base_url();?>assets/data-tables/DT_bootstrap.js"></script>
 <?php /*
 <script src="<?= base_url();?>assets/skycons/skycons.js"></script>
 <script src="<?= base_url();?>assets/jquery.scrollTo/jquery.scrollTo.js"></script>

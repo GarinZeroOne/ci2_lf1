@@ -14,6 +14,8 @@
     <link href="<?= base_url();?>/bs3/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url();?>/css/dashboard/bootstrap-reset.css" rel="stylesheet">
     <link href="<?= base_url();?>/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="<?= base_url();?>assets/data-tables/DT_bootstrap.css" rel="stylesheet" />
+    
 
     <!-- Custom styles for this template -->
     <link href="<?= base_url();?>/css/dashboard/style.css" rel="stylesheet">

@@ -88,4 +88,23 @@ class Banco_model extends CI_Model {
             , $idEquipo, $tipoMovimiento, date('Y-m-d H:i:s')));
     }
 
+    /**
+     * Devuelve los movimientos de dinero de un usuario
+     *
+     * @return void
+     * @author 
+     **/
+    function get_movimientos_banco($id_usuario)
+    {
+        $q = $this->db->select('*')
+                      ->from('movimientos_banco')
+                      ->where('id_usuario',$id_usuario)
+                      ->order_by('fecha','desc')
+                      ->limit(25)
+                      ->get();
+        //dump($q->result());die;
+        return $q->result();
+
+    }
+
 }

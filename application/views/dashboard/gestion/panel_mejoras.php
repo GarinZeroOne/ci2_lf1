@@ -3,6 +3,23 @@
     <section id="main-content">
         <section class="wrapper">
         <!-- page start-->
+        <div class="row">
+
+            
+
+            <div class="col-md-12">
+                   
+
+                <div class="alert alert-info fade in">
+                    <button type="button" class="close close-sm" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <strong>Recuerda!</strong> Las mejoras solo afectan a pilotos fichados! Los pilotos alquilados no se ven afectados por ninguna mejora.
+                </div>
+
+                                
+            </div>
+        </div>
         
         <div class="row">
 

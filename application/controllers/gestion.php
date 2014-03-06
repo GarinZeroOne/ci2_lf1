@@ -53,6 +53,7 @@ class Gestion extends CI_Controller {
      * */
     function mi_oficina() {
 
+        $datos['movimientos_banco'] = $this->banco_model->get_movimientos_banco($_SESSION['id_usuario']);
         // Menu Izquierda
         $sidebarleft = array();
         $sidebarleft['m_act'] = 2;
@@ -63,7 +64,7 @@ class Gestion extends CI_Controller {
         $header['avatar'] = $this->usuarios_model->userAvatar($_SESSION['id_usuario']);
 
         // Javascript
-        $bottom['javascript'] = array();
+        $bottom['javascript'] = array('dashboard/texto_tabla_es.js');
 
         // Vistas base | Header | Menu Principal
         $this->load->view('dashboard/base/header.php', $header);
