@@ -143,7 +143,7 @@
                     </header>
                     <div class="panel-body">
                         <div class="input-group m-bot15">
-                                <input type="text" id="hall-text" class="form-control">
+                                <input type="text" id="hall-text" class="form-control" maxlength="150" placeholder="Tu mensaje (max 150 caracteres)">
                                               <span class="input-group-btn">
                                                 <button id="submit-comment" type="button" data-hof="<?php echo $hof_pregunta->id;?>" class="btn btn-success">Enviar!</button>
                                               </span>
