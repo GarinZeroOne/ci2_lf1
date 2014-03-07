@@ -30,7 +30,7 @@
                 <ul class="sub">
                     <li><a href="<?php echo site_url(); ?>mercado/pilotos">Pilotos</a></li>
                     <li><a href="<?php echo site_url(); ?>mercado/equipos">Equipos</a></li>
-                    <li><a href="<?php echo site_url(); ?>mercado/ultimos_movimientos">Mercado usuarios</a></li>
+                    
                 </ul>
             </li>
             <li>
