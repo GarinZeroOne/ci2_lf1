@@ -343,7 +343,7 @@ class Gestion extends CI_Controller {
         
         // Header
         $header['estilos']    = array('dashboard.css');
-        $header['titulo' ]    = 'Crear nuevo grupo - LigaFormula1.com';
+        $header['titulo' ]    = 'Mejoras - LigaFormula1.com';
 
         // Javascript
         $bottom['javascript'] = array();

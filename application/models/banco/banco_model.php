@@ -84,11 +84,10 @@ class Banco_model extends CI_Model {
         {
             $sql = "INSERT INTO movimientos_banco "
                 . "(id_piloto, dinero, id_usuario"
-                . ", concepto, id_equipo, tipo_movimiento,fecha) "
+                . ", concepto, id_equipo, tipo_movimiento,fecha,texto_concepto) "
                 . "VALUES (?,?,?,?,?,?,?,?)";
 
-            $this->db->query($sql, array($idPiloto, $dinero, $idUsuario, $conepto
-                , $idEquipo, $tipoMovimiento, date('Y-m-d H:i:s'),$texto_concepto));
+            $this->db->query($sql, array($idPiloto, $dinero, $idUsuario, $conepto, $idEquipo, $tipoMovimiento, date('Y-m-d H:i:s'),$texto_concepto));
         }
         else
         {
