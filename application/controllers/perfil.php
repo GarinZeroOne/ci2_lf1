@@ -117,7 +117,7 @@ class Perfil extends CI_Controller {
 		//dump($datos['info_usuario'  ]);
 
 		// Header
-		$header['estilos'] 	  = array('perfil.css');
+		$header['estilos'] 	  = array('perfil.css','dashboard.css');
 		$header['titulo' ]	  = 'Perfil de usuario - LigaFormula1.com';
 		$header['avatar' ]    = $this->usuarios_model->userAvatar($data_user->id);
 

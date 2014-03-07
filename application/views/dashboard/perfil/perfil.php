@@ -47,6 +47,9 @@
                                <p>Inversión compras de los últimos días</p>
                                <h1><?php echo es_dinero($info_usuario['ganancias']) ?> €</h1>
                                <p>Ganacias ventas de los últimos días</p>
+
+                               <?php 
+                               /*
                                <ul>
                                    <li>
                                        <a href="#">
@@ -64,6 +67,7 @@
                                        </a>
                                    </li>
                                </ul>
+                                */?>
                            </div>
                        </div>
                     </div>
@@ -152,17 +156,7 @@
                                                 </div>
                                                 <div class="col-md-2"><?php echo round((($full_stats['dinero_invertido_mejoras']*100)/$full_stats['maximo_posible_mejoras'])); ?>%</div>
                                             </div>
-                                            <div class=" wk-progress">
-                                                <div class="col-md-5">Estadistica 4</div>
-                                                <div class="col-md-5">
-                                                    <div class="progress ">
-                                                        <div style="width: 30%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
-                                                            <span class="sr-only">30% Complete (success)</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">30%</div>
-                                            </div>
+                                            
                                         </div>
 
                                         
