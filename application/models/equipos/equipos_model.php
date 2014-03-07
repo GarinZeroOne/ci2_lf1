@@ -218,6 +218,7 @@ class Equipos_model extends CI_Model {
             $textoGarin = "Has comprado la escuderia "
                     . $equipo->getEscuderia();
 
+            $CI->load->Model('banco/banco_model');
             //Registrar movimiento banco
             $CI->banco_model->registrarMovimiento(0, $equipo->getValorActual()
                     , $usuario->getIdUsuario(), Banco_model::compraEquipo
@@ -226,7 +227,7 @@ class Equipos_model extends CI_Model {
             $usuario->setFondos($saldo_despues_de_compra);
 
             $CI = &get_instance();
-            $CI->load->Model('banco/banco_model');
+            
             $CI->banco_model->guardarSaldoUsuario($usuario);
             // TODO OK
 
