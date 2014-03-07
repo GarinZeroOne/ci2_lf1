@@ -178,12 +178,12 @@ class Admin_model extends CI_Model {
 
         return $usuarios;
     }
-    
-    function getNumeroUsuarios(){
+
+    function getNumeroUsuarios() {
         $sql = "SELECT * FROM usuarios";
-        
+
         $result = $this->db->query($sql);
-        
+
         return $result->num_rows();
     }
 
@@ -321,10 +321,16 @@ class Admin_model extends CI_Model {
 
             $usuario->setFondos($fondos);
 
+            $circuito = new Circuito($idGp);
+
+            $textoGarin = "Dinero ganado por "
+                    . $piloto->getNombre() . " " . $piloto->getApellido() .
+                    " en el Gp de " . $circuito->getCircuito() . " ( " . $circuito->getPais() . " )";
+
             //Registrar movimiento banco
             $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $row->dinero
                     , $usuario->getIdUsuario(), Banco_model::puestoPiloto
-                    , 0, Banco_model::ingreso);
+                    , 0, Banco_model::ingreso, $textoGarin);
 
             //Registrar resultado en resultados_usuario_desglose
             $this->insertarUsuariosDesglose($piloto->getIdPiloto(), $idGp, $row->dinero
@@ -357,10 +363,14 @@ class Admin_model extends CI_Model {
                         (Admin_model::puntosPole, Admin_model::dineroPole, $usuario->getIdUsuario()
                         , $piloto->getIdPiloto());
 
+                $textoGarin = "Dinero pole de "
+                        . $piloto->getNombre() . " " . $piloto->getApellido() .
+                        " en el Gp de " . $circuito->getCircuito() . " ( " . $circuito->getPais() . " )";
+
                 //Registrar movimiento banco
                 $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), Admin_model::dineroPole
                         , $usuario->getIdUsuario(), Banco_model::polePiloto
-                        , 0, Banco_model::ingreso);
+                        , 0, Banco_model::ingreso, $textoGarin);
             }
 
             //Los stikis solo se aplican si el piloto esta fichado
@@ -373,7 +383,7 @@ class Admin_model extends CI_Model {
                         . "AND id_piloto = ?";
 
                 $stiki = $this->db->query($sql_stikis, array($usuario->getIdUsuario()
-                    , $idGp, $piloto->getIdPiloto()));                               
+                    , $idGp, $piloto->getIdPiloto()));
 
                 if ($stiki->num_rows()) {
                     //Si el stiki es de puntos se suman
@@ -407,10 +417,14 @@ class Admin_model extends CI_Model {
                                 , 0, $usuario->getIdUsuario()
                                 , Admin_model::stikiPuntos, 0);
 
+                        $textoGarin = "Dinero stiki dinero de "
+                                . $piloto->getNombre() . " " . $piloto->getApellido() .
+                                " en el Gp de " . $circuito->getCircuito() . " ( " . $circuito->getPais() . " )";
+
                         //Registrar movimiento banco
                         $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $row->dinero
                                 , $usuario->getIdUsuario(), Banco_model::stikiDinero
-                                , 0, Banco_model::ingreso);
+                                , 0, Banco_model::ingreso, $textoGarin);
 
                         //Si tiene mejoras de ingenieros se aplican
                         if ($usuarioIngenierosLvl) {
@@ -424,10 +438,14 @@ class Admin_model extends CI_Model {
                                     , 0, $usuario->getIdUsuario()
                                     , Admin_model::ingenieros, 0);
 
+                            $textoGarin = "Dinero ingresado por las mejoras de ingenieros para el stiki de "
+                                    . $piloto->getNombre() . " " . $piloto->getApellido() .
+                                    " en el Gp de " . $circuito->getCircuito() . " ( " . $circuito->getPais() . " )";
+
                             //Registrar movimiento banco
                             $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $dineroIngenieros
                                     , $usuario->getIdUsuario(), Banco_model::mejoraIngenieros
-                                    , 0, Banco_model::ingreso);
+                                    , 0, Banco_model::ingreso, $textoGarin);
                         }
                     }
                 }
@@ -451,10 +469,14 @@ class Admin_model extends CI_Model {
 
             $usuario->setFondos($fondos);
 
+            $textoGarin = "Dinero ingresado por el puesto de la escuderia "
+                    . $equipo->getEscuderia() .
+                    " en el Gp de " . $circuito->getCircuito() . " ( " . $circuito->getPais() . " )";
+
             //Registrar movimiento banco
             $CI->banco_model->registrarMovimiento(0, $row->dinero
                     , $usuario->getIdUsuario(), Banco_model::puestoEquipo
-                    , $equipo->getIdEquipo(), Banco_model::ingreso);
+                    , $equipo->getIdEquipo(), Banco_model::ingreso, $textoGarin);
 
             //Registrar resultado en resultados_usuario_desglose
             $this->insertarUsuariosDesglose(0, $idGp, $row->dinero
@@ -472,10 +494,13 @@ class Admin_model extends CI_Model {
         $fondos = $usuario->getFondos() + $dineroPublicistas;
         $usuario->setFondos($fondos);
 
+        $textoGarin = "Dinero ingresado gracias a las mejoras de publicistas " .
+                "en el Gp de " . $circuito->getCircuito() . " ( " . $circuito->getPais() . " )";
+
         //Registrar movimiento banco
         $CI->banco_model->registrarMovimiento(0, $dineroPublicistas
                 , $usuario->getIdUsuario(), Banco_model::mejoraPublicistas
-                , 0, Banco_model::ingreso);
+                , 0, Banco_model::ingreso, $textoGarin);
 
         //Registrar resultado en resultados_usuario_desglose
         $this->insertarUsuariosDesglose(0, $idGp, $dineroPublicistas
@@ -486,10 +511,12 @@ class Admin_model extends CI_Model {
         $fondos = $usuario->getFondos() + Admin_model::dineroNomina;
         $usuario->setFondos($fondos);
 
+        $textoGarin = "Nomina del Gp de " . $circuito->getCircuito() . " ( " . $circuito->getPais() . " )";
+
         //Registrar movimiento banco
         $CI->banco_model->registrarMovimiento(0, Admin_model::dineroNomina
                 , $usuario->getIdUsuario(), Banco_model::nomina
-                , 0, Banco_model::ingreso);
+                , 0, Banco_model::ingreso, $textoGarin);
 
         //Guardar los fondos del usuario
         $CI->banco_model->guardarSaldoUsuario($usuario);
@@ -587,6 +614,6 @@ class Admin_model extends CI_Model {
 
             $i++;
         }
-    }   
+    }
 
 }

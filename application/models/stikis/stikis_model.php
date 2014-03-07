@@ -154,6 +154,8 @@ class Stikis_model extends CI_model {
                     }
                 }
 
+                $piloto = Piloto::getById($idPiloto);
+
                 if (!$pilotoConStiki) {
 
                     // Guardar stiki
@@ -177,14 +179,20 @@ class Stikis_model extends CI_model {
                             guardarSaldoUsuario($usuario);
 
                     $concepto = Banco_model::compraStikiDinero;
+                    $textoGarin = "Le has puesto un stiki de dinero a "
+                            . $piloto->getNombre() . " " . $piloto->getApellido();
                     if ($tipoStiki == Stikis_model::stikiPuntos) {
                         $concepto = Banco_model::compraStikiPuntos;
+                        $textoGarin = "Le has puesto un stiki de puntos a "
+                                . $piloto->getNombre() . " " . $piloto->getApellido();
                     }
+
+
 
                     //Registrar movimiento banco
                     $CI->banco_model->registrarMovimiento($idPiloto, $coste_con_mejora
                             , $usuario->getIdUsuario(), $concepto
-                            , 0, Banco_model::gasto);
+                            , 0, Banco_model::gasto, $textoGarin);
                     // devolver msg OK	
 
                     $retorno = array(Stikis_model::codigoRetorno => Stikis_model::codigoOk,
@@ -311,34 +319,38 @@ class Stikis_model extends CI_model {
         $CI->banco_model->
                 guardarSaldoUsuario($usuario);
 
+        $textoGarin = "Has vendido el stiki de dinero de "
+                . $stiki->getPiloto()->getNombre() . " " . $stiki->getPiloto()->getApellido();
         $concepto = Banco_model::ventaStikiDinero;
         if ($tipoStiki == Stikis_model::stikiPuntos) {
             $concepto = Banco_model::ventaStikiPuntos;
+            $textoGarin = "Has vendido el stiki de puntos de "
+                    . $stiki->getPiloto()->getNombre() . " " . $stiki->getPiloto()->getApellido();
         }
 
         //Registrar movimiento banco
         $CI->banco_model->registrarMovimiento($stiki->getPiloto()->getIdPiloto(), $saldo
                 , $usuario->getIdUsuario(), $concepto
-                , 0, Banco_model::ingreso);
+                , 0, Banco_model::ingreso, $textoGarin);
 
         $retorno = array(Stikis_model::codigoRetorno => Stikis_model::codigoOk,
             Stikis_model::mensaje => "Stiki vendido correctamente");
         return $retorno;
     }
-    
+
     function getStikisUsuarioObject($idUser) {
 
         $sql = "SELECT * FROM stikis_usuarios
                         WHERE id_usuario = ? ";
 
         $result = $this->db->query($sql, array($idUser))->result();
-        
+
         $stikis = array();
-        
+
         foreach ($result as $row) {
             $stikis[] = Stiki::getById($row->id);
         }
-        
+
         return $stikis;
     }
 

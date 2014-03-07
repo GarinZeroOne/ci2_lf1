@@ -56,55 +56,57 @@
                                         <div class="col-md-12 col-xs-12">
                                             <div>
                                                 <h4 class="text-center">Datos LF1</h4>
-                                                <ul>
-                                                    <li>Valor actual : <?php echo $equipo->getValorActual(true); ?></li>
-                                                    <li>Valor anterior : <?php echo $equipo->getValorAnterior(true); ?></li>
-                                                    <li>Cambio valor : <?php if ($equipo->getCambioValor() > 0):
+                                                <ul class="nav nav-pills nav-stacked">
+                                                    <li><a href="javascript:;"><i class="fa fa-credit-card" style="margin-right: 4px"></i> Valor actual : <span style="margin: 0 0 0;" class="badge  pull-right r-activity"><?php echo $equipo->getValorActual(true); ?></span></a></li>
+                                                    <li><a href="javascript:;"><i class="fa fa-credit-card" style="margin-right: 4px"></i> Valor anterior : <span style="margin: 0 0 0;" class="badge  pull-right r-activity"><?php echo $equipo->getValorAnterior(true); ?></span></a></li>
+                                                    <li><a href="javascript:;"><i class="fa fa-tachometer" style="margin-right: 4px"></i> Cambio valor : <?php if ($equipo->getCambioValor() > 0):
                                                             ?>
-                                                            <i class="fa fa-angle-double-up" style="color: rgb(90, 157, 29); font-size: 16px;"></i>
-                                                            <span style="color: rgb(90, 157, 29);">
-                                                            <?php elseif ($equipo->getCambioValor() < 0) : ?>
-                                                                <i class="fa fa-angle-double-down" style="color: rgb(255, 0, 0); font-size: 16px;"></i>
-                                                                <span style="color: rgb(255, 0, 0);">
-                                                                    <?php
-                                                                else:
-                                                                    ?>
-                                                                    <i class="fa fa-minus" font-size: 16px;></i>
-                                                                <?php
-                                                                endif;
-                                                                echo $equipo->getCambioValor(true) . "( " . $equipo->getCambioPorcentaje(true) . " )";
-                                                                ?>
-                                                            </span>
+                                                                <span style="margin: 0 0 0;" class="badge label-success2 pull-right r-activity">
+                                                                    <i class="fa fa-angle-double-up" style="color: rgb(90, 157, 29);"></i>                                                            
+                                                                <?php elseif ($equipo->getCambioValor() < 0) : ?>
+                                                                    <span style="margin: 0 0 0;" class="badge label-danger pull-right r-activity">
+                                                                        <i class="fa fa-angle-double-down" style="color: rgb(255, 0, 0);"></i>                                                                
+                                                                        <?php
+                                                                    else:
+                                                                        ?>
+                                                                        <span style="margin: 0 0 0;" class="badge  pull-right r-activity">
+                                                                            <i class="fa fa-angle-double-right" ></i>
+                                                                        <?php
+                                                                        endif;
+                                                                        echo $equipo->getCambioValor(true) . "( " . $equipo->getCambioPorcentaje(true) . " )";
+                                                                        ?>
+                                                                        </a>
+                                                                    </span>
 
-                                                    </li>                                                    
-                                                    <li>Valor maximo : <?php echo $equipo->getValorMax(true); ?></li>
-                                                    <li>Valor minimo : <?php echo $equipo->getValorMin(true); ?></li>
-                                                    <li>Puntos manager conseguidos : <?php echo $equipo->getPuntosConseguidos(); ?></li>
-                                                    <li>Dinero ganado : <?php echo $equipo->getDineroConseguido(true); ?></li>
-                                                </ul>
-                                            </div>
-                                            <div class="btn-group-justified">                                                 
-                                                <a class="btn btn-primary" href="<?php echo site_url() . 'mercado/comprarEquipo/' . $equipo->getIdEquipo(); ?>">Fichar</a>                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
+                                                                    </li>                                                    
+                                                                    <li><a href="javascript:;"><i class="fa fa-credit-card" style="margin-right: 4px"></i> Valor maximo : <span style="margin: 0 0 0;" class="badge  pull-right r-activity"><?php echo $equipo->getValorMax(true); ?></span></a></li>
+                                                                    <li><a href="javascript:;"><i class="fa fa-credit-card" style="margin-right: 4px"></i> Valor minimo : <span style="margin: 0 0 0;" class="badge  pull-right r-activity"><?php echo $equipo->getValorMin(true); ?></span></a></li>
+                                                                    <li><a href="javascript:;"><i class="fa fa-trophy" style="margin-right: 4px"></i> Puntos manager conseguidos : <span style="margin: 0 0 0;" class="badge label-warning pull-right r-activity"><?php echo $equipo->getPuntosConseguidos(); ?></span></a></li>
+                                                                    <li><a href="javascript:;"><i class="fa fa-eur" style="margin-right: 4px"></i> Dinero ganado : <span style="margin: 0 0 0;" class="badge  pull-right r-activity"><?php echo $equipo->getDineroConseguido(true); ?></span></a></li>
+                                                                    </ul>
+                                                                    </div>
+                                                                    <div class="btn-group-justified">                                                 
+                                                                        <a class="btn btn-primary" href="<?php echo site_url() . 'mercado/comprarEquipo/' . $equipo->getIdEquipo(); ?>">Fichar</a>                                                
+                                                                    </div>
+                                                                    </div>
+                                                                    </div>
+                                                                    </section>
+                                                                    </div>
 
-                            <div class="col-md-7">
-                                <section class="panel">                                    
-                                    <div class="col-md-12" id='grafica' data='<?php echo $equipo->getIdEquipo(); ?>'>
-                                    </div>
-                                </section>
-                            </div>
+                                                                    <div class="col-md-7">
+                                                                        <section class="panel">                                    
+                                                                            <div class="col-md-12" id='grafica' data='<?php echo $equipo->getIdEquipo(); ?>'>
+                                                                            </div>
+                                                                        </section>
+                                                                    </div>
 
-                        </div>
+                                                                    </div>
 
-                    </div>
-                </section>
-            </div>
-        </div>
-        <!-- page end-->
-    </section>
-</section>
-<!--main content end-->
+                                                                    </div>
+                                                                    </section>
+                                                                    </div>
+                                                                    </div>
+                                                                    <!-- page end-->
+                                                                    </section>
+                                                                    </section>
+                                                                    <!--main content end-->

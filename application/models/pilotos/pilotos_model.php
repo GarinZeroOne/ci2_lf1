@@ -168,10 +168,13 @@ class Pilotos_model extends CI_Model {
             $CI->load->Model('banco/banco_model');
             $CI->banco_model->guardarSaldoUsuario($usuario);
 
+            $textoGarin = "Te has hecho con los servicios de "
+                    . $piloto->getNombre() . " " . $piloto->getApellido();
+
             //Registrar movimiento banco
             $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $piloto->getValorActual()
                     , $usuario->getIdUsuario(), Banco_model::compraPiloto
-                    , 0, Banco_model::gasto);
+                    , 0, Banco_model::gasto, $textoGarin);
 
             $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoOk,
                 Pilotos_model::mensaje => "Piloto fichado correctamente");
@@ -252,10 +255,13 @@ class Pilotos_model extends CI_Model {
             $CI->banco_model->
                     guardarSaldoUsuario($usuario);
 
+            $textoGarin = "Has alquilado al piloto "
+                    . $piloto->getNombre() . " " . $piloto->getApellido();
+
             //Registrar movimiento banco
             $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $piloto->getPrecioAlquiler()
                     , $usuario->getIdUsuario(), Banco_model::alquilerPiloto
-                    , 0, Banco_model::gasto);
+                    , 0, Banco_model::gasto, $textoGarin);
 
             $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoOk,
                 Pilotos_model::mensaje => "Piloto alquilado correctamente");
@@ -346,10 +352,13 @@ class Pilotos_model extends CI_Model {
 
         $CI->banco_model->guardarSaldoUsuario($usuario);
 
+        $textoGarin = "Has recibido ingresos por la venta de "
+                . $piloto->getNombre() . " " . $piloto->getApellido();
+
         //Registrar movimiento banco
         $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $ingreso
                 , $usuario->getIdUsuario(), $concepto
-                , 0, Banco_model::ingreso);
+                , 0, Banco_model::ingreso, $textoGarin);
 
         return "Piloto vendido correctamente!";
     }
