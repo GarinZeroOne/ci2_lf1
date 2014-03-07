@@ -51,7 +51,7 @@ class Mensajes_model extends CI_Model {
 			foreach($q->result()  as  $alerta)
 			{
 				$html .= '<li>
-		                    <div class="alert alert-warning clearfix">
+		                    <div class="alert alert-success clearfix">
 		                        
 		                        <div class="noti-info">
 		                            '.$alerta->texto.'
