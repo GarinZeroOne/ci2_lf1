@@ -16,9 +16,9 @@ class Boxes_model extends CI_Model {
         $query = $this->db->query($sql, array($hoy, $hoy));
 
         if ($query->num_rows()) {
-            return FALSE; // Boxes cerrados
+            return TRUE; // Boxes cerrados
         } else {
-            return TRUE;  // Boxes abiertos
+            return FALSE;  // Boxes abiertos
         }
     }
 

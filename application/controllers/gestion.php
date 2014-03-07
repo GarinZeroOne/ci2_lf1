@@ -36,6 +36,7 @@ class Gestion extends CI_Controller {
         $this->load->model('banco/banco_model');
         $this->load->model('foro/forophpbb_model');
         $this->load->model('usuarios/usuarios_model');
+        $this->load->model('boxes/boxes_model');
 
         // controlar session
         $this->control_session->comprobar_sesion();
@@ -120,6 +121,17 @@ class Gestion extends CI_Controller {
     }
 
     function venderPiloto() {
+        // *************************************************
+        //      CONTROL APERTURA CIERRA MERCADO/BOXES
+        // Si esta cerrado el mercado redirigimos con mensaje
+        // **************************************************
+        if($this->boxes_model->estado())
+        {
+            $this->session->set_flashdata('msg_boxes','Los sentimos el mercado esta cerrado, no se permiten transacciones de ningun tipo. Por norma general el mercado se cierra a las 12:00PM del viernes en fin de semana de Gran Premio.');
+            redirect_lf1('gestion/mis_pilotos');
+        }
+        // **************************************************
+
 
         $this->load->model('pilotos/pilotos_model');
 
@@ -184,6 +196,17 @@ class Gestion extends CI_Controller {
     }
 
     function venderEquipo() {
+
+        // *************************************************
+        //      CONTROL APERTURA CIERRA MERCADO/BOXES
+        // Si esta cerrado el mercado redirigimos con mensaje
+        // **************************************************
+        if($this->boxes_model->estado())
+        {
+            $this->session->set_flashdata('msg_boxes','Los sentimos el mercado esta cerrado, no se permiten transacciones de ningun tipo. </br>Por norma general el mercado se cierra a las 12:00PM del viernes en fin de semana de Gran Premio.');
+            redirect_lf1('gestion/mis_equipos');
+        }
+        // **************************************************
 
         $this->load->model('equipos/equipos_model');
 
@@ -263,6 +286,18 @@ class Gestion extends CI_Controller {
     }
 
     function comprarStiki() {
+
+        // *************************************************
+        //      CONTROL APERTURA CIERRA MERCADO/BOXES
+        // Si esta cerrado el mercado redirigimos con mensaje
+        // **************************************************
+        if($this->boxes_model->estado())
+        {
+            $this->session->set_flashdata('msg_boxes','Los sentimos el mercado esta cerrado, no se permiten transacciones de ningun tipo. </br>Por norma general el mercado se cierra a las 12:00PM del viernes en fin de semana de Gran Premio.');
+            redirect_lf1('gestion/stikis');
+        }
+        // **************************************************
+
         $this->load->model('stikis/stikis_model');
 
 
@@ -293,6 +328,18 @@ class Gestion extends CI_Controller {
     }
     
     function venderStiki() {
+
+        // *************************************************
+        //      CONTROL APERTURA CIERRA MERCADO/BOXES
+        // Si esta cerrado el mercado redirigimos con mensaje
+        // **************************************************
+        if($this->boxes_model->estado())
+        {
+            $this->session->set_flashdata('msg_boxes','Los sentimos el mercado esta cerrado, no se permiten transacciones de ningun tipo. </br>Por norma general el mercado se cierra a las 12:00PM del viernes en fin de semana de Gran Premio.');
+            redirect_lf1('gestion/stikis');
+        }
+        // **************************************************
+        
         $this->load->model('stikis/stikis_model');
 
         if (!is_numeric($this->uri->segment(3)) ) {
@@ -368,6 +415,18 @@ class Gestion extends CI_Controller {
      **/
     function ampliar_mejora($id_mejora)
     {
+
+        // *************************************************
+        //      CONTROL APERTURA CIERRA MERCADO/BOXES
+        // Si esta cerrado el mercado redirigimos con mensaje
+        // **************************************************
+        if($this->boxes_model->estado())
+        {
+            $this->session->set_flashdata('msg_boxes','Los sentimos el mercado esta cerrado, no se permiten transacciones de ningun tipo. </br>Por norma general el mercado se cierra a las 12:00PM del viernes en fin de semana de Gran Premio.');
+            redirect_lf1('gestion/panel_mejoras');
+        }
+        // **************************************************
+
         // Si no llega el id mejora -> GTFO!
         if(!is_numeric($id_mejora))
         {

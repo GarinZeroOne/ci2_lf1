@@ -37,6 +37,7 @@ class Mercado extends CI_Controller {
         $this->load->model('usuarios/usuarios_model');
         $this->load->model('equipos/equipos_model');
         $this->load->model('pilotos/pilotos_model');
+        $this->load->model('boxes/boxes_model');
 
         // controlar session
         $this->control_session->comprobar_sesion();
@@ -86,6 +87,17 @@ class Mercado extends CI_Controller {
 
     function ficharPiloto() {
 
+        // *************************************************
+        //      CONTROL APERTURA CIERRA MERCADO/BOXES
+        // Si esta cerrado el mercado redirigimos con mensaje
+        // **************************************************
+        if($this->boxes_model->estado())
+        {
+            $this->session->set_flashdata('msg_boxes','Los sentimos el mercado esta cerrado, no se permiten transacciones de ningun tipo. </br>Por norma general el mercado se cierra a las 12:00PM del viernes en fin de semana de Gran Premio.');
+            redirect_lf1('mercado/pilotos');
+        }
+        // **************************************************
+
         if (!is_numeric($this->uri->segment(3))) {
             $msg = "Piloto NO fichado";
             $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo
@@ -112,6 +124,18 @@ class Mercado extends CI_Controller {
     }
 
     function comprarEquipo() {
+
+        // *************************************************
+        //      CONTROL APERTURA CIERRA MERCADO/BOXES
+        // Si esta cerrado el mercado redirigimos con mensaje
+        // **************************************************
+        if($this->boxes_model->estado())
+        {
+            $this->session->set_flashdata('msg_boxes','Los sentimos el mercado esta cerrado, no se permiten transacciones de ningun tipo. </br>Por norma general el mercado se cierra a las 12:00PM del viernes en fin de semana de Gran Premio.');
+            redirect_lf1('mercado/equipos');
+        }
+        // **************************************************
+
         if (!is_numeric($this->uri->segment(3))) {
             $msg = "Equipo NO comprado";
 
@@ -138,6 +162,18 @@ class Mercado extends CI_Controller {
     }
 
     function alquilarPiloto() {
+
+        // *************************************************
+        //      CONTROL APERTURA CIERRA MERCADO/BOXES
+        // Si esta cerrado el mercado redirigimos con mensaje
+        // **************************************************
+        if($this->boxes_model->estado())
+        {
+            $this->session->set_flashdata('msg_boxes','Los sentimos el mercado esta cerrado, no se permiten transacciones de ningun tipo. </br>Por norma general el mercado se cierra a las 12:00PM del viernes en fin de semana de Gran Premio.');
+            redirect_lf1('mercado/pilotos');
+        }
+        // **************************************************
+
         if (!is_numeric($this->uri->segment(3))) {
             $msg = "Piloto NO alquilado";
             $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo

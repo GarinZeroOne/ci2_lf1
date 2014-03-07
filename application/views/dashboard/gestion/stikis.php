@@ -3,6 +3,22 @@
 <section id="main-content">
     <section class="wrapper">
 
+        <?php /******** MENSAJE MERCADO ABIERTO / CERRADO ****************/ ?>
+        <?php if($this->session->flashdata('msg_boxes')): ?>
+        <div class="row">
+            <div class="col-md-12">
+                    <div class="alert alert-block alert-danger fade in">
+                        <button type="button" class="close close-sm" data-dismiss="alert">
+                            <i class="fa fa-times"></i>
+                        </button>
+                        <strong>Mercado cerrado!</strong> <?php echo $this->session->flashdata('msg_boxes'); ?>
+                    </div>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php /******** MENSAJE MERCADO ABIERTO / CERRADO ****************/ ?>
+        
+
         <?php if (isset($msg['codigoOperacion'])): ?>
             <div class="row">
                 <div class="col-sm-12">
