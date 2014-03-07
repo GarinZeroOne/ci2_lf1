@@ -329,7 +329,7 @@ class Stikis_model extends CI_model {
         }
 
         //Registrar movimiento banco
-        $CI->banco_model->registrarMovimiento($stiki->getPiloto()->getIdPiloto(), $saldo
+        $CI->banco_model->registrarMovimiento($stiki->getPiloto()->getIdPiloto(), $stiki->getPrecioCompra()
                 , $usuario->getIdUsuario(), $concepto
                 , 0, Banco_model::ingreso, $textoGarin);
 
