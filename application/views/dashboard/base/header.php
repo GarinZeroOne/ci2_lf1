@@ -70,7 +70,7 @@
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-tasks"></i>
-                <span class="badge bg-important">8</span>
+                <span class="badge bg-important">1</span>
             </a>
             <ul class="dropdown-menu extended tasks-bar">
                 <li>
@@ -80,52 +80,16 @@
                     <a href="#">
                         <div class="task-info clearfix">
                             <div class="desc pull-left">
-                                <h5>Notificación GP</h5>
-                                <p>Datos del GP de australia actualizados.</p>
+                                <h5>Temporada 2014!</h5>
+                                <p>Bienvenido a esta nueva temporada! Tomate unos minutos en leer el Reglamento y ponerte al dia con todas las características de este año. </p>
+                                <p>Presentate en el foro y comparte  con la comunidad tus conocimientos o dudas!</p>
+
                             </div>
                                     
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Error en Mercado Corregido</h5>
-                                <p>Se ha corregido un erro que provocaba fallos en el sistema</p>
-                            </div>
-                            <?php /*grafica porcentaje*/
-                            /*
-                                    <span class="notification-pie-chart pull-right" data-percent="78">
-                            <span class="percent"></span>
-                            </span>
-                            */
-                             ?>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Enhorabuena!</h5>
-                                <p>Te has calificado entre los 10 primeros!</p>
-                            </div>
-                                    
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Grupo Bizkaia</h5>
-                                <p>33 usuarios se han unido al grupo de tu provincia</p>
-                            </div>
-                                    
-                        </div>
-                    </a>
-                </li>
+                
 
                 <li class="external">
                     <a href="#">Ver todas las notificaciones</a>
