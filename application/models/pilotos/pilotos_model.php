@@ -17,6 +17,7 @@ class Pilotos_model extends CI_Model {
         $this->iduser = $_SESSION['id_usuario'];
     }
 
+    /* DEPRECATED
     function getInfoPilotos() {
         $sql = "SELECT pilotos.*,equipos.escuderia
 								FROM 
@@ -27,7 +28,18 @@ class Pilotos_model extends CI_Model {
 									equipos.id = equipos_rel_pilotos.id_equipo";
         return $this->db->query($sql)->result();
     }
+    */
+    function getInfoPilotos() {
+        $sql = "SELECT pilotos.*,equipos.escuderia
+                                FROM 
+                                     pilotos , equipos
+                                WHERE 
+                                    pilotos.id_equipo = equipos.id
+                                ";
+        return $this->db->query($sql)->result();
+    }
 
+    /* DEPRECATED
     function getInfoPilotosEquipos() {
         $sql = "SELECT pilotos.*,equipos.escuderia, equipos.id as id_equipo
 								FROM 
@@ -38,7 +50,18 @@ class Pilotos_model extends CI_Model {
 									equipos.id = equipos_rel_pilotos.id_equipo";
         return $this->db->query($sql)->result();
     }
+    */
+    function getInfoPilotosEquipos() {
+        $sql = "SELECT pilotos.*,equipos.escuderia, equipos.id as id_equipo
+                                FROM 
+                                    pilotos , equipos
+                                WHERE 
+                                    pilotos.id_equipo = equipos.id
+                                ";
+        return $this->db->query($sql)->result();
+    }
 
+    /* DEPRECATED
     function getMisPilotos() {
         $sql = "SELECT pilotos.*,equipos.escuderia,usuarios_pilotos.puntos
 						 FROM 
@@ -55,11 +78,27 @@ class Pilotos_model extends CI_Model {
 						   usuarios_pilotos.activo = 1";
         return $this->db->query($sql, array($this->iduser))->result();
     }
+    */
+    function getMisPilotos() {
+        $sql = "SELECT pilotos.*,equipos.escuderia,usuarios_pilotos.puntos
+                         FROM 
+                           usuarios_pilotos,pilotos,equipos
+                         WHERE
+                           usuarios_pilotos.id_piloto = pilotos.id
+                         
+                         AND
+                           pilotos.id_equipo = equipos.id
+                         AND
+                           usuarios_pilotos.id_usuario = ? 
+                         AND 
+                           usuarios_pilotos.activo = 1";
+        return $this->db->query($sql, array($this->iduser))->result();
+    }
 
     /*
      * Funcion que devuelve los pilotos fichados por un usuario (servicio)
      */
-
+    /* DEPRECATED
     function getMisPilotosUsuario($idUser) {
         $sql = "SELECT pilotos.*,equipos.escuderia,usuarios_pilotos.puntos
 						 FROM 
@@ -74,6 +113,22 @@ class Pilotos_model extends CI_Model {
 						   usuarios_pilotos.id_usuario = ? 
 						 AND 
 						   usuarios_pilotos.activo = 1";
+        return $this->db->query($sql, array($idUser))->result();
+    }
+    */
+    function getMisPilotosUsuario($idUser) {
+        $sql = "SELECT pilotos.*,equipos.escuderia
+                         FROM 
+                           usuarios_pilotos,pilotos,equipos
+                         WHERE
+                           usuarios_pilotos.id_piloto = pilotos.id
+                         AND
+                           pilotos.id_equipo = equipos.id
+                         
+                         AND
+                           usuarios_pilotos.id_usuario = ? 
+                         AND 
+                           usuarios_pilotos.activo = 1";
         return $this->db->query($sql, array($idUser))->result();
     }
 
