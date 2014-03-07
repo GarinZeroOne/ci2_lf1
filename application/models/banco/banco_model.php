@@ -78,14 +78,31 @@ class Banco_model extends CI_Model {
     }
 
     function registrarMovimiento($idPiloto, $dinero, $idUsuario, $conepto
-    , $idEquipo, $tipoMovimiento) {
-        $sql = "INSERT INTO movimientos_banco "
+    , $idEquipo, $tipoMovimiento, $texto_concepto = false ) {
+
+        if($texto_concepto)
+        {
+            $sql = "INSERT INTO movimientos_banco "
+                . "(id_piloto, dinero, id_usuario"
+                . ", concepto, id_equipo, tipo_movimiento,fecha) "
+                . "VALUES (?,?,?,?,?,?,?,?)";
+
+            $this->db->query($sql, array($idPiloto, $dinero, $idUsuario, $conepto
+                , $idEquipo, $tipoMovimiento, date('Y-m-d H:i:s'),$texto_concepto));
+        }
+        else
+        {
+
+            $sql = "INSERT INTO movimientos_banco "
                 . "(id_piloto, dinero, id_usuario"
                 . ", concepto, id_equipo, tipo_movimiento,fecha) "
                 . "VALUES (?,?,?,?,?,?,?)";
 
-        $this->db->query($sql, array($idPiloto, $dinero, $idUsuario, $conepto
-            , $idEquipo, $tipoMovimiento, date('Y-m-d H:i:s')));
+            $this->db->query($sql, array($idPiloto, $dinero, $idUsuario, $conepto
+                , $idEquipo, $tipoMovimiento, date('Y-m-d H:i:s')));
+
+        }
+        
     }
 
     /**
