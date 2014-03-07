@@ -243,62 +243,7 @@
 
         </div>
         
-        <!-- Variaciones mercado -->
-        <div class="row">
-            
-            <div class="col-sm-12">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Variaciones mercado pilotos
-                        <span class="tools pull-right">
-                            <a class="fa fa-chevron-down" href="javascript:;"></a>
-                            
-                            
-                         </span>
-                    </header>
-                    <div class="panel-body">
-                        <section id="unseen">
-                            <table class="table table-bordered table-striped table-condensed">
-                                <thead>
-                                <tr>
-                                    <th>COD</th>
-                                    <th>Piloto</th>
-                                    <th class="numeric">Precio  Ayer</th>
-                                    <th class="numeric">Cambio</th>
-                                    <th class="numeric">Cambio %</th>
-                                    <th class="numeric">Precio actual</th>
-                                    <th class="numeric">Precio más alto</th>
-                                    <th class="numeric">Precio mas bajo</th>
-                                    <th class="numeric">Fichajes</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <?php foreach($info_mercado_pilotos as $iPiloto):?>   
-                                    <tr>
-                                        <td><?php echo $iPiloto->code;?></td>
-                                        <td><?php echo $iPiloto->nombre." ".$iPiloto->apellido;?></td>
-                                        <td class="numeric">$5.000.000</td>
-                                        <td class="numeric"> +$340.901 <i class="fa fa-angle-double-up" style="color: rgb(90, 157, 29); font-size: 16px;"></i></td>
-                                        <td class="numeric">+6,8% <i class="fa fa-angle-double-down" style="color: rgb(255, 0, 0); font-size: 16px;"></i></td>
-                                        <td class="numeric">$5.340.901</td>
-                                        <td class="numeric">$6.100.920</td>
-                                        <td class="numeric">$3.710.200</td>
-                                        <td class="numeric">214</td>
-                                    </tr>
-                                <?php endforeach;?>
-                                
-                                </tbody>
-                            </table>
-                        </section>
-                    </div>
-                </section>
-               
-                
-            </div>
-
-        </div>
-        <!-- Fin variaciones mercado-->
+        
 
        
 
