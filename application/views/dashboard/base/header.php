@@ -74,7 +74,7 @@
             </a>
             <ul class="dropdown-menu extended tasks-bar">
                 <li>
-                    <p class="">Tienes 8 notificaciones</p>
+                    <p class="">Tienes 1 notificacion</p>
                 </li>
                 <li>
                     <a href="#">
