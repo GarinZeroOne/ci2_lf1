@@ -52,6 +52,9 @@ $(document).ready(function() {
             y: 100,
             borderWidth: 0
         },
+        credits: {
+            enabled: false
+        },
         series: [{
                 name: 'valor',
                 pointInterval: 24 * 3600 * 1000
