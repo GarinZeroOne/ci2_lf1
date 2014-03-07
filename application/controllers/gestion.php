@@ -209,6 +209,7 @@ class Gestion extends CI_Controller {
         // **************************************************
 
         $this->load->model('equipos/equipos_model');
+        $this->load->model('pilotos/pilotos_model');
 
         if (!is_numeric($this->uri->segment(3))) {
             $msg = "Piloto NO vendido";
