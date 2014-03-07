@@ -106,7 +106,6 @@
                     <header class="panel-heading">
                         Actualidad Formula 1
                         <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
                             
                          </span>
                     </header>
@@ -137,96 +136,48 @@
                 <!-- OPINIONES start-->
                 <section class="panel">
                     <header class="panel-heading">
-                       HALL OF FAME - ¿Qué piensan los managers?
+                       HALL OF FAME - <?php echo $hof_pregunta->pregunta; ?>
                         <span class="tools pull-right">
-                            <a class="fa fa-chevron-down" href="javascript:;"></a>
-                           
-                            <a class="fa fa-times" href="javascript:;"></a>
+                            
                         </span>
                     </header>
                     <div class="panel-body">
                         <div class="input-group m-bot15">
-                                <input type="text" class="form-control">
+                                <input type="text" id="hall-text" class="form-control">
                                               <span class="input-group-btn">
-                                                <button type="button" class="btn btn-success">Enviar!</button>
+                                                <button id="submit-comment" type="button" data-hof="<?php echo $hof_pregunta->id;?>" class="btn btn-success">Enviar!</button>
                                               </span>
-                            </div>
-                        <div class="alert alert-hall-msg clearfix">
-                            <span class="hall-avatar">
-                                <img src="http://localhost/lf12014//img/avatares/thumbs/i212981_th1.jpg" alt="">
-                                
-                            </span>
-                            <div class="notification-info">
-                                <ul class="clearfix notification-meta">
-                                    <li class="pull-left notification-sender"><span>#87<a href="#"> Gogari</a></span> </li>
-                                    <li class="pull-right notification-time">Hace 1 min</li>
-                                </ul>
-                                <p>
-                                    Vaya carreron de Hamilton! Una pena ese  safety car...Han penalizado al equipo Lotus, 2 horas despues de arruinarme comprandolo.
-                                </p>
-                            </div>
                         </div>
-                        <div class="alert alert-hall-msg">
-                            <span class="hall-avatar">
-                                <img src="http://localhost/lf12014//img/avatares/thumbs/i212981_th1.jpg" alt="">
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 360px;">
+                            <ul id="conversation-list" class="conversation-list" style="overflow: hidden; width: auto; height: 360px;">
+
+                                <?php  foreach($hof_respuestas as $respuesta): ?>
+                                    <li>
+                                        <div class="alert alert-hall-msg clearfix">
+                                            <span class="hall-avatar">
+                                                <img class="round-pilots-big" src="<?php echo base_url();?>img/avatares/<?php echo $respuesta->avatar;?>" alt="">
+                                                
+                                            </span>
+                                            <div class="notification-info">
+                                                <ul class="clearfix notification-meta">
+                                                    <li class="pull-left notification-sender"><span><a href="<?php echo site_url();?>perfil/ver/<?php echo $respuesta->nick; ?>"> <?php echo $respuesta->nick ?></a></span> </li>
+                                                    <li class="pull-right notification-time"><?php echo timeago(strtotime($respuesta->fecha)); ?></li>
+                                                </ul>
+                                                <p>
+                                                    <?php echo $respuesta->respuesta; ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
+
                                 
-                            </span>
-                            <div class="notification-info">
-                                <ul class="clearfix notification-meta">
-                                    <li class="pull-left notification-sender"><span><a href="#">Kniom</a></span> </li>
-                                    <li class="pull-right notification-time">Hace 7 Horas</li>
-                                </ul>
-                                <p>
-                                    Ojito con massa este año
-                                </p>
-                            </div>
-                        </div>
-                        <div class="alert alert-hall-msg ">
-                            <span class="hall-avatar">
-                                <img src="http://localhost/lf12014//img/avatares/thumbs/i212981_th1.jpg" alt="">
-                                
-                            </span>
-                            <div class="notification-info">
-                                <ul class="clearfix notification-meta">
-                                    <li class="pull-left notification-sender"><span><a href="#">Filippo</a></span></li>
-                                    <li class="pull-right notification-time">Hace 12 horas</li>
-                                </ul>
-                                <p>
-                                    Voy a copiar la estrategia de <a href="#">Gogari</a> jurjurjur
-                                </p>
-                            </div>
-                        </div>
-                        <div class="alert alert-hall-msg ">
-                            <span class="hall-avatar">
-                                <img src="http://localhost/lf12014//img/avatares/thumbs/i212981_th1.jpg" alt="">
-                                
-                            </span>
-                            <div class="notification-info">
-                                <ul class="clearfix notification-meta">
-                                    <li class="pull-left notification-sender"><span><a href="#">John Doe</a></span></li>
-                                    <li class="pull-right notification-time">Ayer</li>
-                                </ul>
-                                <p>
-                                    Han penalizado al equipo Lotus, 2 horas despues de arruinarme comprandolo.
-                                </p>
-                            </div>
+                                                        
+                            </ul>
                         </div>
 
-                        <div class="alert alert-hall-msg ">
-                            <span class="hall-avatar">
-                                <img src="http://localhost/lf12014//img/avatares/thumbs/i212981_th1.jpg" alt="">
-                                
-                            </span>
-                            <div class="notification-info">
-                                <ul class="clearfix notification-meta">
-                                    <li class="pull-left notification-sender"><span><a href="#">John Doe</a></span></li>
-                                    <li class="pull-right notification-time">Ayer</li>
-                                </ul>
-                                <p>
-                                    Han penalizado al equipo Lotus, 2 horas despues de arruinarme comprandolo.
-                                </p>
-                            </div>
-                        </div>
+                        
+                        
 
                         
 

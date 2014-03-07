@@ -637,4 +637,101 @@ class Usuarios_model extends CI_Model {
         return $datos;
     }
 
+    /**
+     * HALL OF FAME - Obtener preguntas
+     *
+     * @return void
+     * @author 
+     **/
+    function get_hof_pregunta($id_hof=false)
+    {
+        if(!$id_hof)
+        {
+
+            $pregunta = $this->db->select('id,pregunta')
+                          ->from('hof_preguntas')
+                          ->where('activa',1)
+                          ->get()
+                          ->row();
+                          
+        }
+        else
+        {
+            $pregunta = $this->db->select('id,pregunta')
+                          ->from('hof_preguntas')
+                          ->where('id',$id_hof)
+                          ->get()
+                          ->row();
+                          
+        }
+
+        return $pregunta;
+    }
+
+    /**
+     * HALL OF FAME - Obtener respuestas
+     *
+     * @return void
+     * @author 
+     **/
+    function get_hof_respuestas( $id_hof = false)
+    {
+        if(!$id_hof)
+        {
+
+            $id_hof = $this->db->select('id')
+                          ->from('hof_preguntas')
+                          ->where('activa',1)
+                          ->get()
+                          ->row()
+                          ->id;
+        }
+
+        $respuestas = $this->db->select('hof_respuestas.respuesta,hof_respuestas.fecha,hof_respuestas.id_hof,usuarios.id,usuarios.nick,usuarios_avatar.avatar')
+                               ->from('hof_respuestas')
+                               ->join('usuarios','usuarios.id = hof_respuestas.id_usuario')
+                               ->join('usuarios_avatar','usuarios_avatar.id_usuario = usuarios.id')
+                               ->where('id_hof',$id_hof)
+                               ->order_by('hof_respuestas.id','desc')
+                               ->limit(25)
+                               ->get()
+                               ->result();
+
+        return $respuestas;
+
+
+    }
+
+    /**
+     * Inserta la respuesta de hall of fame
+     *
+     * @return void
+     * @author 
+     **/
+    function add_hof_respuesta($id_hof,$respuesta,$id_usuario, $return = false)
+    {
+        $data_insert = array(
+                            'id'          =>          '',
+                            'id_usuario'  =>         $id_usuario,
+                            'id_hof'      =>         $id_hof,
+                            'respuesta'   =>         $respuesta,
+                            'fecha'       =>        date('Y-m-d H:i:s')
+                            );
+        $this->db->insert('hof_respuestas',$data_insert);
+
+        if($return)
+        {
+            $id_hof_respuesta = $this->db->insert_id();
+
+            $q = $this->db->select('hof_respuestas.respuesta,hof_respuestas.fecha,hof_respuestas.id_hof,usuarios.id,usuarios.nick,usuarios_avatar.avatar')
+                               ->from('hof_respuestas')
+                               ->join('usuarios','usuarios.id = hof_respuestas.id_usuario')
+                               ->join('usuarios_avatar','usuarios_avatar.id_usuario = usuarios.id')
+                               ->where('hof_respuestas.id',$id_hof_respuesta)
+                               ->get()
+                               ->row();
+            return $q;
+        }
+    }
+
 }

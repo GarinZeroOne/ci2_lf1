@@ -137,60 +137,25 @@
         <li id="header_inbox_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-success">4</span>
+                <span class="badge bg-success">1</span>
             </a>
             <ul class="dropdown-menu extended inbox">
                 <li>
-                    <p class="red">Tienes 4 mensajes</p>
+                    <p class="red">Tienes 1 mensajes</p>
                 </li>
                 <li>
                     <a href="#">
-                        <span class="photo"><img alt="avatar" src="<?= base_url();?>/images/avatar-mini.jpg"></span>
+                        <span class="photo"><img alt="avatar" src="<?= base_url();?>/img/avatares/thumbs/admin_icon1.jpg"></span>
                                 <span class="subject">
-                                <span class="from">Jonathan Smith</span>
-                                <span class="time">Ahora mismo</span>
+                                <span class="from">LF1admin</span>
+                                <span class="time">deshabilitado</span>
                                 </span>
                                 <span class="message">
-                                    Wop! Esto es una prueba!
+                                    Hola! Quería informate que  los mensajes estan deshabilitados de momento.
                                 </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="<?= base_url();?>/images/avatar-mini-2.jpg"></span>
-                                <span class="subject">
-                                <span class="from">Jane Doe</span>
-                                <span class="time">Hace 2 minutos</span>
-                                </span>
-                                <span class="message">
-                                    Vaya mierda  de equipo tengo!
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="<?= base_url();?>/images/avatar-mini-3.jpg"></span>
-                                <span class="subject">
-                                <span class="from">Tasi sam</span>
-                                <span class="time">Hace  2 dias</span>
-                                </span>
-                                <span class="message">
-                                    Meteme en el grupo , ultimo aviso.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="<?= base_url();?>/images/avatar-mini.jpg"></span>
-                                <span class="subject">
-                                <span class="from">Mr. Perfect</span>
-                                <span class="time">Hace 2 semanas</span>
-                                </span>
-                                <span class="message">
-                                    Me gusta mucho este juego.
-                                </span>
-                    </a>
-                </li>
+                
                 <li>
                     <a href="#">Ver todos los mensajes</a>
                 </li>

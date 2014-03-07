@@ -78,14 +78,18 @@ class Dashboard extends CI_Controller {
 		$data_to_js3['valores_dinero'] = json_encode($chart_data3['totales_dinero']);
 		$data_to_js3['fechas_valores'] = $chart_data3['totales_dia'];
 
+		// Hall of Fame
+		$datos['hof_pregunta'  ] = $this->usuarios_model->get_hof_pregunta();
+		$datos['hof_respuestas'] = $this->usuarios_model->get_hof_respuestas();
+//dump($datos['hof_respuestas']);die;
 		// Header
-		$header['estilos'] 	  = array('dashboard.css');
+		$header['estilos'] 	  = array('dashboard.css','hof.css');
 		$header['titulo' ]	  = 'Dashboard - LigaFormula1.com';
 		$header['avatar' ]    = $this->usuarios_model->userAvatar($_SESSION['id_usuario']);
 		//$header['saldo'  ]    = $this->banco_model->getSaldo('formateado');
 
 		// Javascript
-		$bottom['javascript'	] = array('highcharts.js');
+		$bottom['javascript'	] = array('highcharts.js','dashboard/hall_of_fame.js');
 		$bottom['javascript_php'] = array('grafica1_dash' => $this->load->view('dashboard/_head/js/grafica1_dash',$data_to_js,TRUE),
  										  'grafica2_dash' => $this->load->view('dashboard/_head/js/grafica2_dash',$data_to_js2,TRUE),
  										  'grafica3_dash' => $this->load->view('dashboard/_head/js/grafica3_dash',$data_to_js3,TRUE),
@@ -114,6 +118,43 @@ class Dashboard extends CI_Controller {
 		
 	}
 
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function ajax_hall()
+	{
+		// Evitar entradas por url
+		if(!$_POST){die;}
+
+		$this->load->helper('timeago');
+		$id_hof = $_POST['hofi'];
+		$contenido = strip_tags($_POST['comment']);
+
+		$mensaje = $this->usuarios_model->add_hof_respuesta($id_hof,$contenido,$_SESSION['id_usuario'],true);
+
+		$texto = '<li>
+                                        <div class="alert alert-hall-msg clearfix">
+                                            <span class="hall-avatar">
+                                                <img class="round-pilots-big" src="'.base_url().'img/avatares/'.$mensaje->avatar.'" alt="">
+                                                
+                                            </span>
+                                            <div class="notification-info">
+                                                <ul class="clearfix notification-meta">
+                                                    <li class="pull-left notification-sender"><span><a href="'.site_url().'perfil/ver/'.$mensaje->nick.'">'.$mensaje->nick.'</a></span> </li>
+                                                    <li class="pull-right notification-time">'.timeago(strtotime($mensaje->fecha)).'</li>
+                                                </ul>
+                                                <p>
+                                                    '.$mensaje->respuesta.'
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>';
+
+        echo $texto;
+	}
 
 	/**
 	 * Plantilla seccion

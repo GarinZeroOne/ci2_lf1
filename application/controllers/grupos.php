@@ -54,7 +54,7 @@ class Grupos extends CI_Controller {
 
         //  Ejemplo GASTOS /INGRESOS
 		// Se ha  echo un gasto/ingreso ,se guarda lo ke tenia antes del gasto/ingreso
-		$this->session->set_flashdata('banco_desde', '1300000');
+		//$this->session->set_flashdata('banco_desde', '1300000');
 
 		// Header
 		$header['estilos'] 	  = array('dashboard.css');
@@ -129,6 +129,7 @@ class Grupos extends CI_Controller {
         //dump($datos);
 
         // Animacion Dinero
+        /*
         if( $this->session->flashdata('banco_desde') )
         {
         	$data_to_js['banco_desde'] = $this->session->flashdata('banco_desde');
@@ -136,6 +137,7 @@ class Grupos extends CI_Controller {
 
         	$bottom['javascript_php'] = array('ruletadinero' => $this->load->view('dashboard/_head/js/ruletadinero',$data_to_js,TRUE));
     	}
+    	*/
 		// Header
 		$header['estilos'] 	  = array('dashboard.css');
 		$header['titulo' ]	  = 'Grupos - LigaFormula1.com';
