@@ -11,8 +11,8 @@
                             Enviar Mensaje
                         </a>
                         <ul class="nav nav-pills nav-stacked mail-nav">
-                            <li class="active"><a href="#"> <i class="fa fa-envelope-o"></i> Mensajes  <span class="label label-success pull-right inbox-notification">8</span></a></li>
-                            <li><a href="<?php echo site_url();?>mensajes/notificaciones"> <i class="fa fa-tasks"></i> Notificaciones <span class="label label-danger pull-right inbox-notification">4</span></a></li>
+                            <li class="active"><a href="#"> <i class="fa fa-envelope-o"></i> Mensajes  <span class="label label-success pull-right inbox-notification">1</span></a></li>
+                            <li><a href="<?php echo site_url();?>mensajes/notificaciones"> <i class="fa fa-tasks"></i> Notificaciones <span class="label label-danger pull-right inbox-notification">0</span></a></li>
                             <li><a href="<?php echo site_url();?>mensajes/alertas"> <i class="fa fa-bell-o"></i> Alertas <span class="label label-warning pull-right inbox-notification"><?php echo mensajes_model::contador_alertas_no_leidas($_SESSION['id_usuario']); ?></span></a> </li>
                             
                         </ul>
@@ -38,31 +38,12 @@
                                 <input type="checkbox" class="mail-checkbox">
                             </td>
                             <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
-                            <td class="view-message  dont-show">Nickusuario</td>
-                            <td class="view-message ">Lorem ipsum dolor imit set.</td>
+                            <td class="view-message  dont-show">LF1admin</td>
+                            <td class="view-message ">Hola! Quería informarte que los mensajes estan deshabilitados de momento.</td>
                             <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-                            <td class="view-message  text-right">12:10 AM</td>
+                            <td class="view-message  text-right">Hoy</td>
                         </tr>
-                        <tr class="unread">
-                            <td class="inbox-small-cells">
-                                <input type="checkbox" class="mail-checkbox">
-                            </td>
-                            <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
-                            <td class="view-message dont-show">Fulanito</td>
-                            <td class="view-message">Hi Bro, Lorem ipsum dolor imit</td>
-                            <td class="view-message inbox-small-cells"></td>
-                            <td class="view-message text-right">Hace 3 dias</td>
-                        </tr>
-                        <tr class="">
-                            <td class="inbox-small-cells">
-                                <input type="checkbox" class="mail-checkbox">
-                            </td>
-                            <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
-                            <td class="view-message dont-show">Gogari</td>
-                            <td class="view-message">Lorem ipsum dolor sit amet</td>
-                            <td class="view-message inbox-small-cells"></td>
-                            <td class="view-message text-right">Marzo 15</td>
-                        </tr>
+                        
                         
                         </tbody>
                         </table>

@@ -146,6 +146,19 @@ class Mercado extends CI_Controller {
             redirect_lf1('mercado/equipos', 'refresh');
         }
 
+        /*Controlar que el numero este dentro de un id de equipo
+         Evitar numeros menores de 1 y mayores de 12
+        */
+         if ($this->uri->segment(3)<1 || $this->uri->segment(3)>12) {
+            $msg = "El equipo seleccionado no es valido.";
+
+            $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo
+                , Pilotos_model::mensaje => $msg);
+            $this->session->set_flashdata(Mercado::msgFichaje, $retorno);
+
+            redirect_lf1('mercado/equipos', 'refresh');
+        }
+
         $idEquipo = $this->uri->segment(3);
 
         $usuario = Usuario::getById($_SESSION['id_usuario']);

@@ -11,8 +11,8 @@
                             Enviar Mensaje
                         </a>
                         <ul class="nav nav-pills nav-stacked mail-nav">
-                            <li><a href="<?php echo site_url();?>mensajes"> <i class="fa fa-envelope-o"></i> Mensajes  <span class="label label-success pull-right inbox-notification">8</span></a></li>
-                            <li class="active"><a href="#"> <i class="fa fa-tasks"></i> Notificaciones <span class="label label-danger pull-right inbox-notification">4</span></a></li>
+                            <li><a href="<?php echo site_url();?>mensajes"> <i class="fa fa-envelope-o"></i> Mensajes  <span class="label label-success pull-right inbox-notification">1</span></a></li>
+                            <li class="active"><a href="#"> <i class="fa fa-tasks"></i> Notificaciones <span class="label label-danger pull-right inbox-notification">0</span></a></li>
                             <li><a href="<?php echo site_url();?>mensajes/alertas"> <i class="fa fa-bell-o"></i> Alertas <span class="label label-warning pull-right inbox-notification"><?php echo mensajes_model::contador_alertas_no_leidas($_SESSION['id_usuario']); ?></span></a> </li>
                             
                         </ul>
