@@ -31,7 +31,9 @@
          'user_regdate'          => time(),
         );
 
-       include('/comunidad/includes/functions_user.php');     
+       //include(ROOT.'/comunidad/includes/functions_user.php');     
+       $ci = & get_instance();
+       $ci->load->helper('phpbb_funciones');
         
        return user_add($user_row, $cp_data);    
   }

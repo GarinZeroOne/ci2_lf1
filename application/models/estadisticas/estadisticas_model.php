@@ -38,12 +38,20 @@ class Estadisticas_model extends CI_Model
 
 	function stikisComprados($tipo = 'puntos')
 	{
+		/*DEPRECATED*/
+		/*
 		$idGp = $this->db->query("SELECT id_gp
 							  FROM stikis_gp
 							  WHERE procesado = 0
 							  ORDER BY id ASC
 							  LIMIT 0,1"
 							 )->row()->id_gp;
+		*/
+		$sql_id_gp = "select * from circuitos
+							where procesado=0
+							order by fecha asc
+							limit 1";
+		$idGp = $this->db->query($sql_id_gp)->row()->id_gp;
 
 		if( $tipo == 'puntos'){
 

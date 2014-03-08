@@ -38,12 +38,16 @@ class Foro_model extends CI_model{
 	// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 	function get_temas_iniciales($limit,$max = 21)
 	{
+		/* DEPRECATED */
+		/*
 		$sql = "SELECT id, autor, titulo, fecha, respuestas, ult_respuesta ";
 		$sql.= "FROM {$this->_foro} WHERE identificador=0 ORDER BY ult_respuesta DESC LIMIT {$limit},{$max}";
 
 		$resultados = $this->db->query($sql)->result();
 
 		return $resultados;
+		*/
+		return true;
 
 	}
 
@@ -56,6 +60,7 @@ class Foro_model extends CI_model{
 	 **/
 	function get_ultimos_posts()
 	{
+		/* DEPRECATED
 		//  LF1GENERAL - foro
 		$sqlforo = "SELECT id, autor, titulo, fecha, respuestas, ult_respuesta ";
 		$sqlforo.= "FROM foro WHERE identificador=0 ORDER BY ult_respuesta DESC LIMIT 0,1";
@@ -84,6 +89,9 @@ class Foro_model extends CI_model{
 
 		return $resforo;
 		//dump($resforo);
+		*/
+
+		return true;
 
 	}
 

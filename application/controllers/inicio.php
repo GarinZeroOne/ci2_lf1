@@ -552,7 +552,7 @@ class Inicio extends CI_Controller {
         $query = $this->db->query("SELECT * FROM usuarios WHERE nick = ?", array($str));
 
         if ($query->num_rows()) {
-            $this->validation->set_message('username_check', 'Ese nombre de usuario ya existe');
+            $this->form_validation->set_message('username_check', 'Ese nombre de usuario ya existe');
             return FALSE;
         } else {
             return TRUE;
@@ -565,7 +565,7 @@ class Inicio extends CI_Controller {
         $query = $this->db->query("SELECT * FROM usuarios WHERE email = ?", array($str));
 
         if ($query->num_rows()) {
-            $this->validation->set_message('email_check', 'Ese email ya existe');
+            $this->form_validation->set_message('email_check', 'Ese email ya existe');
             return FALSE;
         } else {
             return TRUE;

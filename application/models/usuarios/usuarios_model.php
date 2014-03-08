@@ -61,7 +61,7 @@ class Usuarios_model extends CI_Model {
 
         // 2013 - Crear usuario de foro para PHPBB
         // Registramos al usuario en el foro PHPBB integrado
-        reg_from_ci_to_phpbb($datos['usuario'], $datos['email'], 'aquielpass');
+        reg_from_ci_to_phpbb($datos['usuario'], $datos['email'], 'l1g4formul41r4nd0mp455');
     }
 
     function checkUser($datos) {
