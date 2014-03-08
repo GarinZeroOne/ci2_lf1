@@ -50,4 +50,23 @@ class Forophpbb_model extends CI_model{
 		
 
 	}
+
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_num_post($usuario)
+	{
+		//$this->load->helper('timeago');
+		$dbforo = $this->load->database('foro',TRUE);
+
+		$uid = $dbforo->select('user_id')->from('phpbb_users')->where('username',$usuario)->get()->row()->user_id;
+
+		$numero_de_posts = $dbforo->select('post_id')->from('phpbb_posts')->where('poster_id',$uid)->get()->num_rows();
+
+		return $numero_de_posts;
+	}
 }
