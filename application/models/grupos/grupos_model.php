@@ -20,7 +20,7 @@ class Grupos_model extends CI_Model {
 
 
         $sql = "INSERT INTO usuarios_grupos VALUES (?,?,?,?,?,?,?)";
-        $query = $this->db->query($sql, array('', $_SESSION['id_usuario'], strip_tags($datos['nombre_grupo']),$datos['descripcion_grupo'],'',date('Y-m-d h:i:s'),$privacidad));
+        $query = $this->db->query($sql, array('', $_SESSION['id_usuario'], strip_tags($datos['nombre_grupo']),$datos['descripcion_grupo'],'',date('Y-m-d H:i:s'),$privacidad));
 
         return $this->db->insert_id();
     }
