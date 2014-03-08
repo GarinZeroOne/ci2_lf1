@@ -184,7 +184,7 @@ class Estadisticas_model extends CI_Model
 		
 		$stats['total_posts'] = $f1+$f2+$f3+$f4;
 		*/
-		$this->load->model('usuarios/usuarios_model')
+		$this->load->model('usuarios/usuarios_model');
 		$this->load->model('foro/forophpbb_model');
 		$nick_usuario = $this->usuarios_model->userData($id_perfil)->nick;
 		$stats['total_posts'] = $this->forophpbb_model->get_num_post($nick_usuario);
