@@ -593,6 +593,16 @@ class Pilotos_model extends CI_Model {
 
         return $result;
     }
+    
+    function comprobarPilotoUsuario($idPiloto, $idUsuario) {
+        $sql = "SELECT * FROM usuarios_pilotos " . "WHERE id_piloto = ? "
+                . "AND id_usuario = ? AND activo = 1";
+
+        $result = $this->db->query($sql, array(
+            $idPiloto, $idUsuario));
+
+        return $result;
+    }
 
     function getDineroGanadoPiloto($idPiloto) {
         $sql = "SELECT * FROM resultados_pilotos "

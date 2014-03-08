@@ -144,7 +144,22 @@ class Gestion extends CI_Controller {
 
             redirect_lf1('gestion/mis_pilotos', 'refresh');
         }
+        
+        
         $idPiloto = $this->uri->segment(3);
+        
+        //Se comprueba si el usuario tiene el piloto activo
+        $existePiloto = $this->pilotos_model->comprobarPilotoUsuario($idPiloto, $_SESSION['id_usuario']);
+        
+        if (!$existePiloto->num_rows()){
+            $msg = "Error vendiendo piloto";
+            $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo
+                , Pilotos_model::mensaje => $msg);
+
+            $this->session->set_flashdata(Gestion::msgVenta, $retorno);
+
+            redirect_lf1('gestion/mis_pilotos', 'refresh');
+        }
 
         $piloto = PilotoUsuario::getById($idPiloto, $_SESSION['id_usuario']);
 
@@ -212,7 +227,7 @@ class Gestion extends CI_Controller {
         $this->load->model('pilotos/pilotos_model');
 
         if (!is_numeric($this->uri->segment(3))) {
-            $msg = "Piloto NO vendido";
+            $msg = "Equipo NO vendido";
             $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo
                 , Pilotos_model::mensaje => $msg);
 
@@ -222,6 +237,19 @@ class Gestion extends CI_Controller {
         }
         $idEquipo = $this->uri->segment(3);
 
+        //Se comprueba si el usuario tienen el equipo
+        $existeEquipo = $this->equipos_model->comprobarEquipoUsuario($idEquipo,$_SESSION['id_usuario']);
+        
+        if (!$existeEquipo->num_rows()){
+            $msg = "Error vendiendo equipo";
+            $retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo
+                , Pilotos_model::mensaje => $msg);
+
+            $this->session->set_flashdata(Gestion::msgVenta, $retorno);
+
+            redirect_lf1('gestion/mis_equipos', 'refresh');
+        }
+        
         $equipo = EquipoUsuario::getById($idEquipo, $_SESSION['id_usuario']);
 
         $usuario = Usuario::getById($_SESSION['id_usuario']);
@@ -354,6 +382,18 @@ class Gestion extends CI_Controller {
         }
 
         $idStiki = $this->uri->segment(3);
+        
+        $existeStiki = $this->stikis_model->comprobarStikiUsuario($idStiki,$_SESSION['id_usuario']);
+        
+        if(!$existeStiki->num_rows()){
+            $msg = "Error vendiendo Stiki";
+            $retorno = array(Stikis_model::codigoRetorno => Stikis_model::codigoKo
+                , Stikis_model::mensaje => $msg);
+
+            $this->session->set_flashdata(Gestion::msg, $retorno);
+
+            redirect_lf1('gestion/stikis', 'refresh');
+        }
         
         $stiki = Stiki::getById($idStiki);
 

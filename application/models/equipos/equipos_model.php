@@ -50,6 +50,16 @@ class Equipos_model extends CI_Model {
                 AND usuarios_equipos.activo = 1";
         return $this->db->query($sql, array($idUser))->result();
     }
+    
+    function comprobarEquipoUsuario($idEquipo, $idUsuario){
+        
+        $sql = "SELECT * FROM usuarios_equipos "
+                . "WHERE id_usuario = ? "
+                . "AND id_equipo = ? "
+                . "AND  activo = 1";
+        
+        return $this->db->query($sql, array($idUsuario,$idEquipo));
+    }
 
     function fichar($datos) {
         $error = array();

@@ -337,6 +337,14 @@ class Stikis_model extends CI_model {
             Stikis_model::mensaje => "Stiki vendido correctamente");
         return $retorno;
     }
+    
+    function comprobarStikiUsuario($idStiki,$idUsuario){
+        $sql = "SELECT * FROM stikis_usuarios
+                        WHERE id_usuario = ? 
+                        AND id = ?";
+
+        return $this->db->query($sql, array($idUsuario,$idStiki));
+    }
 
     function getStikisUsuarioObject($idUser) {
 
