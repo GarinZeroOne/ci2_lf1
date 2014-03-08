@@ -67,7 +67,7 @@
                     <aside class="profile-nav alt">
                         <section class="panel">
                             <div class="corner-ribon black-ribon">
-                                <a class="confirm" title="Vender este piloto" href="<?php echo site_url() . 'gestion/venderEquipo/' . $equipo->getIdEquipo(); ?>"><i class="fa fa-sign-out"></i></a>
+                                <a class="confirm" title="Vender este equipo" href="<?php echo site_url() . 'gestion/venderEquipo/' . $equipo->getIdEquipo(); ?>"><i class="fa fa-sign-out"></i></a>
                             </div>
                             <div class="user-heading alt gray-bg ">
                                 <div class="col-sm-12 photo-gl">
