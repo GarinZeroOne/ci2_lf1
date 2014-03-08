@@ -4,48 +4,53 @@
     <section class="wrapper">
         <!-- page start-->
 
-        <?php /******** MENSAJE MERCADO ABIERTO / CERRADO ****************/ ?>
-        <?php if($this->session->flashdata('msg_boxes')): ?>
-        <div class="row">
-            <div class="col-md-12">
+        <?php /*         * ****** MENSAJE MERCADO ABIERTO / CERRADO *************** */ ?>
+        <?php if ($this->session->flashdata('msg_boxes')): ?>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="alert alert-block alert-danger fade in">
                         <button type="button" class="close close-sm" data-dismiss="alert">
                             <i class="fa fa-times"></i>
                         </button>
                         <strong>Mercado cerrado!</strong> <?php echo $this->session->flashdata('msg_boxes'); ?>
                     </div>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
-        <?php /******** MENSAJE MERCADO ABIERTO / CERRADO ****************/ ?>
+        <?php /*         * ****** MENSAJE MERCADO ABIERTO / CERRADO *************** */ ?>
 
         <div class="row">
             <div class="col-md-8">
                 <section class="panel">
                     <header class="panel-heading">
                         Compra  equipos
-                        
+
                     </header>
                     <div class="panel-body">   
-                        <p>Texto compra equipos</p>
+                        <p>Aquí tienes toda la cartera de equipos disponibles.</p>
+                        <p>El precio de venta de los equipos varia en función a los resultados que vayan consiguiendo en carrera y en función
+                            de los movimientos diarios de cada escuderia en el mercado (compras/ventas).
+                        </p>
+                        <p>Comprar equipos ayuda a aumentar tus beneficios por carrera y 
+                        a sumar puntos manager que pueden ser decisivos.</p>                        
                     </div>
                 </section>    
             </div>
 
             <div class="col-md-4 hidden-sm">
-                               
+
                 <!--Ultimos fichajes start-->
                 <section class="panel">
                     <header class="panel-heading">
                         Publicidad
-                        
+
                     </header>
                     <div class="panel-body">
                         Contenido publicidad
                     </div>
                 </section>
                 <!--Ultimos fichajes end-->
-                
+
             </div>
 
         </div>
@@ -54,23 +59,23 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                <section class="panel">
-            <?php if ($msgFichaje['codigoOperacion']): ?>
-                <div class="alert alert-block alert-success fade in">                                            
-                    <button type="button" class="close close-sm" data-dismiss="alert">
-                        <i class="fa fa-times"></i>
-                    </button>
-                    <?php echo $msgFichaje['mensaje']; ?>
-                </div>
-            <?php else: ?>
-                <div class="alert alert-block alert-danger fade in">                                            
-                    <button type="button" class="close close-sm" data-dismiss="alert">
-                        <i class="fa fa-times"></i>
-                    </button>
-                    <strong>Opps!</strong> <?php echo $msgFichaje['mensaje']; ?>
-                </div>
-            <?php endif; ?>
-                </section>
+                    <section class="panel">
+                        <?php if ($msgFichaje['codigoOperacion']): ?>
+                            <div class="alert alert-block alert-success fade in">                                            
+                                <button type="button" class="close close-sm" data-dismiss="alert">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <?php echo $msgFichaje['mensaje']; ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="alert alert-block alert-danger fade in">                                            
+                                <button type="button" class="close close-sm" data-dismiss="alert">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <strong>Opps!</strong> <?php echo $msgFichaje['mensaje']; ?>
+                            </div>
+                        <?php endif; ?>
+                    </section>
                 </div>
             </div>
         <?php endif; ?>
@@ -87,7 +92,7 @@
                         </span>
                     </header>
                     <div class="panel-body">
-                        
+
                         <section id="unseen">
                             <table class="table table-bordered table-striped table-condensed">
                                 <thead>
@@ -144,8 +149,8 @@
                                                     </span>
                                             </td>
                                             <td class="numeric"><a href="<?php echo site_url() . 'mercado/comprarEquipo/' . $equipo->getIdEquipo(); ?>" class="btn btn-success btn-xs confirm">
-                                                <i class="fa fa-shopping-cart"></i>
-                                                <?php echo $equipo->getValorActual(true); ?></a></td>
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    <?php echo $equipo->getValorActual(true); ?></a></td>
                                             <td class="numeric"><?php echo $equipo->getValorMax(true); ?></td>
                                             <td class="numeric"><?php echo $equipo->getValorMin(true); ?></td>                                                                                                                        
                                         </tr>
