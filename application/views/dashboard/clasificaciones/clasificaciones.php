@@ -17,10 +17,10 @@
                                         <td style="text-align: center">
                                             <?php if ($circuito->getFechaGp() < date('Y-m-d')): ?>
                                                 <a  title="Ver clasificacion <?php echo $circuito->getCircuito() . " ( ". $circuito->getPais() . " )"; ?>" href="<?php echo site_url() . 'clasificaciones/clasificacionGp/' . $circuito->getIdCircuito(); ?>">
-                                                    <img style="border-radius: 50%; width: 50%; height: 50%; a" alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>">
+                                                    <img class="round-pilots" alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>">
                                                 </a>
                                             <?php else: ?>
-                                                <img class="desaturada" style="border-radius: 50%; width: 50%; height: 50%; a" 
+                                                <img class="desaturada round-pilots" 
                                                      alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>"
                                                      title="Gp <?php echo $circuito->getCircuito() . " ( ". $circuito->getPais() . " )"; ?> no disputado">
                                             <?php endif; ?>

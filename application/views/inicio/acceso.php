@@ -113,27 +113,27 @@
             <div class="col-xs-12 ">
 
               <div class="box-patrocinador">
-                Patrocinador 1
+                <img class="desaturada" width="80" src="<?php echo base_url(); ?>img/logolf1w.png" alt="patrocinador-lf1" title="¿Quieres ver tu logo aqui? Ponte en contacto con nosotros para apoyar a LF1 como patrocinador">
               </div>
               
               <div class="box-patrocinador">
-                Patrocinador 1
+                
               </div>
 
               <div class="box-patrocinador">
-                Patrocinador 1
+                
               </div>
 
               <div class="box-patrocinador">
-                Patrocinador 1
+                
               </div>
               
               <div class="box-patrocinador">
-                Patrocinador 1
+                
               </div>
 
               <div class="box-patrocinador">
-                Patrocinador 1
+                
               </div>
 
             </div>
@@ -162,9 +162,13 @@
           
             <ul class="nav-footer">
               <li>LigaFormula1.com © 2009 - 2014</li>
+              <?php 
+              /*
               <li><a href="#">Reglamento</a></li>
               <li><a href="#">Foro</a></li>
-              <li><a href="#">Contacto</a></li>
+              */
+               ?>
+              <li><a href="mailto:gestionlf1@gmail.com">Contacto</a></li>
             </ul>
           
         </div>

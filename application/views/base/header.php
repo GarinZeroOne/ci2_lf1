@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="LigaFormula1.com">
-    <link rel="shortcut icon" href="<?php echo base_url(); ?>/assets/ico/favicon.png">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>/img/favicon.ico">
 
     <title><?php echo $titulo; ?></title>
   

@@ -472,7 +472,7 @@ class Usuarios_model extends CI_Model {
 					                    <a href="#"><img src="' . base_url() . 'img/avatares/thumbs/' . $usuario->avatar . '" alt=""></a>
 					                </div>
 					                <div class="user-details">
-					                    <h4><a href="' . site_url() . 'perfil/usuario/' . $usuario->nick . '">' . $usuario->nick . '</a></h4>
+					                    <h4><a href="' . site_url() . 'perfil/ver/' . $usuario->nick . '">' . $usuario->nick . '</a></h4>
 					                    <p>
 					                        ' . timeago(strtotime($usuario->fecha_ultimo_login)) . '
 					                    </p>

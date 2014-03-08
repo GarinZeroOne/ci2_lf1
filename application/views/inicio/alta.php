@@ -156,9 +156,13 @@
           
             <ul class="nav-footer">
               <li>LigaFormula1.com © 2009 - 2014</li>
+              <?php 
+              /*
               <li><a href="#">Reglamento</a></li>
               <li><a href="#">Foro</a></li>
-              <li><a href="#">Contacto</a></li>
+              */
+               ?>
+              <li><a href="mailto:gestionlf1@gmail.com">Contacto</a></li>
             </ul>
           
         </div>

@@ -195,9 +195,9 @@ a{
     text-align: center;
 }
 .box-patrocinador{
-  border: 1px solid #565656;
+  /*border: 1px solid #565656;*/
     border-radius: 3px 3px 3px 3px;
-    box-shadow: 0 0 0 #fff;
+    /*box-shadow: 0 0 0 #fff;*/
     color: #565656;
     display: inline-block;
     height: 58px;
@@ -208,6 +208,17 @@ a{
     width: 150px;
     margin-bottom: 10px;
 }
+/*img en blanco y negro*/
+img.desaturada { filter: grayscale(100%); }
+img.desaturada { filter: grayscale(100%);
+-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+-ms-filter: grayscale(100%);
+-o-filter: grayscale(100%);
+filter: url(filter.svg#gris);
+filter: gray;
+}
+
 
 .facts{
     color: #FFB64A;
