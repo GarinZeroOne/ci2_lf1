@@ -467,9 +467,9 @@ class Gestion extends CI_Controller {
             redirect_lf1('gestion/panel_mejoras');
         }
         // **************************************************
-
+        $array_mejoras = array('2','3','4');
         // Si no llega el id mejora -> GTFO!
-        if(!is_numeric($id_mejora))
+        if(!in_array($id_mejora,$array_mejoras))
         {
             redirect_lf1('gestion/panel_mejoras');
         }

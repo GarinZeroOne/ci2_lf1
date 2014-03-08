@@ -175,12 +175,19 @@ class Estadisticas_model extends CI_Model
 		$stats['estrellas_computadas'] = $this->db->select('id_recompensa')->from('recompensa')->where('id_usuario',$id_perfil)->where('estado','u')->get()->num_rows();
 
 		// Posts en foros
+		/*DEPRECATED*/
+		/* ABRI KE MIRAR LOS POST KE LLEVA EN EL FORO PHPBB
 		$f1 = $this->db->select('id')->from('foro')->where('id_usuario',$id_perfil)->get()->num_rows();
 		$f2 = $this->db->select('id')->from('foroayuda')->where('id_usuario',$id_perfil)->get()->num_rows();
 		$f3 = $this->db->select('id')->from('foroformula1')->where('id_usuario',$id_perfil)->get()->num_rows();
 		$f4 = $this->db->select('id')->from('foroofftopic')->where('id_usuario',$id_perfil)->get()->num_rows();
-
+		
 		$stats['total_posts'] = $f1+$f2+$f3+$f4;
+		*/
+		$this->load->model('usuarios/usuarios_model');
+		$this->load->model('foro/forophpbb_model');
+		$nick_usuario = $this->usuarios_model->userData($id_perfil)->nick;
+		$stats['total_posts'] = $this->forophpbb_model->get_num_post($nick_usuario);
 
 		// stikis
 		$stats['total_stikis_dinero'] = $this->db->select('id')->from('stikis_usuarios')->where('id_usuario',$id_perfil)->where('stiki','dinero')->get()->num_rows();

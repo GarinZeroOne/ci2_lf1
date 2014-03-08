@@ -172,9 +172,9 @@
                                                 </div>
                                             </div>
                                             <div class=" wk-progress pf-status">
-                                                <div class="col-md-8 col-xs-8">Mensajes comunidad</div>
+                                                <div class="col-md-8 col-xs-8">Mensajes Foros</div>
                                                 <div class="col-md-4 col-xs-4">
-                                                    <strong>0</strong>
+                                                    <strong><?php echo $info_usuario['full_stats']['total_posts']; ?></strong>
                                                 </div>
                                             </div>
                                             <div class=" wk-progress pf-status">
