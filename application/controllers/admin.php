@@ -254,11 +254,42 @@ class Admin extends CI_Controller {
     }
 
     function cambioValorMovimientos() {
-        $fecha = date('Y-m-d');
-        $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
+        $id_permitida = '92.43.19.150';
 
-        $this->_cambiarValoresMovimientosPilotos($fechaAyer);
-        $this->_cambiarValoresMovimientosEquipos($fechaAyer);
+        if($_SERVER['REMOTE_ADDR'] == $id_permitida)
+        {
+            $fecha = date('Y-m-d');
+            $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
+
+            $this->_cambiarValoresMovimientosPilotos($fechaAyer);
+            $this->_cambiarValoresMovimientosEquipos($fechaAyer);
+
+            $this->load->library('email');
+            $this->email->from('ligaformula1@ligaformula1.com', 'Ligaformula1.com');
+            $this->email->to('gestionlf1@gmail.com');
+            $this->email->subject('Liga formula 1 - Movimientos diarios');
+            $this->email->message('Se ha ejecutado con exito el script de movimientos');
+
+            $this->email->send();
+            echo "ok";
+
+        }
+        else
+        {
+
+            $this->load->library('email');
+            $this->email->from('ligaformula1@ligaformula1.com', 'Ligaformula1.com');
+            $this->email->to('gestionlf1@gmail.com');
+            $this->email->subject('Liga formula 1 - Movimientos diarios - FALLO');
+            $this->email->message('Pareque que alguien ke no es el server a intentado acceder a este ubicacion, o que la ip del server esta mal puesto. IP:'.$_SERVER['REMOTE_ADDR'].' == 92.43.19.150 ?');
+
+            $this->email->send();
+
+            echo "ko";
+
+        }
+
+        
     }
 
     private function _cambiarValoresMovimientosPilotos($fechaAyer) {
