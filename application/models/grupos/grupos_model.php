@@ -785,6 +785,15 @@ class Grupos_model extends CI_Model {
 
         if($miembro)
         {
+            // Comprobar  que no sea el grupo de su comunidad
+            // No esta permitido abandonar grupo de comunidad
+            $comunidad  = $this->db->select('id_grupo')->from('comunidades')->where('id_grupo',$id_grupo)->get()->num_rows();
+            if($comunidad)
+            {
+                $this->session->set_flashdata('error_msg','No puedes abandonar el grupo de tu comunidad');
+                redirect_lf1('grupos');
+            }
+            
             $this->db->where('id_grupo',$id_grupo);
             $this->db->where('id_usuario',$_SESSION['id_usuario']);
             $this->db->delete('grupos_miembros');

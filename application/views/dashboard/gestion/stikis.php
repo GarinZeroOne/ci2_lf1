@@ -96,8 +96,9 @@
                                     </td>
                                     <td>
                                         <?php
+                                        $coste = 30000;
                                         if ($valorMejoraMecanicos > 0) {
-                                            $coste = 30000;
+                                            
                                             $coste_con_mejora = $coste - ($coste * $valorMejoraMecanicos);
                                         } else {
                                             $coste_con_mejora = $coste;
@@ -115,8 +116,9 @@
                                     </td>
                                     <td>
                                         <?php
+                                        $coste = 400000;
                                         if ($valorMejoraMecanicos > 0) {
-                                            $coste = 400000;
+                                            
                                             $coste_con_mejora = $coste - ($coste * $valorMejoraMecanicos);
                                         } else {
                                             $coste_con_mejora = $coste;
