@@ -43,6 +43,19 @@
         <!-- page start-->
         
         
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-aviso fade in">
+                    <button type="button" class="close close-sm" data-dismiss="alert">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <strong>Información!</strong> Faltan algunas caracteristicas por terminar (mensajes,textos,...), pero lo básico ya funciona.Iremos solucionando y añadiendo las caracteristicas que faltan durante estos dias. Para cualquier duda utilizar el foro o el Hall of fame. Queda inaugurada la temporada 2014!
+                </div>
+
+                                
+            </div>
+        </div>
+
         <!--mini statistics start-->
         <div class="row">
 
@@ -200,7 +213,16 @@
                          </span>
                     </header>
                     <div class="panel-body">
-                        Contenido publicidad
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Cuadrado2014display -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:300px;height:250px"
+                             data-ad-client="ca-pub-2361705659034560"
+                             data-ad-slot="9275287139"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+
                     </div>
                 </section>
                 <!--Ultimos fichajes end-->

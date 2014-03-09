@@ -44,7 +44,19 @@
 
                     </header>
                     <div class="panel-body">
-                        Contenido publicidad
+
+                        <div align="center">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- Cuadrado2014display -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:300px;height:250px"
+                                 data-ad-client="ca-pub-2361705659034560"
+                                 data-ad-slot="9275287139"></ins>
+                            <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+
                     </div>
                 </section>
                 <!--Ultimos fichajes end-->
