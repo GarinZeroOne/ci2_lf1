@@ -21,13 +21,15 @@
         <div class="row">
             <div class="col-md-8">
                 <section class="panel">
-                    <header class="panel-heading">
-                        Ficha o alquila pilotos
-                        
-                    </header>
+                    
                     <div class="panel-body">   
-                        <p>Desde aquí podras fichar o alquilar a tus pilotos. El  precio de los pilotos puede variar todos los dias en función de la actividad que reciba un piloto, se tienen en  cuenta las ventas, compras y e inactividad (no compras/no ventas) de cada piloto.</p> 
-                        <p>Los resultados de cada  gran premio también  harán variar el precio de los  pilotos.</p>
+                        <p>Información mercado pilotos:</p>
+                            <ul class="ulpilotos">
+                                <li>El precio  de los pilotos <strong>varia a diario</strong> en función de las <strong>compras/ventas o inactividad</strong>  que haya recibido el dia anterior.</li>
+                                <li>Los <strong style="color:#60C8FF">pilotos alquilados</strong> correrán para ti el siguiente Gran Premio, conseguirás el dinero y los puntos que ganen.Una vez terminado el Gran Premio,el piloto ya no te pertenecerá. A los pilotos alquilados no se les puede poner ninguna clase  de STIKI ni se aprobecharán de las mejoras que tengas.</li>
+                                <li>Los <strong style="color:#77AA3B">pilotos fichados</strong>, formarán parte continua de tu plantilla hasta que <strong>tú</strong> decidás venderlos.A estos se les puede añadir cualquier tipo de STIKI y podrán beneficiarse de tus mejoras</li>
+                            </ul>
+                        
                     </div>
                 </section>    
             </div>
@@ -111,7 +113,7 @@
                                                     <?php foreach ($pilotos as $piloto): ?>   
                                                         <tr>
                                                             <td style="text-align: center;"><img class="round-pilots" alt="" src="<?= base_url() ?>img/pilotos/<?php echo $piloto->getFoto() ?>.jpg"></td>
-                                                            <td><a href="<?php echo site_url() . 'mercado/fichaPiloto/' . $piloto->getIdPiloto(); ?>"><?php echo $piloto->getNombre() . " " . $piloto->getApellido(); ?></a></td>
+                                                            <td><a href="<?php echo site_url() . 'mercado/fichaPiloto/' . $piloto->getIdPiloto(); ?>"><?php echo $piloto->getNombre() . " " . $piloto->getApellido(); ?></a> <span class="team-subtit"><?php echo $piloto->getEquipo()->getEscuderia(); ?></span></td>
                                                             <td class="numeric" style="background-color: rgb(255, 249, 239); color: rgb(188, 164, 108);"><?php echo $piloto->getValorAnterior(true); ?></td>
                                                             <td class="numeric"><?php
                                                                 if ($piloto->getCambioValor() > 0):

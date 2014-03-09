@@ -466,3 +466,14 @@ div.panel-body-circuito
     font-weight: bold;
     text-align: center;
 }
+
+/*mercado*/
+ul.ulpilotos li{
+    list-style: square inside none;
+}
+
+span.team-subtit{
+    display: block;
+    font-size: 11px;
+    font-style: italic;
+}
