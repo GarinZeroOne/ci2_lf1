@@ -61,6 +61,7 @@
 
                                         <p><strong>¿Puedo especular con los pilotos?</strong> Por supuesto! Esa  es la gracia del mercado. Intentar adivinar  que piloto  subirá de valor, comprarlo el mismo dia y venderlo después para obtener beneficios. Desde la ficha de tus pilotos, podrás ver  siempre el precio que pagaste por el piloto, y el <strong>beneficio</strong> que obtendrias si lo vendieras en ese momento. Obviamente el beneficio que obtendras especulando con pilotos alquilados sera bajo, puesto que al ser siempre un 10% del valor de fichaje, las cantidades no seran tan altas como si especulas fichando pilotos, pero el riesgo también  será mas bajo!</p>
                                         <p><strong>Los pilotos fichados, formarán parte de tu plantilla hasta que tu decidas venderlos</strong>.  Puedes colocarles STIKIS y podrán aprobecharse  de todas las mejoras que  tengas.</p>
+                                        <p>LF1 se guarda el derecho de modificar los valores de pilotos y equipos con el fin de corregir cualquier tipo de desfase en los precios.Si esto ocurre se notificará a los usuarios para  que todos esten al tanto de todas las modificaciones.</p>
                                     </div>
                                 </div>
                             </div>
@@ -69,13 +70,14 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a href="#collapseFour" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
-                                            STIKIS
+                                            FIN DE SEMANA DE GP
                                         </a>
                                     </h4>
                                 </div>
                                 <div class="panel-collapse collapse" id="collapseFour">
                                     <div class="panel-body">
-                                        Actualizando texto.Estará disponible en los próximos  dias.
+                                        <p>Durante el  fin  de semana de un Gran Premio NO se permitirá ningún tipo de gestion. Todo el mercado se bloqueará los viernes a las 12:00PM de un fin de semana de Carrera. Esto quiere  decir que no podrás comprar ni vender equipos, mejoras o STIKIS una vez  finalizada  la cuanta atrás que puedes ver en el Dashboard.</p>
+                                        <p>El mercado se volverá a abrir automáticamente una vez procesado el Gran Premio.</p>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +122,13 @@
                                 </div>
                                 <div class="panel-collapse collapse" id="collapseSeven">
                                     <div class="panel-body">
-                                       Actualizando texto.Estará disponible en los próximos  dias.
+                                       <p>Tus fondos son la parte más importante como manager. Empezarás con una base de <strong>250.000 €</strong> con la que tendrás que empezar a construir tu carrera como Manager. Si te registras con la liga ya comenzada, con algun GP ya computado, además de los 250.000 € iniciales, recibirás 50.000 € más por GP pasado.</p>
+
+                                       <p>Mantener tu economia saneada tambien te otorgará puntos extra al final de cada gran premio, así como una mala gestion repercutirá en forma de puntos negativos. Esto solo ocurre cuando inicias un fin de semana de Carrera con números negativos.</p>
+
+                                       <p>Puedes quedarte en numeros negativos hasta un máximo de -200.000 € .</p>
+                                       <p>En la siguiente tabla puedes ver los puntos otorgados dependiendo de tus fondos:</p>
+                                       <p>Disponible en los próximos dias.</p>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +143,148 @@
                                 </div>
                                 <div class="panel-collapse collapse" id="collapseEight">
                                     <div class="panel-body">
-                                        Actualizando texto.Estará disponible en los próximos  dias.
+                                        <h4>Puntuaciones y dinero Pilotos</h4>
+                                        <table class="table table-striped table-bordered">
+                                        <th>Pos</th>
+                                        <th>Puntos</th>
+                                        <th>Dinero</th>
+                                        <tr>
+                                            <td>1º</td>
+                                            <td>50</td>
+                                            <td>270.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>2º</td>
+                                            <td>43</td>
+                                            <td>230.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>3º</td>
+                                            <td>40</td>
+                                            <td>200.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>4º</td>
+                                            <td>37</td>
+                                            <td>180.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>5º</td>
+                                            <td>35</td>
+                                            <td>155.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>6º</td>
+                                            <td>33</td>
+                                            <td>135.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>7º</td>
+                                            <td>31</td>
+                                            <td>115.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>8º</td>
+                                            <td>29</td>
+                                            <td>95.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>9º</td>
+                                            <td>27</td>
+                                            <td>86.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>10º</td>
+                                            <td>25</td>
+                                            <td>75.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>11º</td>
+                                            <td>23</td>
+                                            <td>65.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>12º</td>
+                                            <td>20</td>
+                                            <td>55.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>13º</td>
+                                            <td>17</td>
+                                            <td>47.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>14º</td>
+                                            <td>14</td>
+                                            <td>40.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>15º</td>
+                                            <td>11</td>
+                                            <td>35.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>16º</td>
+                                            <td>8</td>
+                                            <td>28.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>17º</td>
+                                            <td>5</td>
+                                            <td>24.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>18º</td>
+                                            <td>3</td>
+                                            <td>21.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>19º</td>
+                                            <td>2</td>
+                                            <td>18.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>20º</td>
+                                            <td>1</td>
+                                            <td>16.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>21º</td>
+                                            <td>1</td>
+                                            <td>14.000 €</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>22º</td>
+                                            <td>1</td>
+                                            <td>12.000 €</td>
+                                        </tr>
+
+
+                                    </table>
+
+                                    <h4>Puntuaciones y dinero Equipos</h4>
+                                    Actualizando texto.Estará disponible en los próximos  dias.
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +299,8 @@
                                 </div>
                                 <div class="panel-collapse collapse" id="collapseNine">
                                     <div class="panel-body">
-                                        Actualizando texto.Estará disponible en los próximos  dias.
+                                        <p>Hall of fame es un muro de información al que todos los managers tienen acceso y pueden colocar  ahí sus  ideas y opiniones. Normalmente el hall of fame tendrá un tema o pregunta  sobre el que enfocar las respuestas.</p>
+                                        <p>Un buen sitio donde informarte acerca de la opinión de otros managers, sobre  temas  de actualidad, pilotos, equipos, ideas,...</p>
                                     </div>
                                 </div>
                             </div>
