@@ -197,6 +197,8 @@ class Estadisticas_model extends CI_Model
 		$nick_usuario = $this->usuarios_model->userData($id_perfil)->nick;
 		$stats['total_posts'] = $this->forophpbb_model->get_num_post($nick_usuario);
 
+		// Reconnecar a la bd default -no se porke a veces se txina
+		$this->db = $this->load->database('default',TRUE);
 		// stikis
 		$stats['total_stikis_dinero'] = $this->db->select('id')->from('stikis_usuarios')->where('id_usuario',$id_perfil)->where('stiki','dinero')->get()->num_rows();
 		$stats['total_stikis_puntos'] = $this->db->select('id')->from('stikis_usuarios')->where('id_usuario',$id_perfil)->where('stiki','puntos')->get()->num_rows();
