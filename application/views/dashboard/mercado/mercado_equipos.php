@@ -22,17 +22,15 @@
         <div class="row">
             <div class="col-md-8">
                 <section class="panel">
-                    <header class="panel-heading">
-                        Compra  equipos
-
-                    </header>
+                    
                     <div class="panel-body">   
-                        <p>Aquí tienes toda la cartera de equipos disponibles.</p>
-                        <p>El precio de venta de los equipos varia en función a los resultados que vayan consiguiendo en carrera y en función
-                            de los movimientos diarios de cada escuderia en el mercado (compras/ventas).
-                        </p>
-                        <p>Comprar equipos ayuda a aumentar tus beneficios por carrera y 
-                        a sumar puntos manager que pueden ser decisivos.</p>                        
+                        <p>Información mercado equipos:</p>
+                            <ul class="ulpilotos">
+                                <li>El precio  de los equipos <strong>varia a diario</strong> en función de las <strong>compras/ventas o inactividad</strong>  que haya recibido el dia anterior.</li>
+                                <li>El precio de los equipos variará despues de cada Gran Premio, en base a sus resultados.</li>
+                                <li>Los <strong>equipos este año generan dinero y puntos</strong> dependiendo  de sus resultados. La posición final de un equipo en el GP se medirá con la suma de la actuación de sus dos pilotos (clasificación de constructores del GP).</li>
+
+                            </ul>
                     </div>
                 </section>    
             </div>
@@ -85,11 +83,7 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Mercado equipos
-                        <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-cog"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
-                        </span>
+                        
                     </header>
                     <div class="panel-body">
 
@@ -111,7 +105,7 @@
                                     <?php foreach ($equipos as $equipo): ?>   
                                         <tr>
                                             <td><a href="<?php echo site_url() . 'mercado/fichaEquipo/' . $equipo->getIdEquipo(); ?>"><?php echo $equipo->getEscuderia(); ?></a></td>
-                                            <td class="numeric"><?php echo $equipo->getValorAnterior(true); ?></td>
+                                            <td class="numeric" style="background-color: rgb(255, 249, 239); color: rgb(188, 164, 108);"><?php echo $equipo->getValorAnterior(true); ?></td>
                                             <td class="numeric"><?php
                                                 if ($equipo->getCambioValor() > 0):
                                                     ?>
@@ -151,8 +145,8 @@
                                             <td class="numeric"><a href="<?php echo site_url() . 'mercado/comprarEquipo/' . $equipo->getIdEquipo(); ?>" class="btn btn-success btn-xs confirm">
                                                     <i class="fa fa-shopping-cart"></i>
                                                     <?php echo $equipo->getValorActual(true); ?></a></td>
-                                            <td class="numeric"><?php echo $equipo->getValorMax(true); ?></td>
-                                            <td class="numeric"><?php echo $equipo->getValorMin(true); ?></td>                                                                                                                        
+                                            <td class="numeric" style="background-color: rgb(253, 242, 255); color: rgb(162, 122, 170);"><?php echo $equipo->getValorMax(true); ?></td>
+                                            <td class="numeric" style="background-color: rgb(255, 237, 237); color: rgb(191, 120, 120);"><?php echo $equipo->getValorMin(true); ?></td>                                                                                                                        
                                         </tr>
                                     <?php endforeach; ?>
 

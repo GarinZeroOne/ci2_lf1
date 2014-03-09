@@ -26,6 +26,7 @@
                         <p>Información mercado pilotos:</p>
                             <ul class="ulpilotos">
                                 <li>El precio  de los pilotos <strong>varia a diario</strong> en función de las <strong>compras/ventas o inactividad</strong>  que haya recibido el dia anterior.</li>
+                                <li>El precio de los pilotos variará despues  de cada Gran Premio en base a sus resultados.</li>
                                 <li>Los <strong style="color:#60C8FF">pilotos alquilados</strong> correrán para ti el siguiente Gran Premio, conseguirás el dinero y los puntos que ganen.Una vez terminado el Gran Premio,el piloto ya no te pertenecerá. A los pilotos alquilados no se les puede poner ninguna clase  de STIKI ni se aprobecharán de las mejoras que tengas.</li>
                                 <li>Los <strong style="color:#77AA3B">pilotos fichados</strong>, formarán parte continua de tu plantilla hasta que <strong>tú</strong> decidás venderlos.A estos se les puede añadir cualquier tipo de STIKI y podrán beneficiarse de tus mejoras</li>
                             </ul>
