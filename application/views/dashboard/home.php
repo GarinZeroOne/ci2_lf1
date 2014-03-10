@@ -159,7 +159,7 @@
                 <!-- OPINIONES start-->
                 <section class="panel">
                     <header class="panel-heading">
-                       HALL OF FAME - <?php echo $hof_pregunta->pregunta; ?>
+                       HALL OF FAME - <span style="font-weight: bold; color: rgb(255, 89, 48);"><?php echo $hof_pregunta->pregunta; ?></span>
                         <span class="tools pull-right">
                             
                         </span>
