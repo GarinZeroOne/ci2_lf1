@@ -35,6 +35,16 @@
             }
 </script>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=383497631760784";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
 
 
     <!--main content start-->
@@ -226,6 +236,12 @@
                     </div>
                 </section>
                 <!--Ultimos fichajes end-->
+
+                <section class="panel">
+                    <div class="panel-body">
+                        <div class="fb-like-box" data-href="http://www.facebook.com/LigaFormula1" data-width="250" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+                    </div>
+                </section>
                 
             </div>
             <?php /* MODULO ULTIMOS FICHAJES
