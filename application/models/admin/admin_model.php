@@ -301,6 +301,9 @@ class Admin_model extends CI_Model {
                 , $puntosBanco, $usuario->getIdUsuario()
                 , Admin_model::banco, 0);
 
+        //Se obtiene el circuito
+        $circuito = new Circuito($idGp);
+        
         //Se procesan los pilotos
         //Se recorren los pilotos del usuario asignando                 
         foreach ($usuario->getPilotos() as $piloto) {
@@ -319,9 +322,7 @@ class Admin_model extends CI_Model {
                 $dinero += $row->dinero;
             }
 
-            $usuario->setFondos($fondos);
-
-            $circuito = new Circuito($idGp);
+            $usuario->setFondos($fondos);            
 
             $textoGarin = "Dinero ganado por "
                     . $piloto->getNombre() . " " . $piloto->getApellido() .
@@ -614,6 +615,16 @@ class Admin_model extends CI_Model {
 
             $i++;
         }
+    }
+    
+    function desactivarPilotosAlquilados(){
+        $sql = "UPDATE usuarios_pilotos SET activo = 0 "
+                . "WHERE tipo_compra = ? ";
+        
+        $CI = &get_instance();
+        $CI->load->model('pilotos/pilotos_model');
+        
+        $this->db->query($sql, array(Pilotos_model::alquilado));
     }
 
 }

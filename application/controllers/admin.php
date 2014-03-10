@@ -3,6 +3,7 @@
 require_once APPPATH . 'classes/pilotos/piloto.php';
 require_once APPPATH . 'classes/pilotos/valorMercado.php';
 require_once APPPATH . 'classes/equipos/equipo.php';
+require_once APPPATH . 'classes/varios/circuito.php';
 require_once APPPATH . 'classes/usuarios/usuario.php';
 require_once APPPATH . 'classes/pilotos/pilotoUsuario.php';
 require_once APPPATH . 'classes/movimientos/movimientosPilotos.php';
@@ -28,6 +29,7 @@ class Admin extends CI_Controller {
         $msgResultados = $this->session->flashdata('msgResultados');
         $msgClasificacion = $this->session->flashdata('msgClasificacionMundial');
         $msgProcesadoUsuario = $this->session->flashdata('msgProcesadoUsuario');
+        $msgProcesarClas = $this->session->flashdata('msgProcesarClas');        
 
         /* Es el admin???
           $msgResultados = $this->session->flashdata('msgResultados');msgClasificacionMundial */
@@ -45,6 +47,7 @@ class Admin extends CI_Controller {
             $datos['msgResultados'] = $msgResultados;
             $datos['msgClasificacion'] = $msgClasificacion;
             $datos['msgProcesadoUsuario'] = $msgProcesadoUsuario;
+            $datos['msgProcesarClas'] = $msgProcesarClas;
 
             //Se prepara la vista				        
             $this->load->view('admin/inicio', $datos);
@@ -256,8 +259,7 @@ class Admin extends CI_Controller {
     function cambioValorMovimientos() {
         $id_permitida = '92.43.19.150';
 
-        if($_SERVER['REMOTE_ADDR'] == $id_permitida)
-        {
+        if ($_SERVER['REMOTE_ADDR'] == $id_permitida) {
             $fecha = date('Y-m-d');
             $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
 
@@ -272,24 +274,18 @@ class Admin extends CI_Controller {
 
             $this->email->send();
             echo "ok";
-
-        }
-        else
-        {
+        } else {
 
             $this->load->library('email');
             $this->email->from('ligaformula1@ligaformula1.com', 'Ligaformula1.com');
             $this->email->to('gestionlf1@gmail.com');
             $this->email->subject('Liga formula 1 - Movimientos diarios - FALLO');
-            $this->email->message('Pareque que alguien ke no es el server a intentado acceder a este ubicacion, o que la ip del server esta mal puesto. IP:'.$_SERVER['REMOTE_ADDR'].' == 92.43.19.150 ?');
+            $this->email->message('Pareque que alguien ke no es el server a intentado acceder a este ubicacion, o que la ip del server esta mal puesto. IP:' . $_SERVER['REMOTE_ADDR'] . ' == 92.43.19.150 ?');
 
             $this->email->send();
 
             echo "ko";
-
         }
-
-        
     }
 
     private function _cambiarValoresMovimientosPilotos($fechaAyer) {
@@ -648,8 +644,17 @@ class Admin extends CI_Controller {
         //Generar puntos manager totales
         $this->admin_model->guardarPuntosManagerTotales($idGp);
 
+        //Desactivar pilotos alquilados
+        $this->admin_model->desactivarPilotosAlquilados();
+
         //Marcar gp procesado
         $this->calendario_model->setCircuitoProcesado($idGp);
+        
+        $msg = "Clasificacion generada correctamente";
+        
+        $this->session->set_flashdata('msgProcesarClas', $msg);
+
+        redirect_lf1('admin', 'refresh');
     }
 
 }

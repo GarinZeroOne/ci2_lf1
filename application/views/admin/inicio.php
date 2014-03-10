@@ -223,7 +223,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Generar clasificaciones de usuarios
+                            Generar clasificaciones de usuarios (Desactiva alquilados - Marca Gp procesado)
                             <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                                 <a href="javascript:;" class="fa fa-cog"></a>
@@ -231,6 +231,7 @@
                             </span>
                         </header>
                         <div class="panel-body"> 
+                            <?php echo $msgProcesarClas;?>
                             <form method="post" action="<?= site_url() ?>admin/procesarClasificacion">
 
                                 <table>
