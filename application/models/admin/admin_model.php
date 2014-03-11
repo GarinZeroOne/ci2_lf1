@@ -626,5 +626,14 @@ class Admin_model extends CI_Model {
         
         $this->db->query($sql, array(Pilotos_model::alquilado));
     }
+    
+    function comprobarUsuarioProcesado($idUsuario,$idGp){
+        $sql ="SELECT * FROM resultados_usuarios_desglose "
+                . "WHERE id_usuario = ? "
+                . "AND id_gp = ?";
+        
+        return $this->db->query($sql, array($idUsuario,$idGp));
+        
+    }
 
 }

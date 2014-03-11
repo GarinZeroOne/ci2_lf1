@@ -29,7 +29,7 @@ class Admin extends CI_Controller {
         $msgResultados = $this->session->flashdata('msgResultados');
         $msgClasificacion = $this->session->flashdata('msgClasificacionMundial');
         $msgProcesadoUsuario = $this->session->flashdata('msgProcesadoUsuario');
-        $msgProcesarClas = $this->session->flashdata('msgProcesarClas');        
+        $msgProcesarClas = $this->session->flashdata('msgProcesarClas');
 
         /* Es el admin???
           $msgResultados = $this->session->flashdata('msgResultados');msgClasificacionMundial */
@@ -616,6 +616,17 @@ class Admin extends CI_Controller {
         //Se obtiene el gp a procesar
         $idGp = $this->calendario_model->obtenerCircuitoAProcesar()->row()->id;
 
+        //Se comprueba si el primer usuario del grupo ya esta procesado
+        $usuarioProcesado = $this->admin_model->comprobarUsuarioProcesado($usuarioInicial + 1, $idGp);
+
+        if ($usuarioProcesado->num_rows()) {
+            $msg = "Usuarios ya procesados";
+
+            $this->session->set_flashdata('msgProcesadoUsuario', $msg);
+
+            redirect_lf1('admin', 'refresh');
+        }
+
         //Se obtienen los usuarios
         $usuarios = $this->admin_model->getUsuariosObject(intval($usuarioInicial), intval($usuariosXejec));
 
@@ -649,9 +660,9 @@ class Admin extends CI_Controller {
 
         //Marcar gp procesado
         $this->calendario_model->setCircuitoProcesado($idGp);
-        
+
         $msg = "Clasificacion generada correctamente";
-        
+
         $this->session->set_flashdata('msgProcesarClas', $msg);
 
         redirect_lf1('admin', 'refresh');

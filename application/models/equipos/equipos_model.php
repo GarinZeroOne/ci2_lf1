@@ -50,15 +50,15 @@ class Equipos_model extends CI_Model {
                 AND usuarios_equipos.activo = 1";
         return $this->db->query($sql, array($idUser))->result();
     }
-    
-    function comprobarEquipoUsuario($idEquipo, $idUsuario){
-        
+
+    function comprobarEquipoUsuario($idEquipo, $idUsuario) {
+
         $sql = "SELECT * FROM usuarios_equipos "
                 . "WHERE id_usuario = ? "
                 . "AND id_equipo = ? "
                 . "AND  activo = 1";
-        
-        return $this->db->query($sql, array($idUsuario,$idEquipo));
+
+        return $this->db->query($sql, array($idUsuario, $idEquipo));
     }
 
     function fichar($datos) {
@@ -237,8 +237,8 @@ class Equipos_model extends CI_Model {
 
             $usuario->setFondos($saldo_despues_de_compra);
 
-            
-            
+
+
             $CI->banco_model->guardarSaldoUsuario($usuario);
             // TODO OK
 
@@ -604,4 +604,32 @@ class Equipos_model extends CI_Model {
         $this->db->query($sqlFichaje, array($equipo->getIdEquipo(), $usuario->getIdUsuario(), date('Y-m-d')));
     }
 
+    function getPuntosEquipoGp($idEquipo, $idGp) {
+        $pilotos = $this->getPilotosEquipoObject($idEquipo);
+
+        $puntosEquipo = 0;
+        
+        foreach ($pilotos as $piloto) {
+
+            $sql = "SELECT * FROM puntos_posicion pp, resultados_pilotos rp 
+                WHERE rp.posicion = pp.posicion
+                AND id_piloto = ?
+                AND id_gp = ?";
+
+            $row = $this->db->query($sql, array($piloto->getIdPiloto(), $idGp))->row();
+            
+            $puntos += $row()->puntos;
+        }
+
+        return $result;
+    }
+
+    function getEquiposClasificacionMundial() {
+        $equipos = $this->getEquiposObject();
+
+        usort($equipos, array("Equipo", "comparaPosicionMundial"));
+
+        return $equipos;
+    }    
+    
 }

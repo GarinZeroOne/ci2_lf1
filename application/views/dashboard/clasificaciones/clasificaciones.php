@@ -16,14 +16,14 @@
                                     <?php foreach ($circuitos as $circuito): ?>
                                         <td style="text-align: center">
                                             <?php if ($circuito->getFechaGp() < date('Y-m-d')): ?>
-                                                <a  title="Ver clasificacion <?php echo $circuito->getCircuito() . " ( ". $circuito->getPais() . " )"; ?>" href="<?php echo site_url() . 'clasificaciones/clasificacionGp/' . $circuito->getIdCircuito(); ?>">
+                                                <a  title="Ver clasificacion <?php echo $circuito->getCircuito() . " ( " . $circuito->getPais() . " )"; ?>" href="<?php echo site_url() . 'clasificaciones/clasificacionGp/' . $circuito->getIdCircuito(); ?>">
                                                     <img class="round-pilots" alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>">
                                                 </a>
                                             <?php else: ?>
                                                 <img class="desaturada round-pilots" 
                                                      alt="" src="<?= base_url() ?>img/circuitos/banderas/<?php echo $circuito->getBandera() ?>"
-                                                     title="Gp <?php echo $circuito->getCircuito() . " ( ". $circuito->getPais() . " )"; ?> no disputado">
-                                            <?php endif; ?>
+                                                     title="Gp <?php echo $circuito->getCircuito() . " ( " . $circuito->getPais() . " )"; ?> no disputado">
+                                                 <?php endif; ?>
                                         </td>
                                     <?php endforeach; ?>
                                 </tr>
@@ -32,8 +32,8 @@
                 </section>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-5">
                 <section class="panel">
                     <header class="panel-heading">
                         Clasificacion general
@@ -127,10 +127,10 @@
                                                                 </div>
                                                                 </section>
                                                                 </div>
-                                                                <div class="col-sm-12">
+                                                                <div class="col-sm-4">
                                                                     <section class="panel">
                                                                         <header class="panel-heading">
-                                                                            Clasificacion Gp <?php echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )"; ?>
+                                                                            Clasificacion Mundial pilotos
 
                                                                         </header>
                                                                         <div class="panel-body">
@@ -139,38 +139,58 @@
                                                                                     <tr>
                                                                                         <th class="numeric">Posicion</th>
                                                                                         <th>Foto</th>
-                                                                                        <th>Usuario</th>
-                                                                                        <th class="numeric">Puntos</th>                                                                        
+                                                                                        <th>Piloto</th>
+                                                                                        <th class="numeric">Puntos</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr class="mi-posicion">
-                                                                                        <td class="rank-posicion">
-                                                                                            <?php echo $miClasificacionGp->getPosicion(); ?>º
-                                                                                        </td>
-                                                                                        <td style="text-align: center;">
-                                                                                            <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGp->getUsuario()->getAvatar()->getAvatar(); ?>">
-                                                                                        </td>
-                                                                                        <td>                                                                                            
-                                                                                            <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $miClasificacionGp->getUsuario()->getNick(); ?>"><?php echo $miClasificacionGp->getUsuario()->getNick(); ?></a>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <?php echo $miClasificacionGp->getPuntos(); ?>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <?php foreach ($clasificacionGp->getClasificacionUsuarios() as $clasificacionUsuario): ?>
+                                                                                    <?php foreach ($clasificacionMundial as $piloto): ?>
                                                                                         <tr>
                                                                                             <td class="rank-posicion">
-                                                                                                <?php echo $clasificacionUsuario->getPosicion(); ?>º
+                                                                                                <?php echo $piloto->getPosicionMundial(); ?>º
                                                                                             </td>
                                                                                             <td style="text-align: center;">
-                                                                                                <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
+                                                                                                <img class="round-pilots"  alt="" src="<?= base_url() ?>img/pilotos/<?php echo $piloto->getFoto() . ".jpg" ?>">
                                                                                             </td>
                                                                                             <td>
-                                                                                                <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick(); ?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
+                                                                                                <a href="<?php echo site_url() . 'mercado/fichaPiloto/' . $piloto->getIdPiloto(); ?>"><?php echo $piloto->getNombre() . " " . $piloto->getApellido(); ?></a>
                                                                                             </td>
                                                                                             <td>
-                                                                                                <?php echo $clasificacionUsuario->getPuntos(); ?>
+                                                                                                <?php echo $piloto->getPuntosMundial(); ?>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    <?php endforeach; ?>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </section>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <section class="panel">
+                                                                        <header style="text-align: center;" class="panel-heading">
+                                                                            Clasificacion Mundial constructores
+
+                                                                        </header>
+                                                                        <div class="panel-body">
+                                                                            <table class="table table-bordered table-striped table-condensed">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th class="numeric">Posicion</th>
+                                                                                        <th>Equipo</th>
+                                                                                        <th class="numeric">Puntos</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php foreach ($clasificacionMundialEquipos as $equipo): ?>
+                                                                                        <tr>
+                                                                                            <td class="rank-posicion">
+                                                                                                <?php echo $equipo->getPosicionMundial(); ?>º
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a href="<?php echo site_url() . 'mercado/fichaEquipo/' . $equipo->getIdEquipo(); ?>"><?php echo $equipo->getEscuderia(); ?></a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <?php echo $equipo->getPuntosMundial(); ?>
                                                                                             </td>
                                                                                         </tr>
                                                                                     <?php endforeach; ?>
@@ -180,12 +200,11 @@
                                                                     </section>
                                                                 </div>
                                                                 </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="col-sm-12">
+                                                                <div class="row">
+                                                                    <div class="col-sm-5">
                                                                         <section class="panel">
                                                                             <header class="panel-heading">
-                                                                                Clasificacion Mundial
-
+                                                                                Clasificacion Gp <?php echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )"; ?>
                                                                             </header>
                                                                             <div class="panel-body">
                                                                                 <table class="table table-bordered table-striped table-condensed">
@@ -193,24 +212,38 @@
                                                                                         <tr>
                                                                                             <th class="numeric">Posicion</th>
                                                                                             <th>Foto</th>
-                                                                                            <th>Piloto</th>
-                                                                                            <th class="numeric">Puntos</th>
+                                                                                            <th>Usuario</th>
+                                                                                            <th class="numeric">Puntos</th>                                                                        
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <?php foreach ($clasificacionMundial as $piloto): ?>
+                                                                                        <tr class="mi-posicion">
+                                                                                            <td class="rank-posicion">
+                                                                                                <?php echo $miClasificacionGp->getPosicion(); ?>º
+                                                                                            </td>
+                                                                                            <td style="text-align: center;">
+                                                                                                <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGp->getUsuario()->getAvatar()->getAvatar(); ?>">
+                                                                                            </td>
+                                                                                            <td>                                                                                            
+                                                                                                <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $miClasificacionGp->getUsuario()->getNick(); ?>"><?php echo $miClasificacionGp->getUsuario()->getNick(); ?></a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <?php echo $miClasificacionGp->getPuntos(); ?>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <?php foreach ($clasificacionGp->getClasificacionUsuarios() as $clasificacionUsuario): ?>
                                                                                             <tr>
                                                                                                 <td class="rank-posicion">
-                                                                                                    <?php echo $piloto->getPosicionMundial(); ?>º
+                                                                                                    <?php echo $clasificacionUsuario->getPosicion(); ?>º
                                                                                                 </td>
                                                                                                 <td style="text-align: center;">
-                                                                                                    <img class="round-pilots"  alt="" src="<?= base_url() ?>img/pilotos/<?php echo $piloto->getFoto() . ".jpg" ?>">
+                                                                                                    <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <?php echo $piloto->getNombre() . " " . $piloto->getApellido(); ?>
+                                                                                                    <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick(); ?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <?php echo $piloto->getPuntosMundial(); ?>
+                                                                                                    <?php echo $clasificacionUsuario->getPuntos(); ?>
                                                                                                 </td>
                                                                                             </tr>
                                                                                         <?php endforeach; ?>
@@ -219,7 +252,7 @@
                                                                             </div>
                                                                         </section>
                                                                     </div>
-                                                                    <div class="col-sm-12">
+                                                                    <div class="col-sm-4">
                                                                         <section class="panel">
                                                                             <header class="panel-heading">                                                                
                                                                                 Clasificacion Gp Pilotos <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " ( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
@@ -245,10 +278,10 @@
                                                                                                         <?php echo $clasificacionPiloto->getPosicionGp(); ?>
                                                                                                     </td>
                                                                                                     <td style="text-align: center;">
-                                                                                                        <img style="border-radius: 50%; width: 50%; height: 32px;" alt="" src="<?= base_url() ?>img/pilotos/<?php echo $clasificacionPiloto->getFoto() . ".jpg"; ?>">
+                                                                                                        <img class="round-pilots" alt="" src="<?= base_url() ?>img/pilotos/<?php echo $clasificacionPiloto->getFoto() . ".jpg"; ?>">
                                                                                                     </td>
                                                                                                     <td>
-                                                                                                        <?php echo $clasificacionPiloto->getNombre() . " " . $clasificacionPiloto->getApellido(); ?>
+                                                                                                        <a href="<?php echo site_url() . 'mercado/fichaPiloto/' . $clasificacionPiloto->getIdPiloto(); ?>"><?php echo $clasificacionPiloto->getNombre() . " " . $clasificacionPiloto->getApellido(); ?></a>
                                                                                                     </td>
                                                                                                     <td>
                                                                                                         <?php echo $clasificacionPiloto->getPuntosGp(); ?>
@@ -263,7 +296,48 @@
                                                                             </div>
                                                                         </section>
                                                                     </div>
+                                                                    <div class="col-sm-3">
+                                                                        <section class="panel">
+                                                                            <header style="text-align: center;" class="panel-heading">                                                                
+                                                                                Clasificacion Gp Constructores <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " <br>( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
+
+                                                                            </header>
+                                                                            <div class="panel-body">
+                                                                                <table class="table table-bordered table-striped table-condensed">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th class="numeric">Posicion</th>
+                                                                                            <th>Piloto</th>
+                                                                                            <th class="numeric">Puntos</th>                                                                        
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php
+                                                                                        foreach ($clasificaionGpEquipos as $constructor):
+                                                                                            foreach ($constructor->ConstructorStandings as $standings):
+                                                                                                ?>
+                                                                                                <tr>
+                                                                                                    <td>
+                                                                                                        <?php echo $standings->positionText; ?>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <?php echo $standings->Constructor->name; ?>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <?php echo $standings->points; ?>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <?php
+                                                                                            endforeach;
+                                                                                        endforeach;
+                                                                                        ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </section>
+                                                                    </div>
                                                                 </div>
+
                                                                 <!-- page end-->
                                                                 </section>
                                                                 </section>

@@ -76,6 +76,23 @@ class Clasificaciones extends CI_Controller {
 
         $datos['clasificaionGpPiloto'] = new clasificacionGpPilotos(0);
 
+        $this->load->model('equipos/equipos_model');
+
+        $datos['clasificacionMundialEquipos'] = $this->equipos_model->getEquiposClasificacionMundial();
+
+        $idGp = $this->clasificacion_model->getUltimoGpConClasificacion();
+        $season = date('Y');        
+
+        //Se obtienen la clasificacion de equipos del gp 
+        $url = 'http://ergast.com/api/f1/' . $season . '/' . $idGp
+                . '/constructorStandings.json';
+
+        $json = json_decode(file_get_contents($url));
+
+        $MRData = $json->MRData->StandingsTable->StandingsLists;
+
+        $datos['clasificaionGpEquipos'] = $MRData;
+
         //Se carga el model de calendario
         $this->load->model('calendario/calendario_model');
 
@@ -106,7 +123,7 @@ class Clasificaciones extends CI_Controller {
         }
 
         $idGp = $this->uri->segment(3);
-        
+
         // Menu Izquierda
         $sidebarleft = array();
         $sidebarleft['m_act'] = 4;
@@ -121,14 +138,14 @@ class Clasificaciones extends CI_Controller {
 
         $usuario = Usuario::getById($_SESSION['id_usuario']);
 
-        $datos['miClasificacionGeneral'] = ClasificacionGeneralUsuario::getById($usuario,$idGp);
+        $datos['miClasificacionGeneral'] = ClasificacionGeneralUsuario::getById($usuario, $idGp);
 
         $datos['clasificacionGp'] = new clasificacionGp($idGp);
 
         $datos['miClasificacionGp'] = $this->clasificacion_model->getClasificacionGpUsuarioObject($idGp
                 , $_SESSION['id_usuario']);
 
-        $this->load->model('pilotos/pilotos_model');        
+        $this->load->model('pilotos/pilotos_model');
 
         $datos['clasificaionGpPiloto'] = new clasificacionGpPilotos($idGp);
 
@@ -137,7 +154,7 @@ class Clasificaciones extends CI_Controller {
 
         //Se obtienen todos los circuitos
         $datos['circuitos'] = $this->calendario_model->obtenerCircuitosObject();
-        
+
         $datos['circuitoClasificacion'] = new Circuito($idGp);
 
         // Javascript

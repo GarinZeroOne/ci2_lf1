@@ -225,5 +225,9 @@ class Equipo {
         }
         return $porcentaje;
     }
+    
+    static function comparaPosicionMundial(Equipo $a,Equipo $b) {
+        return $a->getPosicionMundial() -$b->getPosicionMundial();
+    }
 
 }
