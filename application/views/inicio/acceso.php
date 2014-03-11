@@ -89,13 +89,22 @@
                   <p><label for="password">Password</label></p>
                   <p><input type="password" id="passwd" name="passwd" placeholder="Tu contraseña" required></p> <!-- JS because of IE support; better: placeholder="password" -->
 
-                  <p><input type="submit" value="Entrar"></p>
+                  <p><input type="submit" value="Entrar"> </p>
+                  <div class="recordar"><a href="<?php echo site_url();?>inicio/restablecer_pass">¿Olvidaste tu contraseña?</a></div>
 
                 </fieldset>
 
               </form>
 
             </div> <!-- end login -->
+
+            <div align="center">
+              <span class='st_facebook_large' displayText='Facebook'></span>
+              <span class='st_twitter_large' displayText='Tweet'></span>
+              <span class='st_googleplus_large' displayText='Google +'></span>
+              <span class='st_email_large' displayText='Email'></span>
+              <span class='st_fblike_large' displayText='Facebook Like'></span>
+            </div>
 
           </div>
           <!-- FIN Derecha -->

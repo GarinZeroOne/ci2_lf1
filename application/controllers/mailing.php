@@ -48,7 +48,7 @@ class Mailing extends CI_Controller {
 
             $this->load->library('email');
 
-            $usuarios = $this->db->query("SELECT * FROM usuarios order by id asc limit {$mail_desde},300")->result();
+            $usuarios = $this->db->query("SELECT * FROM usuarios order by id asc limit {$mail_desde},200")->result();
 
             $i = 0;
 

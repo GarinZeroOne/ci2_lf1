@@ -274,6 +274,112 @@ class Inicio extends CI_Controller {
 	}
 
 	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function restablecer_pass()
+	{
+		
+		// Llevar esto a un modelo!
+		$res = $this->db->query("select * from usuarios order by rand() limit 6")->result_array();
+		
+		// Nick managers aleatorios
+		$datos['managers'] = $res;
+
+		/***********
+		DATOS VISTA - Header
+		************/
+
+		// Titulo/desc
+		$header['titulo'] 		= 'LigaFormula1.com - ¿Has olvidado tu contraseña?';
+		$header['descripcion']  = 'Registrate gratis en la mejor liga manager de Formula 1. Estás a un paso de convertirte en un autentico manager y demostrar a la comunidad LF1 quien es el mejor manager!';
+
+		// Estilos
+		$header['estilos'] 		= array('loginbg.css','style.css');
+
+		// Javascript
+		//$bottom['javascript'] = array('');
+
+		// Cargar vistas
+		$this->load->view('base/header',$header);
+		$this->load->view('inicio/restablecer_pass'  ,$datos);
+		$this->load->view('base/bottom',$bottom);
+	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function restablecer_pass_envio()
+	{
+		if($_POST['correo'] != "")
+		{
+			// Comprobar si existe el correo
+			$this->load->model('usuarios/usuarios_model');
+			$existe = $this->usuarios_model->checkMail($_POST);
+
+			if($existe->num_rows())
+			{
+				// Guardar id usuario y generar pass nueva
+				$id_usuario = $existe->row()->id;
+				$pass = $this->usuarios_model->generar_password();
+
+				// Actualiza la nueva pass encriptandola
+				$this->usuarios_model->resetear_password( $pass , $id_usuario);
+
+
+				// Mandar correo con su nueva pass
+				// $this->usuarios_model->mandar_mail_nuevo_password($existe->row()->email , $pass);
+				$this->load->library('email');
+
+
+				$mensaje_mail = "Se ha reseteado la contraseña a peticion tuya. Tu nueva contraseña es:  {$pass}
+							Recuerda que puedes modificar tu contraseña desde tu perfil.
+
+							Saludos,
+							http://www.ligaformula1.com ";
+
+				$this->email->from('ligaformula1@ligaformula1.com', 'Ligaformula1.com');
+				$this->email->to($existe->row()->email);
+				$this->email->subject('Liga formula 1 - Tu nueva contraseña');
+				$this->email->message($mensaje_mail);
+
+				if(!$this->email->send())
+				{
+					$this->session->set_flashdata('msg_error','No se ha podido enviar el email...');
+					redirect_lf1('inicio/restablecer_pass');
+				}
+				else
+				{
+					$this->session->set_flashdata('msg_ok','Hemos enviado un email a tu cuenta  de correo con la nueva contraseña.');
+					redirect_lf1('inicio/restablecer_pass');
+				}
+
+				//mail("{$existe->row()->email}","Liga Formula 1 - Nueva contraseña ","Tu nueva contraseña es {$pass}") ;
+
+
+
+			}
+			else
+			{
+				$this->session->set_flashdata('msg_error','El email introducido no existe');
+				redirect_lf1('inicio/restablecer_pass');
+			}
+
+		}
+		else
+		{
+
+			redirect_lf1('inicio/restablecer_pass');
+		}
+	}
+
+
+	/**
 	 * Nuevo Login
 	 *
 	 * @return void

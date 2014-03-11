@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="Participa en la mejor liga manager  de Formula 1 basada en resultados reales. Registrate gratis y comienza tu carrera manager!">
     <meta name="author" content="LigaFormula1.com">
     <link rel="shortcut icon" href="<?php echo base_url(); ?>/img/favicon.ico">
 
@@ -45,7 +45,10 @@
     base_url = '<?= base_url();?>';
     site_url = '<?= site_url();?>';
   </script>
-
+  
+ <script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "bcb23888-9982-4008-9511-fea162e4b237", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     
 
   </head>

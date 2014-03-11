@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-lg-5">
                 <section class="panel">
                     <header class="panel-heading">
                         Clasificacion general
@@ -127,7 +127,7 @@
                                                                 </div>
                                                                 </section>
                                                                 </div>
-                                                                <div class="col-sm-4">
+                                                                <div class="col-lg-4">
                                                                     <section class="panel">
                                                                         <header class="panel-heading">
                                                                             Clasificacion Mundial pilotos
@@ -165,7 +165,7 @@
                                                                         </div>
                                                                     </section>
                                                                 </div>
-                                                                <div class="col-sm-3">
+                                                                <div class="col-lg-3">
                                                                     <section class="panel">
                                                                         <header style="text-align: center;" class="panel-heading">
                                                                             Clasificacion Mundial constructores
@@ -201,7 +201,7 @@
                                                                 </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-sm-5">
+                                                                    <div class="col-lg-5">
                                                                         <section class="panel">
                                                                             <header class="panel-heading">
                                                                                 Clasificacion Gp <?php echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )"; ?>
@@ -252,7 +252,7 @@
                                                                             </div>
                                                                         </section>
                                                                     </div>
-                                                                    <div class="col-sm-4">
+                                                                    <div class="col-lg-4">
                                                                         <section class="panel">
                                                                             <header class="panel-heading">                                                                
                                                                                 Clasificacion Gp Pilotos <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " ( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
@@ -296,7 +296,7 @@
                                                                             </div>
                                                                         </section>
                                                                     </div>
-                                                                    <div class="col-sm-3">
+                                                                    <div class="col-lg-3">
                                                                         <section class="panel">
                                                                             <header style="text-align: center;" class="panel-heading">                                                                
                                                                                 Clasificacion Gp Constructores <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " <br>( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
