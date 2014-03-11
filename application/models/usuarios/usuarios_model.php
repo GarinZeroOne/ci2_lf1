@@ -628,9 +628,9 @@ class Usuarios_model extends CI_Model {
         // Obtener avatar usuario
         $datos['avatar'           ] = $this->userAvatar($id_usuario);
         // Obtener inversion ultimos dias
-        $datos['inversion'        ] = $this->estadisticas_model->get_inversion_compras(17,$id_usuario);
+        $datos['inversion'        ] = $this->estadisticas_model->get_inversion_compras(7,$id_usuario);
         // Obtener inversion ultimos dias
-        $datos['ganancias'        ] = $this->estadisticas_model->get_ganancias_ventas(17,$id_usuario);
+        $datos['ganancias'        ] = $this->estadisticas_model->get_ganancias_ventas(7,$id_usuario);
 
 
 

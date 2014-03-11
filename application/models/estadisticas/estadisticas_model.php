@@ -432,8 +432,7 @@ class Estadisticas_model extends CI_Model
 			foreach($fichajes as $fichaje)
 			{
 
-				/*Fichado o alquilado?*/
-				/*TODO*/
+				// Valor piloto en esa fecha?
 				$valor_piloto = $this->db->select('valor_actual')
 										 ->from('valor_piloto')
 										 ->where('id_piloto',$fichaje->id_piloto)
@@ -441,6 +440,15 @@ class Estadisticas_model extends CI_Model
 										 ->get()
 										 ->row()
 										 ->valor_actual;
+
+				/*Fichado o alquilado?*/
+				if( $fichaje->tipo_compra == 'alquilado')
+				{
+
+					$valor_piloto = $valor_piloto * 0.10;
+				}
+				
+				
 				
 
 
@@ -525,6 +533,22 @@ class Estadisticas_model extends CI_Model
 										 ->get()
 										 ->row()
 										 ->valor_actual;
+
+				// Lo compre o lo alquile?
+				// Busca este piloto en la tabla de fichajes, y mirando la fecha de venta, cogemos el primer resultado descendente
+				// con fecha menor a la venta, para fijarnos si se ficho o alquilo.
+				$sql_tipo_compra = "select * from fichajes_pilotos  where id_usuario = ? and id_piloto = ? and fecha  <= ? order by id_fichaje_piloto limit 1";
+				$res = $this->db->query($sql_tipo_compra,array($id_usuario,$venta->id_piloto,$venta->fecha));
+				
+				if($res->num_rows())
+				{
+					$tipo_compra = $res->row()->tipo_compra;
+
+					if($tipo_compra == 'alquilado')
+					{
+						$valor_piloto = $valor_piloto * 0.10;
+					}
+				}
 
 				$dinero_ventas = $dinero_ventas + $valor_piloto;
 			}
