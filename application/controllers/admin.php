@@ -34,12 +34,12 @@ class Admin extends CI_Controller {
         /* Es el admin???
           $msgResultados = $this->session->flashdata('msgResultados');msgClasificacionMundial */
 
-        //Es el admin???
+//Es el admin???
         if ($_SESSION['id_usuario'] == 177) {
 
             $datos['estilos'] = array('dashboard.css');
 
-            //Se pasan los circuitos no procesados
+//Se pasan los circuitos no procesados
             $datos['circuitos'] = $this->calendario_model->obtenerCircuitosSinProcesar();
 
             $datos['numeroUsuarios'] = $this->admin_model->getNumeroUsuarios();
@@ -49,10 +49,10 @@ class Admin extends CI_Controller {
             $datos['msgProcesadoUsuario'] = $msgProcesadoUsuario;
             $datos['msgProcesarClas'] = $msgProcesarClas;
 
-            //Se prepara la vista				        
+//Se prepara la vista				        
             $this->load->view('admin/inicio', $datos);
         } else {
-            // Si no es el admin le mandamos a inicio
+// Si no es el admin le mandamos a inicio
             redirect_lf1('inicio');
         }
     }
@@ -99,7 +99,7 @@ class Admin extends CI_Controller {
 
         $MRData = $json->MRData;
 
-        //Se vacian los circuitos
+//Se vacian los circuitos
         $this->admin_model->vaciarCircuitos();
 
         foreach ($MRData->RaceTable as $raceTable) {
@@ -141,7 +141,7 @@ class Admin extends CI_Controller {
 
         $idGp = $MRData->RaceTable->round;
 
-        //Se comprueba si estan procesados los resultados del gp
+//Se comprueba si estan procesados los resultados del gp
         $resultadosGenerados = $this->admin_model->comprobarResultadosProcesados($idGp)->num_rows();
 
         if (!$resultadosGenerados) {
@@ -160,7 +160,7 @@ class Admin extends CI_Controller {
             }
 
 
-            //Se obtienen los resultados de clasificacion para obtener el poleman
+//Se obtienen los resultados de clasificacion para obtener el poleman
             $url = 'http://ergast.com/api/f1/' . $season . '/' . $gpNumber
                     . '/qualifying.json';
 
@@ -179,17 +179,25 @@ class Admin extends CI_Controller {
                 }
             }
 
-            //Se insertan los resultados de los equipos
-            $ordenEquipos = $this->admin_model->obtenerOrdenEquiposGp($idGp)->result();
+            //Se insertan los resultados de los equipos            
+            //Se obtienen la clasificacion de equipos del gp 
+            $url = 'http://ergast.com/api/f1/' . $season . '/' . $gpNumber
+                    . '/constructorStandings.json';
 
-            $contador = 1;
-            foreach ($ordenEquipos as $equipo) {
-                echo $equipo->id_equipo . "<br>";
-                $this->admin_model->insertarPosicionEquipo
-                        ($equipo->id_equipo, $idGp, $contador);
+            $json = json_decode(file_get_contents($url));
 
-                $contador++;
-            }
+            $MRData = $json->MRData->StandingsTable->StandingsLists;
+
+            foreach ($MRData as $constructor) {
+                foreach ($constructor->ConstructorStandings as $standings) {
+
+                    $equipo = $this->admin_model->obtenerEquipoConstructorId
+                                    ($standings->Constructor->constructorId)->row();
+
+                    $this->admin_model->insertarPosicionEquipo
+                            ($equipo->id, $idGp, $standings->positionText, $standings->points);                    
+                }
+            }          
 
             return "Resultados generados correctamente";
         } else {
@@ -259,7 +267,7 @@ class Admin extends CI_Controller {
     function cambioValorMovimientos() {
         $id_permitida = '92.43.19.150';
 
-        if ($_SERVER['REMOTE_ADDR'] == $id_permitida || DEVZONE ) {
+        if ($_SERVER['REMOTE_ADDR'] == $id_permitida || DEVZONE) {
             $fecha = date('Y-m-d');
             $fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
 
@@ -465,10 +473,10 @@ class Admin extends CI_Controller {
          */
         $idGp = $this->calendario_model->obtenerCircuitoAProcesar()->row()->id;
 
-        //Pilotos
+//Pilotos
         $this->_procesarPrecioPilotos($idGp);
 
-        //Equipos
+//Equipos
         $this->_procesarPrecioEquipos($idGp);
     }
 
@@ -476,7 +484,7 @@ class Admin extends CI_Controller {
 
         $this->load->model('equipos/equipos_model');
 
-        //Equipos
+//Equipos
         $equipos = $this->equipos_model->getEquiposObject();
 
         foreach ($equipos as $equipo) {
@@ -508,14 +516,14 @@ class Admin extends CI_Controller {
                                 getPorcentajeMejora(abs($diferencia))
                                 ->row()->porcentaje;
 
-                //Se comprueba si hay que aumentar o decrementar el valor del piloto
+//Se comprueba si hay que aumentar o decrementar el valor del piloto
                 if ($diferencia < 0) {
-                    //Decrementar
+//Decrementar
                     echo "disminuir " . $porcentaje;
                     echo "<br>";
                     $equipo->disminuirValor($porcentaje);
                 } elseif ($diferencia > 0) {
-                    //Aumentar
+//Aumentar
                     echo "aumentar " . $porcentaje;
                     echo "<br>";
                     $equipo->aumentarValor($porcentaje);
@@ -539,7 +547,7 @@ class Admin extends CI_Controller {
 
         $this->load->model('pilotos/pilotos_model');
 
-        //Pilotos
+//Pilotos
         $pilotos = $this->pilotos_model->getPilotosObject();
 
         foreach ($pilotos as $piloto) {
@@ -572,26 +580,26 @@ class Admin extends CI_Controller {
 
                 $diferencia = $posicionMundial - $posicionGp;
                 echo "diferencia " . $diferencia . "<br>";
-                //Se obtiene el porcentaje a decrementar
+//Se obtiene el porcentaje a decrementar
                 if ($diferencia != 0) {
                     $porcentaje = $this->pilotos_model->
                                     getPorcentajeMejora(abs($diferencia))
                                     ->row()->porcentaje;
 
-                    //Se comprueba si hay que aumentar o decrementar el valor del piloto
+//Se comprueba si hay que aumentar o decrementar el valor del piloto
                     if ($diferencia < 0) {
-                        //Decrementar
+//Decrementar
                         echo "disminuir " . $porcentaje;
                         echo "<br>";
                         $piloto->disminuirValor($porcentaje);
                     } elseif ($diferencia > 0) {
-                        //Aumentar
+//Aumentar
                         echo "aumentar " . $porcentaje;
                         echo "<br>";
                         $piloto->aumentarValor($porcentaje);
                     }
                 } else {
-                    //Se ejecuta la funcion que deja el valor anterior con el de ahora
+//Se ejecuta la funcion que deja el valor anterior con el de ahora
                     $piloto->mismoValor();
                 }
 
@@ -601,7 +609,7 @@ class Admin extends CI_Controller {
                 echo "<br>";
                 echo "<br>";
             } else {
-                //Se ejecuta la funcion que deja el valor anterior con el de ahora
+//Se ejecuta la funcion que deja el valor anterior con el de ahora
                 $piloto->mismoValor();
             }
 
@@ -613,10 +621,10 @@ class Admin extends CI_Controller {
         $usuarioInicial = $this->uri->segment(3);
         $usuariosXejec = $this->uri->segment(4);
 
-        //Se obtiene el gp a procesar
+//Se obtiene el gp a procesar
         $idGp = $this->calendario_model->obtenerCircuitoAProcesar()->row()->id;
 
-        //Se comprueba si el primer usuario del grupo ya esta procesado
+//Se comprueba si el primer usuario del grupo ya esta procesado
         $usuarioProcesado = $this->admin_model->comprobarUsuarioProcesado($usuarioInicial + 1, $idGp);
 
         if ($usuarioProcesado->num_rows()) {
@@ -627,13 +635,13 @@ class Admin extends CI_Controller {
             redirect_lf1('admin', 'refresh');
         }
 
-        //Se obtienen los usuarios
+//Se obtienen los usuarios
         $usuarios = $this->admin_model->getUsuariosObject(intval($usuarioInicial), intval($usuariosXejec));
 
         $fechaInicio = date('Y-m-d H:i:s') . "<br>";
-        //Se procesan los datos de cada usuario
+//Se procesan los datos de cada usuario
         foreach ($usuarios as $usuario) {
-            //echo "procesando usuario " . $usuario->getIdUsuario() . "<br>";
+//echo "procesando usuario " . $usuario->getIdUsuario() . "<br>";
             $this->admin_model->procesarGp($usuario, $idGp);
         }
         $fechaFin = date('Y-m-d H:i:s') . "<br>";
@@ -646,19 +654,19 @@ class Admin extends CI_Controller {
     }
 
     function procesarClasificacion() {
-        //Se obtiene el gp a procesar
+//Se obtiene el gp a procesar
         $idGp = $this->calendario_model->obtenerCircuitoAProcesar()->row()->id;
 
-        //Generar clasificacion
+//Generar clasificacion
         $this->admin_model->generarClasificacionUsuarios($idGp);
 
-        //Generar puntos manager totales
+//Generar puntos manager totales
         $this->admin_model->guardarPuntosManagerTotales($idGp);
 
-        //Desactivar pilotos alquilados
+//Desactivar pilotos alquilados
         $this->admin_model->desactivarPilotosAlquilados();
 
-        //Marcar gp procesado
+//Marcar gp procesado
         $this->calendario_model->setCircuitoProcesado($idGp);
 
         $msg = "Clasificacion generada correctamente";

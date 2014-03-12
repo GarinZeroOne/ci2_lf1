@@ -116,10 +116,10 @@ class Admin_model extends CI_Model {
         return $result;
     }
 
-    function insertarPosicionEquipo($idEquipo, $idGp, $posicion) {
-        $sql = "INSERT INTO resultados_equipos (id_equipo,id_gp,posicion)"
-                . "VALUES (?,?,?)";
-        $this->db->query($sql, array($idEquipo, $idGp, $posicion));
+    function insertarPosicionEquipo($idEquipo, $idGp, $posicion, $puntos) {
+        $sql = "INSERT INTO resultados_equipos (id_equipo,id_gp,posicion,puntos)"
+                . "VALUES (?,?,?,?)";
+        $this->db->query($sql, array($idEquipo, $idGp, $posicion, $puntos));
     }
 
     function comprobarResultadosProcesados($idGp) {
@@ -303,7 +303,7 @@ class Admin_model extends CI_Model {
 
         //Se obtiene el circuito
         $circuito = new Circuito($idGp);
-        
+
         //Se procesan los pilotos
         //Se recorren los pilotos del usuario asignando                 
         foreach ($usuario->getPilotos() as $piloto) {
@@ -322,7 +322,7 @@ class Admin_model extends CI_Model {
                 $dinero += $row->dinero;
             }
 
-            $usuario->setFondos($fondos);            
+            $usuario->setFondos($fondos);
 
             $textoGarin = "Dinero ganado por "
                     . $piloto->getNombre() . " " . $piloto->getApellido() .
@@ -416,7 +416,7 @@ class Admin_model extends CI_Model {
                         $this->insertarUsuariosDesglose($piloto->getIdPiloto(), $idGp
                                 , $row->dinero
                                 , 0, $usuario->getIdUsuario()
-                                , Admin_model::stikiPuntos, 0);
+                                , Admin_model::stikiDinero, 0);
 
                         $textoGarin = "Dinero stiki dinero de "
                                 . $piloto->getNombre() . " " . $piloto->getApellido() .
@@ -616,24 +616,23 @@ class Admin_model extends CI_Model {
             $i++;
         }
     }
-    
-    function desactivarPilotosAlquilados(){
+
+    function desactivarPilotosAlquilados() {
         $sql = "UPDATE usuarios_pilotos SET activo = 0 "
                 . "WHERE tipo_compra = ? ";
-        
+
         $CI = &get_instance();
         $CI->load->model('pilotos/pilotos_model');
-        
+
         $this->db->query($sql, array(Pilotos_model::alquilado));
     }
-    
-    function comprobarUsuarioProcesado($idUsuario,$idGp){
-        $sql ="SELECT * FROM resultados_usuarios_desglose "
+
+    function comprobarUsuarioProcesado($idUsuario, $idGp) {
+        $sql = "SELECT * FROM resultados_usuarios_desglose "
                 . "WHERE id_usuario = ? "
                 . "AND id_gp = ?";
-        
-        return $this->db->query($sql, array($idUsuario,$idGp));
-        
+
+        return $this->db->query($sql, array($idUsuario, $idGp));
     }
 
 }
