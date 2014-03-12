@@ -22,7 +22,7 @@
                           "</div>";
              if (hasta < hoy)
              {
-              document.getElementById('horat').innerHTML = "<?php echo $this->lang->line('fin_de_semana_gp'); ?>";
+              document.getElementById('horat').innerHTML = "<span style='color:#ff0000;'>MERCADO CERRADO</span> </br> FIN DE SEMANA DE GP";
               /*document.getElementById('msgInfo').innerHTML = "<img src='<?php echo base_url();?>/img/boxclosed.png' />";*/
               cleartimeout(tictac);
              }

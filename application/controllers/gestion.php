@@ -54,7 +54,14 @@ class Gestion extends CI_Controller {
      * */
     function mi_oficina() {
 
+        $this->load->model('boxes/mejoras_model');
+        $this->load->model('pilotos/pilotos_model');
+        $this->lang->load('mi_oficina','spanish');
+
+        // Resumen ultimo GP
+        $datos['resultados'       ] = $this->mejoras_model->get_resumen_gp();
         $datos['movimientos_banco'] = $this->banco_model->get_movimientos_banco($_SESSION['id_usuario']);
+
         // Menu Izquierda
         $sidebarleft = array();
         $sidebarleft['m_act'] = 2;

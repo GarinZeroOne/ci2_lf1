@@ -3,6 +3,100 @@
     <section id="main-content">
         <section class="wrapper">
         <!-- page start-->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Resumen ganacias último Gran Premio
+                        
+                    </header>
+                    <div class="panel-body">
+                        
+                        <!-- RESUMEN GP -->
+                        <div id="resumengp" align="center">
+                    <table class="table table-bordered ">
+                        <thead class="resumen-gp">
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Piloto</th>
+                                <th>Equipo</th>
+                                <th>Ingresos</th>
+                                <th>Puntos</th>        
+                            </tr>
+                        </thead>
+
+                        
+                        <tbody>
+                        <?php
+                        $cont_puntos;
+                        $cont_dinero;
+                        $i = 0;
+
+
+                        foreach ($resultados as $resultado):
+                            ?>
+
+                            <tr>
+                                <td class="concepto">
+                                    <?
+                                    switch ($resultado->tipo) {
+
+                                        case "poleman":
+                                            echo "Poleman";
+                                            break;
+                                        case "stiki_puntos":
+                                            echo $this->lang->line('oficina_lbl_stk_puntos');
+                                            break;
+                                        case "ingenieros":
+                                            echo $this->lang->line('oficina_lbl_ingeniero');
+                                            break;
+                                        case "pilotos":
+                                            echo $this->lang->line('oficina_lbl_piloto');
+                                            break;
+                                        case "equipos":
+                                            echo $this->lang->line('oficina_lbl_equipos');
+                                            break;
+                                        case "stiki_dinero":
+                                            echo $this->lang->line('oficina_lbl_stk_dinero');
+                                            break;
+                                        case "banco":
+                                            echo $this->lang->line('oficina_lbl_banco');
+                                            break;
+                                        case "publicistas":
+                                            echo $this->lang->line('oficina_lbl_publicista');
+                                            break;
+                                    }
+                                    ?>
+                                </td>
+                                <td> <?= $this->pilotos_model->get_nombre_piloto_por_id($resultado->id_piloto); ?></td>
+                                <td> <?= $this->pilotos_model->get_nombre_equipo_por_id($resultado->id_equipo); ?>  </td>
+                                <td> <?= es_dinero($resultado->dinero); ?> €</td>
+                                <td class="pm"> <?= $resultado->puntos; ?></td> </tr>
+                            <?
+                            $cont_puntos = $cont_puntos + $resultado->puntos;
+                            $cont_dinero = $cont_dinero + $resultado->dinero;
+                            $i++;
+                            ?>
+
+
+
+                        <? endforeach; ?>
+
+                        <tr><td class="concepto"><? echo $this->lang->line('oficina_lbl_nomina') ?></td><td></td> <td></td><td>100.000 €</td> <td>0</td></tr>
+                        <tr id="totales">
+                            <td><? echo $this->lang->line('oficina_lbl_total') ?></td> <td></td> <td></td>    <td> <?= es_dinero($cont_dinero + 100000); ?> €</td><td><?= $cont_puntos; ?></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                        <!-- FIN RESUMEN GP-->
+
+                    </div>
+                </section>
+            </div>
+
+        </div>
         
         <div class="row">
            
