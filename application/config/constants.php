@@ -41,7 +41,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 // Localhost
  define('ROOT',$_SERVER['DOCUMENT_ROOT'].'/ci2_lf1');
 
-define('DEVZONE',true);
+define('DEVZONE',false);
 
 /* End of file constants.php */
 /* Location: ./system/application/config/constants.php */

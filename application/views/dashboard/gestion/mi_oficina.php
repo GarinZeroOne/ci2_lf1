@@ -5,6 +5,7 @@
         <!-- page start-->
 
         <div class="row">
+            <?php if($resultados): ?>
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
@@ -95,7 +96,7 @@
                     </div>
                 </section>
             </div>
-
+            <?php endif; ?>
         </div>
         
         <div class="row">
