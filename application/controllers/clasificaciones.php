@@ -10,6 +10,7 @@ require_once APPPATH . 'classes/pilotos/piloto.php';
 require_once APPPATH . 'classes/pilotos/pilotoClasificacionGp.php';
 require_once APPPATH . 'classes/pilotos/valorMercado.php';
 require_once APPPATH . 'classes/equipos/equipo.php';
+require_once APPPATH . 'classes/equipos/equipoClasificacionGp.php';
 
 class Clasificaciones extends CI_Controller {
 
@@ -80,18 +81,10 @@ class Clasificaciones extends CI_Controller {
 
         $datos['clasificacionMundialEquipos'] = $this->equipos_model->getEquiposClasificacionMundial();
 
-        $idGp = $this->clasificacion_model->getUltimoGpConClasificacion();
-        $season = date('Y');        
+        $idGp = $this->clasificacion_model->getUltimoGpConClasificacion();       
 
         //Se obtienen la clasificacion de equipos del gp 
-        $url = 'http://ergast.com/api/f1/' . $season . '/' . $idGp
-                . '/constructorStandings.json';
-
-        $json = json_decode(file_get_contents($url));
-
-        $MRData = $json->MRData->StandingsTable->StandingsLists;
-
-        $datos['clasificaionGpEquipos'] = $MRData;
+        $datos['clasificaionGpEquipos'] = $this->equipos_model->getClasificacionGp($idGp);
 
         //Se carga el model de calendario
         $this->load->model('calendario/calendario_model');

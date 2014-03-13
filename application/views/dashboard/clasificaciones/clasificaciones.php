@@ -36,6 +36,146 @@
             <div class="col-lg-5">
                 <section class="panel">
                     <header class="panel-heading">
+                        Clasificacion Gp <?php echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )"; ?>
+                    </header>
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="numeric">Posicion</th>
+                                    <th>Foto</th>
+                                    <th>Usuario</th>
+                                    <th class="numeric">Puntos</th>                                                                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="mi-posicion">
+                                    <td class="rank-posicion">
+                                        <?php echo $miClasificacionGp->getPosicion(); ?>º
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGp->getUsuario()->getAvatar()->getAvatar(); ?>">
+                                    </td>
+                                    <td>                                                                                            
+                                        <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $miClasificacionGp->getUsuario()->getNick(); ?>"><?php echo $miClasificacionGp->getUsuario()->getNick(); ?></a>
+                                    </td>
+                                    <td>
+                                        <?php echo $miClasificacionGp->getPuntos(); ?>
+                                    </td>
+                                </tr>
+                                <?php foreach ($clasificacionGp->getClasificacionUsuarios() as $clasificacionUsuario): ?>
+                                    <tr>
+                                        <td class="rank-posicion">
+                                            <?php echo $clasificacionUsuario->getPosicion(); ?>º
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick(); ?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
+                                        </td>
+                                        <td>
+                                            <?php echo $clasificacionUsuario->getPuntos(); ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-4">
+                <section class="panel">
+                    <header class="panel-heading">                                                                
+                        Clasificacion Gp Pilotos <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " ( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
+
+                    </header>
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="numeric">Posicion</th>
+                                    <th>Foto</th>
+                                    <th>Piloto</th>
+                                    <th class="numeric">Puntos</th>                                                                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $pilotos = $clasificaionGpPiloto->getClasificacionPilotos();
+                                if ($pilotos[0]->getPosicionGp() != 100):
+                                    foreach ($pilotos as $clasificacionPiloto):
+                                        if (is_numeric($clasificacionPiloto->getPuntosGp())):
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $clasificacionPiloto->getPosicionGp(); ?>
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <img class="round-pilots" alt="" src="<?= base_url() ?>img/pilotos/<?php echo $clasificacionPiloto->getFoto() . ".jpg"; ?>">
+                                                </td>
+                                                <td>
+                                                    <a href="<?php echo site_url() . 'mercado/fichaPiloto/' . $clasificacionPiloto->getIdPiloto(); ?>"><?php echo $clasificacionPiloto->getNombre() . " " . $clasificacionPiloto->getApellido(); ?></a>
+                                                </td>
+                                                <td>
+                                                    <?php echo $clasificacionPiloto->getPuntosGp(); ?>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        endif;
+                                    endforeach;
+                                endif;
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-3">
+                <section class="panel">
+                    <header style="text-align: center;" class="panel-heading">                                                                
+                        Clasificacion Gp Constructores <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " <br>( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
+
+                    </header>
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="numeric">Posicion</th>
+                                    <th>Piloto</th>
+                                    <th class="numeric">Puntos</th>                                                                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if ($clasificaionGpEquipos[0]->getPosicionGp() != 0):
+                                    foreach ($clasificaionGpEquipos as $equipo):
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo $equipo->getPosicionGp(); ?>
+                                            </td>
+                                            <td>
+                                                <a href="<?php echo site_url() . 'mercado/fichaEquipo/' . $equipo->getIdEquipo(); ?>"><?php echo $equipo->getEscuderia(); ?></a>
+                                            </td>
+                                            <td>
+                                                <?php echo $equipo->getPuntosGp(); ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    endforeach;
+                                endif;
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5">
+                <section class="panel">
+                    <header class="panel-heading">
                         Clasificacion general
 
                     </header>
@@ -181,7 +321,9 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <?php foreach ($clasificacionMundialEquipos as $equipo): ?>
+                                                                                    <?php
+                                                                                    foreach ($clasificacionMundialEquipos as $equipo):
+                                                                                        ?>
                                                                                         <tr>
                                                                                             <td class="rank-posicion">
                                                                                                 <?php echo $equipo->getPosicionMundial(); ?>º
@@ -193,149 +335,13 @@
                                                                                                 <?php echo $equipo->getPuntosMundial(); ?>
                                                                                             </td>
                                                                                         </tr>
-                                                                                    <?php endforeach; ?>
+                                                                                    <?php endforeach;
+                                                                                    ?>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
                                                                     </section>
                                                                 </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-5">
-                                                                        <section class="panel">
-                                                                            <header class="panel-heading">
-                                                                                Clasificacion Gp <?php echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )"; ?>
-                                                                            </header>
-                                                                            <div class="panel-body">
-                                                                                <table class="table table-bordered table-striped table-condensed">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th class="numeric">Posicion</th>
-                                                                                            <th>Foto</th>
-                                                                                            <th>Usuario</th>
-                                                                                            <th class="numeric">Puntos</th>                                                                        
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <tr class="mi-posicion">
-                                                                                            <td class="rank-posicion">
-                                                                                                <?php echo $miClasificacionGp->getPosicion(); ?>º
-                                                                                            </td>
-                                                                                            <td style="text-align: center;">
-                                                                                                <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $miClasificacionGp->getUsuario()->getAvatar()->getAvatar(); ?>">
-                                                                                            </td>
-                                                                                            <td>                                                                                            
-                                                                                                <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $miClasificacionGp->getUsuario()->getNick(); ?>"><?php echo $miClasificacionGp->getUsuario()->getNick(); ?></a>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <?php echo $miClasificacionGp->getPuntos(); ?>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <?php foreach ($clasificacionGp->getClasificacionUsuarios() as $clasificacionUsuario): ?>
-                                                                                            <tr>
-                                                                                                <td class="rank-posicion">
-                                                                                                    <?php echo $clasificacionUsuario->getPosicion(); ?>º
-                                                                                                </td>
-                                                                                                <td style="text-align: center;">
-                                                                                                    <img class="round-pilots" alt="" src="<?= base_url() ?>img/avatares/<?php echo $clasificacionUsuario->getUsuario()->getAvatar()->getAvatar() ?>">
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <a href="<?php echo site_url(); ?>perfil/ver/<?php echo $clasificacionUsuario->getUsuario()->getNick(); ?>"><?php echo $clasificacionUsuario->getUsuario()->getNick(); ?></a>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <?php echo $clasificacionUsuario->getPuntos(); ?>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        <?php endforeach; ?>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </section>
-                                                                    </div>
-                                                                    <div class="col-lg-4">
-                                                                        <section class="panel">
-                                                                            <header class="panel-heading">                                                                
-                                                                                Clasificacion Gp Pilotos <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " ( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
-
-                                                                            </header>
-                                                                            <div class="panel-body">
-                                                                                <table class="table table-bordered table-striped table-condensed">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th class="numeric">Posicion</th>
-                                                                                            <th>Foto</th>
-                                                                                            <th>Piloto</th>
-                                                                                            <th class="numeric">Puntos</th>                                                                        
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php
-                                                                                        foreach ($clasificaionGpPiloto->getClasificacionPilotos() as $clasificacionPiloto):
-                                                                                            if ($clasificacionPiloto->getPosicionGp() != 0):
-                                                                                                ?>
-                                                                                                <tr>
-                                                                                                    <td>
-                                                                                                        <?php echo $clasificacionPiloto->getPosicionGp(); ?>
-                                                                                                    </td>
-                                                                                                    <td style="text-align: center;">
-                                                                                                        <img class="round-pilots" alt="" src="<?= base_url() ?>img/pilotos/<?php echo $clasificacionPiloto->getFoto() . ".jpg"; ?>">
-                                                                                                    </td>
-                                                                                                    <td>
-                                                                                                        <a href="<?php echo site_url() . 'mercado/fichaPiloto/' . $clasificacionPiloto->getIdPiloto(); ?>"><?php echo $clasificacionPiloto->getNombre() . " " . $clasificacionPiloto->getApellido(); ?></a>
-                                                                                                    </td>
-                                                                                                    <td>
-                                                                                                        <?php echo $clasificacionPiloto->getPuntosGp(); ?>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                                <?php
-                                                                                            endif;
-                                                                                        endforeach;
-                                                                                        ?>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </section>
-                                                                    </div>
-                                                                    <div class="col-lg-3">
-                                                                        <section class="panel">
-                                                                            <header style="text-align: center;" class="panel-heading">                                                                
-                                                                                Clasificacion Gp Constructores <?php echo $clasificaionGpPiloto->getCircuito()->getCircuito() . " <br>( " . $clasificaionGpPiloto->getCircuito()->getPais() . " )"; ?>
-
-                                                                            </header>
-                                                                            <div class="panel-body">
-                                                                                <table class="table table-bordered table-striped table-condensed">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th class="numeric">Posicion</th>
-                                                                                            <th>Piloto</th>
-                                                                                            <th class="numeric">Puntos</th>                                                                        
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php
-                                                                                        foreach ($clasificaionGpEquipos as $constructor):
-                                                                                            foreach ($constructor->ConstructorStandings as $standings):
-                                                                                                ?>
-                                                                                                <tr>
-                                                                                                    <td>
-                                                                                                        <?php echo $standings->positionText; ?>
-                                                                                                    </td>
-                                                                                                    <td>
-                                                                                                        <?php echo $standings->Constructor->name; ?>
-                                                                                                    </td>
-                                                                                                    <td>
-                                                                                                        <?php echo $standings->points; ?>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                                <?php
-                                                                                            endforeach;
-                                                                                        endforeach;
-                                                                                        ?>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </section>
-                                                                    </div>
                                                                 </div>
 
                                                                 <!-- page end-->

@@ -61,7 +61,7 @@ class PilotoClasificacionGp extends Piloto {
             $this->posicionGp = $datosGpPiloto->row()->posicion;
         } else {
             $this->puntosGp = "-";
-            $this->posicionGp = 0;
+            $this->posicionGp = 100;
         }
     }
 

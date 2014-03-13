@@ -632,4 +632,28 @@ class Equipos_model extends CI_Model {
         return $equipos;
     }    
     
+    function getResultadosEquipos($idEquipo,$idGp){
+        $sql = "SELECT * FROM resultados_equipos "
+                . "WHERE id_equipo = ? "
+                . "AND id_gp = ?";
+        
+        return $this->db->query($sql,array($idEquipo,$idGp));
+    }
+    
+    function getClasificacionGp($idGp){
+        $sql = "SELECT * FROM equipos";
+        
+        $result = $this->db->query($sql)->result();
+        
+        $equipos = array();
+        
+        foreach ($result as $row){
+            $equipos[] = new EquipoClasificacionGp($row->id, $idGp);
+        }
+        
+        usort($equipos, array("EquipoClasificacionGp", "comparaPosicionGp"));
+        
+        return $equipos;
+    }
+    
 }
