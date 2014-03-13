@@ -144,7 +144,7 @@ class Stikis_model extends CI_model {
             }
 
             //Comprobar si le llega
-            if ($usuario->getFondos() >= -200000) {
+            if ($usuario->getFondos() - $coste_con_mejora >= -200000) {
 
                 $pilotoConStiki = false;
                 foreach ($stikisGp as $stiki) {
