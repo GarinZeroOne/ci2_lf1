@@ -236,7 +236,8 @@ class Mejoras_model extends CI_Model {
                 $conepto   = 'mejora_'.strtolower($mejora->nombre);
                 $idEquipo = 0;
                 $tipoMovimiento = 'gasto';
-                $this->banco_model->registrarMovimiento($idPiloto, $dinero, $idUsuario, $conepto, $idEquipo, $tipoMovimiento);
+                $texto_concepto = 'Se ha mejorado el nivel de '.$mejora->nombre.' a 1';
+                $this->banco_model->registrarMovimiento($idPiloto, $dinero, $idUsuario, $conepto, $idEquipo, $tipoMovimiento, $texto_concepto);
 
                 $this->session->set_flashdata('msg_ok', 'Se ha aumentado el nivel de '.$mejora->nombre);
             } else {

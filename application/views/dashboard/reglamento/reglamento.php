@@ -128,7 +128,30 @@
 
                                        <p>Puedes quedarte en numeros negativos hasta un máximo de -200.000 € .</p>
                                        <p>En la siguiente tabla puedes ver los puntos otorgados dependiendo de tus fondos:</p>
-                                       <p>Disponible en los próximos dias.</p>
+                                       
+                                        <!-- Tabla datos banco-->
+                                        
+                                        
+
+                                        <ul class="banco">
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 5.000.000 <?php echo $this->lang->line('reglas_s_y'); ?> 10.000.000 € : 25 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 4.000.000 <?php echo $this->lang->line('reglas_s_y'); ?> 5.000.000 € : 22 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 3.000.000 <?php echo $this->lang->line('reglas_s_y'); ?> 4.000.000 € : 18 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 2.000.000 <?php echo $this->lang->line('reglas_s_y'); ?> 3.000.000 € : 15 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 1.000.000 <?php echo $this->lang->line('reglas_s_y'); ?> 2.000.000 € : 12 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 800.000 <?php echo $this->lang->line('reglas_s_y'); ?> 1.000.000 € : 10 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 600.000 <?php echo $this->lang->line('reglas_s_y'); ?> 800.000 € : 7 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 400.000 <?php echo $this->lang->line('reglas_s_y'); ?> 600.000 € : 5 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 200.000 <?php echo $this->lang->line('reglas_s_y'); ?> 400.000 € : 4 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 50.000 <?php echo $this->lang->line('reglas_s_y'); ?> 200.000 € : 2 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> 0 <?php echo $this->lang->line('reglas_s_y'); ?> 50.000 € : 1 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> -50.000 <?php echo $this->lang->line('reglas_s_y'); ?> 0 € : -2 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> -100.000 <?php echo $this->lang->line('reglas_s_y'); ?> -50.000 € : -4 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> -150.000 <?php echo $this->lang->line('reglas_s_y'); ?> -100.000 € : -6 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                            <li> <?php echo $this->lang->line('reglas_s_entre'); ?> -200.000 <?php echo $this->lang->line('reglas_s_y'); ?> -150.000 € : -8 <?php echo $this->lang->line('reglas_s_pm'); ?></li>
+                                        </ul>
+                                        <!-- Tabla datos banco-->
+
                                     </div>
                                 </div>
                             </div>
@@ -145,146 +168,34 @@
                                     <div class="panel-body">
                                         <h4>Puntuaciones y dinero Pilotos</h4>
                                         <table class="table table-striped table-bordered">
-                                        <th>Pos</th>
-                                        <th>Puntos</th>
-                                        <th>Dinero</th>
-                                        <tr>
-                                            <td>1º</td>
-                                            <td>50</td>
-                                            <td>270.000 €</td>
-                                        </tr>
+                                            <th>Pos</th>
+                                            <th>Puntos</th>
+                                            <th>Dinero</th>
+                                            <?php foreach($premios_pilotos as $premiop): ?>
+                                                <tr>
+                                                    <td><?php echo $premiop->posicion; ?>º</td>
+                                                    <td><?php echo $premiop->puntos_manager; ?></td>
+                                                    <td><?php echo es_dinero($premiop->dinero); ?>€</td>
+                                                </tr>
+                                            <?php endforeach; ?>
 
-                                        <tr>
-                                            <td>2º</td>
-                                            <td>43</td>
-                                            <td>230.000 €</td>
-                                        </tr>
+                                        </table>
 
-                                        <tr>
-                                            <td>3º</td>
-                                            <td>40</td>
-                                            <td>200.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>4º</td>
-                                            <td>37</td>
-                                            <td>180.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>5º</td>
-                                            <td>35</td>
-                                            <td>155.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>6º</td>
-                                            <td>33</td>
-                                            <td>135.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>7º</td>
-                                            <td>31</td>
-                                            <td>115.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>8º</td>
-                                            <td>29</td>
-                                            <td>95.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>9º</td>
-                                            <td>27</td>
-                                            <td>86.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>10º</td>
-                                            <td>25</td>
-                                            <td>75.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>11º</td>
-                                            <td>23</td>
-                                            <td>65.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>12º</td>
-                                            <td>20</td>
-                                            <td>55.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>13º</td>
-                                            <td>17</td>
-                                            <td>47.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>14º</td>
-                                            <td>14</td>
-                                            <td>40.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>15º</td>
-                                            <td>11</td>
-                                            <td>35.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>16º</td>
-                                            <td>8</td>
-                                            <td>28.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>17º</td>
-                                            <td>5</td>
-                                            <td>24.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>18º</td>
-                                            <td>3</td>
-                                            <td>21.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>19º</td>
-                                            <td>2</td>
-                                            <td>18.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>20º</td>
-                                            <td>1</td>
-                                            <td>16.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>21º</td>
-                                            <td>1</td>
-                                            <td>14.000 €</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>22º</td>
-                                            <td>1</td>
-                                            <td>12.000 €</td>
-                                        </tr>
-
+                                    <h4>Puntuaciones y dinero Equipos</h4>
+                                    <table class="table table-striped table-bordered">
+                                            <th>Pos</th>
+                                            <th>Puntos</th>
+                                            <th>Dinero</th>
+                                            <?php foreach($premios_equipos as $premioe): ?>
+                                                <tr>
+                                                    <td><?php echo $premioe->posicion; ?>º</td>
+                                                    <td><?php echo $premioe->puntos_manager; ?></td>
+                                                    <td><?php echo es_dinero($premioe->dinero); ?>€</td>
+                                                </tr>
+                                            <?php endforeach; ?>
 
                                     </table>
 
-                                    <h4>Puntuaciones y dinero Equipos</h4>
-                                    Actualizando texto.Estará disponible en los próximos  dias.
                                     </div>
                                 </div>
                             </div>

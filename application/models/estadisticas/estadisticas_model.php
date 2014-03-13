@@ -600,5 +600,28 @@ class Estadisticas_model extends CI_Model
 		return $total_absoluto_ventas;
 	}
 
-	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_premios_pilotos()
+	{
+		$q = $this->db->select('*')->from('premios_manager_pilotos')->order_by('posicion','asc')->get()->result();
+		return $q;
+	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_premios_equipos()
+	{
+		$q = $this->db->select('*')->from('premios_manager_equipos')->order_by('posicion','asc')->get()->result();
+		return $q;
+
+	}
 }

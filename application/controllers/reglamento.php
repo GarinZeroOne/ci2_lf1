@@ -40,6 +40,11 @@ class Reglamento extends CI_Controller {
 	 **/
 	function index()
 	{
+		$this->load->model('estadisticas/estadisticas_model');
+		$this->lang->load('inicio','spanish');
+
+		$datos['premios_pilotos'] = $this->estadisticas_model->get_premios_pilotos();
+		$datos['premios_equipos'] = $this->estadisticas_model->get_premios_equipos();
 
 		// Menu Izquierda
 		$sidebarleft 		  = array();
