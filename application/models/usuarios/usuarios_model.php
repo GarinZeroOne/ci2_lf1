@@ -631,6 +631,8 @@ class Usuarios_model extends CI_Model {
         $datos['inversion'        ] = $this->estadisticas_model->get_inversion_compras(7,$id_usuario);
         // Obtener inversion ultimos dias
         $datos['ganancias'        ] = $this->estadisticas_model->get_ganancias_ventas(7,$id_usuario);
+        // Obtener numero de mensjes en Hall of fame
+        $datos['hof_num_mensajes' ] = $this->estadisticas_model->get_hof_num_mensajes($id_usuario);
 
 
 

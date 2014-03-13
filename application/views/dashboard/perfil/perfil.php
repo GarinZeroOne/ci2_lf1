@@ -168,7 +168,7 @@
                                             <div class=" wk-progress pf-status">
                                                 <div class="col-md-8 col-xs-8">Mensajes en Hall of fame</div>
                                                 <div class="col-md-4 col-xs-4">
-                                                    <strong>0</strong>
+                                                    <strong><?php echo $info_usuario['hof_num_mensajes']; ?></strong>
                                                 </div>
                                             </div>
                                             <div class=" wk-progress pf-status">

@@ -624,4 +624,17 @@ class Estadisticas_model extends CI_Model
 		return $q;
 
 	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_hof_num_mensajes($id_usuario)
+	{
+		$q = $this->db->select('id')->from('hof_respuestas')->where('id_usuario',$id_usuario)->get();
+
+		return $q->num_rows();
+	}
 }
