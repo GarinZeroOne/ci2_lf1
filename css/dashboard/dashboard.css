@@ -464,8 +464,8 @@ div.panel-body-circuito
 /*clasificaciones*/
 .mi-posicion td
 {
-    background-color: #FFF0E7  !important;
-    color: #D06F01 !important;
+    background-color: #1FB5AD  !important;
+    color: #fff !important;
     font-weight: bold;
 }
 
@@ -489,29 +489,29 @@ span.team-subtit{
 
 /*Mi oficina*/
 table tbody tr  td.concepto{
-    background-color: #6D0000 !important;
-    border-bottom: 1px solid #921212 !important;
+    background-color: #32323A !important;
+    border-bottom: 1px solid #484747 !important;
     color: #FFFFFF !important;
     text-shadow: 1px -1px 2px #805000;
 }
 
 table thead.resumen-gp{
-    background-color: #B54200 !important;
-    border: 1px solid #D33809 !important;
-    color: #FFFFFF;
+    background-color: #0D1700 !important;
+    border: 1px solid #1FB5AD !important;
+    color: #1FB5AD;
 }
 
 table tbody tr#totales
 {
-    background-color: #CFE68F;
-    border: 1px solid #BDDC94  !important;
+    background-color: #1FB5AD;
+    border: 1px solid #1FB5AD !important;
     color: #2072D6;
     font-size: 15px;
     font-weight: bold;
 }
 table tbody tr#totales td{
-    color: #2B5B00  !important;
-    border: 1px solid #9EDC3F !important;
+    border: 1px solid #1A8984 !important;
+    color: #FFFFFF !important;
 }
 
 table tbody tr td{
