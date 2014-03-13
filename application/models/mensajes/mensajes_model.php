@@ -67,6 +67,64 @@ class Mensajes_model extends CI_Model {
 	}
 
 	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function notificaciones_activas()
+	{
+		$this->dbx = $this->load->database('local', TRUE);
+		$q = $this->dbx->select('*')->from('notificaciones')->where('activa',1)->order_by('fecha_notificacion','desc')->get();
+
+		if($q->num_rows())
+		{
+			$html = '<li>
+                    <p class="">Tienes '.$q->num_rows().' notificacion</p>
+	                </li>';
+
+			foreach($q->result() as $notificacion)
+			{
+				$html .= '
+	                <li>
+	                    <a href="#">
+	                        <div class="task-info clearfix">
+	                            <div class="desc pull-left">
+	                                <h5>'.$notificacion->titulo.'</h5>
+	                                '.$notificacion->texto.'
+
+	                            </div>
+	                                    
+	                        </div>
+	                    </a>
+	                </li>';
+			}
+		}
+		else
+		{
+			$html = '<li>
+                    <p class="">No hay ninguna notificación</p>
+	                </li>';
+		}
+
+		return $html;
+	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function notificaciones_contador()
+	{
+		$this->dbx = $this->load->database('local', TRUE);
+		$q = $this->dbx->select('*')->from('notificaciones')->where('activa',1)->order_by('fecha_notificacion','desc')->get();
+
+		return $q->num_rows();
+	}
+
+	/**
 	 * Devuelve todas las alertas de un usuario
 	 *
 	 * @return void

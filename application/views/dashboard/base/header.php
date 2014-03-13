@@ -70,25 +70,10 @@
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-tasks"></i>
-                <span class="badge bg-important">1</span>
+                <span class="badge bg-important"><?php echo mensajes_model::notificaciones_contador(); ?></span>
             </a>
             <ul class="dropdown-menu extended tasks-bar">
-                <li>
-                    <p class="">Tienes 1 notificacion</p>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Temporada 2014!</h5>
-                                <p>Bienvenido a esta nueva temporada! Tomate unos minutos en leer el Reglamento y ponerte al dia con todas las características de este año. </p>
-                                <p>Presentate en el foro y comparte  con la comunidad tus conocimientos o dudas!</p>
-
-                            </div>
-                                    
-                        </div>
-                    </a>
-                </li>
+                <?php echo mensajes_model::notificaciones_activas(); ?>
                 
 
                 <li class="external">
