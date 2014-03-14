@@ -179,24 +179,16 @@ class Admin extends CI_Controller {
                 }
             }
 
-            //Se insertan los resultados de los equipos            
-            //Se obtienen la clasificacion de equipos del gp 
-            $url = 'http://ergast.com/api/f1/' . $season . '/' . $gpNumber
-                    . '/constructorStandings.json';
-
-            $json = json_decode(file_get_contents($url));
-
-            $MRData = $json->MRData->StandingsTable->StandingsLists;
-
-            foreach ($MRData as $constructor) {
-                foreach ($constructor->ConstructorStandings as $standings) {
-
-                    $equipo = $this->admin_model->obtenerEquipoConstructorId
-                                    ($standings->Constructor->constructorId)->row();
+            //Se insertan los resultados de los equipos                        
+            $ordenEquipos = $this->admin_model->obtenerOrdenEquiposGp($idGp)->result();
+            
+            $contador = 1;
+            
+            foreach ($ordenEquipos as $equipo) {                                    
 
                     $this->admin_model->insertarPosicionEquipo
-                            ($equipo->id, $idGp, $standings->positionText, $standings->points);                    
-                }
+                            ($equipo->id_equipo, $idGp, $contador, $equipo->puntos);                    
+                $contador++;
             }          
 
             return "Resultados generados correctamente";
