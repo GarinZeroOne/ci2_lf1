@@ -44,9 +44,9 @@
                                <h1><?php echo $info_usuario['posicionRanking'] ?> º</h1>
                                <p>Posición ranking General</p>
                                <h1><?php echo es_dinero($info_usuario['inversion']) ?> €</h1>
-                               <p>Inversión compras de los últimos días</p>
+                               <p>Inversión en mercado de los últimos días (pilotos y equipos)</p>
                                <h1><?php echo es_dinero($info_usuario['ganancias']) ?> €</h1>
-                               <p>Ganacias ventas de los últimos días</p>
+                               <p>Ventas en mercado de los últimos días (pilotos y equipos)</p>
 
                                <?php 
                                /*

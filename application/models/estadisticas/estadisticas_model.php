@@ -418,6 +418,21 @@ class Estadisticas_model extends CI_Model
 	function get_inversion_compras($dias = 7,$id_usuario)
 	{
 
+		$sql = 'SELECT sum( dinero ) pasta_compras
+				FROM movimientos_banco
+				WHERE id_usuario ='.$id_usuario.'
+				AND (
+				concepto = "alquiler_piloto"
+				OR concepto = "compra_equipo"
+				OR concepto = "compra_piloto"
+				)
+				AND fecha >= ( CURDATE( ) - INTERVAL '.$dias.'
+				DAY )';
+		$r = $this->db->query($sql)->row()->pasta_compras;
+
+		return $r;
+
+		/*
 		// Dinero en fichaje de pilotos
 		//
 		$query_fichaje_pilotos = "select * from fichajes_pilotos where id_usuario=? and fecha >= ( CURDATE() - INTERVAL ".$dias." DAY )";
@@ -441,7 +456,7 @@ class Estadisticas_model extends CI_Model
 										 ->row()
 										 ->valor_actual;
 
-				/*Fichado o alquilado?*/
+				//Fichado o alquilado?
 				if( $fichaje->tipo_compra == 'alquilado')
 				{
 
@@ -500,6 +515,8 @@ class Estadisticas_model extends CI_Model
 		$total_absoluto_inversiones = $total_dinero_fichajes_pilotos + $total_dinero_fichajes_equipos;
 
 		return $total_absoluto_inversiones;
+		*/
+
 	}
 
 
@@ -512,6 +529,19 @@ class Estadisticas_model extends CI_Model
 	function get_ganancias_ventas($dias = 7,$id_usuario)
 	{
 
+		$sql = 'SELECT sum( dinero ) pasta_ventas
+				FROM movimientos_banco
+				WHERE id_usuario ='.$id_usuario.'
+				AND (
+				concepto = "venta_alquiler_piloto"
+				OR concepto = "venta_equipo"
+				OR concepto = "venta_piloto"
+				)
+				AND fecha >= ( CURDATE( ) - INTERVAL '.$dias.' DAY )';
+		$r = $this->db->query($sql)->row()->pasta_ventas;
+
+		return $r;
+		/*
 		// Dinero en venta de pilotos
 		//
 		$query_venta_pilotos = "select * from ventas_pilotos where id_usuario=? and fecha >= ( CURDATE() - INTERVAL ".$dias." DAY )";
@@ -597,7 +627,10 @@ class Estadisticas_model extends CI_Model
 
 		$total_absoluto_ventas = $total_dinero_ventas_pilotos + $total_dinero_ventas_equipos;
 		
+
+
 		return $total_absoluto_ventas;
+		*/
 	}
 
 	/**
