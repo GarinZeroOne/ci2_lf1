@@ -98,6 +98,48 @@ div#countDownt span.letrat{
     font-size: 25px;
 }
 
+/*Subidones - Bajones*/
+
+span.tit_subidon
+{
+    color:#4B8200;
+}
+span.tit_bajon
+{
+    color:#F75A5A;
+}
+span.lbl-nombre-piloto
+{
+    font-size: 10px;
+}
+table#subidash > thead > tr > th
+{
+    border: none !important;
+}
+table#subidash > tbody > tr > td
+{
+    border-top:1px solid #BEFB60;
+    padding: 4px;
+}
+
+table#bajadash > thead > tr > th
+{
+    border: none !important;
+}
+table#bajadash > tbody > tr > td
+{
+    border-top:1px solid #FFB7B7;
+    padding: 4px;
+}
+
+
+div.vactual{
+
+}
+div.diferencia{
+    min-width: 66px;
+}
+
 /*Notificaciones*/
 .dropdown-menu.tasks-bar .task-info .desc {
     

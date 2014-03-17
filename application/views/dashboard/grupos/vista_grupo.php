@@ -10,7 +10,7 @@
                     <!--breadcrumbs start -->
                     <ul class="breadcrumb">
                         <li><a href="<?php echo site_url(); ?>grupos"><i class="fa fa-home"></i> Grupos</a></li>
-                        <li class="active"><a href="#"> Baratxoko</a></li>
+                        <li class="active"><a href="#"> <?php echo $grupo_info->nombre; ?></a></li>
                     </ul>
                     <!--breadcrumbs end -->
 

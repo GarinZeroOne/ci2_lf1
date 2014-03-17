@@ -670,4 +670,99 @@ class Estadisticas_model extends CI_Model
 
 		return $q->num_rows();
 	}
+
+	/**
+	 * Devuelve los pilotos que mas han subido hoy
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_subidones()
+	{
+
+		// Los domingos y Lunes  mostramos subidones del dia anterior
+		$dia = date("N");
+
+		if($dia == 0 || $dia == 1)
+		{
+
+			$fecha = date('Y-m-d',strtotime('-1 day',strtotime(date('Y-m-d'))));
+			
+		}
+		else
+		{
+			$fecha = date('Y-m-d');
+		}
+
+
+
+		$sql = "SELECT 
+					valor_actual - valor_anterior as diferencia,valor_piloto.*,pilotos.* 
+				FROM 
+					valor_piloto join pilotos on pilotos.id=valor_piloto.id_piloto
+				WHERE  
+					fecha = ?
+				ORDER BY 
+					diferencia DESC
+				LIMIT 
+					5";
+
+		$subidones = $this->db->query($sql,array($fecha))->result();
+
+
+		return $subidones;
+
+	}
+
+	/**
+	 * Devuelve los pilotos que mas han bajado hoy
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_bajones()
+	{
+
+		// Los domingos y Lunes  mostramos bajones del dia anterior
+		$dia = date("N");
+
+		if($dia == 0 || $dia == 1)
+		{
+			$fecha = date('Y-m-d',strtotime('-1 day',strtotime(date('Y-m-d'))));
+		}
+		else
+		{
+			$fecha = date('Y-m-d');
+		}
+
+		$sql = "SELECT 
+					valor_actual - valor_anterior as diferencia,valor_piloto.*,pilotos.* 
+				FROM 
+					valor_piloto join pilotos on pilotos.id=valor_piloto.id_piloto
+				WHERE  
+					fecha = ?
+				ORDER BY 
+					diferencia ASC
+				LIMIT 
+					5";
+
+		$bajones = $this->db->query($sql,array($fecha))->result();
+
+		return $bajones;
+	}
+
+	function get_texto_dia_subidas_bajadas()
+	{
+		// Los domingos y Lunes  mostramos bajones del dia anterior
+		$dia = date("N");
+
+		if($dia == 0 || $dia == 1)
+		{
+			return " ayer";
+		}
+		else
+		{
+			return " hoy";
+		}
+	}
 }

@@ -41,7 +41,6 @@ class Dashboard extends CI_Controller {
 	function index()
 	{
 		
-		
 		// Datos al contenido
 		$datos = array();
 
@@ -63,6 +62,11 @@ class Dashboard extends CI_Controller {
 		$datos['ultimos_pilotos_comprados'] = $this->estadisticas_model->get_ultimos_comprados();
 		// Variaciones mercado pilotos
 		$datos['info_mercado_pilotos'     ] = $this->pilotos_model->getInfoPilotos();
+
+		// Subidones y Bajones del dia
+		$datos['subidones'] = $this->estadisticas_model->get_subidones();
+		$datos['bajones'  ] = $this->estadisticas_model->get_bajones();
+		$datos['subidas_bajadas_texto_dia'] = $this->estadisticas_model->get_texto_dia_subidas_bajadas();
 
 		// Grafica Movimiento dinero Fichajes/Ventas
 		$chart_data = $this->estadisticas_model->get_info_fichajes_ventas();

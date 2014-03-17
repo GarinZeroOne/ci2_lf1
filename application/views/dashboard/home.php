@@ -53,6 +53,8 @@
         <!-- page start-->
         
         
+        <?php /* ALERTAS Y MENSAJES IMPORTANTES */
+        /*
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-aviso fade in">
@@ -65,6 +67,8 @@
                                 
             </div>
         </div>
+        */
+        ?>
 
         <!--mini statistics start-->
         <div class="row">
@@ -126,6 +130,119 @@
             
             <div class="col-md-4">
                 <section class="panel">
+                    <div class="panel-body">
+
+                
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+
+                        
+                                <table id="subidash" class="table">
+                                    <thead>
+                                        <th colspan="3"> <span class="tit_subidon">TOP Subidas de <?php echo $subidas_bajadas_texto_dia; ?></span></th>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach($subidones as $piloto):?>
+                                        <tr style="background: rgba(204, 255, 169, <?php echo $i; ?>)">
+                                            <td width="40"> <img class="round-pilots" src="<?php echo base_url();?>img/pilotos/<?php echo $piloto->foto;?>.jpg" alt="<?php echo $piloto->apellido; ?>"> </td>
+                                            <td> 
+                                                    <span class="lbl-nombre-piloto"> <a href="<?php echo site_url();?>/mercado/fichaPiloto/<?php echo $piloto->id_piloto; ?>"><?php echo $piloto->nombre."</br>".$piloto->apellido; ?></a><span>
+
+                                            </td>
+                                            <td>
+                                                <div class="vactual">
+                                                    <span style="font-weight: 600; color: rgb(41, 85, 0);">
+                                                    <?php echo es_dinero($piloto->valor_actual); ?>
+                                                    </span>
+                                                </div>
+                                                <div class="diferencia">
+                                                    <i style="color: rgb(90, 157, 29); font-size: 13px;" class="fa fa-angle-double-up"></i>
+                                                    <span style="color: rgb(90, 157, 29); font-size: 12px;"><?php echo es_dinero($piloto->diferencia); ?></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php $i = $i-0.2; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                           
+                        
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        
+                                <table id="bajadash" class="table">
+                                    <thead>
+                                        <th colspan="3"> <span class="tit_bajon">TOP Bajadas de <?php echo $subidas_bajadas_texto_dia; ?></span></th>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach($bajones as $piloto):?>
+                                        <tr style="background: rgba(255, 186, 186, <?php echo $i; ?>)">
+                                            <td width="40"> <img class="round-pilots" src="<?php echo base_url();?>img/pilotos/<?php echo $piloto->foto;?>.jpg" alt="<?php echo $piloto->apellido; ?>"> </td>
+                                            <td> 
+                                                    <span class="lbl-nombre-piloto"> <a href="<?php echo site_url();?>/mercado/fichaPiloto/<?php echo $piloto->id_piloto; ?>"><?php echo $piloto->nombre."</br>".$piloto->apellido; ?></a><span>
+
+                                            </td>
+                                            <td>
+                                                <div class="vactual">
+                                                    <span style="font-weight: 600; color: rgb(41, 85, 0);">
+                                                    <?php echo es_dinero($piloto->valor_actual); ?>
+                                                    </span>
+                                                </div>
+                                                <div class="diferencia">
+                                                    <i style="color: rgb(255, 0, 0); font-size: 12px;" class="fa fa-angle-double-down"></i>
+                                                    <span style="color: rgb(255, 3, 3); font-size: 11px;"><?php echo es_dinero($piloto->diferencia); ?></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php $i = $i-0.2; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                         
+                    </div>
+                    
+                </div> <!-- row inside -->
+                
+                </div><!-- panel-body -->
+            </section> <!-- section -->
+
+            <section class="panel">
+                    <header class="panel-heading">
+                        Actualidad Formula 1
+                        <span class="tools pull-right">
+                            
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <table class="table  table-hover general-table">
+                            
+                            <tbody>
+                        <?php foreach($noticiasfeed->item  as $noticia):?>
+                                <?php if($i<8):?>
+                                <tr>
+                                    
+                                    <td><a target="_blank" href="<?php echo $noticia->link;?>"> <?php echo $noticia->title; ?> </a></td>
+                                </tr>
+                                <?php ++$i; endif;?>
+
+                        <?php endforeach;?>
+
+                            
+
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+
+            </div>
+            
+            <?php /*
+            <div class="col-md-4">
+                <section class="panel">
                     <header class="panel-heading">
                         Actualidad Formula 1
                         <span class="tools pull-right">
@@ -153,7 +270,7 @@
                     </div>
                 </section>
             </div>
-
+            */?>
             <div class="col-md-5">
                 
                 <!-- OPINIONES start-->
