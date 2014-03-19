@@ -144,6 +144,7 @@
                                     <tbody>
                                         <?php $i = 1; ?>
                                         <?php foreach($subidones as $piloto):?>
+                                        <?php if($piloto->diferencia>0): ?>
                                         <tr style="background: rgba(204, 255, 169, <?php echo $i; ?>)">
                                             <td width="40"> <img class="round-pilots" src="<?php echo base_url();?>img/pilotos/<?php echo $piloto->foto;?>.jpg" alt="<?php echo $piloto->apellido; ?>"> </td>
                                             <td> 
@@ -162,6 +163,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <?php endif; ?>
                                         <?php $i = $i-0.2; ?>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -179,6 +181,7 @@
                                     <tbody>
                                         <?php $i = 1; ?>
                                         <?php foreach($bajones as $piloto):?>
+                                        <?php if($piloto->diferencia<0): ?>
                                         <tr style="background: rgba(255, 186, 186, <?php echo $i; ?>)">
                                             <td width="40"> <img class="round-pilots" src="<?php echo base_url();?>img/pilotos/<?php echo $piloto->foto;?>.jpg" alt="<?php echo $piloto->apellido; ?>"> </td>
                                             <td> 
@@ -197,6 +200,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <?php endif; ?>
                                         <?php $i = $i-0.2; ?>
                                         <?php endforeach; ?>
                                     </tbody>

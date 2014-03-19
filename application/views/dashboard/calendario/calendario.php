@@ -2,6 +2,30 @@
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
+        <!-- publi row -->
+        <div class="row">
+            <div class="col-lg-12 hidden-md">
+                <section class="panel-pub">
+                    <div class="panel-body">
+                        <div class="pub-cont">
+                            
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <!-- HorizontalGrande2014 -->
+                                <ins class="adsbygoogle"
+                                     style="display:inline-block;width:970px;height:90px"
+                                     data-ad-client="ca-pub-2361705659034560"
+                                     data-ad-slot="7256510330"></ins>
+                                <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- publi row -->
+        
         <!-- page start-->
         <div class="row">
             <div class="col-md-12">

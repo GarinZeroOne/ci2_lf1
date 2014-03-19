@@ -560,3 +560,12 @@ table tbody tr td{
     /*border: 1px solid #CAE6F9 !important;*/
     /*color:#0E6099  !important;*/
 }
+
+/*content publi*/
+div.pub-cont{
+    text-align: center;
+}
+section.panel-pub div.panel-body{
+    margin-top: -10px;
+    padding: 1px;
+}

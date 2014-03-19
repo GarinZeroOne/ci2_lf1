@@ -4,6 +4,30 @@
         <section class="wrapper">
         <!-- page start-->
         
+        <!-- publi row -->
+        <div class="row">
+            <div class="col-lg-12 hidden-md">
+                <section class="panel-pub">
+                    <div class="panel-body">
+                        <div class="pub-cont">
+                            
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <!-- HorizontalGrande2014 -->
+                                <ins class="adsbygoogle"
+                                     style="display:inline-block;width:970px;height:90px"
+                                     data-ad-client="ca-pub-2361705659034560"
+                                     data-ad-slot="7256510330"></ins>
+                                <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- publi row -->
+
         <!-- Migas -->
         <div class="row">
             <div class="col-md-12">
@@ -248,14 +272,14 @@
                                         <tr>
                                             <td class="posicion"><b style="color:#ff0000;"><? echo $j ?>º</b></td>
                                             <td width="20"><img src="<?= base_url() ?>img/avatares/<? echo $linea->avatar; ?>" class="round-pilots" /></td>
-                                            <td class="nick"><b style="color:#ff0000;"><? echo anchor('usuarios/perfil/'.$linea->nick,$linea->nick);  ?></b></td>
+                                            <td class="nick"><b style="color:#ff0000;"><? echo anchor('perfil/ver/'.$linea->nick,$linea->nick);  ?></b></td>
                                             <td class="puntos"><b style="color:#ff0000;"><? echo $linea->puntos; ?></b></td>
                                         </tr>
                                     <? else: ?>
                                                 <tr>
                                                     <td class="posicion"><?= $j ?>º</td>
                                                     <td width="20"><img  src="<?= base_url() ?>img/avatares/<? echo $linea->avatar; ?>" class="round-pilots" /></td>
-                                                    <td class="nick"><? echo anchor('usuarios/perfil/'.$linea->nick,$linea->nick);  ?></td>
+                                                    <td class="nick"><? echo anchor('perfil/ver/'.$linea->nick,$linea->nick);  ?></td>
                                                     <td class="puntos"><? echo $linea->puntos; ?></td>
                                                 </tr>
                                             <?
@@ -304,14 +328,14 @@
                                     <tr>
                                         <td class="posicion"><b style="color:#ff0000;"><? echo $i; ?>º</b></td>
                                         <td><img  class="round-pilots" src= "<?= base_url() ?>img/avatares/<? echo $linea->avatar; ?>" /></td>
-                                        <td class="nick"><b style="color:#ff0000;"><? echo anchor('usuarios/perfil/'.$linea->nick,$linea->nick);  ?></b></td>
+                                        <td class="nick"><b style="color:#ff0000;"><? echo anchor('perfil/ver/'.$linea->nick,$linea->nick);  ?></b></td>
                                         <td class="puntos"><b style="color:#ff0000;"><? echo $linea->puntos_manager_gp ?></b></td>
                                     </tr>
                                 <? else: ?>
                                             <tr>
                                                 <td class="posicion"><? echo $i; ?>º</td>
                                                 <td><img class="round-pilots" src="<?= base_url() ?>img/avatares/<? echo $linea->avatar; ?>" /></td>
-                                                <td class="nick"><? echo anchor('usuarios/perfil/'.$linea->nick,$linea->nick);  ?></td>
+                                                <td class="nick"><? echo anchor('perfil/ver/'.$linea->nick,$linea->nick);  ?></td>
                                                 <td class="puntos"><?= $linea->puntos_manager_gp ?></td>
                                             </tr>
                                         <?
