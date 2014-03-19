@@ -52,6 +52,9 @@ class Grupos extends CI_Controller {
 		$datos['gruposUsuario'] = $this->grupos_model->obtenerGruposUsuario($_SESSION['id_usuario'])->result();
 		//dump($datos['gruposUsuario']);
 
+		// Obtener grupos publicos
+		$datos['grupos_publicos'] = $this->grupos_model->obtener_grupos_publicos();
+
         //  Ejemplo GASTOS /INGRESOS
 		// Se ha  echo un gasto/ingreso ,se guarda lo ke tenia antes del gasto/ingreso
 		//$this->session->set_flashdata('banco_desde', '1300000');
@@ -62,7 +65,7 @@ class Grupos extends CI_Controller {
 		
 
 		// Javascript
-		$bottom['javascript'] = array('dashboard/grupos.js');
+		$bottom['javascript'] = array('dashboard/grupos.js','dashboard/texto_tabla_es.js');
 
 		// Vistas base | Header | Menu Principal
 		$this->load->view('dashboard/base/header.php',$header);

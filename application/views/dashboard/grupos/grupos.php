@@ -113,6 +113,62 @@
 
         </div>
 
+        <div class="row">
+           
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Grupos publicos
+                        
+                    </header>
+                    <div class="panel-body">
+                    <div class="adv-table">
+                    <table  class="display table table-bordered table-striped" id="dynamic-table">
+                    <thead>
+                    <tr>
+                        <th>Nombre Grupo</th>
+                        <th>Administrador</th>
+                        <th>Descripción</th>
+                        <th>Imagen</th>
+                        <th>Fecha</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($grupos_publicos as $gp): ?>
+                        <tr class="gradeX">
+                            <td><a href="<?php echo site_url();?>grupos/ver/<?php echo $gp->id; ?>"><?php echo $gp->nombre; ?></a></td>
+                            <td><a href="<?php echo site_url();?>perfil/ver/<?php echo $gp->nick; ?>"><?php echo $gp->nick; ?></a></td>
+                            <td><?php echo $gp->descripcion; ?> </td>
+                            <td>
+                                <?php if($gp->imagen): ?>
+                                    <img class="round-pilots" src="<?php echo base_url();?>img/grupos/<?php echo $gp->imagen;?>" />    
+                                <?php else: ?>
+                                    <i class="fa fa-group" style="font-size:25px"></i>
+                                <?php endif; ?>
+                                
+                            </td>
+                            <td><?php echo timeago(strtotime($gp->fecha_creacion)); ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Nombre Grupo</th>
+                        <th>Administrador</th>
+                        <th>Descripción</th>
+                        <th>Imagen</th>
+                        <th>Fecha</th>
+                    </tr>
+                    </tfoot>
+                    </table>
+                    </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
         <!-- page end-->
         </section>
     </section>

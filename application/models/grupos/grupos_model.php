@@ -521,6 +521,24 @@ class Grupos_model extends CI_Model {
         return $gruposUsuario;
     }
 
+    /**
+     * Devuelve los ultimos grupos publicos
+     *
+     * @return void
+     * @author 
+     **/
+    function obtener_grupos_publicos()
+    {
+        $grupos = $this->db->select('usuarios_grupos.*,usuarios.nick')
+                           ->from('usuarios_grupos')
+                           ->join('usuarios','usuarios.id = usuarios_grupos.id_usuario_creador')
+                           ->where('privado',0)
+                           ->order_by('usuarios_grupos.fecha_creacion','DESC')
+                           ->get()
+                           ->result();
+                           
+        return $grupos;
+    }
 
     /**
      * Setear como notificados todos los mensajes de este grupo
