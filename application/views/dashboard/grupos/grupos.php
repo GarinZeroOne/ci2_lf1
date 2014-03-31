@@ -148,7 +148,7 @@
                                 <?php endif; ?>
                                 
                             </td>
-                            <td><?php echo timeago(strtotime($gp->fecha_creacion)); ?></td>
+                            <td><?php echo date("Y-m-d",strtotime($gp->fecha_creacion)); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     
