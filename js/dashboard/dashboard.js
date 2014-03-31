@@ -378,6 +378,15 @@ $(function () {
 });
 */
 
+$(function()
+{
+
+   $('#demo4').scrollbox({
+      direction: 'h',
+  distance: 105
+
+   });
+});
 
 /*==Weather==*/
 /*

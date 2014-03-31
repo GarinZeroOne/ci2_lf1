@@ -51,7 +51,7 @@ class Estadisticas_model extends CI_Model
 							where procesado=0
 							order by fecha asc
 							limit 1";
-		$idGp = $this->db->query($sql_id_gp)->row()->id_gp;
+		$idGp = $this->db->query($sql_id_gp)->row()->id;
 
 		if( $tipo == 'puntos'){
 
@@ -61,6 +61,7 @@ class Estadisticas_model extends CI_Model
 		else{
 
 			$sql2 = "SELECT id FROM stikis_usuarios WHERE id_gp = ? AND stiki = 'dinero'";
+			
 			return $this->db->query($sql2,array($idGp))->num_rows();
 		}
 	}
@@ -91,13 +92,14 @@ class Estadisticas_model extends CI_Model
 	 * @return void
 	 * @author
 	 **/
-	function  get_ultimos_comprados ( $max  = 12)
+	function  get_ultimos_comprados ( $max  = 25)
 	{
 
 		$query  = $this->db->select('pilotos.id,nombre,apellido,foto')
-						   ->from('usuarios_pilotos')
-						   ->join('pilotos','pilotos.id = usuarios_pilotos.id_piloto')
-						   ->order_by('fecha_fichaje','desc')
+						   ->from('fichajes_pilotos')
+						   ->join('pilotos','pilotos.id = fichajes_pilotos.id_piloto')
+						   ->where('fecha',date('Y-m-d'))
+						   ->order_by('fecha','desc')
 						   ->limit($max)
 						   /*->distinct()*/
 						   ->get();
@@ -115,6 +117,8 @@ class Estadisticas_model extends CI_Model
 		foreach($ultimos as $piloto)
 		{
 			$info_pilotos = new stdClass();
+
+			$info_pilotos->id_piloto = $piloto->id;
 
 			$info_pilotos->nombre_completo = $piloto->nombre." ".$piloto->apellido;
 			$info_pilotos->imagen = $piloto->foto.".jpg";

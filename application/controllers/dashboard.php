@@ -60,8 +60,13 @@ class Dashboard extends CI_Controller {
 		$datos['noticiasfeed'			  ] = $this->noticias_model->get_feed_news()->channel;
 		// Ultimos pilotos comprados
 		$datos['ultimos_pilotos_comprados'] = $this->estadisticas_model->get_ultimos_comprados();
+
 		// Variaciones mercado pilotos
 		$datos['info_mercado_pilotos'     ] = $this->pilotos_model->getInfoPilotos();
+
+		// Datos STIKIS
+		$datos['stikis_puntos'] = $this->estadisticas_model->stikisComprados('puntos');
+		$datos['stikis_dinero'] = $this->estadisticas_model->stikisComprados('dinero');
 
 		// Subidones y Bajones del dia
 		$datos['subidones'] = $this->estadisticas_model->get_subidones();

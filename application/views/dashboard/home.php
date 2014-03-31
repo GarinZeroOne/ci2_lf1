@@ -128,6 +128,55 @@
 
         <div class="row">
             
+            <div class="col-md-9">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div id="demo4" class="scroll-img" title="Fichajes/alquileres/ventas del DÍA">
+                            <ul>
+                            <?php foreach($ultimos_pilotos_comprados as $upf): ?>
+                                <li>
+                                    <div class="piloto-marq">
+                                    <a href="<?php echo site_url(); ?>mercado/fichaPiloto/<?php echo $upf->id_piloto; ?>">
+                                        <img src="<?php echo base_url();?>img/pilotos/<?php echo $upf->imagen; ?>" alt="<?php echo $upf->nombre_completo;?>">
+                                    </a>
+
+                                    <div class="stats">
+                                        <div><i class="fa fa-thumbs-up" style="color:#7ABC2B"></i> <?php echo $upf->por_fichaje; ?>%</div>
+                                        <div><i class="fa fa-thumbs-down" style="color:#ff0000"></i><?php echo $upf->por_venta; ?>%</div>
+                                        <div style="text-align:center;color:#ccc"><?php echo $upf->nombre_completo; ?></div>
+                                    </div>
+                                    </div>
+                                    
+                                </li>
+                            <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    
+                    </div>
+                </section>
+            </div>
+            
+
+            <div class="col-md-3">
+                <section class="panel">
+                    <div class="panel-body">
+                        <h4 class="widget-h">STIKIS <?php  echo $paisGP; ?></h4>
+                        <div>
+                            <img width="50%" src="<?php echo base_url();?>img/stikidinero.png" alt="Stiki Dinero"><span class="cont-stiki"><?php echo $stikis_dinero; ?></span>
+                        </div>
+                        <div  style="margin-top:2px;">
+                            <img width="50%" src="<?php echo base_url();?>img/stikipuntos.png" alt="Stiki Puntos"><span class="cont-stiki"><?php echo $stikis_puntos; ?></span>
+                        </div>
+                    </div>
+                </section>    
+            </div>
+
+            
+
+        </div>
+
+        <div class="row">
+            
             <div class="col-md-4">
                 <section class="panel">
                     <div class="panel-body">
