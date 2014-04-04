@@ -89,28 +89,34 @@ class Calendario extends CI_Controller {
         //Se obtienen los datos de la api
         $anoAnterior = date('Y') - 1;
 
-        $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdCircuito() . "/results/1.json";
-        echo $datos['circuito']->getIdApi();
-        echo $datos['circuito']->getIdCircuito();
-        $json = json_decode(file_get_contents($url));
-        $datos['ultimoGanador'] = $json->MRData;
-        
-        $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdCircuito() . "/results/2.json";
-        $json = json_decode(file_get_contents($url));
-        $datos['segundo'] = $json->MRData;
-        
-        $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdCircuito() . "/results/3.json";
-        $json = json_decode(file_get_contents($url));
-        $datos['tercero'] = $json->MRData;
+        if ($datos['circuito']->getIdApi() != 0) {
 
-        $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdCircuito() . "/fastest/1/drivers.json";
-        $json = json_decode(file_get_contents($url));
-        $datos['pilotoVueltaRapida'] = $json->MRData;
+            $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdApi() . "/results/1.json";            
+            $json = json_decode(file_get_contents($url));
+            $datos['ultimoGanador'] = $json->MRData;
 
-        $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdCircuito() . "/qualifying.json";
-        $json = json_decode(file_get_contents($url));
-        $datos['poleman'] = $json->MRData->RaceTable->Races[0]->QualifyingResults[0];
-        
+            $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdApi() . "/results/2.json";
+            $json = json_decode(file_get_contents($url));
+            $datos['segundo'] = $json->MRData;
+
+            $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdApi() . "/results/3.json";
+            $json = json_decode(file_get_contents($url));
+            $datos['tercero'] = $json->MRData;
+
+            $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdApi() . "/fastest/1/drivers.json";
+            $json = json_decode(file_get_contents($url));
+            $datos['pilotoVueltaRapida'] = $json->MRData;
+
+            $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdApi() . "/qualifying.json";
+            $json = json_decode(file_get_contents($url));
+            $datos['poleman'] = $json->MRData->RaceTable->Races[0]->QualifyingResults[0];
+        } else {
+            $datos['ultimoGanador'] = "";
+            $datos['segundo'] = "";
+            $datos['pilotoVueltaRapida'] = "";
+            $datos['poleman'] = "";
+        }
+
         // Javascript
         $bottom['javascript'] = array();
 

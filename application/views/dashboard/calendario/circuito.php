@@ -3,24 +3,24 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        
+
         <!-- publi row -->
         <div class="row">
             <div class="col-lg-12 hidden-md">
                 <section class="panel-pub">
                     <div class="panel-body">
                         <div class="pub-cont">
-                            
+
                             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <!-- HorizontalGrande2014 -->
-                                <ins class="adsbygoogle"
-                                     style="display:inline-block;width:970px;height:90px"
-                                     data-ad-client="ca-pub-2361705659034560"
-                                     data-ad-slot="7256510330"></ins>
-                                <script>
+                            <!-- HorizontalGrande2014 -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:970px;height:90px"
+                                 data-ad-client="ca-pub-2361705659034560"
+                                 data-ad-slot="7256510330"></ins>
+                            <script>
                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
-                            
+                            </script>
+
                         </div>
                     </div>
                 </section>
@@ -33,12 +33,12 @@
         <div class="row">
             <div class="col-md-12">
                 <!--breadcrumbs start -->
-                    <ul class="breadcrumb">
-                        <li><a href="<?php echo site_url();?>calendario"><i class="fa fa-home"></i> Calendario</a></li>
-                        <li class="active"><a href="#"> <?php echo $circuito->getCircuito(); ?></a></li>
-                        
-                    </ul>
-                    <!--breadcrumbs end -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo site_url(); ?>calendario"><i class="fa fa-home"></i> Calendario</a></li>
+                    <li class="active"><a href="#"> <?php echo $circuito->getCircuito(); ?></a></li>
+
+                </ul>
+                <!--breadcrumbs end -->
             </div>
         </div>
         <div class="row">
@@ -46,7 +46,7 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Circuito
-                        
+
                     </header>
                     <div class="panel-body">
                         <div class="row">
@@ -78,71 +78,88 @@
 
                                                     <table class="table">
                                                         <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Piloto</th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Piloto</th>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <tr>
-                                                            <td>1º</td>
-                                                            <td><?php
-                                                                $datosPiloto = $ultimoGanador->RaceTable->Races[0]->Results[0];
-                                                                $datosSegundo = $segundo->RaceTable->Races[0]->Results[0];
-                                                                $datosTercero = $tercero->RaceTable->Races[0]->Results[0];
-                                                                echo $datosPiloto->Driver->givenName . " "
-                                                                . $datosPiloto->Driver->familyName
-                                                                . " (" . $datosPiloto->Constructor->name . " )";
-                                                                ?></td>
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2º</td>
-                                                            <td><?php
-                                                                echo $datosSegundo->Driver->givenName . " "
-                                                                . $datosSegundo->Driver->familyName
-                                                                . " (" . $datosSegundo->Constructor->name . " )";
-                                                                ?></td>
-                                                           
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3º</td>
-                                                            <td><?php
-                                                                echo $datosTercero->Driver->givenName . " "
-                                                                . $datosTercero->Driver->familyName
-                                                                . " (" . $datosTercero->Constructor->name . " )";
-                                                                ?></td>
-                                                            
-                                                        </tr>
+                                                            <tr>
+                                                                <td>1º</td>
+                                                                <td><?php
+                                                                    $datosPiloto = $ultimoGanador->RaceTable->Races[0]->Results[0];
+                                                                    $datosSegundo = $segundo->RaceTable->Races[0]->Results[0];
+                                                                    $datosTercero = $tercero->RaceTable->Races[0]->Results[0];
+                                                                    if (isset($datosPiloto->Driver)) {
+                                                                        echo $datosPiloto->Driver->givenName . " "
+                                                                        . $datosPiloto->Driver->familyName
+                                                                        . " (" . $datosPiloto->Constructor->name . " )";
+                                                                    }
+                                                                    ?></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2º</td>
+                                                                <td><?php
+                                                                    if (isset($datosPiloto->Driver)) {
+                                                                        echo $datosSegundo->Driver->givenName . " "
+                                                                        . $datosSegundo->Driver->familyName
+                                                                        . " (" . $datosSegundo->Constructor->name . " )";
+                                                                    }
+                                                                    ?></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3º</td>
+                                                                <td><?php
+                                                                    if (isset($datosPiloto->Driver)) {
+                                                                        echo $datosTercero->Driver->givenName . " "
+                                                                        . $datosTercero->Driver->familyName
+                                                                        . " (" . $datosTercero->Constructor->name . " )";
+                                                                    }
+                                                                    ?></td>
+
+                                                            </tr>
                                                         </tbody>
                                                     </table>
-                                                   
+
                                                     <ul>
-                                                        
-                                                        
+
+
                                                         <li><strong>Tiempo :</strong> <?php echo $datosPiloto->Time->time; ?>
                                                         </li>
                                                         <li><strong>Vuelta rápida :</strong> 
                                                             <?php
-                                                            echo $datosPiloto->FastestLap->Time->time . " ( "
-                                                            . $pilotoVueltaRapida->DriverTable->Drivers[0]->givenName
-                                                            . " " . $pilotoVueltaRapida->DriverTable->Drivers[0]->familyName
-                                                            . " )";
+                                                            if (isset($datosPiloto->Driver)) {
+                                                                echo $datosPiloto->FastestLap->Time->time . " ( "
+                                                                . $pilotoVueltaRapida->DriverTable->Drivers[0]->givenName
+                                                                . " " . $pilotoVueltaRapida->DriverTable->Drivers[0]->familyName
+                                                                . " )";
+                                                            }
                                                             ?>
                                                         </li>
                                                         <li><strong>Pole : </strong>
                                                             <?php
-                                                            echo $poleman->Driver->givenName .
-                                                            " " . $poleman->Driver->familyName . " ( "
-                                                            . $poleman->Q1
-                                                            . " )";
+                                                            if (isset($datosPiloto->Driver)) {
+                                                                echo $poleman->Driver->givenName .
+                                                                " " . $poleman->Driver->familyName . " ( "
+                                                                . $poleman->Q1
+                                                                . " )";
+                                                            }
                                                             ?>
                                                         </li>
-                                                        <li><a href="<?php echo $ultimoGanador->RaceTable->Races[0]->url; ?>">Wikipedia</a></li>
+                                                        <li>                                                            
+                                                            <?php
+                                                            if (isset($datosPiloto->Driver)) :
+                                                                ?>
+                                                                <a href = "<?php echo $ultimoGanador->RaceTable->Races[0]->url; ?>">Wikipedia</a></li>
+                                                            <?php
+                                                        endif;
+                                                        ?>
                                                     </ul>
                                                 </div>
                                             </section>
-                                            
+
                                         </div>
 
                                     </div>
