@@ -166,6 +166,25 @@ class Dashboard extends CI_Controller {
 	}
 
 	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function ajax_hall_voto_manager()
+	{
+		if(!$_POST){die;}
+
+		
+		$id_respuesta = $_POST['hofiddata'];
+
+		// Guardar voto
+		$total_votos = $this->usuarios_model->hof_respuesta_voto($_SESSION['id_usuario'],$id_respuesta);
+
+		echo "+".$total_votos;
+	}
+
+	/**
 	 * Plantilla seccion
 	 *
 	 * @return void

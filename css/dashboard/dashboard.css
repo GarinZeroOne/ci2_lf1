@@ -78,6 +78,15 @@ span.hall-avatar img{
 	margin-bottom: 2px;
 }
 
+span i.voto-manager{
+    color:#C8C6C6;
+    text-shadow:0 2px 1px #FFFFFF;
+}
+span i.voto-manager:hover{
+    color:#00AFFF;
+    cursor: pointer;
+}
+
 
 div.temporizador{
 	text-align: center;

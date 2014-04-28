@@ -689,7 +689,7 @@ class Usuarios_model extends CI_Model {
                           ->id;
         }
 
-        $respuestas = $this->db->select('hof_respuestas.respuesta,hof_respuestas.fecha,hof_respuestas.id_hof,usuarios.id,usuarios.nick,usuarios_avatar.avatar')
+        $respuestas = $this->db->select('hof_respuestas.id  as id_respuesta,hof_respuestas.respuesta,hof_respuestas.votos,hof_respuestas.fecha,hof_respuestas.id_hof,usuarios.id,usuarios.nick,usuarios_avatar.avatar')
                                ->from('hof_respuestas')
                                ->join('usuarios','usuarios.id = hof_respuestas.id_usuario')
                                ->join('usuarios_avatar','usuarios_avatar.id_usuario = usuarios.id')
@@ -698,7 +698,7 @@ class Usuarios_model extends CI_Model {
                                ->limit(25)
                                ->get()
                                ->result();
-
+        //dump($this->db->queries);                               
         return $respuestas;
 
 
@@ -734,6 +734,42 @@ class Usuarios_model extends CI_Model {
                                ->row();
             return $q;
         }
+    }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     * @author 
+     **/
+    function hof_respuesta_voto($id_usuario,$id_respuesta)
+    {
+        // Comprobar que no exista ya el voto a esa respuesta
+        $q = $this->db->select('id')->from('hof_respuestas_votos')->where('id_respuesta',$id_respuesta)->where('id_usuario',$id_usuario)->get();
+
+        if(!$q->num_rows())
+        {
+            // Insertar voto
+            $data_insert = array(
+                            'id'        =>          '',
+                            'id_respuesta' =>       $id_respuesta,
+                            'id_usuario'    =>      $id_usuario,
+                            'fecha'         =>      date('Y-m-d H:i:s')
+                                );
+            $this->db->insert('hof_respuestas_votos',$data_insert);
+
+            // Sumar voto
+            $data_update_sql = "update hof_respuestas set votos=(votos+1) where id=?";
+            $this->db->query($data_update_sql,array($id_respuesta));
+
+            //dump($this->db->queries);
+
+        }
+
+        // Devolver numero de votos de la respuesta, para escribirla por ajax
+        $num_votos = $this->db->select('votos')->from('hof_respuestas')->where('id',$id_respuesta)->get()->row()->votos;
+
+        return $num_votos;
     }
 
 }

@@ -131,7 +131,7 @@
             <div class="col-md-9">
                 <section class="panel">
                     <div class="panel-body">
-                        <div id="demo4" class="scroll-img" title="Fichajes/alquileres/ventas del DÍA">
+                        <div id="demo4" class="scroll-img" title="Últimos fichades del dia">
                             <ul>
                             <?php foreach($ultimos_pilotos_comprados as $upf): ?>
                                 <li>
@@ -141,8 +141,8 @@
                                     </a>
 
                                     <div class="stats">
-                                        <div><i class="fa fa-thumbs-up" style="color:#7ABC2B"></i> <?php echo $upf->por_fichaje; ?>%</div>
-                                        <div><i class="fa fa-thumbs-down" style="color:#ff0000"></i><?php echo $upf->por_venta; ?>%</div>
+                                        <div title="Porcentaje total de usuarios que alguna vez ficharon a <?php echo $upf->nombre_completo; ?>"><i class="fa fa-thumbs-up" style="color:#7ABC2B"></i> <?php echo $upf->por_fichaje; ?>%</div>
+                                        <div title="Porcentaje total de usuarios que han vendido a <?php echo $upf->nombre_completo; ?>"><i class="fa fa-thumbs-down" style="color:#ff0000"></i><?php echo $upf->por_venta; ?>%</div>
                                         <div style="text-align:center;color:#ccc"><?php echo $upf->nombre_completo; ?></div>
                                     </div>
                                     </div>
@@ -353,7 +353,9 @@
                                             </span>
                                             <div class="notification-info">
                                                 <ul class="clearfix notification-meta">
-                                                    <li class="pull-left notification-sender"><span><a href="<?php echo site_url();?>perfil/ver/<?php echo $respuesta->nick; ?>"> <?php echo $respuesta->nick ?></a></span> </li>
+                                                    <li class="pull-left notification-sender"><span><a href="<?php echo site_url();?>perfil/ver/<?php echo $respuesta->nick; ?>"> <?php echo $respuesta->nick ?></a> 
+                                                        <span id="numvotos"><?php if($respuesta->votos): ?>+<?php echo $respuesta->votos; ?><?php endif; ?></span> 
+                                                        <i data-hofid="<?php echo $respuesta->id_respuesta; ?>"  class="fa fa-thumbs-up voto-manager" title="Me gusta este comentario"></i> </span> </li>
                                                     <li class="pull-right notification-time"><?php echo timeago(strtotime($respuesta->fecha)); ?></li>
                                                 </ul>
                                                 <p>

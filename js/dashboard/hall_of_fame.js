@@ -30,4 +30,29 @@ $(document).ready(function(){
       
     });
 
+
+  $('span i.voto-manager').on('click',function(a){
+    
+    var  hofid = $(this).attr('data-hofid');
+    var dedo = $(this);
+
+    dedo.text("Votando...");
+    
+    $.ajax({
+          type: "POST",
+                       data:{ 
+              hofiddata: hofid
+                  },
+          url: site_url+"dashboard/ajax_hall_voto_manager",
+          success: function(data, textStatus){
+              //alert(data);
+              dedo.text("");
+              dedo.prev().text(data);
+              }
+          },'html');
+
+      
+
+  });
+
 });
