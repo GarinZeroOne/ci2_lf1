@@ -39,24 +39,24 @@
                 <section class="panel-pub">
                     <div class="panel-body">
                         <div class="pub-cont">
-                            
+
                             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <!-- HorizontalGrande2014 -->
-                                <ins class="adsbygoogle"
-                                     style="display:inline-block;width:970px;height:90px"
-                                     data-ad-client="ca-pub-2361705659034560"
-                                     data-ad-slot="7256510330"></ins>
-                                <script>
+                            <!-- HorizontalGrande2014 -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:970px;height:90px"
+                                 data-ad-client="ca-pub-2361705659034560"
+                                 data-ad-slot="7256510330"></ins>
+                            <script>
                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
-                            
+                            </script>
+
                         </div>
                     </div>
                 </section>
             </div>
         </div>
         <!-- publi row -->
-        
+
         <div class="row">
             <div class="col-lg-5">
                 <section class="panel">
@@ -71,6 +71,7 @@
                                     <th>Foto</th>
                                     <th>Usuario</th>
                                     <th class="numeric">Puntos</th>                                                                        
+                                    <th>Comunidad</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,6 +88,9 @@
                                     <td>
                                         <?php echo $miClasificacionGp->getPuntos(); ?>
                                     </td>
+                                    <td style="text-align: center;">
+                                        <img class="round-pilots" alt="" title="<?php echo $miClasificacionGp->getUsuario()->getComunidad()->getNombre(); ?>" src="<?= base_url() ?>img/grupos/<?php echo $miClasificacionGp->getUsuario()->getComunidad()->getBandera(); ?>">
+                                    </td>
                                 </tr>
                                 <?php foreach ($clasificacionGp->getClasificacionUsuarios() as $clasificacionUsuario): ?>
                                     <tr>
@@ -101,6 +105,13 @@
                                         </td>
                                         <td>
                                             <?php echo $clasificacionUsuario->getPuntos(); ?>
+                                        </td>      
+                                        <td style="text-align: center;">
+                                            <?php
+                                            if ($clasificacionUsuario->getUsuario()->getComunidad() != null):
+                                                ?>
+                                                <img class="round-pilots" alt="" title="<?php echo $clasificacionUsuario->getUsuario()->getComunidad()->getNombre(); ?>" src="<?= base_url() ?>img/grupos/<?php echo $clasificacionUsuario->getUsuario()->getComunidad()->getBandera(); ?>">
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -213,6 +224,7 @@
                                     <th>Usuario</th>
                                     <th class="numeric">Puntos</th>
                                     <th class="numeric">Cambio posicion</th>
+                                    <th>Comunidad</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -249,6 +261,14 @@
                                                     ?>
                                                 </span>
                                                 </td>
+                                                <td style="text-align: center;">
+                                                    <?php
+                                                    if ($miClasificacionGeneral->getUsuario()->getComunidad() != null):
+                                                        ?>
+                                                        <img class="round-pilots" alt="" title="<?php echo $miClasificacionGeneral->getUsuario()->getComunidad()->getNombre(); ?>" 
+                                                             src="<?= base_url() ?>img/grupos/<?php echo $miClasificacionGeneral->getUsuario()->getComunidad()->getBandera(); ?>">
+                                                         <?php endif; ?>
+                                                </td>
                                                 </tr>
 
                                                 <?php foreach ($clasificacionGeneral as $clasificacionUsuario): ?>
@@ -284,6 +304,14 @@
                                                                         echo $clasificacionUsuario->getCambioPosicion();
                                                                         ?>
                                                                     </span>
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <?php
+                                                                        if ($clasificacionUsuario->getUsuario()->getComunidad() != null):
+                                                                            ?>
+                                                                            <img class="round-pilots" alt="" title="<?php echo $clasificacionUsuario->getUsuario()->getComunidad()->getNombre(); ?>" 
+                                                                                 src="<?= base_url() ?>img/grupos/<?php echo $clasificacionUsuario->getUsuario()->getComunidad()->getBandera(); ?>">
+                                                                             <?php endif; ?>
                                                                     </td>
                                                                     </tr>
                                                                 <?php endforeach; ?>

@@ -7,6 +7,7 @@ class Comunidad {
 
     private $idComunidad;
     private $nombre;
+    private $bandera;
 
     public function Comunidad() {
     }
@@ -27,7 +28,15 @@ class Comunidad {
         $this->nombre = $nombre;
     }
 
-        
+    public function getBandera() {
+        return $this->bandera;
+    }
+
+    public function setBandera($bandera) {
+        $this->bandera = $bandera;
+    }
+
+            
     public static function getById($idComunidad) {
         $CI;
         $CI = & get_instance();
@@ -41,6 +50,7 @@ class Comunidad {
             
             $instance->setIdComunidad($datosComunidad->id);
             $instance->setNombre($datosComunidad->nombre);
+            $instance->setBandera($datosComunidad->bandera);
         }
 
         return $instance;
