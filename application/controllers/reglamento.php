@@ -46,6 +46,9 @@ class Reglamento extends CI_Controller {
 		$datos['premios_pilotos'] = $this->estadisticas_model->get_premios_pilotos();
 		$datos['premios_equipos'] = $this->estadisticas_model->get_premios_equipos();
 
+		$datos['mejora_pilotos'] = $this->estadisticas_model->get_mejora_pilotos_gp();
+		$datos['mejora_equipos'] = $this->estadisticas_model->get_mejora_equipos_gp();
+
 		// Menu Izquierda
 		$sidebarleft 		  = array();
 		$sidebarleft['m_act'] = 9;

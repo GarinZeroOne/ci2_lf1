@@ -9,7 +9,9 @@ class Inicio extends CI_Controller {
 
 	function Inicio()
 	{
+		
 		parent::__construct();
+
 
 		// Configurar idioma
 		$this->_set_language();

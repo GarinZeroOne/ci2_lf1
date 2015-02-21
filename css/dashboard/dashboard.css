@@ -107,6 +107,39 @@ div#countDownt span.letrat{
     font-size: 25px;
 }
 
+/*Hall of fame - mas votado*/
+div.tit-mas-votada{
+    font-size:10px;
+    color:#ccc;
+    margin-top:-10px;
+}
+div.pregunta-hof-pas{
+    font-size:15px;
+    font-style: italic;
+    margin-bottom:5px;
+}
+
+div.foto-user{
+    float:left;
+    width: 20%;
+}
+div.foto-user img{
+    
+    width: 100%;
+}
+div.autor-hof-semana{
+    text-align: right;
+
+}
+
+blockquote {
+    background: url('../../img/bg-quote1.png') no-repeat;    
+    color: #a5a4a4;
+    font-style: italic;
+    
+    padding: 30px 30px 10px 50px;    
+}  
+
 /*Subidones - Bajones*/
 
 span.tit_subidon
@@ -159,6 +192,14 @@ div.diferencia{
 }
 
 /*NUM Stikis*/
+
+table#estadisticas{
+    font-size: 10px;
+}
+span.textm{
+    font-size:10px;
+}
+
 span.cont-stiki
 {
     background-color: #F7F7F7;
@@ -674,4 +715,9 @@ div.pub-cont{
 section.panel-pub div.panel-body{
     margin-top: -10px;
     padding: 1px;
+}
+
+/*reglamento*/
+ul.lista-reglas li{
+    list-style: disc inside none;
 }

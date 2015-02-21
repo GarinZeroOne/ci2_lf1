@@ -68,6 +68,9 @@ class Dashboard extends CI_Controller {
 		$datos['stikis_puntos'] = $this->estadisticas_model->stikisComprados('puntos');
 		$datos['stikis_dinero'] = $this->estadisticas_model->stikisComprados('dinero');
 
+		// Box estadisticas
+		$datos['estadisticas'] = $this->estadisticas_model->get_estadisticas_box();
+
 		// Subidones y Bajones del dia
 		$datos['subidones'] = $this->estadisticas_model->get_subidones();
 		$datos['bajones'  ] = $this->estadisticas_model->get_bajones();
@@ -90,6 +93,12 @@ class Dashboard extends CI_Controller {
 		// Hall of Fame
 		$datos['hof_pregunta'  ] = $this->usuarios_model->get_hof_pregunta();
 		$datos['hof_respuestas'] = $this->usuarios_model->get_hof_respuestas();
+
+		// Hall of fame - Mas votada
+		$datos['hof_winner'] = $this->usuarios_model->get_hof_winner();
+
+		//dump($datos['hof_winner']);die;
+
 //dump($datos['hof_respuestas']);die;
 		// Header
 		$header['estilos'] 	  = array('dashboard.css','hof.css');

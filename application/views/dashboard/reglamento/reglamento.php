@@ -49,6 +49,7 @@
                                 </div>
                                 <div class="panel-collapse collapse" id="collapseThree">
                                     <div class="panel-body">
+                                        <?php /* 
                                         <p>Este año se ha introducido un mercado de pilotos y equipos con valores variables. <strong>No hay penalización por vender pilotos o equipos</strong>. Tanto los pilotos como los equipos variaran su valor a diario, en  función de las compras/ventas e inactividad que hayan tenido el dia anterior. La inactividad se da cuando un piloto o equipo no recibe compras ni ventas durante un dia.</p>
                                         <p>El precio de los pilotos y equipos también variará a consecuencia de sus resultados en carrera. Por lo general se aumentará el precio de pilotos y equipos que mejoren su posición esperada (posición de clasificacion general) y se bajará cuando su posición en el gp sea inferior.La cantidad  de aumento o disminución del precio dependerá de los puestos ganados o perdidos.</p>
 
@@ -62,6 +63,51 @@
                                         <p><strong>¿Puedo especular con los pilotos?</strong> Por supuesto! Esa  es la gracia del mercado. Intentar adivinar  que piloto  subirá de valor, comprarlo el mismo dia y venderlo después para obtener beneficios. Desde la ficha de tus pilotos, podrás ver  siempre el precio que pagaste por el piloto, y el <strong>beneficio</strong> que obtendrias si lo vendieras en ese momento. Obviamente el beneficio que obtendras especulando con pilotos alquilados sera bajo, puesto que al ser siempre un 10% del valor de fichaje, las cantidades no seran tan altas como si especulas fichando pilotos, pero el riesgo también  será mas bajo!</p>
                                         <p><strong>Los pilotos fichados, formarán parte de tu plantilla hasta que tu decidas venderlos</strong>.  Puedes colocarles STIKIS y podrán aprovecharse  de todas las mejoras que  tengas.</p>
                                         <p>LF1 se guarda el derecho de modificar los valores de pilotos y equipos con el fin de corregir cualquier tipo de desfase en los precios.Si esto ocurre se notificará a los usuarios para  que todos esten al tanto de todas las modificaciones.</p>
+                                    */ ?>
+                                        <ul class="lista-reglas">
+                                            <li>Puedes alquilar o fichar pilotos, los equipos no se pueden alquilar.</li>
+                                            <li>Un piloto alquilado correrá para  ti un GP y luego desaparecerá de tu lista de pilotos.</li>
+                                            <li>Un piloto fichado, permanecerá en tu equipo hasta que decidas venderlo.</li>
+                                            <li>Los pilotos alquilados no pueden llevar STIKIS ni son afectados por ninguna de las mejoras.</li>
+                                            <li>Los pilotos fichados pueden llevar  STIKIS y les afectan todas  las mejoras.</li>
+                                            <li>Puedes tener un  máximo de 7 pilotos, entre fichados y alquilados.</li>
+                                            <li>Puedes tener un máximo de 5 equipos.</li>
+                                            <li>No existe penalización por la venta de pilotos al sistema.Se venderá por el precio actual del mercado.</li>
+                                            <li>El precio de los pilotos y equipos varia a diario en función de sus  movimientos en el mercado.</li>
+                                            <li>El precio de los pilotos y  equipos variará despues de cada GP en base a sus resultados.</li>
+                                            <li>Puedes acceder a la ficha de un piloto o equipo haciendo click en su  nombre.</li>
+                                            <li>Se pueden fichar y vender pilotos como equipos tantas veces se quiera.</li>
+
+                                        </ul>
+
+                                        <h4>Mejora Pilotos por RESULTADOS</h4>
+                                        <table class="table table-striped table-bordered">
+                                                <th>Posiciones Ganadas</th>
+                                                
+                                                <th>Porcentaje de mejora</th>
+                                                <?php foreach($mejora_pilotos as $mp): ?>
+                                                    <tr>
+                                                        <td><?php echo $mp->num_puestos; ?></td>
+                                                        <td><?php echo $mp->porcentaje; ?> %</td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+
+                                        </table>
+
+                                        <h4>Mejora Equipos por RESULTADOS</h4>
+                                        <table class="table table-striped table-bordered">
+                                                <th>Posiciones Ganadas</th>
+                                                
+                                                <th>Porcentaje de mejora</th>
+                                                <?php foreach($mejora_equipos as $me): ?>
+                                                    <tr>
+                                                        <td><?php echo $me->num_puestos; ?></td>
+                                                        <td><?php echo $me->porcentaje; ?> %</td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+
+                                        </table>
+
                                     </div>
                                 </div>
                             </div>
@@ -76,8 +122,14 @@
                                 </div>
                                 <div class="panel-collapse collapse" id="collapseFour">
                                     <div class="panel-body">
-                                        <p>Durante el  fin  de semana de un Gran Premio NO se permitirá ningún tipo de gestion. Todo el mercado se bloqueará los viernes a las 12:00PM de un fin de semana de Carrera. Esto quiere  decir que no podrás comprar ni vender equipos, mejoras o STIKIS una vez  finalizada  la cuanta atrás que puedes ver en el Dashboard.</p>
-                                        <p>El mercado se volverá a abrir automáticamente una vez procesado el Gran Premio.</p>
+                                        
+                                        <ul class="lista-reglas">
+                                            <li>El Fin  de Semana de GP comienza la medianoche del viernes al sabado de un fin de semana  de Gran Premio.</li>
+                                            <li>El mercado y  cualquier tipo de gestión quedan bloqueados hasta el final del Fin de Semana de GP.</li>
+                                            <li>La cuenta atrás del Dashboard indica el tiempo que falta hasta el próximo cierre de mercado.</li>
+                                            
+
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +144,15 @@
                                 </div>
                                 <div class="panel-collapse collapse" id="collapseFive">
                                     <div class="panel-body">
-                                        Actualizando texto.Estará disponible en los próximos  dias.
+                                        <ul class="lista-reglas">
+                                            
+                                            <li>Las mejoras afectan solo a los pilotos FICHADOS.</li>
+                                            <li>Existen 3 tipos de mejoras: Mecánicos,Ingenieros y Publicistas.</li>
+                                            <li>Se puede acceder al panel de mejoras desde el menú Gestión Manager > Panel Mejoras</li>                                          
+                                            <li>Cada mejora tiene 10 niveles.</li>
+                                            <li>Las mejoras no caducan nunca, ni se pueden vender. Son reseteadas tan solo al inicio de una nueva temporada.</li>
+
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +167,19 @@
                                 </div>
                                 <div class="panel-collapse collapse" id="collapseSix">
                                     <div class="panel-body">
-                                        Actualizando texto.Estará disponible en los próximos  dias.
+                                        <ul class="lista-reglas">
+                                            
+                                            <li>Cualquier usuario puede crear grupos publicos o privados.</li>
+                                            <li>Cualquier usuario puede ingresar en los grupos públicos</li>
+                                            <li>Para ingresar a un grupo privado, tendrás  que enviarle tu código de manager al creador del grupo.</li>
+                                            <li>Para conocer cual es tu código manager, tan solo tienes  que entrar en tu perfil desde Menu usuario > Perfil</li>
+                                            <li>Al entrar en Grupos, verás todos los grupos a los que perteneces y el listado de grupos públicos.</li>
+                                            <li>Dentro de cada grupo, podrás ver la clasificación general del grupo y la clasificación del último Gran Premio disputado</li>
+                                            <li>Cada grupo tiene su propio sistema de mensajes.</li>
+                                            <li>Puedes citar un mensaje escrito en tu grupo, de manera que al usuario que lo escribió le llegará una notificación de "mención".</li>
+                                            <li>Para citar un mensaje del grupo, escribe <i>#numero-del-mensaje</i>. Por ejemplo: <i>"Estoy citando el mensaje #32 :)"</i>, al usuario que escribió el mensaje #32 le llegará una notificación de mención.</li>
+
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -210,8 +282,18 @@
                                 </div>
                                 <div class="panel-collapse collapse" id="collapseNine">
                                     <div class="panel-body">
-                                        <p>Hall of fame es un muro de información al que todos los managers tienen acceso y pueden colocar  ahí sus  ideas y opiniones. Normalmente el hall of fame tendrá un tema o pregunta  sobre el que enfocar las respuestas.</p>
-                                        <p>Un buen sitio donde informarte acerca de la opinión de otros managers, sobre  temas  de actualidad, pilotos, equipos, ideas,...</p>
+                                        
+                                        <ul class="lista-reglas">
+                                            
+                                            <li>Hall of fame es un muro de información al que todos los managers tienen acceso y pueden colocar  ahí sus  ideas y opiniones.</li>
+                                            <li>Normalmente el hall of fame tendrá un tema o pregunta  sobre el que enfocar las respuestas.</li>
+                                            <li>Para ingresar a un grupo privado, tendrás  que enviarle tu código de manager al creador del grupo.</li>
+                                            <li>Puedes indicar  que te gusta la respuesta de otro manager haciendo  click en el icono <i class="fa fa-thumbs-up voto-manager" title="Me gusta este comentario" ></i></li>
+                                            <li>Al lado del nick de cada manager podrás ver los votos que ha recibido. <i style="color:#B1C697">+12</i> <i class="fa fa-thumbs-up voto-manager" title="Me gusta este comentario" data-hofid="49"></i></li>
+                                          
+
+                                        </ul>
+
                                     </div>
                                 </div>
                             </div>

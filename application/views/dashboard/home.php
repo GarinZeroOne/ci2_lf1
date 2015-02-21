@@ -35,6 +35,7 @@
             }
 </script>
 
+<!--
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -43,6 +44,7 @@
   js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=383497631760784";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+-->
 
 
 
@@ -127,8 +129,24 @@
         <!--mini statistics end-->
 
         <div class="row">
+
+            <div class="col-md-3">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div class="tit-mas-votada">Respuesta más votada</div>
+                        <div class="pregunta-hof-pas"><?php echo $hof_winner['pregunta']; ?></div>
+                        
+                        <blockquote>
+                            <?php echo $hof_winner['respuesta']; ?>
+                        </blockquote>
+
+                        <div class="autor-hof-semana"> por <a href="<?php echo site_url();?>perfil/ver/<?php echo $hof_winner['nick']; ?>"> <?php echo $hof_winner['nick']; ?></a> </div>
+                        
+                    </div>
+                </section>    
+            </div>
             
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <section class="panel">
                     <div class="panel-body">
                         <div id="demo4" class="scroll-img" title="Últimos fichades del dia">
@@ -160,6 +178,32 @@
             <div class="col-md-3">
                 <section class="panel">
                     <div class="panel-body">
+                        <table id="estadisticas" class="table table-bordered table-striped table-condensed cf">
+                            <tr>
+                                <td> <span class="textm">Fichajes  pilotos:</span></td>
+                                <td><?php echo es_dinero($estadisticas['total_fichajes']); ?></td>
+
+                            
+                                <td><span class="textm">Ventas pilotos:</span></td>
+                                <td><?php echo es_dinero($estadisticas['total_ventas']); ?></td>
+                            </tr>
+                            <tr>
+                                <td><span class="textm">Compra equipos:</span></td>
+                                <td><?php echo es_dinero($estadisticas['total_compras_equipos']); ?></td>
+
+                            
+                                <td><span class="textm">Ventas equipos:</span></td>
+                                <td><?php echo es_dinero($estadisticas['total_ventas_equipos']); ?></td>
+                            </tr>
+                            <tr>
+                                <td><span class="textm">Stikis dinero <?php echo $paisGP; ?></span></td>
+                                <td><?php echo $stikis_dinero; ?></td>
+                            
+                                <td><span class="textm">Stikis puntos <?php echo $paisGP; ?></span></td>
+                                <td><?php echo $stikis_puntos; ?></td>
+                            </tr>
+                        </table>
+                        <!--
                         <h4 class="widget-h">STIKIS <?php  echo $paisGP; ?></h4>
                         <div>
                             <img width="50%" src="<?php echo base_url();?>img/stikidinero.png" alt="Stiki Dinero"><span class="cont-stiki"><?php echo $stikis_dinero; ?></span>
@@ -167,6 +211,7 @@
                         <div  style="margin-top:2px;">
                             <img width="50%" src="<?php echo base_url();?>img/stikipuntos.png" alt="Stiki Puntos"><span class="cont-stiki"><?php echo $stikis_puntos; ?></span>
                         </div>
+                    -->
                     </div>
                 </section>    
             </div>
@@ -411,7 +456,9 @@
 
                 <section class="panel">
                     <div class="panel-body">
+                        <!--
                         <div class="fb-like-box" data-href="http://www.facebook.com/LigaFormula1" data-width="250" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+                    -->
                     </div>
                 </section>
                 

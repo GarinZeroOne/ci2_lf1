@@ -181,7 +181,7 @@ class Estadisticas_model extends CI_Model
 		$q_mejoras = $this->db->select('*')->from('usuarios_mejoras')->where('id_usuario',$id_perfil)->get();
 
 		$stats['dinero_invertido_mejoras'] = $this->_get_gasto_mejoras($q_mejoras);
-		$stats['maximo_posible_mejoras'] = 4860000;
+		$stats['maximo_posible_mejoras'] = 3710000;//4860000;
 
 		// Estrellas computadas
 		$stats['estrellas_computadas'] = $this->db->select('id_recompensa')->from('recompensa')->where('id_usuario',$id_perfil)->where('estado','u')->get()->num_rows();
@@ -223,6 +223,23 @@ class Estadisticas_model extends CI_Model
 		//dump($stats);die;
 		return $stats;
 
+	}
+
+	/**
+	 * Fichajes totales / Ventas totales
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_estadisticas_box()
+	{
+		$datos['total_fichajes'] = $this->db->select('id_fichaje_piloto')->from('fichajes_pilotos')->get()->num_rows();
+		$datos['total_ventas'  ] = $this->db->select('id_venta_piloto')->from('ventas_pilotos')->get()->num_rows();
+
+		$datos['total_compras_equipos'] = $this->db->select('id_venta_equipo')->from('compras_equipos')->get()->num_rows();
+		$datos['total_ventas_equipos'  ] = $this->db->select('id_venta_equipo')->from('ventas_equipos')->get()->num_rows();
+
+		return $datos;
 	}
 
 
@@ -660,6 +677,30 @@ class Estadisticas_model extends CI_Model
 		$q = $this->db->select('*')->from('premios_manager_equipos')->order_by('posicion','asc')->get()->result();
 		return $q;
 
+	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_mejora_pilotos_gp()
+	{
+		$q = $this->db->select('*')->from('mejora_piloto')->order_by('num_puestos','ASC')->get()->result();
+		return $q;
+	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_mejora_equipos_gp()
+	{
+		$q = $this->db->select('*')->from('mejora_equipo')->order_by('num_puestos','ASC')->get()->result();
+		return $q;
 	}
 
 	/**

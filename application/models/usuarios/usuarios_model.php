@@ -772,4 +772,37 @@ class Usuarios_model extends CI_Model {
         return $num_votos;
     }
 
+    /**
+     * Devuelve los datos de la respuesta con mas  votos
+     *
+     * @return void
+     * @author 
+     **/
+    function get_hof_winner()
+    {
+        // Buscar pregunta anterior a la activa
+        $sql = "select * from hof_preguntas where activa = 0 order  by id desc limit 0,1";
+
+        $r = $this->db->query($sql)->row();
+
+        $datos['pregunta'] = $r->pregunta;
+
+
+
+        $id_pregunta = $r->id;
+
+        $sql2 = "select  * from hof_respuestas where id_hof = ? order  by votos desc limit 0,1";
+
+        $r2 = $this->db->query($sql2,array($id_pregunta))->row();
+
+        $datos['respuesta'] = $r2->respuesta;
+        $datos['votos'] = $r2->votos;
+
+        $id_usuario = $r2->id_usuario;
+
+        $datos['nick'] = $this->db->select('nick')->from('usuarios')->where('id',$id_usuario)->get()->row()->nick;
+
+        
+        return $datos;
+    }
 }
