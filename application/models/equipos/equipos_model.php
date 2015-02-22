@@ -656,4 +656,14 @@ class Equipos_model extends CI_Model {
         return $equipos;
     }
     
+    function getPorcentajeMejoraPosicion($posicion) {
+    	$sql = "SELECT * FROM mejora_posicion_equipo "
+    			. "WHERE posicion = ?";
+    
+    	$result = $this->db->query($sql, array(
+    			$posicion));
+    
+    	return $result;
+    }
+    
 }

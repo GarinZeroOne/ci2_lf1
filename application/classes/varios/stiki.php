@@ -19,6 +19,7 @@ class Stiki {
     private $tipoStiki;
     private $precioCompra;
     private $fechaCompra;
+    private $porcentaje;
 
     public function getIdStiki() {
         return $this->idStiki;
@@ -46,6 +47,10 @@ class Stiki {
     public function getFechaCompra() {
         return $this->fechaCompra;
     }
+    
+    public function getPorcentaje() {
+    	return $this->porcentaje;
+    }
 
     public function setIdStiki($idStiki) {
         $this->idStiki = $idStiki;
@@ -70,6 +75,11 @@ class Stiki {
     public function setFechaCompra($fechaCompra) {
         $this->fechaCompra = $fechaCompra;
     }
+    
+    public function setPorcentaje($porcentaje) {
+    	$this->porcentaje = $porcentaje;
+    }
+    
 
     public function __construct() {
         
@@ -92,6 +102,7 @@ class Stiki {
         $instance->setTipoStiki($datosStiki->stiki);
         $instance->setPrecioCompra($datosStiki->precio_compra);
         $instance->setFechaCompra($datosStiki->fecha_compra);
+        $instance->setPorcentaje($datosStiki->porcentaje);
 
         return $instance;
     }

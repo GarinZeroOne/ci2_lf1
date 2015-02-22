@@ -389,16 +389,18 @@ class Admin_model extends CI_Model {
                 if ($stiki->num_rows()) {
                     //Si el stiki es de puntos se suman
                     if ($stiki->row()->stiki == Stikis_model::stikiPuntos) {
-                        $puntos += $row->puntos_manager;
+                    	//Obtengo los puntos del porcentaje del stiki
+                    	$puntosStiki = round($row->puntos_manager * $stiki->row()->porcentaje /100,2);
+                        $puntos += $puntosStiki;
 
                         //Registrar stiki en resultados_usuario_desglose
                         $this->insertarUsuariosDesglose($piloto->getIdPiloto(), $idGp, 0
-                                , $row->puntos_manager, $usuario->getIdUsuario()
+                                , $puntosStiki, $usuario->getIdUsuario()
                                 , Admin_model::stikiPuntos, 0);
 
                         //Si tiene mejoras de ingenieros se aplican
                         if ($usuarioIngenierosLvl) {
-                            $puntosIngenieros = $this->ingenieros[$usuarioIngenierosLvl] * $row->puntos_manager;
+                            $puntosIngenieros = $this->ingenieros[$usuarioIngenierosLvl] * $puntosStiki;
                             $puntos+= $puntosIngenieros;
 
                             //Registrar ingenieros en resultados_usuario_desglose
@@ -407,14 +409,17 @@ class Admin_model extends CI_Model {
                                     , Admin_model::ingenieros, 0);
                         }
                     } else {
+                    	//Obtengo el dinero ganado por el stiki
+                    	$dineroStiki = round($row->dinero * $stiki->row()->porcentaje /100);
+                    	
                         //Stiki dinero, se añade a los fondos del usuario
-                        $fondos = $usuario->getFondos() + $row->dinero;
+                        $fondos = $usuario->getFondos() + $dineroStiki;
                         $usuario->setFondos($fondos);
-                        $dinero += $row->dinero;
+                        $dinero += $dineroStiki;
 
                         //Registrar stiki en resultados_usuario_desglose
                         $this->insertarUsuariosDesglose($piloto->getIdPiloto(), $idGp
-                                , $row->dinero
+                                , $dineroStiki
                                 , 0, $usuario->getIdUsuario()
                                 , Admin_model::stikiDinero, 0);
 
@@ -423,13 +428,13 @@ class Admin_model extends CI_Model {
                                 " en el Gp de " . $circuito->getCircuito() . " ( " . $circuito->getPais() . " )";
 
                         //Registrar movimiento banco
-                        $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $row->dinero
+                        $CI->banco_model->registrarMovimiento($piloto->getIdPiloto(), $dineroStiki
                                 , $usuario->getIdUsuario(), Banco_model::stikiDinero
                                 , 0, Banco_model::ingreso, $textoGarin);
 
                         //Si tiene mejoras de ingenieros se aplican
                         if ($usuarioIngenierosLvl) {
-                            $dineroIngenieros = $this->ingenieros[$usuarioIngenierosLvl] * $row->dinero;
+                            $dineroIngenieros = $this->ingenieros[$usuarioIngenierosLvl] * $dineroStiki;
                             $fondos = $usuario->getFondos() + $dineroIngenieros;
                             $usuario->setFondos($fondos);
                             $dinero += $dineroIngenieros;

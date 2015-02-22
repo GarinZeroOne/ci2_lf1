@@ -117,21 +117,26 @@ class Stikis_model extends CI_model {
         }
     }
 
-    function comprarStiki(Usuario $usuario, $idPiloto, $tipoStiki, $idGp) {
+    function comprarStiki(Usuario $usuario, $idPiloto, $tipoStiki, $idGp, $porcentaje) {
 
 
         $stikisGp = $this->getUserGpStikisObject($usuario->getIdUsuario(), $idGp);
+        $porcentajeStikisComprados = 0;
+        foreach ($stikisGp as $stiki){
+        	$porcentajeStikisComprados += $stiki->getPorcentaje();
+        }
 
+        
+        $porcentajeTotal = $porcentajeStikisComprados + $porcentaje; 
         // Comprobamos que no tenga ya 2 stikis para el GP
-        if (count($stikisGp) < 2) {
+        if ( $porcentajeTotal > 100) {
             // Comprobar que tipo stiki ha comprado
             // para comparar precio con sus fondos
             // y saber si le llega
             if ($tipoStiki == Stikis_model::stikiPuntos) {
-
-                $coste = 400000;
+                $coste = 500000 * $porcentaje /100;
             } else {
-                $coste = 30000;
+                $coste = 50000 * $porcentaje /100;
             }
 
             // Mejoras Mecanicos
@@ -160,12 +165,12 @@ class Stikis_model extends CI_model {
 
                     // Guardar stiki
                     $sql = "INSERT INTO stikis_usuarios (id_usuario, id_gp, "
-                            . "id_piloto, stiki, fecha_compra, estado, precio_compra)"
-                            . "VALUES(?,?,?,?,?,?,?)";
+                            . "id_piloto, stiki, fecha_compra, estado, precio_compra,porcentaje)"
+                            . "VALUES(?,?,?,?,?,?,?,?)";
 
                     $this->db->query($sql, array(
                         $usuario->getIdUsuario(), $idGp, $idPiloto, $tipoStiki, date('Y-m-d'),
-                        'sin procesar', $coste_con_mejora)
+                        'sin procesar', $coste_con_mejora,$porcentaje)
                     );
 
                     // Restarle la pasta del banco
@@ -214,7 +219,7 @@ class Stikis_model extends CI_model {
         } else {
             // Devolver msg Ya tienes 2 stikis comprados
             $retorno = array(Stikis_model::codigoRetorno => Stikis_model::codigoKo,
-                Stikis_model::mensaje => "Solo se pueden comprar 2 Stikis por GP");
+                Stikis_model::mensaje => "No se puede superar el 100% del stiki");
             return $retorno;
         }
     }

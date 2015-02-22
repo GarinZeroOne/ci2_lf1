@@ -530,6 +530,16 @@ class Pilotos_model extends CI_Model {
 
         return $result;
     }
+    
+    function getPorcentajeMejoraPosicion($posicion) {
+    	$sql = "SELECT * FROM mejora_posicion "
+    			. "WHERE posicion = ?";
+    
+    	$result = $this->db->query($sql, array(
+    			$posicion));
+    
+    	return $result;
+    }
 
     function guardarValorPiloto(Piloto $piloto) {
         /*
