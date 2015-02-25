@@ -30,6 +30,8 @@
                 <ul class="sub">
                     <li><a href="<?php echo site_url(); ?>mercado/pilotos">Pilotos</a></li>
                     <li><a href="<?php echo site_url(); ?>mercado/equipos">Equipos</a></li>
+                    <li><a href="<?php echo site_url(); ?>mercado/simulador">Simulación de carrera</a></li>
+
                     
                 </ul>
             </li>

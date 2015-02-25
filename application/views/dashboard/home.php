@@ -149,7 +149,10 @@
             <div class="col-md-6">
                 <section class="panel">
                     <div class="panel-body">
+                        <?php if($ultimos_pilotos_comprados): ?>
                         <div id="demo4" class="scroll-img" title="Últimos fichades del dia">
+
+                            
                             <ul>
                             <?php foreach($ultimos_pilotos_comprados as $upf): ?>
                                 <li>
@@ -168,7 +171,12 @@
                                 </li>
                             <?php endforeach; ?>
                             </ul>
+                        
                         </div>
+
+                        <?php else: ?>
+                        <span class="mercado-triste">Fichajes del dia: <i>No se han realizado fichajes</i></span>
+                        <?php endif; ?>
                     
                     </div>
                 </section>

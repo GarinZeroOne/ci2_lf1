@@ -366,6 +366,112 @@ class Mercado extends CI_Controller {
      * @return void
      * @author 
      * */
+    function simulador() {
+
+        $pilotos = array(
+                    'hamilton',
+                    'rosberg',
+                    'ricciardo',
+                    'kvyat',
+                    'massa',
+                    'bottas',
+                    'vettel',
+                    'raikkonen',
+                    'alonso',
+                    'button',
+                    'perez',
+                    'hulkenberg',
+                    'sainz',
+                    'verstappen',
+                    'grosjean',
+                    'maldonado',
+                    'ericsson',
+                    'nasr'
+
+                    );
+        
+        $cont = 0;
+
+        for($i=2010;$i<2015;$i++)
+        {
+
+
+            $resultados = json_decode(file_get_contents('http://ergast.com/api/f1/'.$i.'/1/results.json'));
+            //echo "<pre>";
+            //var_dump($resultados->MRData->RaceTable->Races[0]->Results);
+            //echo "</pre>";
+            foreach($resultados->MRData->RaceTable->Races[0]->Results as $res)
+            {
+                if(in_array($res->Driver->driverId,$pilotos))
+                {
+                    if($cont > 0 && !$valor[$res->Driver->driverId])
+                    {
+                        
+                        $valor[$res->Driver->driverId] = ($cont-1) * 50;
+
+                        //echo $res->Driver->driverId.": ".$valor[$res->Driver->driverId]."<br>";die;
+                    }
+
+                    if($res->position > 0)
+                    {
+                        $valor[$res->Driver->driverId] = $valor[$res->Driver->driverId] + ($res->position *2);  
+                    }
+                    else
+                    {
+                        $valor[$res->Driver->driverId] = $valor[$res->Driver->driverId] + 50;       
+                    }
+
+                    
+                    
+                    
+                }
+                
+                //echo $res->position." - ".$res->Driver->driverId;
+            }
+
+            $cont++;
+        }
+
+        foreach ($pilotos as $piloto) 
+        {
+            if(!$valor[$piloto]){
+                $valor[$piloto] = 200;
+            }
+        }
+
+
+        $datos['pilotos'] = $pilotos;
+        $datos['valor'] = $valor;
+
+        // Menu Izquierda
+        $sidebarleft = array();
+        $sidebarleft['m_act'] = 3;
+
+        // Estilos
+        $header['estilos'] = array('dashboard.css');
+
+        // Javascript
+        $bottom['javascript'] = array();
+
+        // Vistas base | Header | Menu Principal
+        $this->load->view('dashboard/base/header.php', $header);
+        $this->load->view('dashboard/base/sidebarleft.php', $sidebarleft);
+
+        // Vista contenido
+        $this->load->view('dashboard/mercado/simulador', $datos);
+
+        // Vistas base | Menu derecha | Bottom end
+        $this->load->view('dashboard/base/sidebarright.php', $sidebarright);
+        $this->load->view('dashboard/base/bottom.php', $bottom);
+    }
+
+
+    /**
+     * Plantilla seccion
+     *
+     * @return void
+     * @author 
+     * */
     function _plantilla_seccion() {
 
 

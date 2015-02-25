@@ -5299,3 +5299,22 @@ div.tagsinput span.tag {
     color:#fff !important;
     font-size: 12px;
 }
+
+/*Simulador*/
+.road{
+    text-align: center;
+}
+
+.motor{
+     color: #0087b4;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 10px;
+    width: 100px;
+}
+
+#resul{
+    font-size:20px;
+    text-transform: capitalize;
+    color:#4C4C4D;
+}
