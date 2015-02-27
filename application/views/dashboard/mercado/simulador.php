@@ -5,13 +5,40 @@
         <!-- page start-->
 
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-8">
                 <section class="panel">
                 <div class="road">
                     <canvas>Necesitas actualizar tu navegador para usar el  simulador</canvas>
                 </div>
                 </section>
             </div>
+
+            <div class="col-md-4 hidden-sm">
+                               
+                <!--Ultimos fichajes start-->
+                <section class="panel">
+                    <header class="panel-heading">
+                        Publicidad
+                        
+                    </header>
+                    <div class="panel-body">
+                        <div align="center">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- Cuadrado2014display -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:300px;height:250px"
+                                 data-ad-client="ca-pub-2361705659034560"
+                                 data-ad-slot="9275287139"></ins>
+                            <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </section>
+                <!--Ultimos fichajes end-->
+                
+            </div>
+
         </div>
         <div class="row">
             
@@ -108,7 +135,9 @@
                     pos = 0,
                     val_motor = [],
                     active = true,
-                    tinicio = new Date();
+                    tinicio = new Date(),
+                    COEMANOS = 600225,
+                    COEFRENADA = 1050;
 
                     
                     
@@ -276,7 +305,7 @@
                             if(!(i%2)){
                                 colorc  = "hsla("+parseInt((Math.random()*3)+20,10)+",100%,50%,1)";
                             }
-                            pilotos.push( new piloto(aPilotos[i],10,10*(i+2),0.3,0,((1000 - valores_pilotos[aPilotos[i]])/600225),((1000 - valores_pilotos[aPilotos[i]])/1050), val_motor[aPilotos[i]], colorc) );
+                            pilotos.push( new piloto(aPilotos[i],10,10*(i+2),0.3,0,((1000 - valores_pilotos[aPilotos[i]])/COEMANOS),((1000 - valores_pilotos[aPilotos[i]])/COEFRENADA), val_motor[aPilotos[i]], colorc) );
                         }
 
 
@@ -319,7 +348,7 @@
                         if(!(i%2)){
                             colorc  = "hsla("+parseInt((Math.random()*3)+20,10)+",100%,50%,1)";
                         }
-                        pilotos.push( new piloto(aPilotos[i],10,10*(i+2),0.3,0,((1000 - valores_pilotos[aPilotos[i]])/600225),((1000 - valores_pilotos[aPilotos[i]])/1050), val_motor[aPilotos[i]], colorc) );
+                        pilotos.push( new piloto(aPilotos[i],10,10*(i+2),0.3,0,((1000 - valores_pilotos[aPilotos[i]])/COEMANOS),((1000 - valores_pilotos[aPilotos[i]])/COEFRENADA), val_motor[aPilotos[i]], colorc) );
                     }
                     
                     /*

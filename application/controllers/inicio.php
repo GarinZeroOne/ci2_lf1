@@ -418,6 +418,7 @@ class Inicio extends CI_Controller {
 		// Cargar vistas
 		$this->load->view('base/header.php',$header);
 		$this->load->view('inicio/acceso'  ,$datos);
+		//$this->load->view('inicio/old/new_login'  ,$datos);
 		$this->load->view('base/bottom.php',$bottom);
 	}
 
