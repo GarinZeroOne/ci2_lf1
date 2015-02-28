@@ -285,7 +285,7 @@ class Gestion extends CI_Controller {
 		$header['avatar'] = $this->usuarios_model->userAvatar($_SESSION['id_usuario']);
 
 		// Javascript
-		$bottom['javascript'] = array('dashboard/confirmar.js');
+		$bottom['javascript'] = array('dashboard/confirmar.js','dashboard/stikis.js');
 
 		$this->load->model('calendario/calendario_model');
 
