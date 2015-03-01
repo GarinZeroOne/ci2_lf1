@@ -1,16 +1,8 @@
-function aumentarPorcentaje() {
-	var valorPorc = $('#porcentajeField').val();
-	valorPorc = parseInt(valorPorc) + 10;
-	alert(valorPorc);
-}
-
-function disminuirPorcentaje() {
-	var valorPorc = $('#porcentajeField').val();
-	valorPorc = parseInt(valorPorc) - 10;
-	alert(valorPorc);
+function modificarPorcentaje(){
+	var valorPorc = $('#porcentaje').val();
+	$('#valorPorcentaje').empty();
+	$('#valorPorcentaje').append(valorPorc+"%");
 }
 
 $(document).ready(function() {
-	$('#aumentarPorc').click(aumentarPorcentaje);
-	$('#disminuirPorc').click(disminuirPorcentaje);
 })

@@ -72,7 +72,7 @@
 
 		<!-- page start-->
 		<div class="row">
-			<div class="col-md-5">
+			<div class="col-md-4">
 				<section class="panel">
 					<header class="panel-heading-stiki"> ¿Que son los STIKIS? </header>
 					<div class="panel-body-stiki">
@@ -103,7 +103,7 @@
 				</section>
 			</div>
 
-			<div class="col-md-7">
+			<div class="col-md-8">
 				<section class="panel">
 					<header class="panel-heading"> Precios STIKIS </header>
 					<div class="panel-body">
@@ -124,7 +124,7 @@
 									</td>
 									<td>Stiki multiplicador de dinero</td>
 									<td><?php
-									$coste = 30000;
+									$coste = 50000;
 									if ($valorMejoraMecanicos > 0) {
 
                                             $coste_con_mejora = $coste - ($coste * $valorMejoraMecanicos);
@@ -140,7 +140,7 @@
 									</td>
 									<td>Stiki multiplicador de puntos</td>
 									<td><?php
-									$coste = 400000;
+									$coste = 500000;
 									if ($valorMejoraMecanicos > 0) {
 
                                             $coste_con_mejora = $coste - ($coste * $valorMejoraMecanicos);
@@ -162,7 +162,7 @@
 		<!-- FILA -->
 		<div class="row">
 
-			<div class="col-md-5">
+			<div class="col-md-4">
 				<section class="panel">
 					<div class="panel-body">
 
@@ -210,19 +210,20 @@
 								</div>
 
 							</div>
-							<input id="porcentajeField" type="hidden" name="porcentaje" value="10">
+							<input id="porcentajeField" type="hidden" name="porcentaje"
+								value="10">
 							<div class="col-md-12" style="margin-top: 20px;">
-								<h4 style="display: block;">Porcentaje</h4>
-								<div class="progress col-md-8">
-									<div class="progress-bar" role="progressbar" aria-valuenow="60"
-										aria-valuemin="0" aria-valuemax="100" style="width: 10%;">10%</div>
+								<h4 style="display: block;">Porcentaje stiki</h4>								
+								<div class="col-md-3">
+									<h4>
+										<span class="label label-default " id="valorPorcentaje">10%</span>
+									</h4>
 								</div>
-								<button id="disminuirPorc" type="button" class="btn btn-success btn-sm pull-right">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button id="aumentarPorc" type="button" class="btn btn-success btn-sm pull-right">
-									<i class="fa fa-plus"></i>
-								</button>
+								<div class="col-md-9" id="inputRange">
+									<input type="range" min="0" max="100" step="10" value="10"
+										name="porcentaje" id="porcentaje"
+										onchange="<?php echo "modificarPorcentaje()";?>">
+								</div>
 							</div>
 
 							<div class="col-sm-12" style="margin-top: 20px;">
@@ -272,7 +273,7 @@
 			</div>
 			<!-- FIN COL 5 -->
 
-			<div class="col-md-7">
+			<div class="col-md-8">
 				<!-- COL 7-->
 
 				<section class="panel">
@@ -289,22 +290,23 @@
 									<th>Piloto</th>
 									<th class="numeric">Precio venta</th>
 									<th>Fecha compra</th>
+									<th>Porcentaje</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php foreach ($stikisGp as $stiki): ?>
 								<tr>
 									<td><?php if ($stiki->getTipoStiki() == 'puntos'): ?> <img
-										src="<?php echo base_url() ?>img/stikipuntos.png"> <?php else: ?>
-										<img src="<?php echo base_url() ?>img/stikidinero.png"> <?php endif; ?>
+										src="<?php echo base_url() ?>img/stikipuntos.png" class="stiki-small"> <?php else: ?>
+										<img src="<?php echo base_url() ?>img/stikidinero.png" class="stiki-small"> <?php endif; ?>
 									</td>
 									<td>
 										<div class="row">
-											<div class="col-md-4" style="text-align: center">
-												<img class="round-pilots-big"
+											<div class="col-md-3" style="text-align: center">
+												<img class="round-pilots"
 													src="<?php echo base_url(); ?>img/pilotos/<?php echo $stiki->getPiloto()->getFoto(); ?>.jpg">
 											</div>
-											<div class="col-md-8">
+											<div class="col-md-9">
 												<?php echo $stiki->getPiloto()->getNombre() . " " . $stiki->getPiloto()->getApellido() . "<br><small>" . $stiki->getPiloto()->getEquipo()->getEscuderia() . "</small>"; ?>
 
 											</div>
@@ -317,6 +319,8 @@
 									</a>
 									</td>
 									<td style="vertical-align: middle"><?php echo $stiki->getFechaCompra(); ?>
+									</td>
+									<td style="vertical-align: middle"><?php echo $stiki->getPorcentaje(); ?>%
 									</td>
 								</tr>
 								<?php endforeach; ?>
@@ -335,6 +339,7 @@
 									<th>Piloto</th>
 									<th class="numeric">Precio compra</th>
 									<th>Fecha compra</th>
+									<th>Porcentaje</th>
 									<th style="text-align: center">Circuito</th>
 								</tr>
 							</thead>
@@ -343,16 +348,16 @@
 								<?php if ($stiki->getCircuito()->getIdCircuito() != $circuito->getIdCircuito()): ?>
 								<tr>
 									<td><?php if ($stiki->getTipoStiki() == 'puntos'): ?> <img
-										src="<?php echo base_url() ?>img/stikipuntos.png"> <?php else: ?>
-										<img src="<?php echo base_url() ?>img/stikidinero.png"> <?php endif; ?>
+										src="<?php echo base_url() ?>img/stikipuntos.png" class="stiki-small"> <?php else: ?>
+										<img src="<?php echo base_url() ?>img/stikidinero.png" class="stiki-small"> <?php endif; ?>
 									</td>
 									<td>
 										<div class="row">
-											<div class="col-md-5">
-												<img class="round-pilots-big"
+											<div class="col-md-4">
+												<img class="round-pilots"
 													src="<?php echo base_url(); ?>img/pilotos/<?php echo $stiki->getPiloto()->getFoto(); ?>.jpg">
 											</div>
-											<div class="col-md-7">
+											<div class="col-md-8">
 												<?php echo $stiki->getPiloto()->getNombre() . " " . $stiki->getPiloto()->getApellido() . "<br><small>" . $stiki->getPiloto()->getEquipo()->getEscuderia() . "</small>"; ?>
 
 											</div>
@@ -362,8 +367,10 @@
 									</td>
 									<td style="vertical-align: middle"><?php echo $stiki->getFechaCompra(); ?>
 									</td>
+									<td style="vertical-align: middle"><?php echo $stiki->getPorcentaje(); ?>%
+									</td>
 									<td style="vertical-align: middle; text-align: center"><img
-										class="round-pilots-big"
+										class="round-pilots"
 										src="<?php echo base_url() ?>img/circuitos/banderas/<?php echo $stiki->getCircuito()->getBandera(); ?>"
 										title="<?php echo $stiki->getCircuito()->getCircuito() . " ( " . $stiki->getCircuito()->getPais() . " )"; ?>">
 									</td>

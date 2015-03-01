@@ -215,6 +215,10 @@ span.cont-stiki
     width: 108px;
 }
 
+div#inputRange{
+	padding-top:12px;
+}
+
 /*Ultimos fichajes*/
 div.driver-box{
 	display: inline-block;
@@ -476,6 +480,11 @@ img.round-pilots-big{
     border-radius: 50%;
     height: 65px;
     width: 65px;
+}
+
+img.stiki-small{    
+    height: 45px;
+    width: 90px;
 }
 
 /*img en blanco y negro*/

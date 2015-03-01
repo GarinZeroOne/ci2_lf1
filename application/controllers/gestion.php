@@ -350,7 +350,7 @@ class Gestion extends CI_Controller {
 
 		$tipoStiki = $_POST['tipoStiki'];
 		$idGp = $_POST['idGp'];
-		$porcentaje = $_POST['porcentaje'];
+		$porcentaje = $_POST['porcentaje'];			
 
 		//El porcentaje tiene que ser mayor que cero para comprar el stiki
 		if ($porcentaje >0){

@@ -125,11 +125,10 @@ class Stikis_model extends CI_model {
         foreach ($stikisGp as $stiki){
         	$porcentajeStikisComprados += $stiki->getPorcentaje();
         }
-
-        
-        $porcentajeTotal = $porcentajeStikisComprados + $porcentaje; 
-        // Comprobamos que no tenga ya 2 stikis para el GP
-        if ( $porcentajeTotal > 100) {
+		
+        $porcentajeTotal = $porcentajeStikisComprados + $porcentaje;               
+        // Comprobamos que no tenga superado el 100% del stiki
+        if ( $porcentajeTotal <= 100) {
             // Comprobar que tipo stiki ha comprado
             // para comparar precio con sus fondos
             // y saber si le llega
