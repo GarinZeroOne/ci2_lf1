@@ -1,0 +1,6 @@
+$(function () {
+
+	// notificaciones
+
+	// TO DO
+});

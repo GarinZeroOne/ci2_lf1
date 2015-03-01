@@ -194,6 +194,19 @@ class Dashboard extends CI_Controller {
 	}
 
 	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function c_notificaciones()
+	{
+		$this->load->model('mensajes_model');
+		
+		echo "OK".$_POST['hola'];
+	}
+
+	/**
 	 * Plantilla seccion
 	 *
 	 * @return void

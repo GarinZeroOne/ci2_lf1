@@ -5,7 +5,8 @@ class Grupos_model extends CI_Model {
     function Grupos_model() {
         parent::__construct();
 
-        $this->db->query("SET OPTION SQL_BIG_SELECTS=1");
+        // En local esto peta, en el servidor no, lo comento de momento // 1/03/2015
+        //$this->db->query("SET OPTION SQL_BIG_SELECTS=1");
     }
 
     function insertGrupo($datos) {
@@ -549,16 +550,16 @@ class Grupos_model extends CI_Model {
     function set_notificados($id_grupo, $id_usuario)
     {
 
-        $estado = $this->db->select('id')->from('grupos_notificaciones')->where('id_usuario',$id_usuario)->where('id_grupo',$id_grupo)->where('aldia',0)->get();
+        $estado = $this->db->select('id')->from('usuarios_alertas')->where('id_usuario',$id_usuario)->where('id_grupo',$id_grupo)->where('leida',0)->get();
 
         if($estado->num_rows())
         {
             $id_notificacion = $estado->row()->id;
 
-            $data_update = array( 'aldia' => 1 );
+            $data_update = array( 'leida' => 1 );
 
             $this->db->where('id',$id_notificacion);
-            $this->db->update('grupos_notificaciones',$data_update);
+            $this->db->update('usuarios_alertas',$data_update);
         }
 
     }

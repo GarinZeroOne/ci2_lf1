@@ -179,7 +179,7 @@ class Grupos extends CI_Controller {
 		$mensaje = $this->grupos_model->insertMensajes($id_grupo,$contenido,true);
 		$texto = '<li class="clearfix odd">
                                 <div class="chat-avatar">
-                                    <img alt="female" width="40" src="http://localhost/lf12014//img/avatares/thumbs/'.$mensaje->avatar.'">
+                                    <img alt="male" width="40" src="'.site_url().'/img/avatares/thumbs/'.$mensaje->avatar.'">
                                     <i>'.timeago(strtotime(date('Y-m-d H:i:s'))).'</i>
                                 </div>
                                 <div class="conversation-text">

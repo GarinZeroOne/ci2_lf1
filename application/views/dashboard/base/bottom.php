@@ -53,6 +53,7 @@
 <!--common script init for all pages-->
 <script src="<?= base_url();?>js/dashboard/scripts.js"></script>
 <script src="<?= base_url();?>js/dashboard/dashboard.js"></script>
+<script src="<?= base_url();?>js/dashboard/notificaciones.js"></script>
 <?php 
     if($javascript){
       foreach($javascript as $js){
