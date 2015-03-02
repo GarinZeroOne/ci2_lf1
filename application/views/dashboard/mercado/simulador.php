@@ -244,7 +244,7 @@
                             piloto.tiempoB = new Date();
                             var diferencia = (piloto.tiempoB - piloto.tiempoA) / 1000;
                             pos++;
-                            $('#resul').append('<li>'+pos+'º '+piloto.nombre+'('+diferencia+')</li>');
+                            $('#resul').append('<li>'+pos+'º '+piloto.nombre+' <span style="font-size:10px;">('+diferencia+')</span> </li>');
                         }
                             
 

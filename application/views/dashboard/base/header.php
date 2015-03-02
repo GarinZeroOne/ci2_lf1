@@ -81,13 +81,13 @@
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="fa fa-tasks"></i>
-                <span class="badge bg-important"><?php echo mensajes_model::notificaciones_contador(); ?></span>
+                <span id="cont-notifi" class="badge bg-important"><?php echo mensajes_model::notificaciones_contador(); ?></span>
             </a>
             <ul class="dropdown-menu extended tasks-bar">
                 <?php echo mensajes_model::notificaciones_activas(); ?>
                 
 
-                <li class="external">
+                <li class="ver-todas">
                     <a href="#">Ver todas las notificaciones</a>
                 </li>
             </ul>
