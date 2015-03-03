@@ -41,7 +41,8 @@ class Mensajes extends CI_Controller {
 	 **/
 	function index()
 	{
-
+		redirect_lf1('mensajes/notificaciones');
+		/*
 		// Menu Izquierda
 		$sidebarleft 		  = array();
 		$sidebarleft['m_act'] = 7;
@@ -64,7 +65,7 @@ class Mensajes extends CI_Controller {
 		// Vistas base | Menu derecha | Bottom end
 		$this->load->view('dashboard/base/sidebarright.php',$sidebarright);		
 		$this->load->view('dashboard/base/bottom.php',$bottom);
-		
+		*/
 	}
 
 	/**

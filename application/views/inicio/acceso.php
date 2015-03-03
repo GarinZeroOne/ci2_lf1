@@ -21,7 +21,8 @@
 
               
               <div class="cab">
-                <h1 class="login-header">  LIGAFORMULA1</h1> 
+                <h1 class="login-header">  LIGAFORMULA1</h1>
+                <!-- <h1 class="close">LIGAFORMULA1</h1>-->
                 <div class="anio"><b>2015</b></div>
               </div>
               

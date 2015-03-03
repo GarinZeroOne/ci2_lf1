@@ -406,7 +406,7 @@ class Inicio extends CI_Controller {
 		************/
 
 		// Titulo/desc
-		$header['titulo'] 		= 'LigaFormula1.com - Manager Formula 1 basado en resultados reales de la temporada F1 2014';
+		$header['titulo'] 		= 'LigaFormula1.com - Manager Formula 1 basado en resultados reales de la temporada F1 2015';
 		$header['descripcion']  = 'Juega al mejor manager Formula 1 online  basado en resultados de la F1 real. Compite contra tus amigos y contra  	todos  los  demás managers.';
 
 		// Estilos

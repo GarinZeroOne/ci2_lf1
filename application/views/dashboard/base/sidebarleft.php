@@ -56,9 +56,9 @@
                 
             </li>
             <li>
-                <a href="<?php echo site_url(); ?>mensajes/" <?php if($m_act == 7): ?> class="active" <?php endif; ?>>
+                <a href="<?php echo site_url(); ?>mensajes/notificaciones" <?php if($m_act == 7): ?> class="active" <?php endif; ?>>
                     <i class="fa fa-envelope"></i>
-                    <span>Mensajes </span>
+                    <span>Notificaciones </span>
                 </a>
             </li>
             <li class="sub-menu">

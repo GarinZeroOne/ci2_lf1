@@ -5345,4 +5345,8 @@ div.tagsinput span.tag {
     text-transform: capitalize;
     color:#4C4C4D;
 }
+#resul li span{
+    color: #072fbb;
+    font-size: 12px !important;
+}
 

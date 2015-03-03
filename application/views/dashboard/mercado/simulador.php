@@ -45,14 +45,14 @@
             <div class="col-md-5">
                 <section class="panel">
                     <header class="panel-heading-stiki">
-                        Simulador de carrera
+                        Simulador de carrera <?php echo $next_gp; ?>
                         
                     </header>
                     <div class="panel-body-stiki">   
-                        <p>En el simulador de carreras puedes  comprobar de manera  visual el pronóstico de la siguiente carrera. El simulador otorga a cada piloto un valor basandose en sus resultados de los ultimos años en el Gran Premio que toque cada semana.</p>
-                        <p>Hay pilotos a los que se les dan  especialmente  bien ciertos circuitos, y es una buena oportunidad para ficharlos, con el simulador tendras una vision aproximada del rendimiento que se espera de cada piloto.</p>
+                        <p>En el simulador de carreras puedes  comprobar de manera  visual el pronóstico de la siguiente carrera. El simulador otorga a cada piloto un valor basandose en sus resultados de los últimos años en el Gran Premio que toque cada semana.</p>
+                        <p>Hay pilotos a los que se les dan  especialmente  bien ciertos circuitos, y es una buena oportunidad para ficharlos, con el simulador tendrás una vision aproximada del rendimiento que se espera de cada piloto.</p>
 
-                        <p>Otro factor que afecta al simulador es la escuderia del piloto. No es lo mismo ir con un Mercedes que con un Marussia, tampoco todos los coches se adaptan igual a todos los circuitos y durante la temporada su rendimiento va variando. Por todo esto tienes la posibilidad de ir ajustando a tu gusto o conocimientos el valor de potencia de cada escuderia, de manera que se vea afectada en la simulación.</p>
+                        <p>Otro factor que afecta al simulador es la escuderia del piloto. Como no todos los pilotos disponen del mismo motor ni aerodinámica, tienes la posibilidad ir ajustando a tu gusto o conocimientos el valor de potencia de cada escuderia, de manera que se vea afectada en la simulación.</p>
                     </div>
                 </section>    
             </div>
