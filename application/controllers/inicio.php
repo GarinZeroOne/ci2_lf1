@@ -333,9 +333,68 @@ class Inicio extends CI_Controller {
 				// Actualiza la nueva pass encriptandola
 				$this->usuarios_model->resetear_password( $pass , $id_usuario);
 
+				//ENVIO MAL 2015 USANDO PHPMAILER y MAILGUN
+				
+				require APPPATH . 'classes/phpmailer/class.phpmailer.php';
+				require APPPATH . 'classes/phpmailer/class.smtp.php';
 
+				// Contenido mail
+				$datos['mail_titulo'] = "Liga formula 1 - Tu nueva contraseña";
+				$datos['texto'] = "Se ha reseteado la contraseña a petición tuya. Tu nueva contraseña es:  {$pass}
+							Recuerda que puedes modificar tu contraseña desde tu perfil.
+
+							Saludos,
+							Admin LF1";
+
+				$html_mail = $this->load->view('mailing/mail_template',$datos,TRUE);
+				$plano_mail = "Se ha reseteado la contraseña a petición tuya. Tu nueva contraseña es:  {$pass}
+							Recuerda que puedes modificar tu contraseña desde tu perfil.
+
+							Saludos,
+							Admin LF1";
+
+
+				$mail = new PHPMailer;
+
+				//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+				$mail->isSMTP();                                      // Set mailer to use SMTP
+				$mail->Host = 'smtp.mailgun.org';  // Specify main and backup SMTP servers
+				$mail->SMTPAuth = true;                               // Enable SMTP authentication
+				$mail->Username = 'postmaster@mail.ligaformula1.com';                 // SMTP username
+				$mail->Password = 'c39313b9c90311e35e238b1060affcf4';                           // SMTP password
+				$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+				$mail->Port = 587;                                    // TCP port to connect to
+
+				$mail->From = 'admin@ligaformula1.com';
+				$mail->FromName = 'Liga Formula 1';
+				//$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+				$mail->addAddress($existe->row()->email);               // Name is optional
+				//$mail->addReplyTo('info@example.com', 'Information');
+				//$mail->addCC('cc@example.com');
+				//$mail->addBCC('bcc@example.com');
+
+				//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+				//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+				$mail->isHTML(true);                                  // Set email format to HTML
+
+				$mail->Subject = 'Liga formula 1 - Tu nueva contraseña';
+				$mail->Body    = $html_mail;//'Prueba desde ligaformula1.com';
+				$mail->AltBody = $plano_mail;//'Prueba desde ligaformula1.com';
+
+				if(!$mail->send()) {
+				    $this->session->set_flashdata('msg_error','No se ha podido enviar el email...');
+					redirect_lf1('inicio/restablecer_pass');
+				} else {
+				    $this->session->set_flashdata('msg_ok','Hemos enviado un email a tu cuenta  de correo con la nueva contraseña.');
+					redirect_lf1('inicio/restablecer_pass');
+				}
+				
+
+				// ENVIO DE MAL ANTIGUO CI - DEPRECATED
 				// Mandar correo con su nueva pass
 				// $this->usuarios_model->mandar_mail_nuevo_password($existe->row()->email , $pass);
+				/*
 				$this->load->library('email');
 
 
@@ -360,7 +419,7 @@ class Inicio extends CI_Controller {
 					$this->session->set_flashdata('msg_ok','Hemos enviado un email a tu cuenta  de correo con la nueva contraseña.');
 					redirect_lf1('inicio/restablecer_pass');
 				}
-
+				*/
 				//mail("{$existe->row()->email}","Liga Formula 1 - Nueva contraseña ","Tu nueva contraseña es {$pass}") ;
 
 
