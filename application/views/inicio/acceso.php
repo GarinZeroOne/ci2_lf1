@@ -105,7 +105,7 @@
 
             </div> <!-- end login -->
 
-            <div align="center">
+            <div align="center" style="text-align: right; width: 400px; margin: -12px auto;">
               <span class='st_facebook_large' displayText='Facebook'></span>
               <span class='st_twitter_large' displayText='Tweet'></span>
               <span class='st_googleplus_large' displayText='Google +'></span>
@@ -128,12 +128,15 @@
 
             <div class="col-xs-12 ">
 
+              <h2>Patrocinadores</h2>
+
               <div class="box-patrocinador">
-                <img class="desaturada" width="80" src="<?php echo base_url(); ?>img/logolf1w.png" alt="patrocinador-lf1" title="¿Quieres ver tu logo aqui? Ponte en contacto con nosotros para apoyar a LF1 como patrocinador">
+               <a href="<?php echo site_url(); ?>"> <img class="desaturada" width="80" src="<?php echo base_url(); ?>img/logolf1w.png" alt="patrocinador-lf1" title="Liga Formula 1"></a>
               </div>
               
               <div class="box-patrocinador">
                 
+                <a href="<?php echo site_url(); ?>inicio/patrocinio" class="pat"> ¿Quieres ayudar a LF1 y ver tu logo aquí?</a>
               </div>
 
               <div class="box-patrocinador">
@@ -177,7 +180,7 @@
         <div class="container">
           
             <ul class="nav-footer">
-              <li>LigaFormula1.com © 2009 - 2014</li>
+              <li>LigaFormula1.com © 2009 - 2015</li>
               <?php 
               /*
               <li><a href="#">Reglamento</a></li>

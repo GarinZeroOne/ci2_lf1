@@ -39,18 +39,13 @@
           <div class="col-xs-12 col-sm-6 hidden-xs">
             <h2 class="facts">
               
-              Tu último paso para convertirte en un Manager <br><br>
+              Formulario de contacto enviado! <br><br>
              
             </h2>
 
-            <p class="regtextb">
-              Completa el formulario para crear tu cuenta de usuario,  con la que podrás participar en la Liga Formula 1 y competir contra todos  los demás usuarios.
-            </p>
-            <p class="regtextb">
-              Automaticámente te introduciremos en el grupo de tu comunidad, para que nunca te sientas solo. Quizás no logres ser le mejor manager en la general, pero siempre podrás intentarlo contra los usuarios de tu zona!
-            </p>
-
-            <p class="regtextb">Bienvenido y  buena suerte!</p>
+            
+            <p class="regtextb">Gracias por ponerte en contacto con nosotros, te responderemos lo antes posible!</p>
+            <p class="regtextb">Un saludo.</p>
 
             
             
@@ -62,63 +57,37 @@
               
             <div id="login">
 
-              <h2><span class="fontawesome-lock"></span>Crea tu cuenta Manager</h2>
+               <h2><span class="fontawesome-lock"></span>Acceso Managers</h2>
               <?php 
-              if(validation_errors()):
+              if($this->session->flashdata('login_error')):
               ?>
-              <span class="error-acceso">
-                <?php echo validation_errors(); ?>
-              </span>
+              <span class="error-acceso">## Usuario o contraseña incorrecta ##</span>
               <?php 
               endif;
               ?>
-              <form action="<?php echo site_url(); ?>inicio/alta_nuevo_usuario" method="POST">
+
+              <?php 
+              if($this->session->flashdata('alta_ok')):
+              ?>
+              <span class="alta-ok"> Tu cuenta ha sido  creada! </span>
+              <?php 
+              endif;
+              ?>
+
+              <form action="<?php echo site_url(); ?>inicio/login" method="POST">
 
                 <fieldset>
 
-                  <p><label for="email">Nick:</label></p>
+                  <p><label for="email">Identificador@</label></p>
                   <p><input type="text" id="usuario" name="usuario" placeholder="Tu usuario" required></p> 
                   <!--onBlur="if(this.value=='')this.value='Tu usuario'" onFocus="if(this.value=='Tu usuario')this.value=''" -->
                   <!-- JS because of IE support; better: placeholder="mail@address.com" -->
 
-                  <p><label for="password">Contraseña:</label></p>
-                  <p><input type="password" id="passwd" name="passwd" placeholder="Contraseña" required></p> <!-- JS because of IE support; better: placeholder="password" -->
+                  <p><label for="password">Password</label></p>
+                  <p><input type="password" id="passwd" name="passwd" placeholder="Tu contraseña" required></p> <!-- JS because of IE support; better: placeholder="password" -->
 
-                  <p><label for="password">Confirmar contraseña: </label></p>
-                  <p><input type="password" id="passconf" name="passconf" placeholder="Confirma tu contraseña" required></p>
-
-                  <p><label for="mail">Email: </label></p>
-                  <p><input type="text" id="email" name="email" placeholder="Introduce tu email" required></p>
-
-                  <p><label for="provincia">Comunidad autonoma<br><i style="font-size:10px">(selecciona 'internacional' si resides fuera de españa)</i> </label></p>
-                  <p>
-                        <select name="comunidad" id="comunidad" required>
-                          <option value="">Selecciona una  opción</option>
-                          <option value="1">Andalucía</option>
-                          <option value="2">Aragón</option>
-                          <option value="3">Principado de Asturias</option>
-                          <option value="4">Islas Baleares</option>
-                          <option value="5">País Vasco</option>
-                          <option value="6">Canarias</option>
-                          <option value="7">Cantabria</option>
-                          <option value="8">Castilla-La Mancha</option>
-                          <option value="9">Castilla y León</option>
-                          <option value="10">Cataluña</option>
-                          <option value="11">Extremadura</option>
-                          <option value="12">Galicia</option>
-                          <option value="13">Comunidad de Madrid</option>
-                          <option value="14">Región de Murcia</option>
-                          <option value="15">Comunidad Foral de Navarra</option>
-                          <option value="16">La Rioja</option>
-                          <option value="17">Comunidad Valenciana</option>
-                          <option value="18">Ceuta</option>
-                          <option value="19">Melilla</option>
-                          <option value="20"><i>Internacional</i></option>
-                        </select>
-                  </p>
-
-
-                  <p><input type="submit" value="Crear cuenta"></p>
+                  <p><input type="submit" value="Entrar"> </p>
+                  <div class="recordar"><a href="<?php echo site_url();?>inicio/restablecer_pass">¿Olvidaste tu contraseña?</a></div>
 
                 </fieldset>
 

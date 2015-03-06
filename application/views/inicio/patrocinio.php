@@ -39,18 +39,26 @@
           <div class="col-xs-12 col-sm-6 hidden-xs">
             <h2 class="facts">
               
-              Tu último paso para convertirte en un Manager <br><br>
+              ¿Estás interesado en patrocinar a LigaFormula1? <br><br>
              
             </h2>
 
             <p class="regtextb">
-              Completa el formulario para crear tu cuenta de usuario,  con la que podrás participar en la Liga Formula 1 y competir contra todos  los demás usuarios.
+              En 2009 emprendimos la aventura de crear la primera página dedicada a gestionar una liga del campeonato mundial de Formula 1. Gracias a la respuesta positiva de nuestros usuarios, cada año hemos ido mejorando el formato e introduciendo características únicas que nos diferencian de otras ligas y del formato clasico.
             </p>
             <p class="regtextb">
-              Automaticámente te introduciremos en el grupo de tu comunidad, para que nunca te sientas solo. Quizás no logres ser le mejor manager en la general, pero siempre podrás intentarlo contra los usuarios de tu zona!
+              El reto de mantener año tras año el nivel cada vez es más díficil, dado los gastos que conlleva gestionar un servicio de este tipo, y que cada año con la crecida del número de usuarios se acentúa aún más.
             </p>
 
-            <p class="regtextb">Bienvenido y  buena suerte!</p>
+            <p class="regtextb">
+              Pero ningúno de esos impedimentos ha conseguido frenar nuestra ilusión de seguir desarrollando y preparando cada temporada con las mismas ganas que el primer día. Somos amantes de la Formula 1 y la tecnología, que son los principales pilares de ligaformula1.com y mientras podamos y la comunidad nos apoye seguiremos con el proyecto.
+            </p>
+
+            <p class="regtextb">
+              Si te gusta nuestro proyecto y quieres ayudarnos a crecer más y mejorar, vendes un producto que pueda interesar a nuestros usuarios, quieres promocionar tu marca, tienes ideas para LF1 o quieres colaborar con nosotros, no dudes en ponerte en contacto!
+            </p>
+
+            <p class="regtextb">:></p>
 
             
             
@@ -62,63 +70,41 @@
               
             <div id="login">
 
-              <h2><span class="fontawesome-lock"></span>Crea tu cuenta Manager</h2>
+              <h2><span class="fontawesome-lock"></span>¡Cuentanos tu propuesta!</h2>
               <?php 
-              if(validation_errors()):
+              if($this->session->flashdata('msg_error')):
               ?>
               <span class="error-acceso">
-                <?php echo validation_errors(); ?>
+                <?php echo $this->session->flashdata('msg_error'); ?>
               </span>
               <?php 
               endif;
               ?>
-              <form action="<?php echo site_url(); ?>inicio/alta_nuevo_usuario" method="POST">
+              <form action="<?php echo site_url(); ?>inicio/patrocinio" method="POST">
 
                 <fieldset>
 
-                  <p><label for="email">Nick:</label></p>
-                  <p><input type="text" id="usuario" name="usuario" placeholder="Tu usuario" required></p> 
+                  <p><label for="nombre">Nombre:</label></p>
+                  <p><input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required></p> 
                   <!--onBlur="if(this.value=='')this.value='Tu usuario'" onFocus="if(this.value=='Tu usuario')this.value=''" -->
                   <!-- JS because of IE support; better: placeholder="mail@address.com" -->
 
-                  <p><label for="password">Contraseña:</label></p>
-                  <p><input type="password" id="passwd" name="passwd" placeholder="Contraseña" required></p> <!-- JS because of IE support; better: placeholder="password" -->
+                  <p><label for="empresa">Empresa:</label></p>
+                  <p><input type="text" id="empresa" name="empresa" placeholder="Empresa" ></p> <!-- JS because of IE support; better: placeholder="password" -->
 
-                  <p><label for="password">Confirmar contraseña: </label></p>
-                  <p><input type="password" id="passconf" name="passconf" placeholder="Confirma tu contraseña" required></p>
+                  <p><label for="web">Pagina web: </label></p>
+                  <p><input type="text" id="web" name="web" placeholder="Pagina web" ></p>
 
                   <p><label for="mail">Email: </label></p>
                   <p><input type="text" id="email" name="email" placeholder="Introduce tu email" required></p>
 
-                  <p><label for="provincia">Comunidad autonoma<br><i style="font-size:10px">(selecciona 'internacional' si resides fuera de españa)</i> </label></p>
+                  <p><label for="provincia">Comentarios </label></p>
                   <p>
-                        <select name="comunidad" id="comunidad" required>
-                          <option value="">Selecciona una  opción</option>
-                          <option value="1">Andalucía</option>
-                          <option value="2">Aragón</option>
-                          <option value="3">Principado de Asturias</option>
-                          <option value="4">Islas Baleares</option>
-                          <option value="5">País Vasco</option>
-                          <option value="6">Canarias</option>
-                          <option value="7">Cantabria</option>
-                          <option value="8">Castilla-La Mancha</option>
-                          <option value="9">Castilla y León</option>
-                          <option value="10">Cataluña</option>
-                          <option value="11">Extremadura</option>
-                          <option value="12">Galicia</option>
-                          <option value="13">Comunidad de Madrid</option>
-                          <option value="14">Región de Murcia</option>
-                          <option value="15">Comunidad Foral de Navarra</option>
-                          <option value="16">La Rioja</option>
-                          <option value="17">Comunidad Valenciana</option>
-                          <option value="18">Ceuta</option>
-                          <option value="19">Melilla</option>
-                          <option value="20"><i>Internacional</i></option>
-                        </select>
+                        <textarea name="comentarios" id="" cols="30" rows="10"></textarea>
                   </p>
 
 
-                  <p><input type="submit" value="Crear cuenta"></p>
+                  <p><input type="submit" value="Enviar"></p>
 
                 </fieldset>
 

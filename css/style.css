@@ -193,7 +193,28 @@ a{
 .patrocinadores{
     
     margin-top:45px;
+    /*text-align: center;*/
+}
+
+.patrocinadores h2{
+    background-color: rgba(1, 1, 1, 0.1);
+    border-radius: 5px;
+    color: #ffb64a;
+    font-family: "Share Tech",sans-serif;
+    font-size: 1.8em;
+    font-weight: normal;
+    padding: 5px;
     text-align: center;
+    text-shadow: 1px 1px 1px #000;
+    width: 200px;
+}
+.patrocinadores a.pat{
+  border: 1px solid rgba(255, 199, 18, 0.5);
+    border-radius: 4px;
+    color: rgba(255, 199, 18, 0.6);
+    display: block;
+    font-size: 14px;
+    padding: 5px;
 }
 .box-patrocinador{
   /*border: 1px solid #565656;*/
