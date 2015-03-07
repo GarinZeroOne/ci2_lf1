@@ -375,7 +375,7 @@ class Equipos_model extends CI_Model {
         $pilotos = array();
 
         foreach ($result as $row) {
-            $piloto = Piloto::getById($row->id);
+            $piloto = Piloto::getById($row->id, false);
 
             $pilotos[] = $piloto;
         }
@@ -578,6 +578,24 @@ class Equipos_model extends CI_Model {
         }
 
         return $equipos;
+    }
+    
+    function getMisEquiposObject($idUsuario) {
+    	$sql = "SELECT *
+                FROM usuarios_equipos
+                WHERE usuarios_equipos.id_usuario = ?
+                AND usuarios_equipos.activo = 1";
+    	$result = $this->db->query($sql, array($idUsuario))->result();
+    
+    	$equipos = array();
+    	foreach ($result as $row) {
+    		$equipo = Equipo::getById($row->id_equipo, false);
+    		$pilotos = $this->getPilotosEquipoObject($row->id_equipo);
+    		$equipo->setPilotos($pilotos);
+    		$equipos[] = $equipo;
+    	}
+    
+    	return $equipos;
     }
 
     function getDatosEquipoUsuario($idEquipo, $idUsuario) {

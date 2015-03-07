@@ -228,6 +228,8 @@ class Mercado extends CI_Controller {
 		$header['avatar'] = $this->usuarios_model->userAvatar($_SESSION['id_usuario']);
 
 		$datos['equipos'] = $this->equipos_model->getEquiposFichaObject();
+		
+		$datos['misEquipos'] = $this->equipos_model->getMisEquiposObject($_SESSION['id_usuario']);
 
 		// Javascript
 		$bottom['javascript'] = array('dashboard/confirmar.js');
