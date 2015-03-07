@@ -504,7 +504,7 @@ class Admin extends CI_Controller {
 			echo "<br>";
 			
 			$porcentajePosicion = $this->equipos_model->
-			getPorcentajeMejoraPosicion($posicionGp)->row->porcentaje();
+			getPorcentajeMejoraPosicion($posicionGp)->row()->porcentaje;
 			
 			$porcentajeFinal = 0;
 
@@ -527,17 +527,19 @@ class Admin extends CI_Controller {
 					//$equipo->aumentarValor($porcentaje);
 					$porcentajeFinal = $porcentaje + $porcentajePosicion;
 				}
-			} /*else {
-				$equipo->mismoValor();
-			}*/
+			} else {
+				$porcentajeFinal = $porcentajePosicion;
+			}
 			
 			echo "Porcentaje posicion " . $porcentajePosicion;
+			echo "<br>";
 			echo "Porcentaje final " . $porcentajeFinal;
+			echo "<br>";
 			
 			if ($porcentajeFinal > 0 ){
 				$equipo->aumentarValor($porcentajeFinal);
 			}elseif ($porcentajeFinal < 0){
-				$equipo->disminuirValor($porcentajeFinal);
+				$equipo->disminuirValor(abs($porcentajeFinal));
 			}else{
 				$equipo->mismoValor();
 			}
@@ -597,7 +599,7 @@ class Admin extends CI_Controller {
 				$diferencia = $posicionMundial - $posicionGp;
 				echo "diferencia " . $diferencia . "<br>";
 				$porcentajePosicion = $this->pilotos_model->
-				getPorcentajeMejoraPosicion($posicionGp)->row->porcentaje();
+				getPorcentajeMejoraPosicion($posicionGp)->row()->porcentaje;								
 
 				$porcentajeFinal = 0;
 				//Se obtiene el porcentaje a decrementar
@@ -625,20 +627,27 @@ class Admin extends CI_Controller {
 						//mundial y del gp
 						$porcentajeFinal = $porcentaje + $porcentajePosicion;
 					}
-				} /*else {
-				//Se ejecuta la funcion que deja el valor anterior con el de ahora
-				$piloto->mismoValor();
-				}*/
+				} else {
+					$porcentajeFinal = $porcentajePosicion;
+				}
 
 				echo "Porcentaje posicion " . $porcentajePosicion;
+				echo "<br>";
 				echo "Porcentaje final " . $porcentajeFinal;
+				echo "<br>";
 				
 				if ($porcentajeFinal > 0 ){
 					$piloto->aumentarValor($porcentajeFinal);
+					echo "aumentar";
+					echo "<br>";
 				}elseif ($porcentajeFinal < 0){
-					$piloto->disminuirValor($porcentajeFinal);
+					$piloto->disminuirValor(abs($porcentajeFinal));
+					echo "disminuir";
+					echo "<br>";
 				}else{
 					$piloto->mismoValor();
+					echo "mismo valor";
+					echo "<br>";
 				}
 
 				echo "Valor actual " . $piloto->getValorActual();
