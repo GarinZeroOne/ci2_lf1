@@ -695,6 +695,27 @@ class Pilotos_model extends CI_Model {
 
         return $pilotos;
     }
+    
+    function getMisPilotosObject($idUsuario) {
+    	$sql = "SELECT pilotos.*
+                FROM usuarios_pilotos,pilotos
+                WHERE usuarios_pilotos.id_piloto = pilotos.id
+                AND usuarios_pilotos.id_usuario = ?
+                AND usuarios_pilotos.activo = 1";
+    	$result = $this->db->query($sql, array($idUsuario))->result();
+    
+    	$pilotos = array();
+    
+    	foreach ($result as $row) {
+    		$piloto = Piloto::getById($row->id, false);
+    		$equipo = Equipo::getById($row->id_equipo, false);
+    		$piloto->setEquipo($equipo);
+    
+    		$pilotos[] = $piloto;
+    	}
+    
+    	return $pilotos;
+    }
 
     function getPilotosClasificacionMundial() {
         $pilotos = $this->getPilotosObject();
