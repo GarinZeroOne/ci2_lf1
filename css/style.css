@@ -85,15 +85,16 @@ a{
   display: block;
   position: absolute;
   width: 900px;
-  color: #000000;
+  color: #140700;
   font-family: 'Coda',cursive;
   font-size: 84px;
   font-weight: bold;
   width: 900px;
   z-index: 1;
-  text-shadow: 1px 1px 1px #FFFFFF;
+  text-shadow: 0 0 6px #ffb200;
   margin:0;
   padding:0;
+  opacity:0.87;
 
 }
 
@@ -192,7 +193,28 @@ a{
 .patrocinadores{
     
     margin-top:45px;
+    /*text-align: center;*/
+}
+
+.patrocinadores h2{
+    background-color: rgba(1, 1, 1, 0.1);
+    border-radius: 5px;
+    color: #ffb64a;
+    font-family: "Share Tech",sans-serif;
+    font-size: 1.8em;
+    font-weight: normal;
+    padding: 5px;
     text-align: center;
+    text-shadow: 1px 1px 1px #000;
+    width: 200px;
+}
+.patrocinadores a.pat{
+  border: 1px solid rgba(255, 199, 18, 0.5);
+    border-radius: 4px;
+    color: rgba(255, 199, 18, 0.6);
+    display: block;
+    font-size: 14px;
+    padding: 5px;
 }
 .box-patrocinador{
   /*border: 1px solid #565656;*/
@@ -539,3 +561,28 @@ div.recordar a:hover{
  text-decoration: none;
 }
 
+h1.close {
+  font-family: freight-sans-pro, sans-serif;
+  font-weight: 900;
+  /*background-color: #fff; */
+  color: #000;
+  font-size: 72px;
+  text-shadow:
+    0 1px #808d93,
+    -1px 0 #cdd2d5,
+    -1px 2px #808d93,
+    -2px 1px #cdd2d5,
+    -2px 3px #808d93,
+    -3px 2px #cdd2d5,
+    -3px 4px #808d93,
+    -4px 3px #cdd2d5,
+    -4px 5px #808d93,
+    -5px 4px #cdd2d5,
+    -5px 6px #808d93,
+    -6px 5px #cdd2d5,
+    -6px 7px #808d93,
+    -7px 6px #cdd2d5,
+    -7px 8px #808d93,
+    -8px 7px #cdd2d5;
+    opacity: 0.8;
+  }

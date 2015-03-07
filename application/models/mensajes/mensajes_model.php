@@ -82,7 +82,7 @@ class Mensajes_model extends CI_Model {
 	function notificaciones_activas()
 	{
 		$this->dbx = $this->load->database('local', TRUE);
-		$noti = $this->dbx->select('id_notificacion')->from('usuarios_notificaciones')->where('leida',0)->order_by('fecha','desc')->get();
+		$noti = $this->dbx->select('id_notificacion')->from('usuarios_notificaciones')->where('leida',0)->where('id_usuario',$_SESSION['id_usuario'])->order_by('fecha','desc')->get();
 
 		if($noti->num_rows())
 		{
@@ -97,7 +97,11 @@ class Mensajes_model extends CI_Model {
 				$notificacion = $this->db->select('*')->from('notificaciones')->where('id',$rownoti->id_notificacion)->get()->row();
 				$html .= '
 	                <li>
-	                    <a href="#">
+	                	<div style="position:relative">
+	                		
+	                	
+	                	<span class="xLeida" onclick="marcarNotifiLeida(this)"  data-id="'.$rownoti->id_notificacion.'">x</span>
+	                    <span class="cont-noti">
 	                        <div class="task-info clearfix">
 	                            <div class="desc pull-left">
 	                                <h5>'.$notificacion->titulo.'</h5>
@@ -106,7 +110,9 @@ class Mensajes_model extends CI_Model {
 	                            </div>
 	                                    
 	                        </div>
-	                    </a>
+	                    </span>
+
+	                    </div>
 	                </li>';
 			}
 		}
@@ -138,15 +144,19 @@ class Mensajes_model extends CI_Model {
 											->get()->result();
 		if(count($notificaciones_activas))
 		{
+
 			foreach($notificaciones_activas as $notificacion)
 			{
 				
 				$registrada = $this->dbx->select('id')
 							   ->from('usuarios_notificaciones')
 							   ->where('id_notificacion',$notificacion->id)
+							   ->where('id_usuario',$_SESSION['id_usuario'])
 							   ->get()->num_rows();
+
 				if(!$registrada)
 				{
+
 					// insert al usuario de la notificacion
 					$data_insert = array('id'=>'','id_usuario'=>$_SESSION['id_usuario'],'id_notificacion'=>$notificacion->id,'leida'=>0,'fecha'=>date('Y-m-d H:i:s'));
 					$this->db->insert('usuarios_notificaciones',$data_insert);
@@ -158,7 +168,7 @@ class Mensajes_model extends CI_Model {
 		
 
 		// Contar notificaciones sin leer del usuario
-		$q = $this->dbx->select('id')->from('usuarios_notificaciones')->where('leida',0)->order_by('fecha','desc')->get();
+		$q = $this->dbx->select('id')->from('usuarios_notificaciones')->where('leida',0)->where('id_usuario',$_SESSION['id_usuario'])->order_by('fecha','desc')->get();
 		
 
 		return $q->num_rows();
@@ -212,6 +222,25 @@ class Mensajes_model extends CI_Model {
 		}
 
 		return $html;
+	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function set_notificacion_leida($id_notificacion)
+	{
+		if(!$_SESSION['id_usuario'])
+			return 0;
+
+		$data_update = array('leida'  => 1);
+
+		$this->db->where('id_usuario',$_SESSION['id_usuario']);
+		$this->db->where('id_notificacion',$id_notificacion);
+
+		$this->db->update('usuarios_notificaciones',$data_update);
 	}
 
 

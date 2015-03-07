@@ -333,9 +333,68 @@ class Inicio extends CI_Controller {
 				// Actualiza la nueva pass encriptandola
 				$this->usuarios_model->resetear_password( $pass , $id_usuario);
 
+				//ENVIO MAL 2015 USANDO PHPMAILER y MAILGUN
+				
+				require APPPATH . 'classes/phpmailer/class.phpmailer.php';
+				require APPPATH . 'classes/phpmailer/class.smtp.php';
 
+				// Contenido mail
+				$datos['mail_titulo'] = "Liga formula 1 - Tu nueva contraseña";
+				$datos['texto'] = "Se ha reseteado la contraseña a petición tuya. Tu nueva contraseña es:  {$pass}
+							Recuerda que puedes modificar tu contraseña desde tu perfil.
+
+							Saludos,
+							Admin LF1";
+
+				$html_mail = $this->load->view('mailing/mail_template',$datos,TRUE);
+				$plano_mail = "Se ha reseteado la contraseña a petición tuya. Tu nueva contraseña es:  {$pass}
+							Recuerda que puedes modificar tu contraseña desde tu perfil.
+
+							Saludos,
+							Admin LF1";
+
+
+				$mail = new PHPMailer;
+
+				//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+				$mail->isSMTP();                                      // Set mailer to use SMTP
+				$mail->Host = 'smtp.mailgun.org';  // Specify main and backup SMTP servers
+				$mail->SMTPAuth = true;                               // Enable SMTP authentication
+				$mail->Username = 'postmaster@mail.ligaformula1.com';                 // SMTP username
+				$mail->Password = 'c39313b9c90311e35e238b1060affcf4';                           // SMTP password
+				$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+				$mail->Port = 587;                                    // TCP port to connect to
+
+				$mail->From = 'admin@ligaformula1.com';
+				$mail->FromName = 'Liga Formula 1';
+				//$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+				$mail->addAddress($existe->row()->email);               // Name is optional
+				//$mail->addReplyTo('info@example.com', 'Information');
+				//$mail->addCC('cc@example.com');
+				//$mail->addBCC('bcc@example.com');
+
+				//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+				//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+				$mail->isHTML(true);                                  // Set email format to HTML
+
+				$mail->Subject = 'Liga formula 1 - Tu nueva contraseña';
+				$mail->Body    = $html_mail;//'Prueba desde ligaformula1.com';
+				$mail->AltBody = $plano_mail;//'Prueba desde ligaformula1.com';
+
+				if(!$mail->send()) {
+				    $this->session->set_flashdata('msg_error','No se ha podido enviar el email...');
+					redirect_lf1('inicio/restablecer_pass');
+				} else {
+				    $this->session->set_flashdata('msg_ok','Hemos enviado un email a tu cuenta  de correo con la nueva contraseña.');
+					redirect_lf1('inicio/restablecer_pass');
+				}
+				
+
+				// ENVIO DE MAL ANTIGUO CI - DEPRECATED
 				// Mandar correo con su nueva pass
 				// $this->usuarios_model->mandar_mail_nuevo_password($existe->row()->email , $pass);
+				/*
 				$this->load->library('email');
 
 
@@ -360,7 +419,7 @@ class Inicio extends CI_Controller {
 					$this->session->set_flashdata('msg_ok','Hemos enviado un email a tu cuenta  de correo con la nueva contraseña.');
 					redirect_lf1('inicio/restablecer_pass');
 				}
-
+				*/
 				//mail("{$existe->row()->email}","Liga Formula 1 - Nueva contraseña ","Tu nueva contraseña es {$pass}") ;
 
 
@@ -406,7 +465,7 @@ class Inicio extends CI_Controller {
 		************/
 
 		// Titulo/desc
-		$header['titulo'] 		= 'LigaFormula1.com - Manager Formula 1 basado en resultados reales de la temporada F1 2014';
+		$header['titulo'] 		= 'LigaFormula1.com - Manager Formula 1 basado en resultados reales de la temporada F1 2015';
 		$header['descripcion']  = 'Juega al mejor manager Formula 1 online  basado en resultados de la F1 real. Compite contra tus amigos y contra  	todos  los  demás managers.';
 
 		// Estilos
@@ -461,6 +520,8 @@ class Inicio extends CI_Controller {
 		$this->load->view('inicio/alta'  ,$datos);
 		$this->load->view('base/bottom',$bottom);
 	}
+
+
 
 	function alta_nuevo_usuario()
 	{
@@ -646,7 +707,131 @@ class Inicio extends CI_Controller {
 		}
 	}
 
+	/**
+	 * Patrocinio
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function patrocinio()
+	{
 
+		if($_POST['email'])
+		{
+
+			//ENVIO MAL 2015 USANDO PHPMAILER y MAILGUN
+				
+			require APPPATH . 'classes/phpmailer/class.phpmailer.php';
+			require APPPATH . 'classes/phpmailer/class.smtp.php';
+
+			// Contenido mail
+			$datos['mail_titulo'] = "Liga formula 1 - Patrocinio";
+			$datos['texto'] = "Nombre: ".$_POST['nombre']." | Empresa: | ".$_POST['empresa']." | Web: ".$_POST['web']." Email: ".$_POST['email']."  <br>COMENDARIOS: ".$_POST['comentarios'];
+
+			$html_mail = $this->load->view('mailing/mail_template',$datos,TRUE);
+			$plano_mail = "Nombre: ".$_POST['nombre']." | Empresa: | ".$_POST['empresa']." | Web: ".$_POST['web']." Email: ".$_POST['email']."  <br>COMENDARIOS: ".$_POST['comentarios'];
+
+
+			$mail = new PHPMailer;
+
+			//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+			$mail->isSMTP();                                      // Set mailer to use SMTP
+			$mail->Host = 'smtp.mailgun.org';  // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+			$mail->Username = 'postmaster@mail.ligaformula1.com';                 // SMTP username
+			$mail->Password = 'c39313b9c90311e35e238b1060affcf4';                           // SMTP password
+			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = 587;                                    // TCP port to connect to
+
+			$mail->From = 'admin@ligaformula1.com';
+			$mail->FromName = 'Liga Formula 1';
+			//$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+			$mail->addAddress('gorka.garin@gmail.com');               // Name is optional
+			//$mail->addReplyTo('info@example.com', 'Information');
+			$mail->addCC('gestionlf1@gmail.com');
+			//$mail->addBCC('bcc@example.com');
+
+			//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+			//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+			$mail->isHTML(true);                                  // Set email format to HTML
+
+			$mail->Subject = $datos['mail_titulo'];
+			$mail->Body    = $html_mail;//'Prueba desde ligaformula1.com';
+			$mail->AltBody = $plano_mail;//'Prueba desde ligaformula1.com';
+
+			if(!$mail->send()) {
+			    $this->session->set_flashdata('msg_error','No se ha podido enviar el email :(');
+				redirect_lf1('inicio/patrocinio');
+			} else {
+			    $this->session->set_flashdata('msg_ok','Hemos enviado un email a tu cuenta  de correo con la nueva contraseña.');
+				redirect_lf1('inicio/patrocinio_enviado');
+			}
+
+
+		}
+
+		
+		
+		// Llevar esto a un modelo!
+		$res = $this->db->query("select * from usuarios order by rand() limit 6")->result_array();
+		
+		// Nick managers aleatorios
+		$datos['managers'] = $res;
+
+		/***********
+		DATOS VISTA - Header
+		************/
+
+		// Titulo/desc
+		$header['titulo'] 		= 'LigaFormula1.com - Apúntate como patrocinador de  ligaformula1.com';
+		$header['descripcion']  = 'Ayuda a Liga Formula 1 a crecer y mejorar. Somos la mejor Liga de Formula 1 y cada año intentamos mejorar, aunque el reto de mantener el juego nos cueste más cada año, seguimos con el mismo espiritu desde 2009.';
+
+		// Estilos
+		$header['estilos'] 		= array('loginbg.css','style.css');
+
+		// Javascript
+		//$bottom['javascript'] = array('');
+
+		// Cargar vistas
+		$this->load->view('base/header',$header);
+		$this->load->view('inicio/patrocinio'  ,$datos);
+		$this->load->view('base/bottom',$bottom);
+	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function patrocinio_enviado()
+	{
+		// Llevar esto a un modelo!
+		$res = $this->db->query("select * from usuarios order by rand() limit 6")->result_array();
+		
+		// Nick managers aleatorios
+		$datos['managers'] = $res;
+
+		/***********
+		DATOS VISTA - Header
+		************/
+
+		// Titulo/desc
+		$header['titulo'] 		= 'LigaFormula1.com - Apúntate como patrocinador de  ligaformula1.com';
+		$header['descripcion']  = 'Ayuda a Liga Formula 1 a crecer y mejorar. Somos la mejor Liga de Formula 1 y cada año intentamos mejorar, aunque el reto de mantener el juego nos cueste más cada año, seguimos con el mismo espiritu desde 2009.';
+
+		// Estilos
+		$header['estilos'] 		= array('loginbg.css','style.css');
+
+		// Javascript
+		//$bottom['javascript'] = array('');
+
+		// Cargar vistas
+		$this->load->view('base/header',$header);
+		$this->load->view('inicio/patrocinio_enviado'  ,$datos);
+		$this->load->view('base/bottom',$bottom);
+	}
 
 	function logout(){
 

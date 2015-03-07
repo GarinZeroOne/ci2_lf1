@@ -175,7 +175,7 @@ var google_remarketing_only = false;
         <div class="container">
           
             <ul class="nav-footer">
-              <li>LigaFormula1.com © 2009 - 2014</li>
+              <li>LigaFormula1.com © 2009 - 2015</li>
               <?php 
               /*
               <li><a href="#">Reglamento</a></li>

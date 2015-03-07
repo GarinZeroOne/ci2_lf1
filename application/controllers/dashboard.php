@@ -199,11 +199,11 @@ class Dashboard extends CI_Controller {
 	 * @return void
 	 * @author 
 	 **/
-	function c_notificaciones()
+	function ajax_notificacionleida()
 	{
 		$this->load->model('mensajes_model');
-		
-		echo "OK".$_POST['hola'];
+		$this->mensajes_model->set_notificacion_leida($_POST['idn']);
+		//echo "OK".$_POST['idn'];
 	}
 
 	/**

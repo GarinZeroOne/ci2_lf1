@@ -368,6 +368,20 @@ class Mercado extends CI_Controller {
      * */
     function simulador() {
 
+        // Info del GP
+        $gp_info  = $this->calendario_model->getNextGP();
+
+        $datos['next_gp'] = $gp_info->pais;
+
+        // Info pilotos
+        $res_pilotos = $this->pilotos_model->getInfoPilotos();
+
+        //dump($res_pilotos);die;
+        foreach($res_pilotos as $piloto){
+            $pilotos[] = $piloto->driverId;
+        }
+
+        /*
         $pilotos = array(
                     'hamilton',
                     'rosberg',
@@ -389,6 +403,7 @@ class Mercado extends CI_Controller {
                     'nasr'
 
                     );
+        */
         
         $cont = 0;
 
@@ -396,7 +411,7 @@ class Mercado extends CI_Controller {
         {
 
 
-            $resultados = json_decode(file_get_contents('http://ergast.com/api/f1/'.$i.'/1/results.json'));
+            $resultados = json_decode(file_get_contents('http://ergast.com/api/f1/'.$i.'/'.$gp_info->id_api.'/results.json'));
             //echo "<pre>";
             //var_dump($resultados->MRData->RaceTable->Races[0]->Results);
             //echo "</pre>";

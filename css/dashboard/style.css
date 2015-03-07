@@ -420,15 +420,42 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     line-height:35px;
     height:35px;
 }
-.dropdown-menu.extended.inbox li a,.dropdown-menu.extended.tasks-bar li a {
+
+.dropdown-menu.extended.inbox li a,.dropdown-menu.extended.tasks-bar li span.cont-noti {
     background:#f1f2f7;
     border-radius:5px;
     -webkit-border-radius:5px;
     padding:10px;
     margin-bottom:10px;
-    float:left;
+    /*float:left;*/
+    display: block;
     width:100%;
+
 }
+/*Cerrar notificacion*/
+.dropdown-menu.extended.inbox li span.xLeida, .dropdown-menu.extended.tasks-bar li span.xLeida{
+    background: none repeat scroll 0 0 #c9cced !important;
+    border-radius: 0 5px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 20px;
+}
+.dropdown-menu.extended.inbox li span.xLeida:hover, .dropdown-menu.extended.tasks-bar li span.xLeida:hover{
+    background:#ff0000 !important;
+}
+
+.dropdown-menu.extended.inbox li.ver-todas a, .dropdown-menu.extended.tasks-bar li.ver-todas a {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    margin: 1px 1px 10px;
+    padding: 5px;
+    text-align: center;
+}
+
 .dropdown-menu.extended li p {
     margin:0;
     padding:10px 0;
@@ -5318,3 +5345,8 @@ div.tagsinput span.tag {
     text-transform: capitalize;
     color:#4C4C4D;
 }
+#resul li span{
+    color: #072fbb;
+    font-size: 12px !important;
+}
+
