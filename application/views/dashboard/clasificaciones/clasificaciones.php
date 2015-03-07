@@ -62,7 +62,10 @@
 				<section class="panel">
 					<header class="panel-heading">
 						Clasificacion Gp
-						<?php echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )"; ?>
+						<?php $hayGp = !$clasificacionGp->getCircuito()->getCircuito() == '';						
+						if ($hayGp){
+							echo $clasificacionGp->getCircuito()->getCircuito() . " ( " . $clasificacionGp->getCircuito()->getPais() . " )";
+						}?>
 					</header>
 					<div class="panel-body">
 						<table class="table table-bordered table-striped table-condensed">
@@ -76,6 +79,7 @@
 								</tr>
 							</thead>
 							<tbody>
+								<?php if ($hayGp):?>
 								<tr class="mi-posicion">
 									<td class="rank-posicion"><?php echo $miClasificacionGp->getPosicion(); ?>º
 									</td>
@@ -118,6 +122,7 @@
 									</td>
 								</tr>
 								<?php endforeach; ?>
+								<?php endif;?>
 							</tbody>
 						</table>
 					</div>
@@ -225,7 +230,7 @@
 									<th>Usuario</th>
 									<th class="numeric">Puntos</th>
 									<th class="numeric inline" title="Cambio de posicion"><span
-										class="col-md-12"><i class="fa fa-refresh"  font-size: 16px;"></i>
+										class="col-md-12"><i class="fa fa-refresh"font-size: 16px;"></i>
 									</span></th>
 									<th>Comunidad</th>
 								</tr>
