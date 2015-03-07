@@ -459,7 +459,7 @@ class Mercado extends CI_Controller {
 			}
 		}
 
-
+		//dump($valor);
 		$datos['pilotos'] = $pilotos;
 		$datos['valor'] = $valor;
 

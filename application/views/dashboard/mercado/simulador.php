@@ -76,9 +76,9 @@
                                     <li><span class="motor">forceindia</span><input type="range" min="1" max="40" value="18" id="forceindia"></li>
                                     <li><span class="motor">toro rosso</span><input type="range" min="1" max="40" value="16" id="tororoso"></li>
                                     <li><span class="motor">lotus</span><input type="range" min="1" max="40" value="17" id="lotus"></li>
-                                    <li><span class="motor">marussia</span><input type="range" min="1" max="40" value="15" id="marussia"></li> 
+                                    <!--<li><span class="motor">marussia</span><input type="range" min="1" max="40" value="15" id="marussia"></li> -->
                                     <li><span class="motor">sauber</span><input type="range" min="1" max="40" value="14" id="sauber"></li>
-                                    <li><span class="motor">caterham</span><input type="range" min="1" max="40" value="12" id="caterham"></li>
+                                    <!--<li><span class="motor">caterham</span><input type="range" min="1" max="40" value="12" id="caterham"></li>-->
                             </ul>
                             
                             <button onclick="restart();"> Probar  configuración </button>
