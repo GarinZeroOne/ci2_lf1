@@ -133,14 +133,45 @@
             <div class="col-md-3">
                 <section class="panel">
                     <div class="panel-body">
-                        <div class="tit-mas-votada">Respuesta más votada</div>
-                        <div class="pregunta-hof-pas"><?php echo $hof_winner['pregunta']; ?></div>
-                        
-                        <blockquote>
-                            <?php echo $hof_winner['respuesta']; ?>
-                        </blockquote>
+                        <div class="tit-mas-votada">Podium <?php echo $paisGP; ?> <?php echo date('Y') - 1; ?></div>
+                        <div class="podium">
+                            <ol style="margin: 5px -25px;">
+                                <li style="font-size: 20px; margin: 10px 0px 0px 10px; color: rgb(79, 130, 0);"><?php
+                                $datosPiloto = $ultimoGanador->RaceTable->Races[0]->Results[0];
+                                $datosSegundo = $segundo->RaceTable->Races[0]->Results[0];
+                                $datosTercero = $tercero->RaceTable->Races[0]->Results[0];
+                                if (isset($datosPiloto->Driver)) {
+                                    echo $datosPiloto->Driver->givenName . " "
+                                    . $datosPiloto->Driver->familyName
+                                    . " (" . $datosPiloto->Constructor->name . " )";
+                                }
+                            ?></li>
+                            <li style="font-size: 20px; margin: 10px 0px 0px 10px;">
+                                <?php
+                                if (isset($datosPiloto->Driver)) {
+                                    echo $datosSegundo->Driver->givenName . " "
+                                    . $datosSegundo->Driver->familyName
+                                    . " (" . $datosSegundo->Constructor->name . " )";
+                                }
+                            ?>
+                            </li>
+                            <li style="font-size: 20px; margin: 10px 0px 0px 10px;"><?php
+                                if (isset($datosPiloto->Driver)) {
+                                    echo $datosTercero->Driver->givenName . " "
+                                    . $datosTercero->Driver->familyName
+                                    . " (" . $datosTercero->Constructor->name . " )";
+                                }
+                            ?></li>
+                            </ol>
+                            
+                            
 
-                        <div class="autor-hof-semana"> por <a href="<?php echo site_url();?>perfil/ver/<?php echo $hof_winner['nick']; ?>"> <?php echo $hof_winner['nick']; ?></a> </div>
+                            
+                        </div>
+                        
+                        
+
+                        
                         
                     </div>
                 </section>    

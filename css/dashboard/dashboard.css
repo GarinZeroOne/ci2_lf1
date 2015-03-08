@@ -109,9 +109,10 @@ div#countDownt span.letrat{
 
 /*Hall of fame - mas votado*/
 div.tit-mas-votada{
-    font-size:10px;
-    color:#ccc;
-    margin-top:-10px;
+    color: #ff5806;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: -10px;
 }
 div.pregunta-hof-pas{
     font-size:15px;

@@ -1,4 +1,5 @@
 <?php
+require_once APPPATH . 'classes/varios/circuito.php';
 
 class Dashboard extends CI_Controller {
 
@@ -49,6 +50,8 @@ class Dashboard extends CI_Controller {
 		// Datos para la cuenta atras al GP
 		$next_GP  = $this->calendario_model->obtenerPaisDelSiguienteGp();
 
+
+
 		$fecha_gp = explode("-",$next_GP->fecha);
 		
 		$datos['anioGP']  = $fecha_gp[0];
@@ -94,8 +97,39 @@ class Dashboard extends CI_Controller {
 		$datos['hof_pregunta'  ] = $this->usuarios_model->get_hof_pregunta();
 		$datos['hof_respuestas'] = $this->usuarios_model->get_hof_respuestas();
 
-		// Hall of fame - Mas votada
-		$datos['hof_winner'] = $this->usuarios_model->get_hof_winner();
+		// Podium AÑO anterior
+		$idGp = $this->uri->segment(3);
+
+        $datos['circuito'] = $this->calendario_model->getNextGpObject();
+
+        //Se obtienen los datos de la api
+        $anoAnterior = date('Y') - 1;
+
+        if ($datos['circuito']->getIdApi() != 0) {
+
+            $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdApi() . "/results/1.json";            
+            $json = json_decode(file_get_contents($url));
+            $datos['ultimoGanador'] = $json->MRData;
+
+            
+
+            $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdApi() . "/results/2.json";
+            $json = json_decode(file_get_contents($url));
+            $datos['segundo'] = $json->MRData;
+
+            $url = "http://ergast.com/api/f1/" . $anoAnterior . "/" . $datos['circuito']->getIdApi() . "/results/3.json";
+            $json = json_decode(file_get_contents($url));
+            $datos['tercero'] = $json->MRData;
+            
+        } else {
+            $datos['ultimoGanador'] = "sin información";
+            $datos['segundo'] = "sin información";
+            $datos['tercero'] = "sin información";
+        }
+		// FIN PODIUM AÑO ANTERIOR
+
+		// Hall of fame - Mas votada /*DEPRECATED 2015- se ha puesto el podium del año anterior*/
+		// $datos['hof_winner'] = $this->usuarios_model->get_hof_winner();
 
 		//dump($datos['hof_winner']);die;
 
