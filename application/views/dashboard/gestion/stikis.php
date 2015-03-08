@@ -76,28 +76,27 @@
 				<section class="panel">
 					<header class="panel-heading-stiki"> ¿Que son los STIKIS? </header>
 					<div class="panel-body-stiki">
-						<p>Los STIKIS aumentan tus posibilidades duplicando los puntos y
+						<p>Los STIKIS aumentan tus posibilidades aumentando los puntos y
 							el dinero de tus pilotos estrella!</p>
-						<p>El piloto que lleve un stiki en su monoplaza duplicará los
-							puntos o el dinero ganado, dependiendo del tipo de stiki que
-							lleve.Hay dos tipos de STIKIS:</p>
+						<p>Este año los STIKIS son un poco diferentes, tu decides que porcentaje de STIKI darle a cada piloto hasta llegar al 100%. Este es tu límite, podrás comprar STIKIS de puntos o dinero hasta llegar a un 100%, o dicho de otra manera, entre la suma de los porcentajes de tus STIKIS de dinero y puntos no puedes superar el 100%. El como repartas ese porcentaje depende de tí!  </p>
 						<ul>
 							<li style="list-style: inside;"><strong style="color: #358C00">STIKI
-									DE DINERO:</strong> Duplica las ganancias del piloto que lo
-								lleve.</li>
+									DE DINERO:</strong> Aumenta las ganancias del piloto que lo
+								lleve. Al 100% las duplica.</li>
 							<li style="list-style: inside;"><strong style="color: #DE0000">STIKI
-									DE PUNTOS:</strong> Duplica los puntos conseguidos por el
-								piloto que lo lleve.</li>
+									DE PUNTOS:</strong> Aumenta los puntos conseguidos por el
+								piloto que lo lleve.Al 100% los duplica.</li>
 
 						</ul>
 						<p>Los STIKIS estan sujetos a las siguientes normas:</p>
 						<ul>
 							<li style="list-style: inside;">Solo los pilotos fichados pueden
 								llevar stiki</li>
-							<li style="list-style: inside;">Solo se pueden llevar dos STIKIS
-								por carrera.</li>
-							<li style="list-style: inside;">Un corredor solo puede llevar un
+							<li style="list-style: inside;">La suma de todos los STIKIS no puede superar el 100%.</li>
+							<li style="list-style: inside;">Un piloto solo puede llevar un tipo de
 								STIKI.</li>
+							<li style="list-style: inside;">El máximo de STIKIS posibles es de 10 (10% cada uno).</li>	
+							<li style="list-style: inside;">.</li>	
 						</ul>
 					</div>
 				</section>
@@ -115,14 +114,14 @@
 								<tr>
 									<th>Tipo Stiki</th>
 									<th>Descripcion</th>
-									<th class="numeric">Precio</th>
+									<th class="numeric">Precio al 100%</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td><img src="<?php echo base_url() ?>img/stikidinero.png">
 									</td>
-									<td>Stiki multiplicador de dinero</td>
+									<td>Stiki  de dinero</td>
 									<td><?php
 									$coste = 50000;
 									if ($valorMejoraMecanicos > 0) {
@@ -131,14 +130,14 @@
                                         } else {
                                             $coste_con_mejora = $coste;
                                         }
-                                        echo "<div style='margin-bottom:5px;' class='badge bg-inverse'>".number_format($coste, 0, ',', '.') . " €</div><br><div class='badge bg-success' style=\"color:#298A08\">" . number_format($coste_con_mejora, 0, ',', '.') . " € </div>";
+                                        echo "<div style='margin-bottom:5px;' class='badge bg-inverse'>".number_format($coste, 0, ',', '.') . " €</div><br><div  class='badge bg-success' style=\"color:#298A08\"> <span  id='mj-dinero' data-val='".$coste_con_mejora."'>" . number_format($coste_con_mejora, 0, ',', '.') . "</span> € </div>";
                                         ?>
 									</td>
 								</tr>
 								<tr>
 									<td><img src="<?php echo base_url() ?>img/stikipuntos.png">
 									</td>
-									<td>Stiki multiplicador de puntos</td>
+									<td>Stiki  de puntos</td>
 									<td><?php
 									$coste = 500000;
 									if ($valorMejoraMecanicos > 0) {
@@ -147,7 +146,7 @@
                                         } else {
                                             $coste_con_mejora = $coste;
                                         }
-                                        echo "<div style='margin-bottom:5px;' class='badge bg-inverse'>".number_format($coste, 0, ',', '.') . " € </div><br><div class='badge bg-success' style=\"color:#298A08\">" . number_format($coste_con_mejora, 0, ',', '.') . " € </div>";
+                                        echo "<div style='margin-bottom:5px;' class='badge bg-inverse'>".number_format($coste, 0, ',', '.') . " € </div><br><div  class='badge bg-success' style=\"color:#298A08\"> <span  id='mj-puntos' data-val='".$coste_con_mejora."'>" . number_format($coste_con_mejora, 0, ',', '.') . "</span> € </div>";
                                         ?>
 									</td>
 								</tr>
@@ -199,13 +198,13 @@
 									<label> <input type="radio" name="tipoStiki" value="dinero"
 										checked> <img
 										src="<?php echo base_url(); ?>img/stikidinero.png"> Stiki
-										dinero
+										dinero <span class='mny' id="calc-dinero-sd"> </span>
 									</label>
 								</div>
 								<div class="radio">
 									<label> <input type="radio" name="tipoStiki" value="puntos"> <img
 										src="<?php echo base_url(); ?>img/stikipuntos.png"> Stiki
-										puntos
+										puntos <span class='mny' id="calc-dinero-sp"> </span>
 									</label>
 								</div>
 

@@ -5360,3 +5360,8 @@ ul.mis-pilotos li{
     display: inline;
     margin:5px;
 }
+
+span.mny{
+    color:#219103;
+    font-size:12px;
+}
