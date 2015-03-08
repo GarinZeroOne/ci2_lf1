@@ -97,13 +97,34 @@
 			</div>
 		</div>
 		<?php endif; ?>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<span style="display: block; font-size: 12px; color: rgb(140, 166, 111);">Tus equipos:</span>
+				<?php if(count($misEquipos)): ?>	
+
+				<ul class="mis-pilotos">
+				
+					<?php foreach($misEquipos as $miequipo): ?>
+						<li>
+							<span> <img src="<?= base_url() ?>img/equipos/<?php echo $miequipo->getFoto() ?>.jpg" alt="" title="<?php echo $miequipo->getEscuderia(); ?>" style="width: 65px; border-radius: 10px; display: inline-block; margin: 5px;"></span>
+							
+						</li>
+					<?php endforeach; ?>
+
+				</ul>
+				<?php else: ?>
+				<span style="padding: 5px; display: inline-block; border-radius: 5px; background-color: rgb(255, 191, 191); color: rgb(156, 12, 12); margin: 0px 0px 10px;">No tienes equipos comprados.</span>
+				<?php endif; ?>
+			</div>
+		</div>
 
 		<div class="row">
 			<div class="col-sm-12">
 				<section class="panel">
 					<header class="panel-heading"> Mercado equipos </header>
 					<div class="panel-body">
-						<?php print_r($misEquipos);?>
+						<?php /*print_r($misEquipos);*/?>
 						<section id="unseen">
 							<table class="table table-bordered table-striped table-condensed">
 								<thead>

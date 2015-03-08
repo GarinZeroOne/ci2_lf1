@@ -5350,3 +5350,13 @@ div.tagsinput span.tag {
     font-size: 12px !important;
 }
 
+/*Mercado*/
+ul.mis-pilotos{
+    background-color: #D8DDD2;
+    border-radius: 5px;
+    display: inline-flex;
+}
+ul.mis-pilotos li{
+    display: inline;
+    margin:5px;
+}

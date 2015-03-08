@@ -101,16 +101,32 @@
 		</div>
 		<?php endif; ?>
 
+		<div class="row">
+			<div class="col-sm-12">
+				<span style="display: block; font-size: 12px; color: rgb(140, 166, 111);">Tus pilotos para el siguiente gran premio:</span>
+				<?php if(count($misPilotos)): ?>	
 
+				<ul class="mis-pilotos">
+				
+					<?php foreach($misPilotos as $mipiloto): ?>
+						<li>
+							<span> <img src="<?= base_url() ?>img/pilotos/<?php echo $mipiloto->getFoto() ?>.jpg" alt="" title="<?php echo $mipiloto->getNombre()." ".$mipiloto->getApellido() ?>" class="round-pilots"></span>
+							
+						</li>
+					<?php endforeach; ?>
+
+				</ul>
+				<?php else: ?>
+				<span style="padding: 5px; display: inline-block; border-radius: 5px; background-color: rgb(255, 191, 191); color: rgb(156, 12, 12); margin: 0px 0px 10px;">No tienes pilotos contratados para el siguiente  gran premio.</span>
+				<?php endif; ?>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-sm-12">
 				<section class="panel">
 					<header class="panel-heading"> Mercado Pilotos </header>
 					<div class="panel-body">
-						<?php foreach ($misPilotos as $piloto){
-							echo $piloto->getNombre()." ".$piloto->getApellido(). "-".$piloto->getEquipo()->getEscuderia();
-							echo "<br>";
-						}?>
+						
 						<!-- Pilotos -->
 						<div class="row">
 

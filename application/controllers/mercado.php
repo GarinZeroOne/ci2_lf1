@@ -72,6 +72,8 @@ class Mercado extends CI_Controller {
 		//Obtengo los pilotos del usuario
 		$datos['misPilotos'] =
 		$this->pilotos_model->getMisPilotosObject($_SESSION['id_usuario']);
+
+		//dump($datos['misPilotos'][0]->getFoto());
 		// Javascript
 		$bottom['javascript'] = array('dashboard/confirmar.js');
 
