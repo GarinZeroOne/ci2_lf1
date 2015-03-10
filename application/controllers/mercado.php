@@ -388,6 +388,8 @@ class Mercado extends CI_Controller {
 			$pilotos[] = $piloto->driverId;
 		}
 
+		
+
 		/*
 		 $pilotos = array(
 		 		'hamilton',

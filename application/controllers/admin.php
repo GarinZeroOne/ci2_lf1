@@ -259,7 +259,7 @@ class Admin extends CI_Controller {
 	function cambioValorMovimientos() {
 		$id_permitida = '92.43.19.150';
 
-		if ($_SERVER['REMOTE_ADDR'] == $id_permitida || DEVZONE) {
+		if (getenv('OPENSHIFT_PHP_IP') || DEVZONE) {
 			$fecha = date('Y-m-d');
 			$fechaAyer = date("Y-m-d", strtotime($fecha . " -1 day"));
 

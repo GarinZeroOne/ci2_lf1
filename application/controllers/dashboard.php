@@ -79,6 +79,7 @@ class Dashboard extends CI_Controller {
 		$datos['bajones'  ] = $this->estadisticas_model->get_bajones();
 		$datos['subidas_bajadas_texto_dia'] = $this->estadisticas_model->get_texto_dia_subidas_bajadas();
 
+
 		// Grafica Movimiento dinero Fichajes/Ventas
 		$chart_data = $this->estadisticas_model->get_info_fichajes_ventas();
 		$data_to_js['series_data'] = json_encode($chart_data);
