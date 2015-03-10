@@ -35,7 +35,7 @@
 								correrán para ti el siguiente Gran Premio, conseguirás el
 								dinero y los puntos que ganen.Una vez terminado el Gran
 								Premio,el piloto ya no te pertenecerá. A los pilotos alquilados
-								no se les puede poner ninguna clase de STIKI ni se aprobecharán
+								no se les puede poner ninguna clase de STIKI ni se aprovecharán
 								de las mejoras que tengas.
 							</li>
 							<li>Los <strong style="color: #77AA3B">pilotos fichados</strong>,

@@ -132,11 +132,11 @@
 
             <div class="col-md-3">
                 <section class="panel">
-                    <div class="panel-body">
+                    <div class="panel-body" style="border-radius: 4px; background-color: rgb(176, 186, 137);">
                         <div class="tit-mas-votada">Podium <?php echo $paisGP; ?> <?php echo date('Y') - 1; ?></div>
                         <div class="podium">
                             <ol style="margin: 5px -25px;">
-                                <li style="font-size: 20px; margin: 10px 0px 0px 10px; color: rgb(79, 130, 0);"><?php
+                                <li style="font-size: 18px; margin: 10px 0px 0px 10px; text-shadow: 1px 1px 1px rgb(255, 186, 0); color: rgb(255, 241, 150);"><?php
                                 $datosPiloto = $ultimoGanador->RaceTable->Races[0]->Results[0];
                                 $datosSegundo = $segundo->RaceTable->Races[0]->Results[0];
                                 $datosTercero = $tercero->RaceTable->Races[0]->Results[0];
@@ -146,7 +146,7 @@
                                     . " (" . $datosPiloto->Constructor->name . " )";
                                 }
                             ?></li>
-                            <li style="font-size: 20px; margin: 10px 0px 0px 10px;">
+                            <li style="font-size: 18px; margin: 10px 0px 0px 10px; color: rgb(66, 91, 33);">
                                 <?php
                                 if (isset($datosPiloto->Driver)) {
                                     echo $datosSegundo->Driver->givenName . " "
@@ -155,7 +155,7 @@
                                 }
                             ?>
                             </li>
-                            <li style="font-size: 20px; margin: 10px 0px 0px 10px;"><?php
+                            <li style="font-size: 18px; margin: 10px 0px 0px 10px; color: rgb(76, 82, 43);"><?php
                                 if (isset($datosPiloto->Driver)) {
                                     echo $datosTercero->Driver->givenName . " "
                                     . $datosTercero->Driver->familyName
@@ -164,7 +164,7 @@
                             ?></li>
                             </ol>
                             
-                            
+                            <div style="text-align:right"> <a style="color: rgb(255, 255, 255); text-shadow: 0px 1px 1px rgb(0, 0, 0);" href="<?php echo site_url();?>mercado/simulador"> <i class="fa fa-flag-checkered"></i> Simulador GP <?php echo $paisGP. " ".date('Y'); ?> </a></div>
 
                             
                         </div>
