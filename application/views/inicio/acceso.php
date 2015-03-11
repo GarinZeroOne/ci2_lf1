@@ -128,19 +128,19 @@
 
             <div class="col-xs-12 ">
 
-              <h2>Patrocinadores</h2>
+              <h2>Patrocinadores <a href="<?php echo site_url(); ?>inicio/patrocinio" title="¿Quieres ayudar a LF1 y ver tu logo aquí?"><i class="fa fa-info-circle"></i></a></h2>
 
               <div class="box-patrocinador">
                <a href="<?php echo site_url(); ?>"> <img class="desaturada" width="80" src="<?php echo base_url(); ?>img/logolf1w.png" alt="patrocinador-lf1" title="Liga Formula 1"></a>
               </div>
               
               <div class="box-patrocinador">
+                <a href="http://www.desdebox.es" target="_blank"> <img class="desaturada" width="405" src="<?php echo base_url(); ?>img/patrocinios/desdeboxes.png" alt="Desde boxes" title="Desde Boxes Podcast"></a>
                 
-                <a href="<?php echo site_url(); ?>inicio/patrocinio" class="pat"> ¿Quieres ayudar a LF1 y ver tu logo aquí?</a>
               </div>
 
               <div class="box-patrocinador">
-                
+                  
               </div>
 
               <div class="box-patrocinador">
