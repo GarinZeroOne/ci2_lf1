@@ -34,10 +34,7 @@
             
         </div>
         
-        <div class="row">
-          <h1 style="text-align: center; color: rgb(255, 255, 255); font-size: 50px; text-shadow: 1px 1px 5px rgb(255, 211, 0);">Estamos preparando la nueva temporada</h1>
-          <h2 style="text-align: center; font-size: 30px; font-family: Share Tech; color: rgba(0, 0, 0, 0.5); text-shadow: 1px 1px 5px;">KEEP CALM</h2>
-        </div>
+       
 
         <!-- Comentar desde aqui, quitar login -->
         <div class="row">
