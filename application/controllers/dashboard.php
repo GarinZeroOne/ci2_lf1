@@ -74,6 +74,9 @@ class Dashboard extends CI_Controller {
 		// Box estadisticas
 		$datos['estadisticas'] = $this->estadisticas_model->get_estadisticas_box();
 
+
+
+
 		// Subidones y Bajones del dia
 		$datos['subidones'] = $this->estadisticas_model->get_subidones();
 		$datos['bajones'  ] = $this->estadisticas_model->get_bajones();
@@ -94,16 +97,24 @@ class Dashboard extends CI_Controller {
 		$data_to_js3['valores_dinero'] = json_encode($chart_data3['totales_dinero']);
 		$data_to_js3['fechas_valores'] = $chart_data3['totales_dia'];
 
+		// Grafica Estadisticas comunidades mas ricas
+		$chart_data4 = $this->estadisticas_model->get_ranking_comunidades_dinero();
+		//$data_to_js4['comunidades_dinero'] = json_encode($chart_data4['totales_comunidades']);
+		$data_to_js4['comunidades_dinero'] = $chart_data4['totales_comunidades'];
+		//dump($data_to_js4);die;
+
 		// Hall of Fame
 		$datos['hof_pregunta'  ] = $this->usuarios_model->get_hof_pregunta();
 		$datos['hof_respuestas'] = $this->usuarios_model->get_hof_respuestas();
 
+		
 		// Podium AÑO anterior
 		$idGp = $this->uri->segment(3);
 
         $datos['circuito'] = $this->calendario_model->getNextGpObject();
 
         //Se obtienen los datos de la api
+
         $anoAnterior = date('Y') - 1;
 
         if ($datos['circuito']->getIdApi() != 0) {
@@ -128,7 +139,7 @@ class Dashboard extends CI_Controller {
             $datos['tercero'] = "sin información";
         }
 		// FIN PODIUM AÑO ANTERIOR
-
+		
 		// Hall of fame - Mas votada /*DEPRECATED 2015- se ha puesto el podium del año anterior*/
 		// $datos['hof_winner'] = $this->usuarios_model->get_hof_winner();
 
@@ -146,6 +157,7 @@ class Dashboard extends CI_Controller {
 		$bottom['javascript_php'] = array('grafica1_dash' => $this->load->view('dashboard/_head/js/grafica1_dash',$data_to_js,TRUE),
  										  'grafica2_dash' => $this->load->view('dashboard/_head/js/grafica2_dash',$data_to_js2,TRUE),
  										  'grafica3_dash' => $this->load->view('dashboard/_head/js/grafica3_dash',$data_to_js3,TRUE),
+ 										  'grafica4_dash' => $this->load->view('dashboard/_head/js/grafica4_dash',$data_to_js4,TRUE)
 										 );
 
 		// Menu Izquierda

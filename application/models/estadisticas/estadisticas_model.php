@@ -810,4 +810,29 @@ class Estadisticas_model extends CI_Model
 			return " hoy";
 		}
 	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function get_ranking_comunidades_dinero()
+	{
+		$sql = "select sum(fondos) as totales,id_comunidad,comunidades.nombre   from usuarios_banco
+				join usuarios ON usuarios.id = usuarios_banco.id_usuario
+				join comunidades  on comunidades.id  = usuarios.id_comunidad
+				group by usuarios.id_comunidad";
+
+		$q = $this->db->query($sql);
+
+		foreach($q->result() as $row)
+		{
+			$datos[$row->nombre] = round($row->totales);
+		}
+
+		$series_data['totales_comunidades'] = $datos;
+		return $series_data;
+
+	}
 }

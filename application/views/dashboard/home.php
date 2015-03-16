@@ -75,109 +75,7 @@
         <!--mini statistics start-->
         <div class="row">
 
-            <div class="col-md-3">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafica" >
-                            
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            
-            
-            
-            <div class="col-md-3">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafica2" >
-                            
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div class="col-md-3">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafica3" >
-                            
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div class="col-md-3">
-                <section class="panel">
-                    <div class="panel-body">
-                        
-                        
-                            <div class="temporizador">
-                                <h4 class="widget-h">PRÓXIMO GRAN PREMIO</h4>
-
-                                <span id="horat"><script>calcula("<?=$anioGP?>","<?=$mesGP?>","<?=$diaGP?>")</script></span>
-
-                                <div class="nextGP"><?php  echo $paisGP; ?></div>
-                            </div>
-                        
-                    </div>
-                </section>
-            </div>
-            
-        </div>
-        <!--mini statistics end-->
-
-        <div class="row">
-
-            <div class="col-md-3">
-                <section class="panel">
-                    <div class="panel-body" style="border-radius: 4px; background-color: rgb(176, 186, 137);">
-                        <div class="tit-mas-votada">Podium <?php echo $paisGP; ?> <?php echo date('Y') - 1; ?></div>
-                        <div class="podium">
-                            <ol style="margin: 5px -25px;">
-                                <li style="font-size: 18px; margin: 10px 0px 0px 10px; text-shadow: 1px 1px 1px rgb(255, 186, 0); color: rgb(255, 241, 150);"><?php
-                                $datosPiloto = $ultimoGanador->RaceTable->Races[0]->Results[0];
-                                $datosSegundo = $segundo->RaceTable->Races[0]->Results[0];
-                                $datosTercero = $tercero->RaceTable->Races[0]->Results[0];
-                                if (isset($datosPiloto->Driver)) {
-                                    echo $datosPiloto->Driver->givenName . " "
-                                    . $datosPiloto->Driver->familyName
-                                    . " (" . $datosPiloto->Constructor->name . " )";
-                                }
-                            ?></li>
-                            <li style="font-size: 18px; margin: 10px 0px 0px 10px; color: rgb(66, 91, 33);">
-                                <?php
-                                if (isset($datosPiloto->Driver)) {
-                                    echo $datosSegundo->Driver->givenName . " "
-                                    . $datosSegundo->Driver->familyName
-                                    . " (" . $datosSegundo->Constructor->name . " )";
-                                }
-                            ?>
-                            </li>
-                            <li style="font-size: 18px; margin: 10px 0px 0px 10px; color: rgb(76, 82, 43);"><?php
-                                if (isset($datosPiloto->Driver)) {
-                                    echo $datosTercero->Driver->givenName . " "
-                                    . $datosTercero->Driver->familyName
-                                    . " (" . $datosTercero->Constructor->name . " )";
-                                }
-                            ?></li>
-                            </ol>
-                            
-                            <div style="text-align:right"> <a style="color: rgb(255, 255, 255); text-shadow: 0px 1px 1px rgb(0, 0, 0);" href="<?php echo site_url();?>mercado/simulador"> <i class="fa fa-flag-checkered"></i> Simulador GP <?php echo $paisGP. " ".date('Y'); ?> </a></div>
-
-                            
-                        </div>
-                        
-                        
-
-                        
-                        
-                    </div>
-                </section>    
-            </div>
-            
-            <div class="col-md-6">
+            <div class="col-md-9">
                 <section class="panel">
                     <div class="panel-body">
                         <?php if($ultimos_pilotos_comprados): ?>
@@ -212,61 +110,46 @@
                     </div>
                 </section>
             </div>
+
             
 
             <div class="col-md-3">
                 <section class="panel">
                     <div class="panel-body">
-                        <table id="estadisticas" class="table table-bordered table-striped table-condensed cf">
-                            <tr>
-                                <td> <span class="textm">Fichajes  pilotos:</span></td>
-                                <td><?php echo es_dinero($estadisticas['total_fichajes']); ?></td>
+                        
+                        
+                            <div class="temporizador">
+                                <h4 class="widget-h">PRÓXIMO GRAN PREMIO</h4>
 
-                            
-                                <td><span class="textm">Ventas pilotos:</span></td>
-                                <td><?php echo es_dinero($estadisticas['total_ventas']); ?></td>
-                            </tr>
-                            <tr>
-                                <td><span class="textm">Compra equipos:</span></td>
-                                <td><?php echo es_dinero($estadisticas['total_compras_equipos']); ?></td>
+                                <span id="horat"><script>calcula("<?=$anioGP?>","<?=$mesGP?>","<?=$diaGP?>")</script></span>
 
-                            
-                                <td><span class="textm">Ventas equipos:</span></td>
-                                <td><?php echo es_dinero($estadisticas['total_ventas_equipos']); ?></td>
-                            </tr>
-                            <tr>
-                                <td><span class="textm">Stikis dinero <?php echo $paisGP; ?></span></td>
-                                <td><?php echo $stikis_dinero; ?></td>
-                            
-                                <td><span class="textm">Stikis puntos <?php echo $paisGP; ?></span></td>
-                                <td><?php echo $stikis_puntos; ?></td>
-                            </tr>
-                        </table>
-                        <!--
-                        <h4 class="widget-h">STIKIS <?php  echo $paisGP; ?></h4>
-                        <div>
-                            <img width="50%" src="<?php echo base_url();?>img/stikidinero.png" alt="Stiki Dinero"><span class="cont-stiki"><?php echo $stikis_dinero; ?></span>
-                        </div>
-                        <div  style="margin-top:2px;">
-                            <img width="50%" src="<?php echo base_url();?>img/stikipuntos.png" alt="Stiki Puntos"><span class="cont-stiki"><?php echo $stikis_puntos; ?></span>
-                        </div>
-                    -->
+                                <div class="nextGP"><?php  echo $paisGP; ?></div>
+                            </div>
+                        
                     </div>
-                </section>    
+                </section>
             </div>
-
             
-
         </div>
+        <!--mini statistics end-->
 
         <div class="row">
             
+            <div class="col-md-5">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div id="grafica4" >
+                            
+                        </div>
+                    </div>
+                </section>
+            </div>
+
             <div class="col-md-4">
                 <section class="panel">
                     <div class="panel-body">
 
-                
-                <div class="row">
+                        <div class="row"><!-- row inside -->
                     <div class="col-lg-6 col-md-12">
 
                         
@@ -342,72 +225,48 @@
                     </div>
                     
                 </div> <!-- row inside -->
-                
-                </div><!-- panel-body -->
-            </section> <!-- section -->
 
-            <section class="panel">
-                    <header class="panel-heading">
-                        Actualidad Formula 1
-                        <span class="tools pull-right">
-                            
-                         </span>
-                    </header>
-                    <div class="panel-body">
-                        <table class="table  table-hover general-table">
-                            
-                            <tbody>
-                        <?php foreach($noticiasfeed->item  as $noticia):?>
-                                <?php if($i<8):?>
-                                <tr>
-                                    
-                                    <td><a target="_blank" href="<?php echo $noticia->link;?>"> <?php echo $noticia->title; ?> </a></td>
-                                </tr>
-                                <?php ++$i; endif;?>
-
-                        <?php endforeach;?>
-
-                            
-
-                            </tbody>
-                        </table>
                     </div>
                 </section>
-
-
             </div>
+
             
-            <?php /*
-            <div class="col-md-4">
+
+            <div class="col-md-3">
+                               
+                <!--Ultimos fichajes start-->
                 <section class="panel">
                     <header class="panel-heading">
-                        Actualidad Formula 1
+                        Publicidad
                         <span class="tools pull-right">
+                            
                             
                          </span>
                     </header>
                     <div class="panel-body">
-                        <table class="table  table-hover general-table">
-                            
-                            <tbody>
-                        <?php foreach($noticiasfeed->item  as $noticia):?>
-                                <?php if($i<8):?>
-                                <tr>
-                                    
-                                    <td><a target="_blank" href="<?php echo $noticia->link;?>"> <?php echo $noticia->title; ?> </a></td>
-                                </tr>
-                                <?php ++$i; endif;?>
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Cuadrado2014display -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:300px;height:250px"
+                             data-ad-client="ca-pub-2361705659034560"
+                             data-ad-slot="9275287139"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
 
-                        <?php endforeach;?>
-
-                            
-
-                            </tbody>
-                        </table>
                     </div>
                 </section>
+
+                
+                
+            
+                
+                
             </div>
-            */?>
+
+        </div>
+
+        <div class="row">
             <div class="col-md-5">
                 
                 <!-- OPINIONES start-->
@@ -467,6 +326,194 @@
                 
             </div>
             
+
+            <div class="col-md-7">
+
+                <div class="row"> <!-- inside row-->
+                    
+                    <div class="col-md-6">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div id="grafica" >
+                                    
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    
+
+                    <div class="col-md-6">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div id="grafica3" >
+                                    
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <section class="panel">
+                            <div class="panel-body" style="border-radius: 4px; background-color: rgb(176, 186, 137);">
+                                <div class="tit-mas-votada">Podium <?php echo $paisGP; ?> <?php echo date('Y') - 1; ?></div>
+                                <div class="podium">
+                                    <ol style="margin: 5px -25px;">
+                                        <li style="font-size: 18px; margin: 10px 0px 0px 10px; text-shadow: 1px 1px 1px rgb(255, 186, 0); color: rgb(255, 241, 150);"><?php
+                                        $datosPiloto = $ultimoGanador->RaceTable->Races[0]->Results[0];
+                                        $datosSegundo = $segundo->RaceTable->Races[0]->Results[0];
+                                        $datosTercero = $tercero->RaceTable->Races[0]->Results[0];
+                                        if (isset($datosPiloto->Driver)) {
+                                            echo $datosPiloto->Driver->givenName . " "
+                                            . $datosPiloto->Driver->familyName
+                                            . " (" . $datosPiloto->Constructor->name . " )";
+                                        }
+                                    ?></li>
+                                    <li style="font-size: 18px; margin: 10px 0px 0px 10px; color: rgb(66, 91, 33);">
+                                        <?php
+                                        if (isset($datosPiloto->Driver)) {
+                                            echo $datosSegundo->Driver->givenName . " "
+                                            . $datosSegundo->Driver->familyName
+                                            . " (" . $datosSegundo->Constructor->name . " )";
+                                        }
+                                    ?>
+                                    </li>
+                                    <li style="font-size: 18px; margin: 10px 0px 0px 10px; color: rgb(76, 82, 43);"><?php
+                                        if (isset($datosPiloto->Driver)) {
+                                            echo $datosTercero->Driver->givenName . " "
+                                            . $datosTercero->Driver->familyName
+                                            . " (" . $datosTercero->Constructor->name . " )";
+                                        }
+                                    ?></li>
+                                    </ol>
+                                    
+                                    <div style="text-align:right"> <a style="color: rgb(255, 255, 255); text-shadow: 0px 1px 1px rgb(0, 0, 0);" href="<?php echo site_url();?>mercado/simulador"> <i class="fa fa-flag-checkered"></i> Simulador GP <?php echo $paisGP. " ".date('Y'); ?> </a></div>
+
+                                    
+                                </div>
+                                
+                                
+
+                                
+                                
+                            </div>
+                        </section>    
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div id="grafica2" >
+                                    
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    
+
+
+                </div> <!-- inside row -->
+
+
+            </div>
+
+
+            
+
+            
+            
+            
+            
+
+            
+            
+            
+
+
+            
+            
+            
+            
+        </div>
+
+        
+
+        <div class="row">
+
+            <div class="col-md-9">
+                
+
+            <section class="panel">
+                    <header class="panel-heading">
+                        Actualidad Formula 1
+                        <span class="tools pull-right">
+                            
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <table class="table  table-hover general-table">
+                            
+                            <tbody>
+                        <?php foreach($noticiasfeed->item  as $noticia):?>
+                                <?php if($i<8):?>
+                                <tr>
+                                    
+                                    <td><a target="_blank" href="<?php echo $noticia->link;?>"> <?php echo $noticia->title; ?> </a></td>
+                                </tr>
+                                <?php ++$i; endif;?>
+
+                        <?php endforeach;?>
+
+                            
+
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+
+            </div>
+
+
+            
+            
+            
+            
+            <?php /*
+            <div class="col-md-4">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Actualidad Formula 1
+                        <span class="tools pull-right">
+                            
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <table class="table  table-hover general-table">
+                            
+                            <tbody>
+                        <?php foreach($noticiasfeed->item  as $noticia):?>
+                                <?php if($i<8):?>
+                                <tr>
+                                    
+                                    <td><a target="_blank" href="<?php echo $noticia->link;?>"> <?php echo $noticia->title; ?> </a></td>
+                                </tr>
+                                <?php ++$i; endif;?>
+
+                        <?php endforeach;?>
+
+                            
+
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            */?>
+            
+            
             <div class="col-md-3">
                                
                 <!--Ultimos fichajes start-->
@@ -493,13 +540,44 @@
                 </section>
                 <!--Ultimos fichajes end-->
 
-                <section class="panel">
+               <section class="panel">
                     <div class="panel-body">
+                        <table id="estadisticas" class="table table-bordered table-striped table-condensed cf">
+                            <tr>
+                                <td> <span class="textm">Fichajes  pilotos:</span></td>
+                                <td><?php echo es_dinero($estadisticas['total_fichajes']); ?></td>
+
+                            
+                                <td><span class="textm">Ventas pilotos:</span></td>
+                                <td><?php echo es_dinero($estadisticas['total_ventas']); ?></td>
+                            </tr>
+                            <tr>
+                                <td><span class="textm">Compra equipos:</span></td>
+                                <td><?php echo es_dinero($estadisticas['total_compras_equipos']); ?></td>
+
+                            
+                                <td><span class="textm">Ventas equipos:</span></td>
+                                <td><?php echo es_dinero($estadisticas['total_ventas_equipos']); ?></td>
+                            </tr>
+                            <tr>
+                                <td><span class="textm">Stikis dinero <?php echo $paisGP; ?></span></td>
+                                <td><?php echo $stikis_dinero; ?></td>
+                            
+                                <td><span class="textm">Stikis puntos <?php echo $paisGP; ?></span></td>
+                                <td><?php echo $stikis_puntos; ?></td>
+                            </tr>
+                        </table>
                         <!--
-                        <div class="fb-like-box" data-href="http://www.facebook.com/LigaFormula1" data-width="250" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+                        <h4 class="widget-h">STIKIS <?php  echo $paisGP; ?></h4>
+                        <div>
+                            <img width="50%" src="<?php echo base_url();?>img/stikidinero.png" alt="Stiki Dinero"><span class="cont-stiki"><?php echo $stikis_dinero; ?></span>
+                        </div>
+                        <div  style="margin-top:2px;">
+                            <img width="50%" src="<?php echo base_url();?>img/stikipuntos.png" alt="Stiki Puntos"><span class="cont-stiki"><?php echo $stikis_puntos; ?></span>
+                        </div>
                     -->
                     </div>
-                </section>
+                </section>    
                 
             </div>
             <?php /* MODULO ULTIMOS FICHAJES

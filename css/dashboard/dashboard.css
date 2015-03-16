@@ -90,7 +90,7 @@ span i.voto-manager:hover{
 
 div.temporizador{
 	text-align: center;
-	min-height: 164px;
+	min-height: 100px;
 }
 
 div.temporizador div.nextGP{
