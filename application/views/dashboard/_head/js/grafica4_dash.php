@@ -40,7 +40,7 @@ $(function () {
         },
         series: [{
             type: 'pie',
-            name: 'Browser share',
+            name: 'Fondos ',
             data: [
                 <?php foreach ($comunidades_dinero as $key => $value) {
                         # ['Shanghai', 23.7]
