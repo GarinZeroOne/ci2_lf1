@@ -18,7 +18,7 @@ $(function () {
             },
         title: {
             align: 'left',
-            text: 'Fondos por comunidad',
+            text: 'Movimientos hoy',
             x:0,
             y:20
             },
@@ -40,7 +40,7 @@ $(function () {
         },
         series: [{
             type: 'pie',
-            name: 'Fondos ',
+            name: 'Movimientos % ',
             data: [
                 <?php foreach ($comunidades_dinero as $key => $value) {
                         # ['Shanghai', 23.7]

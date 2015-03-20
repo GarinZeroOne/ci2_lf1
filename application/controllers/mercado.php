@@ -154,8 +154,11 @@ class Mercado extends CI_Controller {
 
 		/*Controlar que el numero este dentro de un id de equipo
 		 Evitar numeros menores de 1 y mayores de 12
+
+		 2015 FIX: Al meter a Manor Motorsport se le adjudica el id 14 y no entraba por aqui,
+		 no se porque esta puesta esta traba, aumento el rango a 22 para que  entre el nuevo equipo y futuros que vengan hasta el 22
 		*/
-		if ($this->uri->segment(3)<1 || $this->uri->segment(3)>12) {
+		if ($this->uri->segment(3)<1 || $this->uri->segment(3)>22) {
 			$msg = "El equipo seleccionado no es valido.";
 
 			$retorno = array(Pilotos_model::codigoRetorno => Pilotos_model::codigoKo

@@ -819,10 +819,17 @@ class Estadisticas_model extends CI_Model
 	 **/
 	function get_ranking_comunidades_dinero()
 	{
+		/*
 		$sql = "select sum(fondos) as totales,id_comunidad,comunidades.nombre   from usuarios_banco
 				join usuarios ON usuarios.id = usuarios_banco.id_usuario
 				join comunidades  on comunidades.id  = usuarios.id_comunidad
-				group by usuarios.id_comunidad";
+				group by usuarios.id_comunidad";*/
+		$sql = "select sum(dinero) as totales,id_comunidad,comunidades.nombre   from movimientos_banco
+				join usuarios ON usuarios.id = movimientos_banco.id_usuario
+				join comunidades  on comunidades.id  = usuarios.id_comunidad
+				where movimientos_banco.fecha >= '".date('Y-m-d')."'
+				group by usuarios.id_comunidad
+				order by totales desc";
 
 		$q = $this->db->query($sql);
 
