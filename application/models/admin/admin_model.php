@@ -195,7 +195,7 @@ class Admin_model extends CI_Model {
         $equipos = array();
 
         foreach ($result as $row) {
-            $equipos[] = Equipo::getById($row->id_equipo);
+            $equipos[] = Equipo::getById($row->id_equipo,false);
         }
 
         return $equipos;

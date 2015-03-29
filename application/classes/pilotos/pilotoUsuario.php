@@ -60,7 +60,7 @@ class PilotoUsuario extends Piloto {
         $CI = & get_instance();
         $CI->load->model('pilotos/pilotos_model');
 
-        $parent = Piloto::getById($idPiloto);
+        $parent = Piloto::getById($idPiloto,false);
 
         $instance = new self();
         $instance->setIdPiloto($parent->getIdPiloto());
